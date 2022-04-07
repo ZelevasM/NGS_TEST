@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">NGS_Test_Login</string>
+
+    //Login Page
+    <string name="welcome">Welcome to App Name</string>
+    <string name="email_cont">Continue with Email</string>
+    <string name="google_cont">Continue with Google</string>
+    <string name="terms">By continuing, You agree with <a href ="https://dev.taskpal.com/">Terms and Conditions</a>
+        and <a href = "https://dev.taskpal.com/">Privacy Policy</a> of TaskPal.</string>
+
+    <string name="email_ask">Your Email?</string>
+    <string name="email_sample">For sample@sample.com</string>
+    <string name="email_wrong">Wrong Email</string>
+    <string name="submit">Submit</string>
+    <string name="password">Password</string>
+    <string name="password_confirm">Confirm Password</string>
+    <string name="password_forgot">Forgot Password?</string>
+
+    <string name="signup">Sign Up</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="signup_sample">Sign up with sample@sample.com</string>
+
+</resources>
