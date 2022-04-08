@@ -18,7 +18,7 @@ import com.example.ngs_test_login.R
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
-//TODO EXP
+
 class LoginFragment : Fragment()
 {
     private lateinit var emailButton : Button
@@ -26,7 +26,6 @@ class LoginFragment : Fragment()
     private lateinit var appleButton : Button
     private lateinit var termsTextView : TextView
     private lateinit var fbButton : Button
-    private var checker: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?) : View?
     {
@@ -37,6 +36,10 @@ class LoginFragment : Fragment()
     {
         super.onViewCreated(view,savedInstanceState)
         Init(view)
+
+        /**
+         * after clicking on the button, it proceeds by taking the user to the EmailFragment
+         */
         emailButton.setOnClickListener(){
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.container,EmailFragment.newInstance())?.commit()
@@ -48,6 +51,10 @@ class LoginFragment : Fragment()
         fun newInstance() = LoginFragment()
     }
 
+    /**
+     * fun Init is used to initialize all the required views on the fragment's layout
+     * @param view: View of the current fragment
+     */
     fun Init(view : View)
     {
         emailButton = view.findViewById(R.id.button_email_cont)
@@ -55,6 +62,7 @@ class LoginFragment : Fragment()
         appleButton = view.findViewById(R.id.button_fb_cont)
         fbButton = view.findViewById(R.id.button_apple_cont)
         termsTextView = view.findViewById(R.id.textView_terms)
+        /// enabling the transition from the hyperlink
         termsTextView.movementMethod = LinkMovementMethod.getInstance()
     }
 

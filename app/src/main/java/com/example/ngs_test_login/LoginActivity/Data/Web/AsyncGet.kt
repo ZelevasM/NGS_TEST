@@ -5,10 +5,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.ngs_test_login.BuildConfig
 import com.example.ngs_test_login.LoginActivity.Domain.Models.User
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -17,15 +14,25 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Base64
 
+@DelicateCoroutinesApi
 class AsyncGet
 {
-    //TODO EXP
+    /**
+     * fun searchEmail receives email:User,
+     * then runs on runBlocking thread its coroutine job,
+     * inside of which it sends POST requestMethod to the server,
+     * checks connection, and if it is ok, retrieves JSON from the server and makes var result = true,
+     * which is returned by the fun at the end of its execution
+     * @param email: User
+     * @return boolean
+     */
     fun searchEmail(email: User): Boolean = runBlocking{
+        //// var result which changes its value to true, if the responseCode from the server was between 200 and 299
         var result: Boolean = false
 
         val job = GlobalScope.launch(Dispatchers.IO) {
             val em: String = email.e
-            var reqParam: String = "email=$em"
+            val reqParam: String = "email=$em"
 
             Log.d("MyLog","\n\n$reqParam")
 
@@ -35,9 +42,9 @@ class AsyncGet
                 // optional default is GET
                 requestMethod = "POST"
 
-                val wr = OutputStreamWriter(getOutputStream());
-                wr.write(reqParam);
-                wr.flush();
+                val wr = OutputStreamWriter(outputStream)
+                wr.write(reqParam)
+                wr.flush()
 
 
                 Log.d("MyLog","Conn1")
@@ -49,7 +56,7 @@ class AsyncGet
                 {
                     result = true
                     BufferedReader(InputStreamReader(inputStream)).use {
-                        var inputLine = it.readLine()
+                        val inputLine = it.readLine()
                         Log.d("MyLog","RES: $inputLine")
                     }
                     Log.d("MyLog","returned: $result")
@@ -64,8 +71,18 @@ class AsyncGet
         return@runBlocking result
     }
 
+    /**
+     * fun signIn receives password:User,
+     * then runs on runBlocking thread its coroutine job,
+     * inside of which it sends POST requestMethod to the server,
+     * checks connection, and if it is ok, retrieves JSON from the server and makes var result = true,
+     * which is returned by the fun at the end of its execution
+     * @param password: User
+     * @return boolean
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun signIn(password: User): Boolean = runBlocking{
+        //// var result which changes its value to true, if the responseCode from the server was between 200 and 299
         var result: Boolean = false
         val job = GlobalScope.launch(Dispatchers.IO) {
 
@@ -79,7 +96,7 @@ class AsyncGet
             Log.d("MyLog","\nEncode: $encodedPass")
             Log.d("MyLog","\nDecode: $decodedPass\n")
 
-            var reqParam: String = "email=$email&password=$encodedPass"
+            val reqParam: String = "email=$email&password=$encodedPass"
 
             Log.d("MyLog","\n\n$reqParam")
 
@@ -89,9 +106,9 @@ class AsyncGet
                 // optional default is GET
                 requestMethod = "POST"
 
-                val wr = OutputStreamWriter(getOutputStream());
-                wr.write(reqParam);
-                wr.flush();
+                val wr = OutputStreamWriter(outputStream)
+                wr.write(reqParam)
+                wr.flush()
 
 
                 Log.d("MyLog","Conn1")
@@ -103,7 +120,7 @@ class AsyncGet
                 {
                     result = true
                     BufferedReader(InputStreamReader(inputStream)).use {
-                        var inputLine = it.readLine()
+                        val inputLine = it.readLine()
                         Log.d("MyLog","RES: $inputLine")
                     }
                 }
@@ -118,9 +135,18 @@ class AsyncGet
         return@runBlocking result
     }
 
-
+    /**
+     * fun signUp receives user:User,
+     * then runs on runBlocking thread its coroutine job,
+     * inside of which it sends POST requestMethod to the server,
+     * checks connection, and if it is ok, retrieves JSON from the server and makes var result = true,
+     * which is returned by the fun at the end of its execution
+     * @param user: User
+     * @return boolean
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun signUp(user: User): Boolean = runBlocking {
+        //// var result which changes its value to true, if the responseCode from the server was between 200 and 299
         var result: Boolean = false
         val job = GlobalScope.launch(Dispatchers.IO) {
 
@@ -135,7 +161,7 @@ class AsyncGet
             Log.d("MyLog","\nEncode: $encodedPass")
             Log.d("MyLog","\nDecode: $decodedPass\n")
 
-            var reqParam: String = "name=$name&email=$email&password=$encodedPass"
+            val reqParam: String = "name=$name&email=$email&password=$encodedPass"
 
             Log.d("MyLog","\n\n$reqParam")
 
@@ -145,9 +171,9 @@ class AsyncGet
                 // optional default is GET
                 requestMethod = "POST"
 
-                val wr = OutputStreamWriter(getOutputStream());
-                wr.write(reqParam);
-                wr.flush();
+                val wr = OutputStreamWriter(outputStream)
+                wr.write(reqParam)
+                wr.flush()
 
 
                 Log.d("MyLog","Conn1")
