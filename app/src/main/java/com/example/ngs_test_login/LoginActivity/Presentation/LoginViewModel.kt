@@ -9,6 +9,12 @@ import com.example.ngs_test_login.LoginActivity.Domain.Email.CheckPassUseCase
 import com.example.ngs_test_login.LoginActivity.Domain.Email.CreateAccUseCase
 import com.example.ngs_test_login.LoginActivity.Domain.Models.User
 
+/**
+ * LoginViewModel is a ViewModel that provides a layer between UI components and other layers.
+ * Basically, it prevents direct communication between UI components,
+ * and back-end of the application,
+ * providing better flexibility of UI controlling
+ */
 class LoginViewModel : ViewModel()
 {
     /// variable that holds all implementations for each of the UseCases

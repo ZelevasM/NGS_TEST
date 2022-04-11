@@ -18,7 +18,10 @@ import com.example.ngs_test_login.R
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
-
+/**
+ * LoginFragment is a base fragment, from which app's UI begins
+ * It contains main Login menu
+ */
 class LoginFragment : Fragment()
 {
     private lateinit var emailButton : Button
