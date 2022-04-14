@@ -56,6 +56,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
+        android:stateListAnimator="@null"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="@string/email_cont"

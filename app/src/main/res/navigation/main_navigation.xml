@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/navigation_lists">
+
+    <fragment
+        android:id="@+id/navigation_shortcuts"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainShortcutsFragment"
+        android:label="@string/shortcuts"
+        tools:layout="@layout/fragment_main_shortcuts" />
+
+    <fragment
+        android:id="@+id/navigation_lists"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainListsFragment"
+        android:label="@string/lists"
+        tools:layout="@layout/fragment_main_lists" />
+
+    <fragment
+        android:id="@+id/navigation_chats"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainChatsFragment"
+        android:label="@string/chats"
+        tools:layout="@layout/fragment_main_chats" />
+
+</navigation>

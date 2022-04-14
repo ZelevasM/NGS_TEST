@@ -1,6 +1,7 @@
 package com.example.ngs_test_login.LoginActivity.Data
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentTransaction
 import com.example.ngs_test_login.LoginActivity.Data.Web.AsyncGet
