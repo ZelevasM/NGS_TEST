@@ -32,9 +32,7 @@ class MainActivity : AppCompatActivity()
             R.id.navigation_chats))
         setupActionBarWithNavController(navController,appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val toolbar: Toolbar = findViewById(R.id.toolbar_main)
-        /// toolbar holds back button, which gets the user back to the LoginFragment, when it is pressed
+        //supportActionBar?.elevation = 0f
 
     }
     //TODO Init(view)

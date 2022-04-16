@@ -1,47 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_container">
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-    <Toolbar
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/toolbar_main"
-        app:titleTextAppearance = "@color/teal_200">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/toolbar_main_layout"
-            android:layout_gravity="center"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"/>
-    </Toolbar>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editText_email_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:hint="@string/search_notif"
-        app:boxStrokeColor="@color/light_pink"
-        app:boxStrokeWidth="1dp"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/light_pink"
-        app:hintTextColor="@color/light_pink">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_email"
+        android:id="@+id/editText_main_search_layout_holder"
+        android:background="@color/light_grey">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editText_main_search_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            style="@style/Widget.NGS_Test_Login.TextInput"
+            app:shapeAppearanceOverlay="@style/Widget.NGS_Test_Login.TextInput"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+            android:hint="@string/search_notif"
+            app:boxStrokeColor="@color/light_pink"
+            app:boxStrokeWidth="1dp"
+            app:startIconDrawable="@drawable/ic_search"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/light_pink"
+            app:hintTextColor="@color/light_pink">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_email"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="text"
+                android:paddingVertical="1dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/button_add"
+        style="@style/Widget.NGS_Test_Login.Button.Add"
+        android:layout_above="@id/main_navigation_bar"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        app:icon = "@drawable/ic_add"
+        app:iconGravity = "textStart"
+        app:iconPadding="0dp"/>
 
     <fragment
         android:id="@+id/main_nav_host_fragment"
@@ -49,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/main_navigation_bar"
-        android:layout_below="@id/toolbar_main"
+        android:layout_below="@id/editText_main_search_layout_holder"
         app:defaultNavHost="true"
         app:navGraph="@navigation/main_navigation" />
 
@@ -59,5 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"
+        app:itemIconTint="@color/nav_item_selector"
+        app:itemTextColor="@color/nav_item_selector"/>
 </RelativeLayout>

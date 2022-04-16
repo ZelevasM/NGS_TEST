@@ -11,4 +11,31 @@
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
+
+    <style name="Widget.NGS_Test_Login.Button.Small" parent="Widget.NGS_Test_Login.Button">
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:backgroundTint">@color/lighter_pink</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="Widget.NGS_Test_Login.Button.Add" parent = "Widget.NGS_Test_Login.Button.Small">
+        <item name="shapeAppearanceOverlay">@style/Widget.NGS_Test_Login.Button.Add.Shape</item>
+    </style>
+
+    <style name="Widget.NGS_Test_Login.Button.Add.Shape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30%</item>
+    </style>
+
+    <style name="Widget.NGS_Test_Login.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
+        <item name="elevation">0dp</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="Widget.NGS_Test_Login.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20%</item>
+    </style>
+
 </resources>

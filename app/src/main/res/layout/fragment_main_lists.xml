@@ -21,7 +21,6 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/lists_imageView"
         android:text="@string/lists_notif"
-        android:textStyle="bold"
         android:textSize="18sp" />
 
 </RelativeLayout>

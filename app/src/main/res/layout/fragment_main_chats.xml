@@ -21,7 +21,6 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/chats_imageView"
         android:text="@string/chats_notif"
-        android:textStyle="bold"
         android:textSize="18sp" />
 
 </RelativeLayout>
