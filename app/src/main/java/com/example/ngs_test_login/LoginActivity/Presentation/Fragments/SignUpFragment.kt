@@ -65,7 +65,7 @@ class SignUpFragment : Fragment()
                     //TODO
                     Toast.makeText(activity,"Created: $name",Toast.LENGTH_LONG).show()
                     activity?.supportFragmentManager?.beginTransaction()
-                        ?.replace(R.id.container,LoginFragment.newInstance())?.commit()
+                        ?.replace(R.id.login_container,LoginFragment.newInstance())?.commit()
                 } else
                 {
                     /// just a Toast, to show incorrectness of the input, that should be changed later
@@ -104,7 +104,7 @@ class SignUpFragment : Fragment()
         /// toolbar holds back button, which gets the user back to the LoginFragment, when it is pressed
         toolbar.setNavigationOnClickListener{
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container,LoginFragment.newInstance())?.commit()
+                ?.replace(R.id.login_container,LoginFragment.newInstance())?.commit()
         }
         /// loginViewModel observes boolean resultLive from ViewModel,
         /// to check it and assign value to local variable checker

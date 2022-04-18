@@ -45,7 +45,7 @@ class LoginFragment : Fragment()
          */
         emailButton.setOnClickListener(){
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container,EmailFragment.newInstance())?.commit()
+                ?.replace(R.id.login_container,EmailFragment.newInstance())?.commit()
         }
     }
 

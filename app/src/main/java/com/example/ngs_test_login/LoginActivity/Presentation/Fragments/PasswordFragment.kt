@@ -94,7 +94,7 @@ class PasswordFragment : Fragment()
         /// toolbar holds back button, which gets the user back to the EmailFragment, when it is pressed
         toolbar.setNavigationOnClickListener{
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container,EmailFragment.newInstance())?.commit()
+                ?.replace(R.id.login_container,EmailFragment.newInstance())?.commit()
         }
         /// loginViewModel observes boolean resultLive from ViewModel,
         /// to check it and assign value to local variable checker

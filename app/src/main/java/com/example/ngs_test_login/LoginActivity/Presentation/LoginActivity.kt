@@ -45,6 +45,6 @@ class LoginActivity : AppCompatActivity()
         setContentView(R.layout.activity_login)
 
         /// starting LoginFragment, inside of R.id.container in LoginActivity's layout
-        supportFragmentManager.beginTransaction().replace(R.id.container,LoginFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.login_container,LoginFragment.newInstance()).commit()
     }
 }

@@ -33,10 +33,10 @@ class MainActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Init()
-
+        getData()
     }
 
-    fun Init()
+    private fun Init()
     {
         navView = findViewById(R.id.main_navigation_bar)
 
@@ -50,6 +50,11 @@ class MainActivity : AppCompatActivity()
                 controller, destination, arguments ->
             actionBar.title = navController.currentDestination?.label
         }
+    }
+
+    private fun getData()
+    {
+        mainViewModel.getData()
     }
     //TODO Init(view)
 

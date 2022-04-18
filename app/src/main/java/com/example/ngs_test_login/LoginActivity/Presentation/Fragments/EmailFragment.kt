@@ -52,7 +52,7 @@ class EmailFragment : Fragment()
                 if (checker)
                 {
                     activity?.supportFragmentManager?.beginTransaction()
-                        ?.replace(R.id.container,PasswordFragment.newInstance())?.commit()
+                        ?.replace(R.id.login_container,PasswordFragment.newInstance())?.commit()
                     /// just a Toast, to show correctness of the input, that should be changed later
                     //TODO
                     Toast.makeText(activity,"email: $str",Toast.LENGTH_LONG).show()
@@ -60,7 +60,7 @@ class EmailFragment : Fragment()
                 } else
                 {
                     activity?.supportFragmentManager?.beginTransaction()
-                        ?.replace(R.id.container,SignUpFragment.newInstance())?.commit()
+                        ?.replace(R.id.login_container,SignUpFragment.newInstance())?.commit()
                 }
             }
             else
@@ -87,7 +87,7 @@ class EmailFragment : Fragment()
         /// toolbar holds back button, which gets the user back to the LoginFragment, when it is pressed
         toolbar.setNavigationOnClickListener{
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container,LoginFragment.newInstance())?.commit()
+                ?.replace(R.id.login_container,LoginFragment.newInstance())?.commit()
         }
         emailButton = view.findViewById(R.id.button_email_cont)
         emailEditText = view.findViewById(R.id.editText_email)
