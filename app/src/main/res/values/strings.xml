@@ -26,6 +26,8 @@
     <string name="shortcuts">Shortcuts</string>
     <string name="lists">Lists</string>
     <string name="chats">Chats</string>
+    <string name="notifications">Notifications</string>
+    <string name="account">Account</string>
 
     <string name="lists_notif">You have no lists yet</string>
     <string name="shortcuts_notif">You have no shortcuts yet</string>

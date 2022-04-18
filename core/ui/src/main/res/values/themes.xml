@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.V24.Theme.NGS_Test_Login" parent="Theme.MaterialComponents.Light">
+    <style name="Base.V24.Theme.NGS_Test_Login" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/light_pink</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>

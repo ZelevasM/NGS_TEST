@@ -8,9 +8,26 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topAppBarLayout"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/black"
+            app:menu="@menu/action_bar_main_menu"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/topAppBarLayout"
         android:id="@+id/editText_main_search_layout_holder"
         android:background="@color/light_grey">
         <com.google.android.material.textfield.TextInputLayout
