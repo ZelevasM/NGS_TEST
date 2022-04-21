@@ -1,14 +1,49 @@
 package com.example.ngs_test_login.MainActivity.Domain.Models
 
-import java.text.DateFormat
+import com.google.gson.annotations.SerializedName
 
-class User(private val id: String,private val dateFormat: DateFormat,
-           private val token: String,private val diskSpace: String,
-           private val showSidebar: Boolean,private val shortcuts: ArrayList<String>,
-           private val language: String,private val newTask: String,
-           private val homePage: String,private val expandSubtask: String,
-           private val email: String,private val name: String,
-           private val folder: String)
+data class User(
+    @field:SerializedName("shortcut_inbox")
+    val shortcutInbox: String? = null,
+
+    @field:SerializedName("shortcuts")
+    val shortcuts: List<Shortcut?>? = null,
+
+    @field:SerializedName("language")
+    val language: String? = null,
+
+    @field:SerializedName("disk_space")
+    val diskSpace: String? = null,
+
+    @field:SerializedName("show_sidebar")
+    val showSidebar: Boolean? = null,
+
+    @field:SerializedName("token")
+    val token: List<Any?>? = null,
+
+    @field:SerializedName("folder")
+    val folder: List<Any?>? = null,
+
+    @field:SerializedName("expand_subtask")
+    val expandSubtask: String? = null,
+
+    @field:SerializedName("name")
+    val name: String? = null,
+
+    @field:SerializedName("date_format")
+    val dateFormat: DateFormat? = null,
+
+    @field:SerializedName("_id")
+    val id: String? = null,
+
+    @field:SerializedName("new_task")
+    val newTask: String? = null,
+
+    @field:SerializedName("email")
+    val email: String? = null,
+
+    @field:SerializedName("homepage")
+    val homepage: HomePage? = null)
 {
 
 }

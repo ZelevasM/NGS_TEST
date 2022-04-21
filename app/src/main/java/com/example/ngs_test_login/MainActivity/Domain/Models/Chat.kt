@@ -1,6 +1,6 @@
 package com.example.ngs_test_login.MainActivity.Domain.Models
 
-class Chat(private val id: String, private val name: String,
+data class Chat(private val id: String, private val name: String,
            private val author: String, private val date: String,
            private val users: ArrayList<User>, private val sections: ArrayList<String>,
            private val tasks: ArrayList<Task>)

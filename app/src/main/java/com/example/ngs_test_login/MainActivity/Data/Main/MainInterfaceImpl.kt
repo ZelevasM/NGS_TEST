@@ -9,7 +9,7 @@ class MainInterfaceImpl: MainInterface
     {
         val getData = GetData()
         val dataJson = getData.getData()
-        val mainDataSerializer = MainDataSerializer(dataJson)
+        val mainDataSerializer: MainDataSerializer = MainDataSerializer(dataJson)
         val mainData: MainData = mainDataSerializer.doSerialization()
     }
 

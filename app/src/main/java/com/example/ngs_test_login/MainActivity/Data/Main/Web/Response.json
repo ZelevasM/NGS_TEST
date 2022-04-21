@@ -1,0 +1,174 @@
+{
+  "lists": [
+    {
+      "_id": "B4JQcjZZurcDBjiN5sqYTmI=",
+      "name": "Inbox",
+      "author": "624e98cae68d380603b7ba59",
+      "date": "1650367250890",
+      "users": [
+        {
+          "muted": false,
+          "order": "0",
+          "_id": "624e98cae68d380603b7ba59"
+        }
+      ],
+      "sections": [],
+      "tasks": [],
+      "__v": 0
+    },
+    {
+      "_id": "CRiScjZZurcDBjiN5sqYTmI=",
+      "name": "List1",
+      "author": "624e98cae68d380603b7ba59",
+      "date": "1650367292248",
+      "users": [
+        {
+          "muted": false,
+          "order": "1",
+          "_id": "624e98cae68d380603b7ba59"
+        },
+        {
+          "muted": false,
+          "order": "0",
+          "_id": "624ea74f7a442905fb8f0f9c"
+        }
+      ],
+      "sections": [
+        {
+          "order": 1,
+          "_id": "ADQXczZZurcDBjiN5sqYTmI=",
+          "name": "Section1"
+        }
+      ],
+      "tasks": [
+        {
+          "assign": {
+            "date": "",
+            "remind": "",
+            "notif": false
+          },
+          "done": false,
+          "notes": "",
+          "_id": "ByWZcjZZurcDBjiN5sqYTmI=",
+          "name": "Task1",
+          "order": 0,
+          "auth": "624e98cae68d380603b7ba59",
+          "users": [
+            {
+              "unread_message": 0,
+              "note_size": "130",
+              "_id": "624e98cae68d380603b7ba59"
+            },
+            {
+              "unread_message": 0,
+              "note_size": "130",
+              "_id": "624ea74f7a442905fb8f0f9c"
+            }
+          ],
+          "parent": "",
+          "date": "1650367299835",
+          "messages": [],
+          "section": ""
+        },
+        {
+          "assign": {
+            "date": "",
+            "remind": "",
+            "notif": false
+          },
+          "done": false,
+          "notes": "",
+          "_id": "CSEWczZZurcDBjiN5sqYTmI=",
+          "name": "Task2",
+          "order": 0,
+          "auth": "624e98cae68d380603b7ba59",
+          "users": [
+            {
+              "unread_message": 0,
+              "note_size": "130",
+              "_id": "624e98cae68d380603b7ba59"
+            },
+            {
+              "unread_message": 0,
+              "note_size": "130",
+              "_id": "624ea74f7a442905fb8f0f9c"
+            }
+          ],
+          "parent": "",
+          "date": "1650367316781",
+          "messages": [],
+          "section": "ADQXczZZurcDBjiN5sqYTmI="
+        }
+      ],
+      "__v": 6,
+      "order_by": ""
+    },
+    {
+      "_id": "BhIydzZZurcDBjiN5sqYTmI=",
+      "name": "List2",
+      "author": "624e98cae68d380603b7ba59",
+      "date": "1650367732184",
+      "users": [
+        {
+          "muted": true,
+          "order": "2",
+          "_id": "624e98cae68d380603b7ba59"
+        },
+        {
+          "muted": false,
+          "order": "1",
+          "_id": "624ea74f7a442905fb8f0f9c"
+        }
+      ],
+      "sections": [],
+      "tasks": [],
+      "__v": 3,
+      "order_by": ""
+    }
+  ],
+  "chats": [],
+  "user": {
+    "_id": "624e98cae68d380603b7ba59",
+    "date_format": {
+      "date": "DD/MM/YYYY",
+      "time": "13:00",
+      "start_of_the_week": "Monday"
+    },
+    "token": [],
+    "disk_space": "0",
+    "show_sidebar": false,
+    "shortcuts": [
+      {
+        "type": "inbox",
+        "color": "#6CB2CE",
+        "project_id": "B4JQcjZZurcDBjiN5sqYTmI="
+      },
+      {
+        "type": "today",
+        "color": "#6DA67A"
+      },
+      {
+        "type": "assigned_to_me",
+        "color": "#E1B26B"
+      },
+      {
+        "type": "medium_priority",
+        "color": "#D2D462"
+      },
+      {
+        "type": "high_priority",
+        "color": "#FF6361"
+      }
+    ],
+    "language": "English",
+    "new_task": "top",
+    "homepage": {
+      "type": "today"
+    },
+    "expand_subtask": "Enabled",
+    "email": "vector@gmail.com",
+    "name": "Vector",
+    "folder": [],
+    "shortcut_inbox": "B4JQcjZZurcDBjiN5sqYTmI="
+  }
+}

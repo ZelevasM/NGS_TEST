@@ -14,7 +14,7 @@ class GetData
 
     fun getData(): String
     {
-        var dataJson = String()
+        var dataJson: String = "{}"
         httpURLConnection = dataURL.openConnection() as HttpURLConnection
         httpURLConnection.addRequestProperty("Authorization",BuildConfig.Token)
         httpURLConnection.requestMethod = "GET"
@@ -29,7 +29,7 @@ class GetData
         }
         if (httpURLConnection.responseCode in 300..600)
         {
-            Log.d("MyLog","ERRORCODE")
+            Log.d("MyLog","ERRORCODE: ${httpURLConnection.responseCode}")
         }
         httpURLConnection.disconnect()
         return dataJson
