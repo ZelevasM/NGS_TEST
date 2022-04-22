@@ -16,7 +16,21 @@ data class ListUser(
     val noteSize: String? = null,
 
     @field:SerializedName("unread_message")
-    val unreadMessage: Int? = null)
+    val unreadMessage: Int? = null,
+    @field:SerializedName("read")
+    val read: Boolean? = null,
+
+    @field:SerializedName("last_seen")
+    val lastSeen: String? = null,
+
+    @field:SerializedName("user_id")
+    val userId: String? = null,
+
+    @field:SerializedName("read_last_message")
+    val readLastMessage: String? = null,
+
+    @field:SerializedName("unread_number")
+    val unreadNumber: String? = null)
 {
 
 }

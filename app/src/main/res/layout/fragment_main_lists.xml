@@ -5,6 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listRecView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <ImageView
         android:id="@+id/lists_imageView"
         android:layout_width="226dp"
@@ -22,5 +27,4 @@
         android:layout_below="@id/lists_imageView"
         android:text="@string/lists_notif"
         android:textSize="18sp" />
-
 </RelativeLayout>

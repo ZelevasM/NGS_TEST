@@ -1,42 +1,26 @@
 {
   "lists": [
     {
-      "_id": "B4JQcjZZurcDBjiN5sqYTmI=",
-      "name": "Inbox",
-      "author": "624e98cae68d380603b7ba59",
-      "date": "1650367250890",
+      "_id": "BFCXZ1Oy7Mz6BeW1XU74YGI=",
+      "name": "List#1",
+      "author": "6260f84e5db5e505faccecb2",
+      "date": "1650536796010",
       "users": [
         {
           "muted": false,
           "order": "0",
-          "_id": "624e98cae68d380603b7ba59"
-        }
-      ],
-      "sections": [],
-      "tasks": [],
-      "__v": 0
-    },
-    {
-      "_id": "CRiScjZZurcDBjiN5sqYTmI=",
-      "name": "List1",
-      "author": "624e98cae68d380603b7ba59",
-      "date": "1650367292248",
-      "users": [
-        {
-          "muted": false,
-          "order": "1",
-          "_id": "624e98cae68d380603b7ba59"
+          "_id": "6260f84e5db5e505faccecb2"
         },
         {
           "muted": false,
-          "order": "0",
-          "_id": "624ea74f7a442905fb8f0f9c"
+          "order": "1",
+          "_id": "625fdff072e46c05fb903482"
         }
       ],
       "sections": [
         {
           "order": 1,
-          "_id": "ADQXczZZurcDBjiN5sqYTmI=",
+          "_id": "CSkiaFOy7Mz6BeW1XU74YGI=",
           "name": "Section1"
         }
       ],
@@ -49,24 +33,200 @@
           },
           "done": false,
           "notes": "",
-          "_id": "ByWZcjZZurcDBjiN5sqYTmI=",
-          "name": "Task1",
-          "order": 0,
-          "auth": "624e98cae68d380603b7ba59",
+          "_id": "BSMoaVOy7Mz6BeW1XU74YGI=",
+          "name": "Task#3 - Subtask#1",
+          "order": 1,
+          "auth": "6260f84e5db5e505faccecb2",
           "users": [
             {
               "unread_message": 0,
               "note_size": "130",
-              "_id": "624e98cae68d380603b7ba59"
+              "_id": "6260f84e5db5e505faccecb2"
             },
             {
               "unread_message": 0,
               "note_size": "130",
-              "_id": "624ea74f7a442905fb8f0f9c"
+              "_id": "625fdff072e46c05fb903482"
+            }
+          ],
+          "parent": "BGBAaFOy7Mz6BeW1XU74YGI=",
+          "date": "1650536935003",
+          "messages": []
+        },
+        {
+          "assign": {
+            "date": "",
+            "remind": "",
+            "notif": false
+          },
+          "done": false,
+          "notes": "",
+          "_id": "BGBAaFOy7Mz6BeW1XU74YGI=",
+          "name": "List#1 - Task#3",
+          "order": 0,
+          "auth": "6260f84e5db5e505faccecb2",
+          "users": [
+            {
+              "unread_message": 0,
+              "note_size": "130",
+              "_id": "6260f84e5db5e505faccecb2"
+            },
+            {
+              "unread_message": 0,
+              "note_size": "130",
+              "_id": "625fdff072e46c05fb903482"
             }
           ],
           "parent": "",
-          "date": "1650367299835",
+          "date": "1650536839612",
+          "messages": [],
+          "section": "",
+          "priority": "High"
+        },
+        {
+          "assign": {
+            "date": "",
+            "remind": "",
+            "notif": false
+          },
+          "done": false,
+          "notes": "",
+          "_id": "BFYZaFOy7Mz6BeW1XU74YGI=",
+          "name": "List#1 - Task#2",
+          "order": 0,
+          "auth": "6260f84e5db5e505faccecb2",
+          "users": [
+            {
+              "unread_message": 0,
+              "note_size": "130",
+              "_id": "6260f84e5db5e505faccecb2"
+            },
+            {
+              "unread_message": 0,
+              "note_size": "130",
+              "_id": "625fdff072e46c05fb903482"
+            }
+          ],
+          "parent": "",
+          "date": "1650536818572",
+          "messages": [],
+          "section": "CSkiaFOy7Mz6BeW1XU74YGI=",
+          "priority": "Medium"
+        },
+        {
+          "assign": {
+            "date": "2022-04-13T10:28:20.811Z",
+            "remind": "2022-04-07T08:24:00.000Z",
+            "notif": false,
+            "user_id": "6260f84e5db5e505faccecb2"
+          },
+          "done": false,
+          "notes": "Note 1\nNote 2",
+          "_id": "B5MJaFOy7Mz6BeW1XU74YGI=",
+          "name": "List#1 - Task#1",
+          "order": 1,
+          "auth": "6260f84e5db5e505faccecb2",
+          "users": [
+            {
+              "unread_message": 0,
+              "note_size": "130",
+              "_id": "6260f84e5db5e505faccecb2"
+            },
+            {
+              "unread_message": 4,
+              "note_size": "130",
+              "_id": "625fdff072e46c05fb903482"
+            }
+          ],
+          "parent": "",
+          "date": "1650536808955",
+          "messages": [
+            {
+              "reply": {
+                "files": []
+              },
+              "read": false,
+              "_id": "AjZ5aFOy7Mz6BeW1XU74YGI=",
+              "message": "GG",
+              "user_id": "6260f84e5db5e505faccecb2",
+              "files": [],
+              "date": "2022-04-21T10:27:58.370Z"
+            },
+            {
+              "reply": {
+                "files": []
+              },
+              "read": false,
+              "_id": "BJiAaFOy7Mz6BeW1XU74YGI=",
+              "message": "WW",
+              "user_id": "6260f84e5db5e505faccecb2",
+              "files": [],
+              "date": "2022-04-21T10:27:59.981Z"
+            },
+            {
+              "reply": {
+                "files": []
+              },
+              "read": false,
+              "_id": "AyOEaFOy7Mz6BeW1XU74YGI=",
+              "message": "Hello World",
+              "user_id": "6260f84e5db5e505faccecb2",
+              "files": [],
+              "date": "2022-04-21T10:28:03.237Z"
+            },
+            {
+              "reply": {
+                "files": []
+              },
+              "read": false,
+              "_id": "CFSJaFOy7Mz6BeW1XU74YGI=",
+              "message": "Welcome Here",
+              "user_id": "6260f84e5db5e505faccecb2",
+              "files": [],
+              "date": "2022-04-21T10:28:08.569Z"
+            }
+          ],
+          "section": ""
+        }
+      ],
+      "__v": 6,
+      "order_by": ""
+    },
+    {
+      "_id": "AoZJaFOy7Mz6BeW1XU74YGI=",
+      "name": "List#2",
+      "author": "6260f84e5db5e505faccecb2",
+      "date": "1650536848343",
+      "users": [
+        {
+          "muted": false,
+          "order": "1",
+          "_id": "6260f84e5db5e505faccecb2"
+        }
+      ],
+      "sections": [],
+      "tasks": [
+        {
+          "assign": {
+            "date": "",
+            "remind": "",
+            "notif": false
+          },
+          "done": false,
+          "notes": "",
+          "_id": "CXhwaFOy7Mz6BeW1XU74YGI=",
+          "name": "List#2 - Task#2",
+          "order": 0,
+          "auth": "6260f84e5db5e505faccecb2",
+          "users": [
+            {
+              "unread_message": 0,
+              "note_size": "130",
+              "_id": "6260f84e5db5e505faccecb2"
+            }
+          ],
+          "parent": "",
+          "date": "1650536869807",
           "messages": [],
           "section": ""
         },
@@ -78,57 +238,30 @@
           },
           "done": false,
           "notes": "",
-          "_id": "CSEWczZZurcDBjiN5sqYTmI=",
-          "name": "Task2",
-          "order": 0,
-          "auth": "624e98cae68d380603b7ba59",
+          "_id": "AURoaFOy7Mz6BeW1XU74YGI=",
+          "name": "List#2 - Task#1",
+          "order": 1,
+          "auth": "6260f84e5db5e505faccecb2",
           "users": [
             {
               "unread_message": 0,
               "note_size": "130",
-              "_id": "624e98cae68d380603b7ba59"
-            },
-            {
-              "unread_message": 0,
-              "note_size": "130",
-              "_id": "624ea74f7a442905fb8f0f9c"
+              "_id": "6260f84e5db5e505faccecb2"
             }
           ],
           "parent": "",
-          "date": "1650367316781",
+          "date": "1650536867455",
           "messages": [],
-          "section": "ADQXczZZurcDBjiN5sqYTmI="
+          "section": ""
         }
       ],
-      "__v": 6,
-      "order_by": ""
-    },
-    {
-      "_id": "BhIydzZZurcDBjiN5sqYTmI=",
-      "name": "List2",
-      "author": "624e98cae68d380603b7ba59",
-      "date": "1650367732184",
-      "users": [
-        {
-          "muted": true,
-          "order": "2",
-          "_id": "624e98cae68d380603b7ba59"
-        },
-        {
-          "muted": false,
-          "order": "1",
-          "_id": "624ea74f7a442905fb8f0f9c"
-        }
-      ],
-      "sections": [],
-      "tasks": [],
-      "__v": 3,
+      "__v": 2,
       "order_by": ""
     }
   ],
   "chats": [],
   "user": {
-    "_id": "624e98cae68d380603b7ba59",
+    "_id": "6260f84e5db5e505faccecb2",
     "date_format": {
       "date": "DD/MM/YYYY",
       "time": "13:00",
@@ -137,29 +270,7 @@
     "token": [],
     "disk_space": "0",
     "show_sidebar": false,
-    "shortcuts": [
-      {
-        "type": "inbox",
-        "color": "#6CB2CE",
-        "project_id": "B4JQcjZZurcDBjiN5sqYTmI="
-      },
-      {
-        "type": "today",
-        "color": "#6DA67A"
-      },
-      {
-        "type": "assigned_to_me",
-        "color": "#E1B26B"
-      },
-      {
-        "type": "medium_priority",
-        "color": "#D2D462"
-      },
-      {
-        "type": "high_priority",
-        "color": "#FF6361"
-      }
-    ],
+    "shortcuts": [],
     "language": "English",
     "new_task": "top",
     "homepage": {
@@ -168,7 +279,6 @@
     "expand_subtask": "Enabled",
     "email": "vector@gmail.com",
     "name": "Vector",
-    "folder": [],
-    "shortcut_inbox": "B4JQcjZZurcDBjiN5sqYTmI="
+    "folder": []
   }
 }

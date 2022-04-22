@@ -26,10 +26,10 @@ data class DataList(
     val users: List<ListUser?>? = null,
 
     @field:SerializedName("sections")
-    val sections: List<Any?>? = null,
+    val sections: List<ListSection?>? = null,
 
     @field:SerializedName("tasks")
-    val tasks: List<Any?>? = null)
+    val tasks: List<Task?>? = null)
 {
 
 }

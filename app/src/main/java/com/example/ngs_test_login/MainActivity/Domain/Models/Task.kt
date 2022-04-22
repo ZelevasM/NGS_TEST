@@ -19,7 +19,7 @@ data class Task(
     val name: String? = null,
 
     @field:SerializedName("messages")
-    val messages: List<Any?>? = null,
+    val messages: List<TaskMessage?>? = null,
 
     @field:SerializedName("section")
     val section: String? = null,
@@ -37,5 +37,8 @@ data class Task(
     val assign: TaskAssign? = null,
 
     @field:SerializedName("order")
-    val order: Int? = null)
+    val order: Int? = null,
+
+    @field:SerializedName("priority")
+    val priority: String? = null)
 {}

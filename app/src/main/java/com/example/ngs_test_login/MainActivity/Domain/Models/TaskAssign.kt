@@ -10,6 +10,9 @@ data class TaskAssign(
     @field:SerializedName("notif")
     val notif: Boolean? = null,
 
+    @field:SerializedName("user_id")
+    val userId: String? = null,
+
     @field:SerializedName("remind")
     val remind: String? = null)
 {}

@@ -5,11 +5,11 @@ import com.google.gson.Gson
 
 class MainDataSerializer(private val dataJson: String)
 {
-    fun doSerialization(): MainData
+    fun doSerialization(): WebMainData
     {
         val gson = Gson()
-        val mainData:  MainData = gson.fromJson(dataJson, MainData::class.java)
-        Log.d("MyLog", "MAINDATA: $mainData")
-        return mainData
+        val webMainData:  WebMainData = gson.fromJson(dataJson, WebMainData::class.java)
+        Log.d("MyLog", "WEB_MAIN_DATA: $webMainData")
+        return webMainData
     }
 }

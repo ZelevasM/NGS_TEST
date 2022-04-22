@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toolbar
 import androidx.activity.viewModels
 import androidx.core.graphics.luminance
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.navArgument
@@ -56,7 +57,6 @@ class MainActivity : AppCompatActivity()
     {
         mainViewModel.getData()
     }
-    //TODO Init(view)
 
     /* Passing each menu ID as a set of Ids because each
      menu should be considered as top level destinations.

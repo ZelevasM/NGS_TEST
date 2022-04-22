@@ -1,17 +1,21 @@
 package com.example.ngs_test_login.MainActivity.Data.Main
 
+import com.example.ngs_test_login.MainActivity.Domain.Models.Chat
 import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
 import com.google.gson.annotations.SerializedName
 
-data class MainData(
+data class WebMainData(
     @field:SerializedName("lists")
-    private val dataLists: ArrayList<DataList?>?,
+    val dataLists: ArrayList<DataList?>?,
 
     @field:SerializedName("chats")
-    private val chats: ArrayList<Any?>?,
+    val chats: ArrayList<Chat?>?,
 
     @field:SerializedName("user")
-    private val user: User?)
+    val user: User?)
 {
+//    val mDataList: ArrayList<DataList?>? = dataLists
+//    val mChat: ArrayList<Any?>? = chats
+//    val mUser: User? = user
 }

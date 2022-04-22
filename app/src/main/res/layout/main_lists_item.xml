@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/list_item_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+        
+        <RelativeLayout
+            android:id="@+id/list_item_cardView_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/list_item_cardView_mainIcon_layout"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentStart="true"
+                android:gravity="center_horizontal"
+                android:background="@color/light_blue">
+
+                <TextView
+                    android:id="@+id/list_item_cardView_mainIcon_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="L"
+                    android:textSize="56sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/list_item_cardView_title_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_toEndOf="@+id/list_item_cardView_mainIcon_layout"
+                android:layout_marginStart="16dp"
+
+                android:text="Loading"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/list_item_cardView_tasks_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignTop="@+id/list_item_cardView_title_textView"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/list_item_cardView_mainIcon_layout"
+
+                android:text="Loading"
+                android:textColor="@color/light_blue"
+                android:textSize="16sp" />
+        </RelativeLayout>
+        
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

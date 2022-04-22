@@ -1,13 +1,30 @@
 package com.example.ngs_test_login.MainActivity.Domain.Models
 
-data class Chat(private val id: String, private val name: String,
-           private val author: String, private val date: String,
-           private val users: ArrayList<User>, private val sections: ArrayList<String>,
-           private val tasks: ArrayList<Task>)
-{
-    /*TODO
-    *  1. Sections
-    *  2. Users
-    *  3. Tasks
-    * */
-}
+import com.google.gson.annotations.SerializedName
+
+data class Chat(
+    @field:SerializedName("date")
+    val date: String? = null,
+
+    @field:SerializedName("auth")
+    val auth: String? = null,
+
+    @field:SerializedName("project_id")
+    val projectId: String? = null,
+
+    @field:SerializedName("__v")
+    val V: Int? = null,
+
+    @field:SerializedName("name")
+    val name: String? = null,
+
+    @field:SerializedName("messages")
+    val messages: List<ChatMessage?>? = null,
+
+    @field:SerializedName("_id")
+    val id: String? = null,
+
+    @field:SerializedName("users")
+    val users: List<ListUser?>? = null)
+{}
+

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/chat_item_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <RelativeLayout
+            android:id="@+id/chat_item_cardView_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/chat_item_cardView_mainIcon_layout"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentStart="true"
+                android:gravity="center_horizontal"
+                android:background="@color/lighter_pink">
+
+                <TextView
+                    android:id="@+id/chat_item_cardView_mainIcon_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="C"
+                    android:textSize="56sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/chat_item_cardView_title_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_toEndOf="@+id/chat_item_cardView_mainIcon_layout"
+                android:layout_marginStart="16dp"
+
+                android:text="Loading"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/chat_item_cardView_sender_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignTop="@+id/chat_item_cardView_title_textView"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/chat_item_cardView_mainIcon_layout"
+
+                android:text="Loading"
+                android:textColor="@color/light_blue"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/chat_item_cardView_message_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_toEndOf="@+id/chat_item_cardView_mainIcon_layout"
+                android:layout_marginStart="16dp"
+                android:layout_alignBottom="@+id/chat_item_cardView_mainIcon_layout"
+
+
+                android:textSize="16sp"
+                android:text="Loading"
+                android:textColor="@color/grey"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
