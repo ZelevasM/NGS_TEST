@@ -30,9 +30,6 @@ class DataListAdapter(private val lists: ArrayList<DataList?>?): RecyclerView.Ad
         //holder.iconTextView.setText(currentList.)
         holder.titleTextView.text = currentList?.name
         holder.tasksTextView.text = currentList?.tasks?.size.toString()
-        Log.d("MyLog","\n\ntitle: ${currentList?.name}")
-        Log.d("MyLog","\n\ntitle: ${currentList?.name}")
-        Log.d("MyLog","\n\ntitle: ${currentList?.name}")
     }
 
     override fun getItemCount(): Int

@@ -51,11 +51,9 @@ class MainListsFragment: Fragment()
         listRecView.setHasFixedSize(true)
         listViewModel.listsLiveData.observe(viewLifecycleOwner, Observer {
             lists = it
-            Log.d("MyLog","\n\nLIST HAS BEEN CHANGED $lists")
             adapter = DataListAdapter(lists)
-            Log.d("MyLog","\n\nLIST HAS BEEN CHANGED $adapter")
             listRecView.adapter = adapter
-            Log.d("MyLog","\n\nLIST HAS BEEN CHANGED")
+
 
             nullIcon.visibility = View.GONE
             nullText.visibility = View.GONE

@@ -10,6 +10,7 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.GetDataUseCa
 import com.example.ngs_test_login.MainActivity.Domain.Models.*
 import com.example.ngs_test_login.MainActivity.Presentation.Validators.ChatValidator
 import com.example.ngs_test_login.MainActivity.Presentation.Validators.ListValidator
+import com.example.ngs_test_login.MainActivity.Presentation.Validators.ShortcutValidator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope.coroutineContext
 import kotlinx.coroutines.launch
@@ -39,6 +40,8 @@ class MainViewModel: ViewModel()
         val lists: ArrayList<DataList?>? = mainData.dataLists
         val chats: ArrayList<Chat?>? = mainData.chats
         val user: User? = mainData.user
+        val shortcuts: ArrayList<Shortcut?>? = user?.shortcuts as ArrayList<Shortcut?>?
+
         Log.d("MyLog","lists: $lists")
         Log.d("MyLog","chats: $chats")
         Log.d("MyLog","user: $user")
@@ -51,6 +54,10 @@ class MainViewModel: ViewModel()
         if (ChatValidator().validateIncomingChat(chats))
         {
             chatsData.postValue(chats)
+        }
+        if(ShortcutValidator().validateIncomingShortcut(shortcuts))
+        {
+            shortcutsData.postValue(shortcuts)
         }
     }
 }
