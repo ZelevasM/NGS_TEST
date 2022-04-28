@@ -18,7 +18,7 @@ class ListValidator
             else
             {
                 checker = true
-                Log.d("MyLog","Lists contain $lists")
+                //Log.d("MyLog","Lists contain $lists")
             }
         }
         else

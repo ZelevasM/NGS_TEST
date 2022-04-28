@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ngs_test_login.MainActivity.Data.Main.MainInterfaceImpl
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.GetDataUseCase
+import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketListUseCase
 import com.example.ngs_test_login.MainActivity.Domain.Models.*
 import com.example.ngs_test_login.MainActivity.Presentation.Validators.ChatValidator
 import com.example.ngs_test_login.MainActivity.Presentation.Validators.ListValidator
@@ -32,32 +33,43 @@ class MainViewModel: ViewModel()
 
     private val mainInterface = MainInterfaceImpl()
 
-    fun getData() = viewModelScope.launch(Dispatchers.IO) {
-        val getDataUseCase = GetDataUseCase(mainInterface)
+    fun getData(){
+        viewModelScope.launch(Dispatchers.IO) {
+            val getDataUseCase = GetDataUseCase(mainInterface)
 
-        //TODO GOVNO CODE
-        val mainData: MainData = getDataUseCase.execute()
-        val lists: ArrayList<DataList?>? = mainData.dataLists
-        val chats: ArrayList<Chat?>? = mainData.chats
-        val user: User? = mainData.user
-        val shortcuts: ArrayList<Shortcut?>? = user?.shortcuts as ArrayList<Shortcut?>?
+            //TODO GOVNO CODE
+            val mainData: MainData = getDataUseCase.execute()
+            val lists: ArrayList<DataList?>? = mainData.dataLists
+            val chats: ArrayList<Chat?>? = mainData.chats
+            val user: User? = mainData.user
+            val shortcuts: ArrayList<Shortcut?>? = user?.shortcuts as ArrayList<Shortcut?>?
 
-        Log.d("MyLog","lists: $lists")
-        Log.d("MyLog","chats: $chats")
-        Log.d("MyLog","user: $user")
+            Log.d("MyLog","lists: $lists")
+            Log.d("MyLog","chats: $chats")
+            Log.d("MyLog","user: $user")
 
 
-        if (ListValidator().validateIncomingList(lists))
-        {
-            listsData.postValue(lists)
-        }
-        if (ChatValidator().validateIncomingChat(chats))
-        {
-            chatsData.postValue(chats)
-        }
-        if(ShortcutValidator().validateIncomingShortcut(shortcuts))
-        {
-            shortcutsData.postValue(shortcuts)
+            if (ListValidator().validateIncomingList(lists))
+            {
+                listsData.postValue(lists)
+            }
+            if (ChatValidator().validateIncomingChat(chats))
+            {
+                chatsData.postValue(chats)
+            }
+            if (ShortcutValidator().validateIncomingShortcut(shortcuts))
+            {
+                shortcutsData.postValue(shortcuts)
+            }
         }
     }
+
+    fun socketList(){
+        viewModelScope.launch(Dispatchers.IO){
+            val socketListUseCase: SocketListUseCase = SocketListUseCase(mainInterface)
+            socketListUseCase.execute()
+            Log.d("MyLog","BACK")
+        }
+    }
+
 }

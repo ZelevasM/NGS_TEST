@@ -18,7 +18,7 @@ class ChatValidator
             else
             {
                 checker = true
-                Log.d("MyLog","Chats contain $chats")
+                //Log.d("MyLog","Chats contain $chats")
             }
         }
         else

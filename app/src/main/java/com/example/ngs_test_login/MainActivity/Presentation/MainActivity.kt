@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
         Init()
         getData()
+        addList()
     }
 
     private fun Init()
@@ -56,6 +57,11 @@ class MainActivity : AppCompatActivity()
     private fun getData()
     {
         mainViewModel.getData()
+    }
+
+    private fun addList()
+    {
+        mainViewModel.socketList()
     }
 
     /* Passing each menu ID as a set of Ids because each

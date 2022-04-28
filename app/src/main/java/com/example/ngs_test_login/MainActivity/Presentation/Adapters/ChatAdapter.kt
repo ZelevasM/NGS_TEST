@@ -28,8 +28,8 @@ class ChatAdapter(private val chats: ArrayList<Chat?>?): RecyclerView.Adapter<Ch
     {
         val chats = chats?.get(position)
         holder.titleTextView.text = chats?.name
-        holder.senderTextView.text = chats?.messages?.last()?.id
-        holder.messageTextView.text = chats?.messages?.last()?.message
+        holder.senderTextView.text = chats?.messages?.lastOrNull()?.id
+        holder.messageTextView.text = chats?.messages?.lastOrNull()?.message
     }
 
     override fun getItemCount(): Int

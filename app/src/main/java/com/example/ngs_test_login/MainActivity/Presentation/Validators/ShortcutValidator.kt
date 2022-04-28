@@ -17,7 +17,7 @@ class ShortcutValidator
             else
             {
                 checker = true
-                Log.d("MyLog","Shorts contain $shortcuts")
+                //Log.d("MyLog","Shorts contain $shortcuts")
             }
         }
         else

@@ -1,4 +1,4 @@
-package com.example.ngs_test_login.MainActivity.Data.Main
+package com.example.ngs_test_login.MainActivity.Data.Main.Models
 
 import com.example.ngs_test_login.MainActivity.Domain.Models.Chat
 import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
