@@ -41,20 +41,28 @@ class MainAddChatFragment: Fragment()
         createChat = view.findViewById(R.id.main_add_chat_create_button)
         cancelButton = view.findViewById(R.id.main_add_chat_cancel_button)
 
+        val host: Int = R.id.main_activity_nav_host_fragment
+        val destination: Int = R.id.mainFragment3
+
         createChat.setOnClickListener {
             val name: String = chatName.text.toString()
             val nameChecker: Boolean = verifyName(name)
             if(nameChecker)
             {
                 mainAddChatViewModel.addChat(name)
-                Toast.makeText(activity,"Added",Toast.LENGTH_LONG).show()
-                requireActivity().findNavController(R.id.main_activity_nav_host_fragment).navigate(R.id.mainFragment3)
+                Toast.makeText(activity,"Added: $name",Toast.LENGTH_LONG).show()
+                requireActivity().findNavController(host).popBackStack(destination, true)
+                requireActivity().findNavController(host).navigate(destination)
             }
             else
             {
                 Toast.makeText(activity,"Wrong",Toast.LENGTH_LONG).show()
-                requireActivity().findNavController(R.id.main_activity_nav_host_fragment).navigate(R.id.mainFragment3)
             }
+        }
+
+        cancelButton.setOnClickListener {
+            requireActivity().findNavController(host).popBackStack(destination, true)
+            requireActivity().findNavController(host).navigate(destination)
         }
     }
 

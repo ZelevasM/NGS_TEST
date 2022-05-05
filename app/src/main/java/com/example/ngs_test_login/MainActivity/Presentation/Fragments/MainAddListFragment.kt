@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.findFragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -48,6 +49,8 @@ class MainAddListFragment: Fragment()
         addMemberButton = view.findViewById(R.id.main_add_list_add_button)
         createList = view.findViewById(R.id.main_add_list_create_button)
         cancelButton = view.findViewById(R.id.main_add_list_cancel_button)
+        val host: Int = R.id.main_activity_nav_host_fragment
+        val destination: Int = R.id.mainFragment3
 
         createList.setOnClickListener {
             val name: String = listName.text.toString()
@@ -55,8 +58,9 @@ class MainAddListFragment: Fragment()
             if(nameChecker)
             {
                 mainAddListViewModel.addList(name)
-                Toast.makeText(activity,"Added",Toast.LENGTH_LONG).show()
-                requireActivity().findNavController(R.id.main_activity_nav_host_fragment).navigate(R.id.mainFragment3)
+                Toast.makeText(activity,"Added: $name",Toast.LENGTH_LONG).show()
+                requireActivity().findNavController(host).popBackStack(destination, true)
+                requireActivity().findNavController(host).navigate(destination)
             }
             else
             {
@@ -65,7 +69,8 @@ class MainAddListFragment: Fragment()
         }
 
         cancelButton.setOnClickListener {
-            requireActivity().findNavController(R.id.main_activity_nav_host_fragment).navigate(R.id.mainFragment3)
+            requireActivity().findNavController(host).popBackStack(destination, true)
+            requireActivity().findNavController(host).navigate(destination)
         }
     }
 

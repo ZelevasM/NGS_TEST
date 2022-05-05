@@ -67,4 +67,5 @@ class MainFragment: Fragment()
             findNavController().navigate(R.id.action_mainFragment3_to_mainAddFragment)
         }
     }
+
 }

@@ -76,7 +76,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/main_navigation_bar"
         android:layout_below="@id/editText_main_search_layout_holder"
-        app:defaultNavHost="true"
         app:navGraph="@navigation/main_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
