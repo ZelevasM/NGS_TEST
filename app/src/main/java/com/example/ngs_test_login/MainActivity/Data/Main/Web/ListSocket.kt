@@ -3,13 +3,15 @@ package com.example.ngs_test_login.MainActivity.Data.Main.Web
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.ngs_test_login.MainActivity.Data.Main.Models.SocketSendChat
+import com.example.ngs_test_login.MainActivity.Data.Main.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Models.SocketSendList
+import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ListSocketCallbackInterface
+import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
 import io.socket.client.Socket
 import org.json.JSONObject
 
 
-class SocketList(private val mSocket: Socket)
+class ListSocket(private val mSocket: Socket)
 {
     //TODO Bear all events out to consts
     @RequiresApi(Build.VERSION_CODES.O)
@@ -19,17 +21,19 @@ class SocketList(private val mSocket: Socket)
         //val options = IO.Options.builder().setExtraHeaders(mapOf("Authorization" to listOf(BuildConfig.Token))).build()
         Log.d("MyLog","Connexion: ${mSocket.connected()}")
 
-        val name = "List#59"
+        val name = "List#Test1"
         val id: String = IdGenerator("6260f84e5db5e505faccecb2").generate()
-        val order = 16
+        val order = 9
 
         val socketSendList: SocketSendList = SocketSendList(name, id, order)
         val socketList: JSONObject = ConvertClassToJson(socketSendList).convert()
         mSocket.emit("IN_ProjectAdd", socketList)
     }
 
-    fun getList()
+    fun getList(listSocketCallbackInterface: ListSocketCallbackInterface)
     {
+        var serializerSocket: SocketDataSerializer<DataList>
+        val list: DataList = DataList()
         mSocket.on("OUT_Message")
         {
             Log.d("MyLog","OUT MESSAGE")
@@ -38,35 +42,10 @@ class SocketList(private val mSocket: Socket)
 
         mSocket.on("OUT_ProjectAdd")
         {
-            Log.d("MyLog","GOT LIST ${Thread.currentThread().name}")
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun addChat()
-    {
-        Log.d("MyLog","CHAT SOCKET START:")
-        val name = "Chat7"
-        val id: String = IdGenerator("6260f84e5db5e505faccecb2").generate()
-
-        //TODO replace by json in emit
-        val socketSendChat: SocketSendChat = SocketSendChat(name, id)
-        val socketChat: JSONObject = ConvertClassToJson(socketSendChat).convert()
-        Log.d("MyLog","hat: ${socketChat.toString()}")
-        mSocket.emit("IN_AddChats", id, name)
-    }
-
-    fun getChat()
-    {
-        mSocket.on("OUT_Message")
-        {
-            Log.d("MyLog","OUT MESSAGE")
-            Log.d("MyLog","ConnexionInChat: ${mSocket.connected()}")
-        }
-
-        mSocket.on("OUT_AddChats")
-        {
-            Log.d("MyLog","GOT CHAT")
+            args->
+                Log.d("MyLog","GOT LIST: ${args[0]}")
+                serializerSocket = SocketDataSerializer(args[0] as JSONObject, list.javaClass)
+                listSocketCallbackInterface.onChanged(serializerSocket.doSerialization())
         }
     }
 }

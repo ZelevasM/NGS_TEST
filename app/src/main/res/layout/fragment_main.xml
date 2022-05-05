@@ -2,7 +2,90 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topAppBarLayout"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/black"
+            app:menu="@menu/action_bar_main_menu"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topAppBarLayout"
+        android:id="@+id/editText_main_search_layout_holder"
+        android:background="@color/light_grey">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editText_main_search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.NGS_Test_Login.TextInput"
+            app:shapeAppearanceOverlay="@style/Widget.NGS_Test_Login.TextInput"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+            android:hint="@string/search_notif"
+            app:boxStrokeColor="@color/light_pink"
+            app:boxStrokeWidth="1dp"
+            app:startIconDrawable="@drawable/ic_search"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/light_pink"
+            app:hintTextColor="@color/light_pink">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_email"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="text"
+                android:paddingVertical="1dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/button_add"
+        style="@style/Widget.NGS_Test_Login.Button.Add"
+        android:layout_above="@id/main_navigation_bar"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:elevation="1dp"
+        app:icon = "@drawable/ic_add"
+        app:iconGravity = "textStart"
+        app:iconPadding="0dp"/>
+
+    <fragment
+        android:id="@+id/main_nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/main_navigation_bar"
+        android:layout_below="@id/editText_main_search_layout_holder"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main_navigation" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/main_navigation_bar"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_navigation_menu"
+        app:itemIconTint="@color/nav_item_selector"
+        app:itemTextColor="@color/nav_item_selector"/>
 </RelativeLayout>

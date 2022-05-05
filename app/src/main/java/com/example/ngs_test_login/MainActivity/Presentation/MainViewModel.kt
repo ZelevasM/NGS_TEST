@@ -6,16 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ngs_test_login.MainActivity.Data.Main.MainInterfaceImpl
-import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.GetDataUseCase
-import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketListUseCase
+import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.*
 import com.example.ngs_test_login.MainActivity.Domain.Models.*
+import com.example.ngs_test_login.MainActivity.Presentation.SocketCallbacksImpl.ChatSocketCallbackImpl
+import com.example.ngs_test_login.MainActivity.Presentation.SocketCallbacksImpl.ListSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Validators.ChatValidator
 import com.example.ngs_test_login.MainActivity.Presentation.Validators.ListValidator
 import com.example.ngs_test_login.MainActivity.Presentation.Validators.ShortcutValidator
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope.coroutineContext
 import kotlinx.coroutines.launch
-import kotlin.coroutines.coroutineContext
 
 class MainViewModel: ViewModel()
 {
@@ -29,6 +28,8 @@ class MainViewModel: ViewModel()
     private val shortcutsData = MutableLiveData<ArrayList<Shortcut?>?>()
     val shortcutsLiveData: LiveData<ArrayList<Shortcut?>?> = shortcutsData
 
+    private var lists: ArrayList<DataList?>? = null
+    private var chats: ArrayList<Chat?>? = null
     //////
 
     private val mainInterface = MainInterfaceImpl()
@@ -36,11 +37,10 @@ class MainViewModel: ViewModel()
     fun getData(){
         viewModelScope.launch(Dispatchers.IO) {
             val getDataUseCase = GetDataUseCase(mainInterface)
-
             //TODO GOVNO CODE
             val mainData: MainData = getDataUseCase.execute()
-            val lists: ArrayList<DataList?>? = mainData.dataLists
-            val chats: ArrayList<Chat?>? = mainData.chats
+            lists = mainData.dataLists
+            chats  = mainData.chats
             val user: User? = mainData.user
             val shortcuts: ArrayList<Shortcut?>? = user?.shortcuts as ArrayList<Shortcut?>?
 
@@ -52,10 +52,12 @@ class MainViewModel: ViewModel()
             if (ListValidator().validateIncomingList(lists))
             {
                 listsData.postValue(lists)
+                getList()
             }
             if (ChatValidator().validateIncomingChat(chats))
             {
                 chatsData.postValue(chats)
+                getChat()
             }
             if (ShortcutValidator().validateIncomingShortcut(shortcuts))
             {
@@ -64,12 +66,42 @@ class MainViewModel: ViewModel()
         }
     }
 
-    fun socketList(){
+    fun socketInit()
+    {
+        val socketInitUseCase: SocketInitUseCase = SocketInitUseCase(mainInterface)
+        socketInitUseCase.execute()
+    }
+
+    fun addList(){
         viewModelScope.launch(Dispatchers.IO){
-            val socketListUseCase: SocketListUseCase = SocketListUseCase(mainInterface)
-            socketListUseCase.execute()
-            Log.d("MyLog","BACK")
+            val addListUseCase: AddListUseCase = AddListUseCase(mainInterface)
+            addListUseCase.execute()
         }
     }
 
+    fun getList()
+    {
+        viewModelScope.launch(Dispatchers.IO){
+            val getListUseCase: GetListUseCase = GetListUseCase(mainInterface)
+            val listSocketCallbackImpl: ListSocketCallbackImpl = ListSocketCallbackImpl(lists, listsData)
+            getListUseCase.execute(listSocketCallbackImpl)
+        }
+    }
+
+    fun addChat()
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            val addChatUseCase: AddChatUseCase = AddChatUseCase(mainInterface)
+            addChatUseCase.execute()
+        }
+    }
+
+    fun getChat()
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            val getChatUseCase: GetChatUseCase = GetChatUseCase(mainInterface)
+            val chatSocketCallbackImpl: ChatSocketCallbackImpl = ChatSocketCallbackImpl(chats, chatsData)
+            getChatUseCase.execute(chatSocketCallbackImpl)
+        }
+    }
 }
