@@ -4,9 +4,9 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
 
 class AddChatUseCase(private val mainInterface: MainInterface)
 {
-    fun execute()
+    fun execute(name: String)
     {
-        mainInterface.addChat()
+        mainInterface.addChat(name)
     }
 
 }

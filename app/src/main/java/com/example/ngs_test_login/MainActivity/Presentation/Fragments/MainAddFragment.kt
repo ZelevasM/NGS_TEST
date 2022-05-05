@@ -18,6 +18,8 @@ import com.example.ngs_test_login.MainActivity.Domain.Models.Chat
 import com.example.ngs_test_login.MainActivity.Presentation.Adapters.ChatAdapter
 import com.example.ngs_test_login.MainActivity.Presentation.MainViewModel
 import com.example.ngs_test_login.R
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainAddFragment: Fragment()
@@ -26,6 +28,8 @@ class MainAddFragment: Fragment()
     private lateinit var navView: BottomNavigationView
     private lateinit var navHost: NavHostFragment
     private lateinit var navController: NavController
+    private lateinit var actionBar: MaterialToolbar
+    private lateinit var actionBarLayout: AppBarLayout
     //TODO FIX
     private lateinit var nullIcon: ImageView
     private lateinit var nullText: TextView
@@ -48,8 +52,14 @@ class MainAddFragment: Fragment()
 
         navHost = childFragmentManager.findFragmentById(R.id.main_add_nav_host_fragment) as NavHostFragment
         navController = navHost.findNavController()
-
-
         navView.setupWithNavController(navController)
+
+        actionBarLayout = view.findViewById(R.id.main_add_topAppBarLayout)
+        actionBar = view.findViewById(R.id.main_add_topAppBar)
+
+        navController.addOnDestinationChangedListener{
+            controller, destination, arguments->
+                actionBar.title = navController.currentDestination?.label
+        }
     }
 }

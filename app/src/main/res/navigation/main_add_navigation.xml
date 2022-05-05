@@ -8,16 +8,16 @@
     <fragment
         android:id="@+id/navigation_mainAddListFragment"
         android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainAddListFragment"
-        android:label="MainAddListFragment"
+        android:label="@string/add_new"
         tools:layout="@layout/fragment_main_add_list"/>
     <fragment
         android:id="@+id/navigation_mainAddChatFragment"
         android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainAddChatFragment"
-        android:label="MainAddChatFragment"
+        android:label="@string/add_new"
         tools:layout="@layout/fragment_main_add_chat"/>
     <fragment
         android:id="@+id/navigation_mainAddShortcutFragment"
         android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainAddShortcutFragment"
-        android:label="MainAddShortcutFragment"
+        android:label="@string/add_new"
         tools:layout="@layout/fragment_main_add_shortcut"/>
 </navigation>

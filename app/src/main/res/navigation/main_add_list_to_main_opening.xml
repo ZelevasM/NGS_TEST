@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_add_list_to_main_opening"
+    app:startDestination="@id/mainAddListFragment">
+
+    <fragment
+        android:id="@+id/mainAddListFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainAddListFragment"
+        android:label="MainAddListFragment"
+        tools:layout="@layout/fragment_main_add_list">
+        <action
+            android:id="@+id/action_mainAddListFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main" />
+</navigation>

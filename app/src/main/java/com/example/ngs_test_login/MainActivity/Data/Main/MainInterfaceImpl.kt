@@ -41,9 +41,9 @@ class MainInterfaceImpl: MainInterface
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun addList()
+    override fun addList(name: String)
     {
-        listSocket.addList()
+        listSocket.addList(name)
     }
 
     override fun getList(listSocketCallbackInterface: ListSocketCallbackInterface)
@@ -52,9 +52,9 @@ class MainInterfaceImpl: MainInterface
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun addChat()
+    override fun addChat(name: String)
     {
-        chatSocket.addChat()
+        chatSocket.addChat(name)
     }
 
     override fun getChat(chatSocketCallbackInterface: ChatSocketCallbackInterface)

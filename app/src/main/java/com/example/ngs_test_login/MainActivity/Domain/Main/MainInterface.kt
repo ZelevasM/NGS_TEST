@@ -10,11 +10,11 @@ interface MainInterface
 
     fun socketInit()
 
-    fun addList()
+    fun addList(name: String)
 
     fun getList(listSocketCallbackInterface: ListSocketCallbackInterface)
 
-    fun addChat()
+    fun addChat(name: String)
 
     fun getChat(chatSocketCallbackInterface: ChatSocketCallbackInterface)
 }

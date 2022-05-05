@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -52,6 +53,13 @@ class MainChatsFragment: Fragment()
             chats = it
             adapter = ChatAdapter(chats)
             chatRecView.adapter = adapter
+            adapter.setOnItemClickListener(object: ChatAdapter.onItemClickListener{
+                override fun onItemClicked(position: Int,id: String?)
+                {
+                    super.onItemClicked(position,id)
+                    Toast.makeText(activity,"$position + $id" ,Toast.LENGTH_SHORT).show()
+                }
+            })
 
             nullIcon.visibility = View.GONE
             nullText.visibility = View.GONE

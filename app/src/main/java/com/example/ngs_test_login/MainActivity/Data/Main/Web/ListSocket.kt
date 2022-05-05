@@ -15,13 +15,12 @@ class ListSocket(private val mSocket: Socket)
 {
     //TODO Bear all events out to consts
     @RequiresApi(Build.VERSION_CODES.O)
-    fun addList()
+    fun addList(name: String)
     {
         Log.d("MyLog","SOCKET_INPUT11:")
         //val options = IO.Options.builder().setExtraHeaders(mapOf("Authorization" to listOf(BuildConfig.Token))).build()
         Log.d("MyLog","Connexion: ${mSocket.connected()}")
 
-        val name = "List#Test1"
         val id: String = IdGenerator("6260f84e5db5e505faccecb2").generate()
         val order = 9
 

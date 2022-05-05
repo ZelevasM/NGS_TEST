@@ -34,4 +34,7 @@
     <string name="chats_notif">You have no chats yet</string>
     <string name="search_notif">Search for tasks or comments</string>
 
+    //Main Add
+    <string name="add_new">Add new</string>
+
 </resources>

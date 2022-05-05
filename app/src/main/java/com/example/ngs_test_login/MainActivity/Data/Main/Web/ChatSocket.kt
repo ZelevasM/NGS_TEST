@@ -14,10 +14,10 @@ import org.json.JSONObject
 class ChatSocket(private val mSocket: Socket)
 {
     @RequiresApi(Build.VERSION_CODES.O)
-    fun addChat()
+    fun addChat(name: String)
     {
         Log.d("MyLog","CHAT SOCKET START:")
-        val name = "ChatGHGH"
+
         val id: String = IdGenerator("6260f84e5db5e505faccecb2").generate()
 
         //TODO replace by json in emit

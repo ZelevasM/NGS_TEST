@@ -4,11 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.ngs_test_login.MainActivity.Presentation.MainViewModel
 import com.example.ngs_test_login.R
 
 class MainAddChatFragment: Fragment()
 {
+    private val mainAddChatViewModel: MainViewModel by activityViewModels()
+    private lateinit var chatName: EditText
+    private lateinit var addMemberButton: Button
+    private lateinit var createChat: Button
+    private lateinit var cancelButton: Button
+
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?) : View?
     {
         return inflater.inflate(R.layout.fragment_main_add_chat, container, false)
@@ -22,6 +35,36 @@ class MainAddChatFragment: Fragment()
 
     private fun Init(view: View)
     {
+        chatName = view.findViewById(R.id.main_add_chat_name)
 
+        addMemberButton = view.findViewById(R.id.main_add_chat_add_button)
+        createChat = view.findViewById(R.id.main_add_chat_create_button)
+        cancelButton = view.findViewById(R.id.main_add_chat_cancel_button)
+
+        createChat.setOnClickListener {
+            val name: String = chatName.text.toString()
+            val nameChecker: Boolean = verifyName(name)
+            if(nameChecker)
+            {
+                mainAddChatViewModel.addChat(name)
+                Toast.makeText(activity,"Added",Toast.LENGTH_LONG).show()
+                requireActivity().findNavController(R.id.main_activity_nav_host_fragment).navigate(R.id.mainFragment3)
+            }
+            else
+            {
+                Toast.makeText(activity,"Wrong",Toast.LENGTH_LONG).show()
+                requireActivity().findNavController(R.id.main_activity_nav_host_fragment).navigate(R.id.mainFragment3)
+            }
+        }
+    }
+
+    private fun verifyName(name: String): Boolean
+    {
+        var checker = false
+        if(name.isNotEmpty())
+        {
+            checker = true
+        }
+        return checker
     }
 }

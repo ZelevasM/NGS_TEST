@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ngs_test_login.MainActivity.Data.Main.MainInterfaceImpl
+import com.example.ngs_test_login.MainActivity.Data.Main.Web.IdGenerator
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.*
 import com.example.ngs_test_login.MainActivity.Domain.Models.*
 import com.example.ngs_test_login.MainActivity.Presentation.SocketCallbacksImpl.ChatSocketCallbackImpl
@@ -72,10 +73,10 @@ class MainViewModel: ViewModel()
         socketInitUseCase.execute()
     }
 
-    fun addList(){
+    fun addList(name: String){
         viewModelScope.launch(Dispatchers.IO){
             val addListUseCase: AddListUseCase = AddListUseCase(mainInterface)
-            addListUseCase.execute()
+            addListUseCase.execute(name)
         }
     }
 
@@ -88,11 +89,11 @@ class MainViewModel: ViewModel()
         }
     }
 
-    fun addChat()
+    fun addChat(name: String)
     {
         viewModelScope.launch(Dispatchers.IO) {
             val addChatUseCase: AddChatUseCase = AddChatUseCase(mainInterface)
-            addChatUseCase.execute()
+            addChatUseCase.execute(name)
         }
     }
 
