@@ -55,15 +55,18 @@ class MainViewModel: ViewModel()
                 listsData.postValue(lists)
                 getList()
             }
+            else{ getList() }
             if (ChatValidator().validateIncomingChat(chats))
             {
                 chatsData.postValue(chats)
                 getChat()
             }
+            else{ getList() }
             if (ShortcutValidator().validateIncomingShortcut(shortcuts))
             {
                 shortcutsData.postValue(shortcuts)
             }
+            else{ getList() }
         }
     }
 
