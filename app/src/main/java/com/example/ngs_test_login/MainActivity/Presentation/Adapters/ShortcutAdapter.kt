@@ -27,10 +27,10 @@ class ShortcutAdapter(private val shortcuts: ArrayList<Shortcut?>?): RecyclerVie
 
     override fun onBindViewHolder(holder: ShortcutViewHolder,position: Int)
     {
-        val currentList = shortcuts?.get(position)
-        val color: Int = Color.parseColor(currentList?.color)
+        val currentShortcut = shortcuts?.get(position)
+        val color: Int = Color.parseColor(currentShortcut?.color)
         holder.iconTextViewBackColor.setBackgroundColor(color)
-        holder.titleTextView.text = currentList?.type
+        holder.titleTextView.text = currentShortcut?.type
     }
 
     override fun getItemCount(): Int

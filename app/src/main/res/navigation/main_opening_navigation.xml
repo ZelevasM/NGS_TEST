@@ -12,10 +12,18 @@
         <action
             android:id="@+id/action_mainFragment3_to_mainAddFragment"
             app:destination="@id/mainAddFragment" />
+        <action
+            android:id="@+id/action_mainFragment3_to_mainProfileFragment"
+            app:destination="@id/mainProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainAddFragment"
         android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainAddFragment"
         android:label="MainAddFragment"
         tools:layout="@layout/fragment_main_add"/>
+    <fragment
+        android:id="@+id/mainProfileFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainProfileFragment"
+        android:label="MainProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
 </navigation>

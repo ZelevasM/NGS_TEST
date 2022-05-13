@@ -2,10 +2,12 @@ package com.example.ngs_test_login.MainActivity.Presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainFragment
 import com.example.ngs_test_login.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -24,6 +26,8 @@ class MainActivity : AppCompatActivity()
         Init()
         socketInit()
         getData()
+
+
         //addList()
     }
 

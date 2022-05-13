@@ -1,17 +1,13 @@
 package com.example.ngs_test_login.MainActivity.Presentation.Fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavAction
-import androidx.navigation.NavController
-import androidx.navigation.NavDirections
-import androidx.navigation.Navigation
+import androidx.navigation.*
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -32,6 +28,10 @@ class MainFragment: Fragment()
     private lateinit var addButton: Button
     //private lateinit var action: NavDirections
 
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?) : View?
     {
@@ -54,6 +54,13 @@ class MainFragment: Fragment()
 
         actionBar = view.findViewById(R.id.topAppBar)
         actionBarLayout = view.findViewById(R.id.topAppBarLayout)
+        actionBar.setOnMenuItemClickListener{
+            if(it.itemId == R.id.action_account)
+            {
+                findNavController().navigate(R.id.action_mainFragment3_to_mainProfileFragment)
+            }
+            true
+        }
 
         navView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener {

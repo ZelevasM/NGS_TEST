@@ -37,4 +37,10 @@
     //Main Add
     <string name="add_new">Add new</string>
 
+    //Profile
+    <string name="gen_settings">General Settings</string>
+    <string name="backups">Backups</string>
+    <string name="upgrade">Upgrade</string>
+    <string name="imp">Import</string>
+
 </resources>
