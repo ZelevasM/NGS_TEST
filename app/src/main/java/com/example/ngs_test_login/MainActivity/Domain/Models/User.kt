@@ -25,7 +25,7 @@ data class User(
     val folder: List<Any?>? = null,
 
     @field:SerializedName("expand_subtask")
-    val expandSubtask: String? = null,
+    val expandSubtask: Boolean? = null,
 
     @field:SerializedName("name")
     val name: String? = null,
@@ -37,7 +37,7 @@ data class User(
     val id: String? = null,
 
     @field:SerializedName("new_task")
-    val newTask: String? = null,
+    val newTask: Boolean? = null,
 
     @field:SerializedName("email")
     val email: String? = null,

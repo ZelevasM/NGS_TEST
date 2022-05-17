@@ -1,5 +1,6 @@
 package com.example.ngs_test_login.MainActivity.Presentation
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -25,10 +26,16 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
         Init()
         socketInit()
-        getData()
+        getData(this)
 
 
         //addList()
+    }
+
+    override fun onDestroy()
+    {
+        super.onDestroy()
+        mainViewModel.localDbClose()
     }
 
     private fun Init()
@@ -37,15 +44,16 @@ class MainActivity : AppCompatActivity()
         //supportFragmentManager.beginTransaction().replace(R.id.main_container,MainFragment.newInstance()).commit()
     }
 
-    private fun getData()
+    private fun getData(context: Context)
     {
-        mainViewModel.getData()
+        mainViewModel.getData(this)
     }
 
     private fun socketInit()
     {
         mainViewModel.socketInit()
     }
+
 
     /* Passing each menu ID as a set of Ids because each
      menu should be considered as top level destinations.

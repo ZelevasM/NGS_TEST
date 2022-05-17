@@ -17,6 +17,7 @@ data class ListUser(
 
     @field:SerializedName("unread_message")
     val unreadMessage: Int? = null,
+
     @field:SerializedName("read")
     val read: Boolean? = null,
 
