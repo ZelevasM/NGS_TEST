@@ -3,6 +3,7 @@ package com.example.ngs_test_login.MainActivity.Data.Main.Local
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
@@ -11,18 +12,7 @@ class UserDatabaseManager (private val context: Context)
 {
     private val userDatabaseHelper: UserDatabaseHelper = UserDatabaseHelper(context)
     private var db: SQLiteDatabase? = null
-    private var dbOpened: Boolean = true
 
-    companion object{
-        //@SuppressLint("StaticFieldLeak")
-//        private var instance: UserDatabaseManager? = null
-//        fun getInstance(context: Context) = synchronized(this)
-//        {
-//            if (instance == null)
-//                instance = UserDatabaseManager(context)
-//            instance
-//        }
-    }
     fun openDb(): Boolean
     {
         //TODO SUPER MEGA GOVNO CODE -> CHANGE IT
@@ -51,14 +41,47 @@ class UserDatabaseManager (private val context: Context)
             put(UserDatabase.COLUMN_NAME_SHORTCUT_INBOX, user?.shortcutInbox)
         }
         db?.insert(UserDatabase.TABLE_NAME, null, values)
+
+        //Write Values For Folders
+        val folderValues: ContentValues = ContentValues()
+        if(user?.folder != null)
+        {
+            Log.d("LocalDb", "SIZE: ${user.folder.size}")
+            for(i in user.folder.indices)
+            {
+                folderValues.put(UserDatabase.FOLDERS_COLUMN_NAME_KEY,user.id)
+                folderValues.put(UserDatabase.FOLDERS_COLUMN_NAME_ID, user.folder[i]?.id)
+                folderValues.put(UserDatabase.FOLDERS_COLUMN_NAME_NAME, user.folder[i]?.name)
+                folderValues.put(UserDatabase.FOLDERS_COLUMN_NAME_ORDER, user.folder[i]?.order)
+                db?.insert(UserDatabase.FOLDERS_TABLE_NAME, null, folderValues)
+            }
+        }
+
+        //Write Values For Lists in Folders
+        val folderListsValues: ContentValues = ContentValues()
+        if(user?.folder != null)
+        {
+            for(i in user.folder.indices)
+            {
+                if(user.folder[i]?.lists != null)
+                {
+                    Log.d("LocalDb", "FOLDER LISTS NULLNESS: ${user.folder[i]?.lists}")
+                    for(j in user.folder[i]?.lists?.indices!!)
+                    {
+                        folderListsValues.put(UserDatabase.FOLDERS_LISTS_COLUMN_NAME_KEY,user.folder[i]?.id)
+                        folderListsValues.put(UserDatabase.FOLDERS_LISTS_COLUMN_NAME_ID, user.folder[i]?.lists?.get(j))
+                        db?.insert(UserDatabase.FOLDERS_LISTS_TABLE_NAME, null, folderListsValues)
+                    }
+                }
+            }
+        }
     }
 
     @SuppressLint("Range")
     fun readFromDb(): User?
     {
-        val cursor = db?.query(UserDatabase.TABLE_NAME, null, null, null,
+        var cursor: Cursor? = db?.query(UserDatabase.TABLE_NAME, null, null, null,
                         null, null, null)
-        var i: Int = 0
         var name: String? = null
         var id: String? = null
         var email: String? = null
@@ -79,21 +102,56 @@ class UserDatabaseManager (private val context: Context)
             expandSubtask = cursor.getString(cursor.getColumnIndex(UserDatabase.COLUMN_NAME_EXPAND_SUBTASK))
             newTask = cursor.getString(cursor.getColumnIndex(UserDatabase.COLUMN_NAME_NEW_TASK))
             shortInbox = cursor.getString(cursor.getColumnIndex(UserDatabase.COLUMN_NAME_SHORTCUT_INBOX))
-            Log.d("LocalDb", "${UserDatabase.TABLE_NAME}$i NAME : $name")
-            Log.d("LocalDb", "${UserDatabase.TABLE_NAME}$i ID : $id")
-            Log.d("LocalDb", "${UserDatabase.TABLE_NAME}$i EMAIL : $email")
-            Log.d("LocalDb", "${UserDatabase.TABLE_NAME}$i LANGUAGE : $language")
-            Log.d("LocalDb", "${UserDatabase.TABLE_NAME}$i SIDEBAR : $sidebar")
-            Log.d("LocalDb", "${UserDatabase.TABLE_NAME}$i DISK SPACE : $diskSpace")
-            Log.d("LocalDb", "${UserDatabase.TABLE_NAME}$i EXPAND SUBTASK : $expandSubtask")
-            Log.d("LocalDb", "${UserDatabase.TABLE_NAME}$i NEW TASK : $newTask")
-            Log.d("LocalDb", "${UserDatabase.TABLE_NAME}$i SHORT INBOX : $shortInbox")
+            Log.d("LocalDb", "${UserDatabase.TABLE_NAME} NAME : $name")
+            Log.d("LocalDb", "${UserDatabase.TABLE_NAME} ID : $id")
+            Log.d("LocalDb", "${UserDatabase.TABLE_NAME} EMAIL : $email")
+            Log.d("LocalDb", "${UserDatabase.TABLE_NAME} LANGUAGE : $language")
+            Log.d("LocalDb", "${UserDatabase.TABLE_NAME} SIDEBAR : $sidebar")
+            Log.d("LocalDb", "${UserDatabase.TABLE_NAME} DISK SPACE : $diskSpace")
+            Log.d("LocalDb", "${UserDatabase.TABLE_NAME} EXPAND SUBTASK : $expandSubtask")
+            Log.d("LocalDb", "${UserDatabase.TABLE_NAME} NEW TASK : $newTask")
+            Log.d("LocalDb", "${UserDatabase.TABLE_NAME} SHORT INBOX : $shortInbox\n=")
+        }
+
+        val user: User? = User(name = name, id = id, email = email, language = language,
+            showSidebar = ConvertStringToBoolean(sidebar.toString()).convert(),
+            diskSpace = diskSpace, expandSubtask = ConvertStringToBoolean(expandSubtask.toString()).convert(),
+            newTask = ConvertStringToBoolean(newTask.toString()).convert(), shortcutInbox = shortInbox)
+
+        cursor = db?.query(UserDatabase.FOLDERS_TABLE_NAME, null, null, null,
+                null, null, null)
+
+        var key: String? = null
+        var order: String? = null
+        var i: Int = 0
+        while(cursor?.moveToNext() == true)
+        {
+            key = cursor.getString(cursor.getColumnIndex(UserDatabase.FOLDERS_COLUMN_NAME_KEY))
+            id = cursor.getString(cursor.getColumnIndex(UserDatabase.FOLDERS_COLUMN_NAME_ID))
+            name = cursor.getString(cursor.getColumnIndex(UserDatabase.FOLDERS_COLUMN_NAME_NAME))
+            order = cursor.getString(cursor.getColumnIndex(UserDatabase.FOLDERS_COLUMN_NAME_ORDER))
+            Log.d("LocalDb", "${UserDatabase.FOLDERS_TABLE_NAME} KEY : $key")
+            Log.d("LocalDb", "${UserDatabase.FOLDERS_TABLE_NAME} ID : $id")
+            Log.d("LocalDb", "${UserDatabase.FOLDERS_TABLE_NAME} NAME : $name")
+            Log.d("LocalDb", "${UserDatabase.FOLDERS_TABLE_NAME} ORDER : $order")
+            Log.d("LocalDb", "READ ITERATION: $i \n=")
             i+=1
         }
-        val user: User? = User(name = name, id = id, email = email, language = language,
-        showSidebar = ConvertStringToBoolean(sidebar.toString()).convert(),
-        diskSpace = diskSpace, expandSubtask = ConvertStringToBoolean(expandSubtask.toString()).convert(),
-        newTask = ConvertStringToBoolean(newTask.toString()).convert(), shortcutInbox = shortInbox)
+
+        cursor = db?.query(UserDatabase.FOLDERS_LISTS_TABLE_NAME, null, null, null,
+            null, null, null)
+        i = 0
+        while(cursor?.moveToNext() == true)
+        {
+            key = cursor.getString(cursor.getColumnIndex(UserDatabase.FOLDERS_LISTS_COLUMN_NAME_KEY))
+            id = cursor.getString(cursor.getColumnIndex(UserDatabase.FOLDERS_LISTS_COLUMN_NAME_ID))
+            Log.d("LocalDb", "LIST# $i")
+            Log.d("LocalDb", "${UserDatabase.FOLDERS_LISTS_TABLE_NAME} KEY : $key")
+            Log.d("LocalDb", "${UserDatabase.FOLDERS_LISTS_TABLE_NAME} ID : $id")
+            i+=1
+        }
+
+
         //close cursor
         cursor?.close()
         return user
@@ -103,6 +161,5 @@ class UserDatabaseManager (private val context: Context)
     {
         //close db helper
         userDatabaseHelper.close()
-        dbOpened = false
     }
 }
