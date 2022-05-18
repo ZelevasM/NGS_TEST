@@ -11,7 +11,7 @@ class UserValidator
         if (user != null)
         {
             checker = true
-            Log.d("MyLog","User contain $user")
+            //Log.d("MyLog","User contain $user")
         }
         else
         {

@@ -48,6 +48,9 @@ class MainViewModel: ViewModel()
             {
                 //retrieve data from Local Storage
                 //read method i guess
+                Log.d("LocalDb","=== FROM EXISTED LOCAL STORAGE ===")
+                user = getLocalUser()
+                Log.d("LocalDb","=== LOCAL EXISTED USER ===\n $user")
             }
 
             val getDataUseCase = GetDataUseCase(mainInterface)
@@ -88,6 +91,7 @@ class MainViewModel: ViewModel()
                 //write data to local storage
                 addLocalUser(context, user)
                 //delete then
+                Log.d("LocalDb","=== FROM RENEWED LOCAL STORAGE ===")
                 getLocalUser()
             }
             else{ }
@@ -113,10 +117,11 @@ class MainViewModel: ViewModel()
         addLocalUserUseCase.execute(context, user)
     }
 
-    fun getLocalUser()
+    fun getLocalUser(): User?
     {
         val getLocalUserUseCase: GetLocalUserUseCase = GetLocalUserUseCase(mainInterface)
-        getLocalUserUseCase.execute()
+        val user: User? = getLocalUserUseCase.execute()
+        return user
     }
 
     fun addLocalLists()

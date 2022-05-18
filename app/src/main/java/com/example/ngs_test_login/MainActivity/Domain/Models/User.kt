@@ -22,7 +22,7 @@ data class User(
     val token: List<Any?>? = null,
 
     @field:SerializedName("folder")
-    val folder: List<Any?>? = null,
+    val folder: List<Folder?>? = null,
 
     @field:SerializedName("expand_subtask")
     val expandSubtask: Boolean? = null,

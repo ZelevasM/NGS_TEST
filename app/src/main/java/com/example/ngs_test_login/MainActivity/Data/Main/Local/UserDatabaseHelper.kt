@@ -10,16 +10,15 @@ class UserDatabaseHelper(context: Context): SQLiteOpenHelper(context, UserDataba
     override fun onCreate(db: SQLiteDatabase?)
     {
         db?.execSQL(UserDatabase.CREATE_TABLE)
+        db?.execSQL(UserDatabase.FOLDERS_CREATE_TABLE)
+        db?.execSQL(UserDatabase.FOLDERS_LISTS_CREATE_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?,oldVersion: Int,newVersion: Int)
     {
         db?.execSQL(UserDatabase.DELETE_TABLE)
+        db?.execSQL(UserDatabase.FOLDERS_DELETE_TABLE)
+        db?.execSQL(UserDatabase.FOLDERS_LISTS_DELETE_TABLE)
         onCreate(db)
-    }
-
-    fun onDelete(db: SQLiteDatabase?)
-    {
-        db?.execSQL(UserDatabase.DELETE_TABLE)
     }
 }

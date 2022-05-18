@@ -71,7 +71,8 @@ class MainInterfaceImpl: MainInterface
 
     override fun localDbInit(context: Context): Boolean?
     {
-        userDatabaseManager = UserDatabaseManager.getInstance(context)
+        //userDatabaseManager = UserDatabaseManager.getInstance(context)
+        userDatabaseManager = UserDatabaseManager(context)
         val newlyCreated: Boolean? = userDatabaseManager?.openDb()
         return newlyCreated
     }
@@ -87,8 +88,9 @@ class MainInterfaceImpl: MainInterface
         userDatabaseManager?.writeToDb(user)
     }
 
-    override fun getLocalUser()
+    override fun getLocalUser(): User?
     {
-        userDatabaseManager?.readFromDb()
+        val user: User? = userDatabaseManager?.readFromDb()
+        return user
     }
 }

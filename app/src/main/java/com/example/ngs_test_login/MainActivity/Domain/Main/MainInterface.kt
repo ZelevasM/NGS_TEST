@@ -26,5 +26,5 @@ interface MainInterface
 
     fun addLocalUser(context: Context, user: User?)
 
-    fun getLocalUser()
+    fun getLocalUser(): User?
 }
