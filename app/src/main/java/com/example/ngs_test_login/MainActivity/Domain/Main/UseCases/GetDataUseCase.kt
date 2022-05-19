@@ -5,7 +5,7 @@ import com.example.ngs_test_login.MainActivity.Domain.Models.MainData
 
 class GetDataUseCase(private val mainInterface: MainInterface)
 {
-    fun execute(): MainData
+    fun execute(): MainData?
     {
         return mainInterface.getData()
     }

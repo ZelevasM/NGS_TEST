@@ -8,7 +8,7 @@ import com.example.ngs_test_login.MainActivity.Domain.Models.User
 
 interface MainInterface
 {
-    fun getData(): MainData
+    fun getData(): MainData?
 
     fun socketInit()
 

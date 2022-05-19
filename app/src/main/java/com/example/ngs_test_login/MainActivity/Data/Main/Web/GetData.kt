@@ -12,9 +12,9 @@ class GetData
     private val dataURL = URL(BuildConfig.GET_DATA)
     private lateinit var httpURLConnection: HttpURLConnection
 
-    fun getData(): String
+    fun getData(): String?
     {
-        var dataJson: String = "{}"
+        var dataJson: String? = null
         httpURLConnection = dataURL.openConnection() as HttpURLConnection
         httpURLConnection.addRequestProperty("Authorization",BuildConfig.Token)
         httpURLConnection.requestMethod = "GET"

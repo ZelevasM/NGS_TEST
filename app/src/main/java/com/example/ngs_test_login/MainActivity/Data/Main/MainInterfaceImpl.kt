@@ -2,8 +2,9 @@ package com.example.ngs_test_login.MainActivity.Data.Main
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.UserDatabaseManager
+import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.UserDatabaseManager
 import com.example.ngs_test_login.MainActivity.Data.Main.Mappers.WebMainDataMapper
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.GetData
 import com.example.ngs_test_login.MainActivity.Data.Main.Models.WebMainData
@@ -28,14 +29,18 @@ class MainInterfaceImpl: MainInterface
     private var userDatabaseManager: UserDatabaseManager? = null
 
 
-    override fun getData(): MainData
+    override fun getData(): MainData?
     {
         val getData = GetData()
-        val dataJson = getData.getData()
+        val dataJson: String? = getData.getData()
         val mainDataSerializer: MainDataSerializer = MainDataSerializer(dataJson)
-        val webMainData: WebMainData = mainDataSerializer.doSerialization()
+        Log.d("MyLog","mSer: $mainDataSerializer")
+        val webMainData: WebMainData? = mainDataSerializer.doSerialization()
+        Log.d("MyLog","mWebData: $webMainData")
         val webMainDataMapper: WebMainDataMapper = WebMainDataMapper()
-        val mainData: MainData = webMainDataMapper.fromWebData(webMainData)
+        Log.d("MyLog","mMapper: $webMainDataMapper")
+        val mainData: MainData? = webMainDataMapper.fromWebData(webMainData)
+        Log.d("MyLog","mData: $mainData")
 
         return mainData
     }

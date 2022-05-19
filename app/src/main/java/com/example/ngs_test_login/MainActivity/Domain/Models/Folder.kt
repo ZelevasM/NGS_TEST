@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class Folder(
     @field:SerializedName("lists" )
-    val lists: List<String?>? = null,
+    var lists: ArrayList<String?>? = ArrayList(),
     @field:SerializedName("_id" )
-    val id: String? = null,
+    var id: String? = null,
     @field:SerializedName("name" )
-    val name: String? = null,
+    var name: String? = null,
     @field:SerializedName("order" )
-    val order: String? = null,)
+    var order: String? = null,)
 {}

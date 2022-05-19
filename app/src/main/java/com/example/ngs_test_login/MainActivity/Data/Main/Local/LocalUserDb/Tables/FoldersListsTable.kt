@@ -1,0 +1,17 @@
+package com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.Tables
+
+object FoldersListsTable
+{
+    //FOLDERS' LISTS' TABLE ->
+    const val FOLDERS_LISTS_TABLE_NAME: String = "Folder_Lists"
+    const val FOLDERS_LISTS_COLUMN_NAME_KEY: String = "Key"
+    const val FOLDERS_LISTS_COLUMN_NAME_ID: String = "Id"
+    //<- FOLDERS' LISTS' TABLE
+
+    //FOLDERS' LISTS' TABLE OPERATIONS ->
+    const val FOLDERS_LISTS_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS $FOLDERS_LISTS_TABLE_NAME" +
+            "($FOLDERS_LISTS_COLUMN_NAME_KEY TEXT,$FOLDERS_LISTS_COLUMN_NAME_ID TEXT)"
+
+    const val FOLDERS_LISTS_DELETE_TABLE = "DROP TABLE IF EXISTS $FOLDERS_LISTS_TABLE_NAME"
+    //<- FOLDERS' LISTS' TABLE OPERATIONS
+}

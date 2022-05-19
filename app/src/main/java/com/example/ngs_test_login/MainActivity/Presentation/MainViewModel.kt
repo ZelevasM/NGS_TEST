@@ -34,68 +34,91 @@ class MainViewModel: ViewModel()
     private var lists: ArrayList<DataList?>? = null
     private var chats: ArrayList<Chat?>? = null
     private var user: User? = null
-    //////
 
     private val mainInterface = MainInterfaceImpl()
 
     fun getData(context: Context){
         viewModelScope.launch(Dispatchers.IO) {
-            //Get Data From Local Storage
-            //If Local Data exists, retrieve it, and continue to get newer data from REST
-            //If Local Data does not exist, create Local Db, and continue to get newer data from REST
             val newlyCreated: Boolean? = localDbInit(context)
             if(newlyCreated == false)
             {
-                //retrieve data from Local Storage
-                //read method i guess
                 Log.d("LocalDb","=== FROM EXISTED LOCAL STORAGE ===")
                 user = getLocalUser()
                 Log.d("LocalDb","=== LOCAL EXISTED USER ===\n $user")
-            }
 
-            val getDataUseCase = GetDataUseCase(mainInterface)
-            //TODO GOVNO CODE
-            val mainData: MainData = getDataUseCase.execute()
-            lists = mainData.dataLists
-            chats  = mainData.chats
-            user = mainData.user
-            val shortcuts: ArrayList<Shortcut?>? = user?.shortcuts as ArrayList<Shortcut?>?
-
-            Log.d("MyLog","lists: $lists")
-            Log.d("MyLog","chats: $chats")
-            Log.d("MyLog","user: $user")
-
-            //if(localdata == 1) {fetch it + checker = true} -> and then just continue code
-            if (ListValidator().validateIncomingList(lists))
-            {
-                listsData.postValue(lists)
-                getList()
-                //write data to local storage
+                val getDataUseCase = GetDataUseCase(mainInterface)
+                val mainData: MainData? = getDataUseCase.execute()
+                if(mainData == null)
+                {
+                    Log.d("MyLog","YES LOCAL DB + ERROR IN MAINDATA: $mainData")
+                    //show local -> keep connecting
+                }
+                else
+                {
+                    dataEstablisher(mainData, context)
+                    Log.d("MyLog","YES LOCAL DB + SUCCESS IN MAINDATA: $mainData")
+                    //store locally -> show from local -> connect sockets
+                }
             }
-            else{ getList() }
-            if (ChatValidator().validateIncomingChat(chats))
+            else
             {
-                chatsData.postValue(chats)
-                getChat()
-                //write data to local storage
+                val getDataUseCase = GetDataUseCase(mainInterface)
+                val mainData: MainData? = getDataUseCase.execute()
+                if(mainData == null)
+                {
+                    Log.d("MyLog","NO LOCAL DB + ERROR IN MAINDATA: $mainData")
+                    //show local -> keep connecting
+                }
+                else
+                {
+                    dataEstablisher(mainData, context)
+                    Log.d("MyLog","NO LOCAL DB + SUCCESS IN MAINDATA: $mainData")
+                    //store locally -> show from local -> connect sockets
+                }
             }
-            else{ getChat() }
-            if (ShortcutValidator().validateIncomingShortcut(shortcuts))
-            {
-                shortcutsData.postValue(shortcuts)
-                //write data to local storage
-            }
-            else{  }
-            if(UserValidator().validateIncomingUser(user))
-            {
-                //write data to local storage
-                addLocalUser(context, user)
-                //delete then
-                Log.d("LocalDb","=== FROM RENEWED LOCAL STORAGE ===")
-                getLocalUser()
-            }
-            else{ }
         }
+    }
+
+    fun dataEstablisher(mainData: MainData?, context: Context)
+    {
+        lists = mainData?.dataLists
+        chats  = mainData?.chats
+        user = mainData?.user
+        val shortcuts: ArrayList<Shortcut?>? = user?.shortcuts as ArrayList<Shortcut?>?
+
+        Log.d("MyLog","lists: $lists")
+        Log.d("MyLog","chats: $chats")
+        Log.d("MyLog","user: $user")
+
+        if (ListValidator().validateIncomingList(lists))
+        {
+            listsData.postValue(lists)
+            getList()
+            //write data to local storage
+        }
+        else{ getList() }
+        if (ChatValidator().validateIncomingChat(chats))
+        {
+            chatsData.postValue(chats)
+            getChat()
+            //write data to local storage
+        }
+        else{ getChat() }
+        if (ShortcutValidator().validateIncomingShortcut(shortcuts))
+        {
+            shortcutsData.postValue(shortcuts)
+            //write data to local storage
+        }
+        else{  }
+        if(UserValidator().validateIncomingUser(user))
+        {
+            //write data to local storage
+            addLocalUser(context, user)
+            //delete then
+            Log.d("LocalDb","=== FROM RENEWED LOCAL STORAGE ===")
+            getLocalUser()
+        }
+        else{ }
     }
 
     fun localDbInit(context: Context): Boolean?
@@ -123,6 +146,42 @@ class MainViewModel: ViewModel()
         val user: User? = getLocalUserUseCase.execute()
         return user
     }
+
+    fun changeNotifications()
+    {
+        //send change to socket -> receive answer from socket -> store answer from socket locally
+    // -> show answer from socket in UI
+    }
+
+    fun changeName()
+    {}
+
+    fun changeEmail()
+    {}
+
+    fun changePassword()
+    {}
+
+    fun changeLanguage()
+    {}
+
+    fun changeHomePage()
+    {}
+
+    fun changeDateFormat()
+    {}
+
+    fun changeTimeFormat()
+    {}
+
+    fun changeWeekStart()
+    {}
+
+    fun changeExpandSubtask()
+    {}
+
+    fun changeNewTask()
+    {}
 
     fun addLocalLists()
     {
