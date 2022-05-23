@@ -34,13 +34,9 @@ class MainInterfaceImpl: MainInterface
         val getData = GetData()
         val dataJson: String? = getData.getData()
         val mainDataSerializer: MainDataSerializer = MainDataSerializer(dataJson)
-        Log.d("MyLog","mSer: $mainDataSerializer")
         val webMainData: WebMainData? = mainDataSerializer.doSerialization()
-        Log.d("MyLog","mWebData: $webMainData")
         val webMainDataMapper: WebMainDataMapper = WebMainDataMapper()
-        Log.d("MyLog","mMapper: $webMainDataMapper")
         val mainData: MainData? = webMainDataMapper.fromWebData(webMainData)
-        Log.d("MyLog","mData: $mainData")
 
         return mainData
     }

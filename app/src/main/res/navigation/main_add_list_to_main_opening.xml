@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainAddListFragment"
-        android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainAddListFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainAddListFragment"
         android:label="MainAddListFragment"
         tools:layout="@layout/fragment_main_add_list">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main" />
 </navigation>

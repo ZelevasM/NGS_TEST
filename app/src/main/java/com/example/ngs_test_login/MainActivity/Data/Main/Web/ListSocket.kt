@@ -17,16 +17,12 @@ class ListSocket(private val mSocket: Socket)
     @RequiresApi(Build.VERSION_CODES.O)
     fun addList(name: String)
     {
-        Log.d("MyLog","SOCKET_INPUT11:")
-        //val options = IO.Options.builder().setExtraHeaders(mapOf("Authorization" to listOf(BuildConfig.Token))).build()
-        Log.d("MyLog","Connexion: ${mSocket.connected()}")
-
         val id: String = IdGenerator("6260f84e5db5e505faccecb2").generate()
         val order = 9
-
         val socketSendList: SocketSendList = SocketSendList(name, id, order)
         val socketList: JSONObject = ConvertClassToJson(socketSendList).convert()
-        mSocket.emit("IN_ProjectAdd", socketList)
+        val event: String = "IN_ProjectAdd"
+        mSocket.emit(event, socketList)
     }
 
     fun getList(listSocketCallbackInterface: ListSocketCallbackInterface)

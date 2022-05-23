@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_shortcuts"
-        android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainShortcutsFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.User.Fragments.MainShortcutsFragment"
         android:label="@string/shortcuts"
         tools:layout="@layout/fragment_main_shortcuts" />
 
     <fragment
         android:id="@+id/navigation_lists"
-        android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainListsFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainListsFragment"
         android:label="@string/lists"
         tools:layout="@layout/fragment_main_lists" />
 
     <fragment
         android:id="@+id/navigation_chats"
-        android:name="com.example.ngs_test_login.MainActivity.Presentation.Fragments.MainChatsFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainChatsFragment"
         android:label="@string/chats"
         tools:layout="@layout/fragment_main_chats" />
 

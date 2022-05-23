@@ -8,5 +8,4 @@ class AddChatUseCase(private val mainInterface: MainInterface)
     {
         mainInterface.addChat(name)
     }
-
 }
