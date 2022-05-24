@@ -59,20 +59,20 @@ class MainViewModel: ViewModel(), ViewModelInterface
         if (ListValidator().validateIncomingList(lists))
         {
             listsData.postValue(lists)
-            getList()
+            //getList()
             //write data to local storage
         } else
         {
-            getList()
+            //getList()
         }
         if (ChatValidator().validateIncomingChat(chats))
         {
             chatsData.postValue(chats)
-            getChat()
+            //getChat()
             //write data to local storage
         } else
         {
-            getChat()
+            //getChat()
         }
         if (ShortcutValidator().validateIncomingShortcut(shortcuts))
         {
@@ -83,8 +83,8 @@ class MainViewModel: ViewModel(), ViewModelInterface
 
     override fun socketInit()
     {
-        val socketInitUseCase: SocketInitUseCase = SocketInitUseCase(mainInterfaceImpl)
-        socketInitUseCase.execute()
+        val mainSocketInitUseCase: MainSocketInitUseCase = MainSocketInitUseCase(mainInterfaceImpl)
+        mainSocketInitUseCase.execute()
     }
 
     override fun localDbInit(context: Context)

@@ -2,7 +2,7 @@ package com.example.ngs_test_login.MainActivity.Data.User
 
 import android.content.Context
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.UserDatabaseManager
-import com.example.ngs_test_login.MainActivity.Data.Main.Web.MainSocket
+import com.example.ngs_test_login.MainActivity.Data.Base.Web.BaseSocket
 import com.example.ngs_test_login.MainActivity.Data.User.Web.UserSocket
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
 import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
@@ -74,7 +74,7 @@ class UserInterfaceImpl: UserInterface
 
     override fun changeDateFormat()
     {
-        mSocket = MainSocket().initialize()
+        //mSocket = BaseSocket().initialize()
         val userSocket: UserSocket = UserSocket(mSocket)
         userSocket.changeDateFormat()
         userSocket.onChangedDateFormat()

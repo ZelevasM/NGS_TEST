@@ -7,7 +7,7 @@ import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.UserD
 import com.example.ngs_test_login.MainActivity.Data.Main.Mappers.WebMainDataMapper
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.GetData
 import com.example.ngs_test_login.MainActivity.Data.Main.Models.WebMainData
-import com.example.ngs_test_login.MainActivity.Data.Main.Web.MainSocket
+import com.example.ngs_test_login.MainActivity.Data.Base.Web.BaseSocket
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ChatSocket
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListSocket
 import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
@@ -41,9 +41,9 @@ class MainInterfaceImpl: MainInterface
 
     override fun socketInit()
     {
-        mSocket = MainSocket().initialize()
-        listSocket = ListSocket(mSocket)
-        chatSocket = ChatSocket(mSocket)
+//        mSocket = BaseSocket().initialize()
+//        listSocket = ListSocket(mSocket)
+//        chatSocket = ChatSocket(mSocket)
     }
 
     override fun localDbInit(context: Context)

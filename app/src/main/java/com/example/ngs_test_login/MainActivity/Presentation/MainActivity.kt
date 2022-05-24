@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.ngs_test_login.MainActivity.Presentation.Base.BaseViewModel
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.MainActivity.Presentation.User.UserViewModel
 import com.example.ngs_test_login.R
@@ -14,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity()
 {
+    private val baseViewModel: BaseViewModel by viewModels()
     private val mainViewModel: MainViewModel by viewModels()
     private val userViewModel: UserViewModel by viewModels()
     private lateinit var navView: BottomNavigationView
@@ -50,7 +52,8 @@ class MainActivity : AppCompatActivity()
 
     private fun socketInit()
     {
-        mainViewModel.socketInit()
+        baseViewModel.socketInit()
+        //mainViewModel.socketInit()
     }
 
     private fun changeNameEmailPassword()
@@ -65,13 +68,4 @@ class MainActivity : AppCompatActivity()
         //userViewModel.changeExpandSubtask()
         //userViewModel.changeNewTask()
     }
-
-
-    /* Passing each menu ID as a set of Ids because each
-     menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.navigation_shortcuts,
-            R.id.navigation_lists,
-            R.id.navigation_chats))
-    setupActionBarWithNavController(navController,appBarConfiguration)
-    supportActionBar?.elevation = 0f*/
 }
