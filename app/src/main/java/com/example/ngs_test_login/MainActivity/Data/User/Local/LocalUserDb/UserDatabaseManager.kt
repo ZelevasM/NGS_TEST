@@ -1,12 +1,12 @@
-package com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb
+package com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.TableManagers.FoldersListsTableManager
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.TableManagers.FoldersTableManager
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.TableManagers.UserTableManager
+import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.TableManagers.FoldersListsTableManager
+import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.TableManagers.FoldersTableManager
+import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.TableManagers.UserTableManager
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
 
 class UserDatabaseManager (private val context: Context)

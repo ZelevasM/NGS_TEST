@@ -1,6 +1,7 @@
 package com.example.ngs_test_login.MainActivity.Data.User
 
-import android.util.Log
+import android.content.Context
+import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.UserDatabaseManager
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.MainSocket
 import com.example.ngs_test_login.MainActivity.Data.User.Web.UserSocket
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
@@ -9,8 +10,39 @@ import io.socket.client.Socket
 
 class UserInterfaceImpl: UserInterface
 {
-    //*DELETE*//
     private lateinit var mSocket: Socket
+    //Local DB
+    private var userDatabaseManager: UserDatabaseManager? = null
+
+    override fun socketInit()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun localDbInit(context: Context)
+    {
+        //userDatabaseManager = UserDatabaseManager.getInstance(context)
+        userDatabaseManager = UserDatabaseManager(context)
+        val newlyCreated: Boolean? = userDatabaseManager?.openDb()
+    }
+
+    override fun localDbClose()
+    {
+        userDatabaseManager?.closeDb()
+    }
+
+    override fun addLocalUser(context: Context, user: User?)
+    {
+        //test db
+        userDatabaseManager?.writeToDb(user)
+    }
+
+    override fun getLocalUser(): User?
+    {
+        val user: User? = userDatabaseManager?.readFromDb()
+        return user
+    }
+
     override fun changeName()
     {
 
@@ -42,6 +74,7 @@ class UserInterfaceImpl: UserInterface
 
     override fun changeDateFormat()
     {
+        mSocket = MainSocket().initialize()
         val userSocket: UserSocket = UserSocket(mSocket)
         userSocket.changeDateFormat()
         userSocket.onChangedDateFormat()
@@ -63,7 +96,6 @@ class UserInterfaceImpl: UserInterface
 
     override fun changeExpandSubtask()
     {
-        mSocket = MainSocket().initialize()
         val userSocket: UserSocket = UserSocket(mSocket)
         userSocket.changeExpandSubtask()
         userSocket.onChangedExpandSubtask()

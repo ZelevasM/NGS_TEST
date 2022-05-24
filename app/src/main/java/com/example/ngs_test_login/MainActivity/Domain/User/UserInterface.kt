@@ -1,7 +1,20 @@
 package com.example.ngs_test_login.MainActivity.Domain.User
 
+import android.content.Context
+import com.example.ngs_test_login.MainActivity.Domain.Models.User
+
 interface UserInterface
 {
+    fun socketInit()
+
+    fun localDbInit(context: Context)
+
+    fun localDbClose()
+
+    fun addLocalUser(context: Context,user: User?)
+
+    fun getLocalUser(): User?
+
     fun changeName()
 
     //fun onChangedName()

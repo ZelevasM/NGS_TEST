@@ -1,4 +1,4 @@
-package com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb
+package com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

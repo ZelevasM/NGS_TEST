@@ -1,8 +1,8 @@
-package com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb
+package com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb
 
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.Tables.FoldersListsTable
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.Tables.FoldersTable
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.Tables.UserTable
+import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.FoldersListsTable
+import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.FoldersTable
+import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.UserTable
 
 //RENAME TO DATA CLASS
 object UserDatabase

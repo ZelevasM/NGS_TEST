@@ -1,11 +1,10 @@
-package com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.TableManagers
+package com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.TableManagers
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.Tables.FoldersListsTable
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.UserDatabaseHelper
+import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.FoldersListsTable
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
 
 class FoldersListsTableManager

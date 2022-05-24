@@ -2,9 +2,8 @@ package com.example.ngs_test_login.MainActivity.Data.Main
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalUserDb.UserDatabaseManager
+import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.UserDatabaseManager
 import com.example.ngs_test_login.MainActivity.Data.Main.Mappers.WebMainDataMapper
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.GetData
 import com.example.ngs_test_login.MainActivity.Data.Main.Models.WebMainData
@@ -15,7 +14,6 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ChatSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ListSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.Models.MainData
-import com.example.ngs_test_login.MainActivity.Domain.Models.User
 import io.socket.client.Socket
 
 class MainInterfaceImpl: MainInterface
@@ -48,6 +46,16 @@ class MainInterfaceImpl: MainInterface
         chatSocket = ChatSocket(mSocket)
     }
 
+    override fun localDbInit(context: Context)
+    {
+
+    }
+
+    override fun localDbClose()
+    {
+
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun addList(name: String)
     {
@@ -68,30 +76,5 @@ class MainInterfaceImpl: MainInterface
     override fun getChat(chatSocketCallbackInterface: ChatSocketCallbackInterface)
     {
         chatSocket.getChat(chatSocketCallbackInterface)
-    }
-
-    override fun localDbInit(context: Context): Boolean?
-    {
-        //userDatabaseManager = UserDatabaseManager.getInstance(context)
-        userDatabaseManager = UserDatabaseManager(context)
-        val newlyCreated: Boolean? = userDatabaseManager?.openDb()
-        return newlyCreated
-    }
-
-    override fun localDbClose()
-    {
-        userDatabaseManager?.closeDb()
-    }
-
-    override fun addLocalUser(context: Context, user: User?)
-    {
-        //test db
-        userDatabaseManager?.writeToDb(user)
-    }
-
-    override fun getLocalUser(): User?
-    {
-        val user: User? = userDatabaseManager?.readFromDb()
-        return user
     }
 }

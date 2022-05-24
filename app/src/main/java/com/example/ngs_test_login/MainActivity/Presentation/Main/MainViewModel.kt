@@ -14,11 +14,11 @@ import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacks
 import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.ChatValidator
 import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.ListValidator
 import com.example.ngs_test_login.MainActivity.Presentation.User.Validators.ShortcutValidator
-import com.example.ngs_test_login.MainActivity.Presentation.User.Validators.UserValidator
+import com.example.ngs_test_login.MainActivity.Presentation.ViewModelInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel: ViewModel()
+class MainViewModel: ViewModel(), ViewModelInterface
 {
     //TODO GOVNO CODE
     private val listsData = MutableLiveData<ArrayList<DataList?>?>()
@@ -34,54 +34,21 @@ class MainViewModel: ViewModel()
     private var chats: ArrayList<Chat?>? = null
     private var user: User? = null
 
-    private val mainInterface = MainInterfaceImpl()
+    private val mainInterfaceImpl = MainInterfaceImpl()
 
-    fun getData(context: Context){
+    fun getData(context: Context)
+    {
         viewModelScope.launch(Dispatchers.IO) {
-            val newlyCreated: Boolean? = localDbInit(context)
-            if(newlyCreated == false)
-            {
-                Log.d("LocalDb","=== FROM EXISTED LOCAL STORAGE ===")
-                user = getLocalUser()
-                Log.d("LocalDb","=== LOCAL EXISTED USER ===\n $user")
-
-                val getDataUseCase = GetDataUseCase(mainInterface)
-                val mainData: MainData? = getDataUseCase.execute()
-                if(mainData == null)
-                {
-                    Log.d("MyLog","YES LOCAL DB + ERROR IN MAINDATA: $mainData")
-                    //show local -> keep connecting
-                }
-                else
-                {
-                    dataEstablisher(mainData, context)
-                    Log.d("MyLog","YES LOCAL DB + SUCCESS IN MAINDATA: $mainData")
-                    //store locally -> show from local -> connect sockets
-                }
-            }
-            else
-            {
-                val getDataUseCase = GetDataUseCase(mainInterface)
-                val mainData: MainData? = getDataUseCase.execute()
-                if(mainData == null)
-                {
-                    Log.d("MyLog","NO LOCAL DB + ERROR IN MAINDATA: $mainData")
-                    //show local -> keep connecting
-                }
-                else
-                {
-                    dataEstablisher(mainData, context)
-                    Log.d("MyLog","NO LOCAL DB + SUCCESS IN MAINDATA: $mainData")
-                    //store locally -> show from local -> connect sockets
-                }
-            }
+            val getDataUseCase = GetDataUseCase(mainInterfaceImpl)
+            val mainData: MainData? = getDataUseCase.execute()
+            dataEstablisher(mainData, context)
         }
     }
 
-    fun dataEstablisher(mainData: MainData?, context: Context)
+    fun dataEstablisher(mainData: MainData?,context: Context)
     {
         lists = mainData?.dataLists
-        chats  = mainData?.chats
+        chats = mainData?.chats
         user = mainData?.user
         val shortcuts: ArrayList<Shortcut?>? = user?.shortcuts as ArrayList<Shortcut?>?
 
@@ -94,57 +61,42 @@ class MainViewModel: ViewModel()
             listsData.postValue(lists)
             getList()
             //write data to local storage
+        } else
+        {
+            getList()
         }
-        else{ getList() }
         if (ChatValidator().validateIncomingChat(chats))
         {
             chatsData.postValue(chats)
             getChat()
             //write data to local storage
+        } else
+        {
+            getChat()
         }
-        else{ getChat() }
         if (ShortcutValidator().validateIncomingShortcut(shortcuts))
         {
             shortcutsData.postValue(shortcuts)
             //write data to local storage
         }
-        else{  }
-        if(UserValidator().validateIncomingUser(user))
-        {
-            //write data to local storage
-            addLocalUser(context, user)
-            //delete then
-            Log.d("LocalDb","=== FROM RENEWED LOCAL STORAGE ===")
-            getLocalUser()
-        }
-        else{ }
     }
 
-    fun localDbInit(context: Context): Boolean?
+    override fun socketInit()
     {
-        val localDbInitUseCase: LocalDbInitUseCase = LocalDbInitUseCase(mainInterface)
-        val newlyCreated: Boolean? = localDbInitUseCase.execute(context)
-        return newlyCreated
+        val socketInitUseCase: SocketInitUseCase = SocketInitUseCase(mainInterfaceImpl)
+        socketInitUseCase.execute()
     }
 
-    fun localDbClose()
+    override fun localDbInit(context: Context)
     {
-        val localDbCloseUseCase: LocalDbCloseUseCase = LocalDbCloseUseCase(mainInterface)
-        localDbCloseUseCase.execute()
+
     }
 
-    fun addLocalUser(context: Context, user: User?)
+    override fun localDbClose()
     {
-        val addLocalUserUseCase: AddLocalUserUseCase = AddLocalUserUseCase(mainInterface)
-        addLocalUserUseCase.execute(context, user)
+
     }
 
-    fun getLocalUser(): User?
-    {
-        val getLocalUserUseCase: GetLocalUserUseCase = GetLocalUserUseCase(mainInterface)
-        val user: User? = getLocalUserUseCase.execute()
-        return user
-    }
     fun addLocalLists()
     {
 
@@ -156,29 +108,27 @@ class MainViewModel: ViewModel()
     }
 
     fun addLocalChats()
-    {}
-
-    fun getLocalChat()
-    {}
-
-    fun socketInit()
     {
-        val socketInitUseCase: SocketInitUseCase = SocketInitUseCase(mainInterface)
-        socketInitUseCase.execute()
     }
 
-    fun addList(name: String){
-        viewModelScope.launch(Dispatchers.IO){
-            val addListUseCase: AddListUseCase = AddListUseCase(mainInterface)
+    fun getLocalChat()
+    {
+    }
+
+    fun addList(name: String)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            val addListUseCase: AddListUseCase = AddListUseCase(mainInterfaceImpl)
             addListUseCase.execute(name)
         }
     }
 
-    private fun getList()
+    fun getList()
     {
-        viewModelScope.launch(Dispatchers.IO){
-            val getListUseCase: GetListUseCase = GetListUseCase(mainInterface)
-            val listSocketCallbackImpl: ListSocketCallbackImpl = ListSocketCallbackImpl(lists, listsData)
+        viewModelScope.launch(Dispatchers.IO) {
+            val getListUseCase: GetListUseCase = GetListUseCase(mainInterfaceImpl)
+            val listSocketCallbackImpl: ListSocketCallbackImpl = ListSocketCallbackImpl(lists,
+                listsData)
             getListUseCase.execute(listSocketCallbackImpl)
         }
     }
@@ -186,16 +136,17 @@ class MainViewModel: ViewModel()
     fun addChat(name: String)
     {
         viewModelScope.launch(Dispatchers.IO) {
-            val addChatUseCase: AddChatUseCase = AddChatUseCase(mainInterface)
+            val addChatUseCase: AddChatUseCase = AddChatUseCase(mainInterfaceImpl)
             addChatUseCase.execute(name)
         }
     }
 
-    private fun getChat()
+    fun getChat()
     {
         viewModelScope.launch(Dispatchers.IO) {
-            val getChatUseCase: GetChatUseCase = GetChatUseCase(mainInterface)
-            val chatSocketCallbackImpl: ChatSocketCallbackImpl = ChatSocketCallbackImpl(chats, chatsData)
+            val getChatUseCase: GetChatUseCase = GetChatUseCase(mainInterfaceImpl)
+            val chatSocketCallbackImpl: ChatSocketCallbackImpl = ChatSocketCallbackImpl(chats,
+                chatsData)
             getChatUseCase.execute(chatSocketCallbackImpl)
         }
     }

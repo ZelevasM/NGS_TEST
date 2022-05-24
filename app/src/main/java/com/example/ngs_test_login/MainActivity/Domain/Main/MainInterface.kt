@@ -12,6 +12,10 @@ interface MainInterface
 
     fun socketInit()
 
+    fun localDbInit(context: Context)
+
+    fun localDbClose()
+
     fun addList(name: String)
 
     fun getList(listSocketCallbackInterface: ListSocketCallbackInterface)
@@ -19,12 +23,4 @@ interface MainInterface
     fun addChat(name: String)
 
     fun getChat(chatSocketCallbackInterface: ChatSocketCallbackInterface)
-
-    fun localDbInit(context: Context): Boolean?
-
-    fun localDbClose()
-
-    fun addLocalUser(context: Context, user: User?)
-
-    fun getLocalUser(): User?
 }

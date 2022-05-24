@@ -4,7 +4,6 @@ import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.Main.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ConvertClassToJson
 import com.example.ngs_test_login.MainActivity.Data.User.Models.*
-import com.example.ngs_test_login.MainActivity.Domain.Models.User
 import io.socket.client.Socket
 import org.json.JSONObject
 
@@ -156,7 +155,9 @@ class UserSocket(private val mSocket: Socket)
     fun changeDateFormat()
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userGeneralSettingsSocket.emit()
+        val type: String =  "date_format"
+        val field: String = "MM/DD/YYYY"
+        userGeneralSettingsSocket.onEmit(type, field)
     }
 
     fun onChangedDateFormat()
@@ -168,7 +169,9 @@ class UserSocket(private val mSocket: Socket)
     fun changeTimeFormat()
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userGeneralSettingsSocket.emit()
+        val type: String =  "date_format"
+        val field: String = ""
+        userGeneralSettingsSocket.onEmit(type, field)
     }
 
     fun onChangedTimeFormat()
@@ -180,7 +183,9 @@ class UserSocket(private val mSocket: Socket)
     fun changeStartOfWeek()
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userGeneralSettingsSocket.emit()
+        val type: String =  "date_format"
+        val field: String = ""
+        userGeneralSettingsSocket.onEmit(type, field)
     }
 
     fun onChangedStartOfWeek()
@@ -192,7 +197,9 @@ class UserSocket(private val mSocket: Socket)
     fun changeExpandSubtask()
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userGeneralSettingsSocket.emit()
+        val type: String =  "date_format"
+        val field: Boolean = false
+        userGeneralSettingsSocket.onEmit(type, field)
     }
 
     fun onChangedExpandSubtask()
@@ -204,7 +211,9 @@ class UserSocket(private val mSocket: Socket)
     fun changeNewTask()
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userGeneralSettingsSocket.emit()
+        val type: String =  "date_format"
+        val field: Boolean = false
+        userGeneralSettingsSocket.onEmit(type, field)
     }
 
     fun onChangedNewTask()

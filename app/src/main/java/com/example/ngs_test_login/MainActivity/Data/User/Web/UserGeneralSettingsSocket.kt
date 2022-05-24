@@ -12,12 +12,9 @@ import org.json.JSONObject
 
 class UserGeneralSettingsSocket(private val mSocket: Socket)
 {
-    fun emit()
+    fun <T> onEmit (type: String, field: T)
     {
-        val type: String =  "expand_subtask"
-        val field: Boolean = false
-
-        val socketGeneralSetting: SocketGeneralSetting = SocketGeneralSetting (type, field)
+        val socketGeneralSetting: SocketGeneralSetting<T> = SocketGeneralSetting (type, field)
         val socketGeneralSettingJson: JSONObject = ConvertClassToJson(socketGeneralSetting).convert()
         val event: String = "IN_UserGeneralSettings"
         mSocket.emit(event, socketGeneralSettingJson)
@@ -25,8 +22,8 @@ class UserGeneralSettingsSocket(private val mSocket: Socket)
 
     fun onReceive()
     {
-        var socketDataSerializer: SocketDataSerializer<SocketGeneralSetting>
-        var socketGeneralSetting: SocketGeneralSetting = SocketGeneralSetting()
+        var socketDataSerializer: SocketDataSerializer<SocketGeneralSetting<String>>
+        var socketGeneralSetting: SocketGeneralSetting<String> = SocketGeneralSetting()
         val event: String = "OUT_UserGeneralSettings"
 
         var outMessage: SocketOutMessage = SocketOutMessage()

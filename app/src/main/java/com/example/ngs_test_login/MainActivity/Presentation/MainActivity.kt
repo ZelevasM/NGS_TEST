@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity()
     override fun onDestroy()
     {
         super.onDestroy()
-        mainViewModel.localDbClose()
     }
 
     private fun Init()
@@ -63,7 +62,7 @@ class MainActivity : AppCompatActivity()
         //userViewModel.changeDateFormat()
         //userViewModel.changeTimeFormat()
         //userViewModel.changeStartOfWeek()
-        userViewModel.changeExpandSubtask()
+        //userViewModel.changeExpandSubtask()
         //userViewModel.changeNewTask()
     }
 
