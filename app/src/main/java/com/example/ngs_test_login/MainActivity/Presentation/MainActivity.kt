@@ -3,7 +3,10 @@ package com.example.ngs_test_login.MainActivity.Presentation
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -30,7 +33,6 @@ class MainActivity : AppCompatActivity()
         socketInit()
         getData(this)
         changeNameEmailPassword()
-
         //addList()
     }
 
@@ -53,6 +55,16 @@ class MainActivity : AppCompatActivity()
     private fun socketInit()
     {
         baseViewModel.socketInit()
+        var response: Boolean = false
+        baseViewModel.responseLiveData.observe(this, Observer {
+            response = it
+            if(response == true)
+            {
+                Toast.makeText(this,"CONNECTED", Toast.LENGTH_SHORT).show()
+            }
+            else
+                Toast.makeText(this,"LOST CONNECTION", Toast.LENGTH_SHORT).show()
+        })
         //mainViewModel.socketInit()
     }
 
