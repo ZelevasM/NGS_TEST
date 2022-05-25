@@ -1,4 +1,4 @@
-package com.example.ngs_test_login.MainActivity.Data.Base
+package com.example.ngs_test_login.MainActivity.Data.Base.Serializers
 
 import com.google.gson.Gson
 import org.json.JSONObject

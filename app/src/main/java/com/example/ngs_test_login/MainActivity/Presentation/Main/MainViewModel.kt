@@ -97,7 +97,6 @@ class MainViewModel: ViewModel(), ViewModelInterface
 
     fun getLocalLists()
     {
-
     }
 
     fun addLocalChats()

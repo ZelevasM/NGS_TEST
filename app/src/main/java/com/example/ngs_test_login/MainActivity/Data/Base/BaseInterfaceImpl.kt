@@ -3,6 +3,7 @@ package com.example.ngs_test_login.MainActivity.Data.Base
 import com.example.ngs_test_login.MainActivity.Data.Base.Web.BaseSocket
 import com.example.ngs_test_login.MainActivity.Data.Main.Mappers.WebMainDataMapper
 import com.example.ngs_test_login.MainActivity.Data.Base.Models.WebMainData
+import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.MainDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.GetData
 import com.example.ngs_test_login.MainActivity.Domain.Base.BaseInterface
 import com.example.ngs_test_login.MainActivity.Domain.Base.SocketCallbacks.BaseSocketCallback

@@ -4,7 +4,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.ngs_test_login.MainActivity.Data.Main.Models.SocketSendChat
-import com.example.ngs_test_login.MainActivity.Data.Base.SocketDataSerializer
+import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ChatSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.Models.Chat
 import io.socket.client.Socket

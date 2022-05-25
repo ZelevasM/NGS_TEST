@@ -3,7 +3,7 @@ package com.example.ngs_test_login.MainActivity.Data.Main.Web
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.ngs_test_login.MainActivity.Data.Base.SocketDataSerializer
+import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Models.SocketSendList
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ListSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.Models.DataList

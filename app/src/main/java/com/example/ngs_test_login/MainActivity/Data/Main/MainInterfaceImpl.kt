@@ -3,17 +3,11 @@ package com.example.ngs_test_login.MainActivity.Data.Main
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.ngs_test_login.MainActivity.Data.Base.MainDataSerializer
-import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.UserDatabaseManager
-import com.example.ngs_test_login.MainActivity.Data.Main.Mappers.WebMainDataMapper
-import com.example.ngs_test_login.MainActivity.Data.Main.Web.GetData
-import com.example.ngs_test_login.MainActivity.Data.Base.Models.WebMainData
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ChatSocket
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListSocket
 import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ChatSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ListSocketCallbackInterface
-import com.example.ngs_test_login.MainActivity.Domain.Models.MainData
 import io.socket.client.Socket
 
 class MainInterfaceImpl: MainInterface

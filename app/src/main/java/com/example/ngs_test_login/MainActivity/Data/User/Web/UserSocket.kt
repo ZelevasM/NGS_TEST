@@ -1,7 +1,7 @@
 package com.example.ngs_test_login.MainActivity.Data.User.Web
 
 import android.util.Log
-import com.example.ngs_test_login.MainActivity.Data.Base.SocketDataSerializer
+import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ConvertClassToJson
 import com.example.ngs_test_login.MainActivity.Data.User.Models.*
 import io.socket.client.Socket
