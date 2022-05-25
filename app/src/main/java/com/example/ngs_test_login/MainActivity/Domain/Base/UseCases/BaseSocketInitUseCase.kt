@@ -6,9 +6,9 @@ import io.socket.client.Socket
 
 class BaseSocketInitUseCase(private val baseInterface: BaseInterface)
 {
-    fun execute(baseSocketCallback: BaseSocketCallback): Socket?
+    fun execute(baseSocketCallback: BaseSocketCallback): Socket
     {
-        val bSocket: Socket? = baseInterface.socketInit(baseSocketCallback)
+        val bSocket: Socket = baseInterface.socketInit(baseSocketCallback)
         return bSocket
     }
 }

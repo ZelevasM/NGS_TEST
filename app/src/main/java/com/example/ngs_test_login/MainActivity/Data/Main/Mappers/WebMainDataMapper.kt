@@ -1,7 +1,6 @@
 package com.example.ngs_test_login.MainActivity.Data.Main.Mappers
 
-import android.util.Log
-import com.example.ngs_test_login.MainActivity.Data.Main.Models.WebMainData
+import com.example.ngs_test_login.MainActivity.Data.Base.Models.WebMainData
 import com.example.ngs_test_login.MainActivity.Domain.Main.Mappers.MainDataMapper
 import com.example.ngs_test_login.MainActivity.Domain.Models.MainData
 

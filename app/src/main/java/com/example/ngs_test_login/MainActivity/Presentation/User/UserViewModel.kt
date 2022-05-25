@@ -4,13 +4,14 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ngs_test_login.MainActivity.Data.User.UserInterfaceImpl
-import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalUserDbCloseUseCase
-import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalUserDbInitUseCase
-import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.AddLocalUserUseCase
-import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.GetLocalUserUseCase
+import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.LocalUserDbCloseUseCase
+import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.LocalUserDbInitUseCase
+import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.AddLocalUserUseCase
+import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.GetLocalUserUseCase
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
-import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.*
+import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.SocketUseCases.*
 import com.example.ngs_test_login.MainActivity.Presentation.ViewModelInterface
+import io.socket.client.Socket
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -18,7 +19,7 @@ class UserViewModel: ViewModel(), ViewModelInterface
 {
     private val userInterfaceImpl: UserInterfaceImpl = UserInterfaceImpl()
 
-    override fun socketInit()
+    override fun socketInit(vararg bSocket: Socket)
     {
 
     }
@@ -33,11 +34,6 @@ class UserViewModel: ViewModel(), ViewModelInterface
     {
         val localUserDbCloseUseCase: LocalUserDbCloseUseCase = LocalUserDbCloseUseCase(userInterfaceImpl)
         localUserDbCloseUseCase.execute()
-    }
-
-    fun localDbSaveAll()
-    {
-
     }
 
     fun addLocalUser(context: Context,user: User?)
@@ -67,6 +63,9 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
+    fun onChangedName()
+    {}
+
     fun changeEmail()
     {
         viewModelScope.launch(Dispatchers.IO) {
@@ -74,6 +73,9 @@ class UserViewModel: ViewModel(), ViewModelInterface
             changeEmailUseCase.execute()
         }
     }
+
+    fun onChangedEmail()
+    {}
 
     fun changePassword()
     {
@@ -83,7 +85,13 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
+    fun onChangedPassword()
+    {}
+
     fun changeLanguage()
+    {}
+
+    fun onChangedLanguage()
     {}
 
     fun changeHomepage()
@@ -94,6 +102,9 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
+    fun onChangedHomepage()
+    {}
+
     fun changeDateFormat()
     {
         viewModelScope.launch(Dispatchers.IO) {
@@ -101,6 +112,9 @@ class UserViewModel: ViewModel(), ViewModelInterface
             changedDateFormatUseCase.execute()
         }
     }
+
+    fun onChangedDateFormat()
+    {}
 
     fun changeTimeFormat()
     {
@@ -110,6 +124,9 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
+    fun onChangedTimeFormat()
+    {}
+
     fun changeStartOfWeek()
     {
         viewModelScope.launch(Dispatchers.IO) {
@@ -117,6 +134,9 @@ class UserViewModel: ViewModel(), ViewModelInterface
             changeStartOfWeekUseCase.execute()
         }
     }
+
+    fun onChangedStartOfWeek()
+    {}
 
     fun changeExpandSubtask()
     {
@@ -126,6 +146,9 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
+    fun onChangedExpandSubtask()
+    {}
+
     fun changeNewTask()
     {
         viewModelScope.launch(Dispatchers.IO) {
@@ -134,6 +157,12 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
-    fun getLocalShortcuts()
+    fun onChangedNewTask()
+    {}
+
+    fun changedShortcuts()
+    {}
+
+    fun onChangedShortcuts()
     {}
 }

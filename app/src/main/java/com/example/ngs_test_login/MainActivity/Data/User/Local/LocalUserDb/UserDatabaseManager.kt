@@ -8,8 +8,9 @@ import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Table
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.TableManagers.FoldersTableManager
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.TableManagers.UserTableManager
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
+import com.example.ngs_test_login.MainActivity.Domain.User.UserLocalDbProviderInterface
 
-class UserDatabaseManager (private val context: Context)
+class UserDatabaseManager (private val context: Context): UserLocalDbProviderInterface
 {
     private val userDatabaseHelper: UserDatabaseHelper = UserDatabaseHelper(context)
     private var db: SQLiteDatabase? = null
@@ -52,5 +53,95 @@ class UserDatabaseManager (private val context: Context)
     {
         //close db helper
         userDatabaseHelper.close()
+    }
+
+    override fun saveName()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getName()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun saveId()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getId()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun saveEmail()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getEmail()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun saveLanguage()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLanguage()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun saveShowSidebar()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getShowSidebar()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun saveDiskSpace()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getDiskSpace()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun saveExpandSubtask()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getExpandSubtask()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun saveNewTask()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getNewTask()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun saveShortcutInbox()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getShortcutInbox()
+    {
+        TODO("Not yet implemented")
     }
 }

@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity()
 {
-    private val baseViewModel: BaseViewModel by viewModels()
+    private lateinit var baseViewModel: BaseViewModel
     private val mainViewModel: MainViewModel by viewModels()
     private val userViewModel: UserViewModel by viewModels()
     private lateinit var navView: BottomNavigationView
@@ -31,27 +31,26 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
         Init()
         socketInit()
-        getData(this)
         changeNameEmailPassword()
         //addList()
     }
 
     override fun onDestroy()
     {
+        baseViewModel.localDbClose()
         super.onDestroy()
     }
 
     private fun Init()
     {
         navController = findNavController(R.id.main_activity_nav_host_fragment)
+        //lock UI elements
+        baseViewModel = BaseViewModel(mainViewModel, userViewModel)
+        baseViewModel.init(this)
         //supportFragmentManager.beginTransaction().replace(R.id.main_container,MainFragment.newInstance()).commit()
     }
 
-    private fun getData(context: Context)
-    {
-        mainViewModel.getData(this)
-    }
-
+    //delete - rename
     private fun socketInit()
     {
         baseViewModel.socketInit()
@@ -61,9 +60,15 @@ class MainActivity : AppCompatActivity()
             if(response == true)
             {
                 Toast.makeText(this,"CONNECTED", Toast.LENGTH_SHORT).show()
+                //unlock UI elements
+                baseViewModel.getDataFromRest()
             }
             else
+            {
                 Toast.makeText(this,"LOST CONNECTION", Toast.LENGTH_SHORT).show()
+                //lock UI elements, in fragments
+            }
+
         })
         //mainViewModel.socketInit()
     }
@@ -79,5 +84,12 @@ class MainActivity : AppCompatActivity()
         //userViewModel.changeStartOfWeek()
         //userViewModel.changeExpandSubtask()
         //userViewModel.changeNewTask()
+    }
+
+    private fun lockUI()
+    {}
+
+    private fun unLockUI()
+    {
     }
 }

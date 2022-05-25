@@ -8,6 +8,7 @@ object UserTable
     const val COLUMN_NAME_ID: String = "Id"
     const val COLUMN_NAME_EMAIL: String = "Email"
     const val COLUMN_NAME_LANGUAGE: String = "Language"
+    const val COLUMN_NAME_HOMEPAGE_ID: String = "Homepage"
     //BOOLEAN
     const val COLUMN_NAME_SIDEBAR: String = "Sidebar"
     const val COLUMN_NAME_DISK_SPACE: String = "DiskSpace"
@@ -18,8 +19,6 @@ object UserTable
     const val COLUMN_NAME_SHORTCUT_INBOX: String = "ShortcutInbox"
     //<- USER BASIC TABLE
 
-    //UNNECESSARY
-    const val COLUMN_NAME_HOMEPAGE_ID: String = "Homepage"
     //TABLE
     const val COLUMN_NAME_DATE_FORMAT_ID: String = "DateFormatId"
     //List

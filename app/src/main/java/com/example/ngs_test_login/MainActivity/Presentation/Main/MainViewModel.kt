@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ngs_test_login.MainActivity.Data.Main.MainInterfaceImpl
+import com.example.ngs_test_login.MainActivity.Domain.Base.UseCases.GetDataUseCase
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.*
 import com.example.ngs_test_login.MainActivity.Domain.Models.*
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.ChatSocketCallbackImpl
@@ -15,6 +16,7 @@ import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.Chat
 import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.ListValidator
 import com.example.ngs_test_login.MainActivity.Presentation.User.Validators.ShortcutValidator
 import com.example.ngs_test_login.MainActivity.Presentation.ViewModelInterface
+import io.socket.client.Socket
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -36,16 +38,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
 
     private val mainInterfaceImpl = MainInterfaceImpl()
 
-    fun getData(context: Context)
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            val getDataUseCase = GetDataUseCase(mainInterfaceImpl)
-            val mainData: MainData? = getDataUseCase.execute()
-            dataEstablisher(mainData, context)
-        }
-    }
-
-    fun dataEstablisher(mainData: MainData?,context: Context)
+    fun dataEstablisher(mainData: MainData?)
     {
         lists = mainData?.dataLists
         chats = mainData?.chats
@@ -59,20 +52,20 @@ class MainViewModel: ViewModel(), ViewModelInterface
         if (ListValidator().validateIncomingList(lists))
         {
             listsData.postValue(lists)
-            //getList()
+            getList()
             //write data to local storage
         } else
         {
-            //getList()
+            getList()
         }
         if (ChatValidator().validateIncomingChat(chats))
         {
             chatsData.postValue(chats)
-            //getChat()
+            getChat()
             //write data to local storage
         } else
         {
-            //getChat()
+            getChat()
         }
         if (ShortcutValidator().validateIncomingShortcut(shortcuts))
         {
@@ -81,10 +74,10 @@ class MainViewModel: ViewModel(), ViewModelInterface
         }
     }
 
-    override fun socketInit()
+    override fun socketInit(vararg bSocket: Socket)
     {
         val mainSocketInitUseCase: MainSocketInitUseCase = MainSocketInitUseCase(mainInterfaceImpl)
-        mainSocketInitUseCase.execute()
+        mainSocketInitUseCase.execute(bSocket[0])
     }
 
     override fun localDbInit(context: Context)

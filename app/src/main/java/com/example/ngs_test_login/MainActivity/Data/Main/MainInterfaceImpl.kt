@@ -3,11 +3,11 @@ package com.example.ngs_test_login.MainActivity.Data.Main
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.example.ngs_test_login.MainActivity.Data.Base.MainDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.UserDatabaseManager
 import com.example.ngs_test_login.MainActivity.Data.Main.Mappers.WebMainDataMapper
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.GetData
-import com.example.ngs_test_login.MainActivity.Data.Main.Models.WebMainData
-import com.example.ngs_test_login.MainActivity.Data.Base.Web.BaseSocket
+import com.example.ngs_test_login.MainActivity.Data.Base.Models.WebMainData
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ChatSocket
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListSocket
 import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
@@ -24,26 +24,12 @@ class MainInterfaceImpl: MainInterface
     private lateinit var chatSocket: ChatSocket
 
     //Local DB
-    private var userDatabaseManager: UserDatabaseManager? = null
 
-
-    override fun getData(): MainData?
+    override fun socketInit(bSocket: Socket)
     {
-        val getData = GetData()
-        val dataJson: String? = getData.getData()
-        val mainDataSerializer: MainDataSerializer = MainDataSerializer(dataJson)
-        val webMainData: WebMainData? = mainDataSerializer.doSerialization()
-        val webMainDataMapper: WebMainDataMapper = WebMainDataMapper()
-        val mainData: MainData? = webMainDataMapper.fromWebData(webMainData)
-
-        return mainData
-    }
-
-    override fun socketInit()
-    {
-//        mSocket = BaseSocket().initialize()
-//        listSocket = ListSocket(mSocket)
-//        chatSocket = ChatSocket(mSocket)
+        mSocket = bSocket
+        listSocket = ListSocket(mSocket)
+        chatSocket = ChatSocket(mSocket)
     }
 
     override fun localDbInit(context: Context)
