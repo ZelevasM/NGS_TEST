@@ -32,6 +32,4 @@ data class ListUser(
 
     @field:SerializedName("unread_number")
     val unreadNumber: String? = null)
-{
-
-}
+{}

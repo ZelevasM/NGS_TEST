@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class TaskMessageReply(
     @field:SerializedName("files")
-    val files: List<Any?>? = null)
+    val files: List<TaskMessageFile?>? = null)
 {}

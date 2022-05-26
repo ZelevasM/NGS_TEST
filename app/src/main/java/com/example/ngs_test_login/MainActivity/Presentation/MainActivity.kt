@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity()
     //delete - rename
     private fun socketInit()
     {
-        baseViewModel.socketInit()
         var response: Boolean = false
         baseViewModel.responseLiveData.observe(this, Observer {
             response = it

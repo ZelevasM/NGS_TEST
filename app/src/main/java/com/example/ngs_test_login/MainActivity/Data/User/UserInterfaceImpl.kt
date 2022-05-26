@@ -6,6 +6,7 @@ import com.example.ngs_test_login.MainActivity.Data.Base.Web.BaseSocket
 import com.example.ngs_test_login.MainActivity.Data.User.Web.UserSocket
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
 import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.UserLocalDbProviderInterface
 import io.socket.client.Socket
 
 class UserInterfaceImpl: UserInterface
