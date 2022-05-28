@@ -4,8 +4,8 @@ import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
 
 class ChangeNewTaskUseCase(private val userInterface: UserInterface)
 {
-    fun execute()
+    fun execute(newTask: String?)
     {
-        userInterface.changeNewTask()
+        userInterface.changeNewTask(newTask)
     }
 }

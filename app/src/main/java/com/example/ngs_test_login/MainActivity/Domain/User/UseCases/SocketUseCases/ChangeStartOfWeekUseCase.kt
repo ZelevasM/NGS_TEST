@@ -4,8 +4,8 @@ import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
 
 class ChangeStartOfWeekUseCase(private val userInterface: UserInterface)
 {
-    fun execute()
+    fun execute(startOfWeek: String?)
     {
-        userInterface.changeStartOfWeek()
+        userInterface.changeStartOfWeek(startOfWeek)
     }
 }

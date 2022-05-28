@@ -21,7 +21,7 @@ interface UserInterface: UserLocalProviderInterface, DateFormatLocalProviderInte
 
     fun onChangedName(userNameSocketCallbackInterface: UserNameSocketCallbackInterface)
 
-    fun changeEmail()
+    fun changeEmail(email: String?)
 
     fun onChangedEmail(userEmailSocketCallbackInterface: UserEmailSocketCallbackInterface)
 
@@ -33,23 +33,23 @@ interface UserInterface: UserLocalProviderInterface, DateFormatLocalProviderInte
 
     fun onChangedHomepage(userHomeSocketCallbackInterface: UserHomepageSocketCallbackInterface)
 
-    fun changeDateFormat()
+    fun changeDateFormat(dateFormat: String?)
 
     fun onChangedDateFormat(userDateFormatSocketCallbackInterface: UserDateFormatSocketCallbackInterface)
 
-    fun changeTimeFormat()
+    fun changeTimeFormat(timeFormat: String?)
 
     fun onChangedTimeFormat(userTimeFormatSocketCallbackInterface: UserTimeFormatSocketCallbackInterface)
 
-    fun changeStartOfWeek()
+    fun changeStartOfWeek(startOfWeek: String?)
 
     fun onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface: UserStartOfWeekSocketCallbackInterface)
 
-    fun changeExpandSubtask()
+    fun changeExpandSubtask(expandSubtask: String?)
 
     fun onChangedExpandSubtask(userSubtaskSocketCallbackInterface: UserSubtaskSocketCallbackInterface)
 
-    fun changeNewTask()
+    fun changeNewTask(newTask: String?)
 
     fun onChangedNewTask(userNewTaskSocketCallbackInterface: UserNewTaskSocketCallbackInterface)
 }

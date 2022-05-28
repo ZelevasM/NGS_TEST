@@ -40,10 +40,9 @@ class UserSocket(private val mSocket: Socket)
         }
     }
 
-    fun changeEmail()
+    fun changeEmail(email: String?)
     {
         val type: String = "change_email"
-        val email: String = "bmw@gmail.com"
         val password: String = "1234"
 
         val socketEmail: SocketEmail = SocketEmail(type, email, password)
@@ -133,35 +132,39 @@ class UserSocket(private val mSocket: Socket)
 
     fun onChangedHomepage(userHomeSocketCallbackInterface: UserHomepageSocketCallbackInterface)
     {
-//        var socketDataSerializer: SocketDataSerializer<SocketHomepage>
-//        var socketHomepage: SocketHomepage = SocketHomepage()
-//        val event: String = "OUT_UserGeneralSettings"
-//
-//        var outMessage: SocketOutMessage = SocketOutMessage()
-//        var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
-//        mSocket.on("OUT_Message")
-//        { args ->
-//            socketDataSerializerOut = SocketDataSerializer(args[0] as JSONObject, outMessage.javaClass)
-//            outMessage = socketDataSerializerOut.doSerialization()
-//            Log.d("MyLog","OUT MESSAGE")
-//            Log.d("MyLog","ConnexionInHomepage: ${mSocket.connected()}")
-//        }
-//        mSocket.on(event)
-//        { args ->
-//            Log.d("MyLog","GOT HOMEPAGE MESSAGE: ${args[0]}")
-//            val generalSetting: SocketGeneralSetting = args[0]
-//            socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, SocketGeneralSetting)
-//            socketHomepage = socketDataSerializer.doSerialization()
-//            userHomeSocketCallbackInterface.onChanged(socketHomepage.field?.type)
-//            Log.d("MyLog", "Serialized: ${socketHomepage.field?.type}")
-//        }
+        var socketDataSerializer: SocketDataSerializer<SocketGeneralSetting<String>>
+        var socketGeneralSetting: SocketGeneralSetting<String> = SocketGeneralSetting()
+        val event: String = "OUT_UserGeneralSettings"
+        var result: String? = null
+
+        var outMessage: SocketOutMessage = SocketOutMessage()
+        var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
+        mSocket.on("OUT_Message")
+        { args ->
+            socketDataSerializerOut = SocketDataSerializer(args[0] as JSONObject, outMessage.javaClass)
+            outMessage = socketDataSerializerOut.doSerialization()
+            Log.d("MyLog","OUT MESSAGE")
+            Log.d("MyLog","ConnexionInDateFormat: ${mSocket.connected()}")
+            result = "Error"
+        }
+        mSocket.on(event)
+        { args ->
+            socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, socketGeneralSetting.javaClass)
+            socketGeneralSetting = socketDataSerializer.doSerialization()
+            if(socketGeneralSetting.type == "homepage")
+            {
+                userHomeSocketCallbackInterface.onChanged(socketGeneralSetting.field)
+                Log.d("MyLog","GOT ${args[0].toString()} MESSAGE: ${args[0]}")
+                Log.d("MyLog", "Serialized: ${socketGeneralSetting.field}")
+            }
+            //result = socketGeneralSetting.field
+        }
     }
 
-    fun changeDateFormat()
+    fun changeDateFormat(field: String?)
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
         val type: String =  "date_format"
-        val field: String = "MM/DD/YYYY"
         userGeneralSettingsSocket.onEmit(type, field)
     }
 
@@ -184,72 +187,192 @@ class UserSocket(private val mSocket: Socket)
         }
         mSocket.on(event)
         { args ->
-            Log.d("MyLog","GOT ${args[0].toString()} MESSAGE: ${args[0]}")
             socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, socketGeneralSetting.javaClass)
             socketGeneralSetting = socketDataSerializer.doSerialization()
-            when(socketGeneralSetting.type)
+            if(socketGeneralSetting.type == "date_format")
             {
-                "date_format" -> userDateFormatSocketCallbackInterface.onChanged(socketGeneralSetting.field)
+                userDateFormatSocketCallbackInterface.onChanged(socketGeneralSetting.field)
+                Log.d("MyLog","GOT ${args[0].toString()} MESSAGE: ${args[0]}")
+                Log.d("MyLog", "Serialized: ${socketGeneralSetting.field}")
             }
-            Log.d("MyLog", "Serialized: ${socketGeneralSetting.field}")
             //result = socketGeneralSetting.field
         }
-
     }
 
-    fun changeTimeFormat()
+    fun changeTimeFormat(field: String?)
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        val type: String =  "date_format"
-        val field: String = ""
+        val type: String =  "time_format"
         userGeneralSettingsSocket.onEmit(type, field)
     }
 
     fun onChangedTimeFormat(userTimeFormatSocketCallbackInterface: UserTimeFormatSocketCallbackInterface)
     {
-        val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userTimeFormatSocketCallbackInterface.onChanged(userGeneralSettingsSocket.onReceive())
+        var socketDataSerializer: SocketDataSerializer<SocketGeneralSetting<String>>
+        var socketGeneralSetting: SocketGeneralSetting<String> = SocketGeneralSetting()
+        val event: String = "OUT_UserGeneralSettings"
+        var result: String? = null
+
+        var outMessage: SocketOutMessage = SocketOutMessage()
+        var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
+        mSocket.on("OUT_Message")
+        { args ->
+            socketDataSerializerOut = SocketDataSerializer(args[0] as JSONObject, outMessage.javaClass)
+            outMessage = socketDataSerializerOut.doSerialization()
+            Log.d("MyLog","OUT MESSAGE")
+            Log.d("MyLog","ConnexionInDateFormat: ${mSocket.connected()}")
+            result = "Error"
+        }
+        mSocket.on(event)
+        { args ->
+            socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, socketGeneralSetting.javaClass)
+            socketGeneralSetting = socketDataSerializer.doSerialization()
+            if(socketGeneralSetting.type == "time_format")
+            {
+                userTimeFormatSocketCallbackInterface.onChanged(socketGeneralSetting.field)
+                Log.d("MyLog","GOT ${args[0].toString()} MESSAGE: ${args[0]}")
+                Log.d("MyLog", "Serialized: ${socketGeneralSetting.field}")
+            }
+            //result = socketGeneralSetting.field
+        }
     }
 
-    fun changeStartOfWeek()
+    fun changeStartOfWeek(field: String?)
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        val type: String =  "date_format"
-        val field: String = ""
+        val type: String =  "start_of_the_week"
         userGeneralSettingsSocket.onEmit(type, field)
     }
 
     fun onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface: UserStartOfWeekSocketCallbackInterface)
     {
-        val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userStartOfWeekSocketCallbackInterface.onChanged(userGeneralSettingsSocket.onReceive())
+        var socketDataSerializer: SocketDataSerializer<SocketGeneralSetting<String>>
+        var socketGeneralSetting: SocketGeneralSetting<String> = SocketGeneralSetting()
+        val event: String = "OUT_UserGeneralSettings"
+        var result: String? = null
+
+        var outMessage: SocketOutMessage = SocketOutMessage()
+        var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
+        mSocket.on("OUT_Message")
+        { args ->
+            socketDataSerializerOut = SocketDataSerializer(args[0] as JSONObject, outMessage.javaClass)
+            outMessage = socketDataSerializerOut.doSerialization()
+            Log.d("MyLog","OUT MESSAGE")
+            Log.d("MyLog","ConnexionInDateFormat: ${mSocket.connected()}")
+            result = "Error"
+        }
+        mSocket.on(event)
+        { args ->
+            socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, socketGeneralSetting.javaClass)
+            socketGeneralSetting = socketDataSerializer.doSerialization()
+            if(socketGeneralSetting.type == "start_of_the_week")
+            {
+                userStartOfWeekSocketCallbackInterface.onChanged(socketGeneralSetting.field)
+                Log.d("MyLog","GOT ${args[0].toString()} MESSAGE: ${args[0]}")
+                Log.d("MyLog", "Serialized: ${socketGeneralSetting.field}")
+            }
+            //result = socketGeneralSetting.field
+        }
     }
 
-    fun changeExpandSubtask()
+    fun changeExpandSubtask(subtask: String?)
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        val type: String =  "date_format"
-        val field: Boolean = false
+        val type: String =  "expand_subtask"
+        var field: Boolean = false
+        if(subtask == "Enabled")
+            field = true
+        else
+            field = false
         userGeneralSettingsSocket.onEmit(type, field)
     }
 
     fun onChangedExpandSubtask(userSubtaskSocketCallbackInterface: UserSubtaskSocketCallbackInterface)
     {
-        val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userSubtaskSocketCallbackInterface.onChanged(userGeneralSettingsSocket.onReceive())
+        var socketDataSerializer: SocketDataSerializer<SocketGeneralSetting<Boolean>>
+        var socketGeneralSetting: SocketGeneralSetting<Boolean> = SocketGeneralSetting()
+        val event: String = "OUT_UserGeneralSettings"
+        var result: String? = null
+
+        var outMessage: SocketOutMessage = SocketOutMessage()
+        var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
+        mSocket.on("OUT_Message")
+        { args ->
+            socketDataSerializerOut = SocketDataSerializer(args[0] as JSONObject, outMessage.javaClass)
+            outMessage = socketDataSerializerOut.doSerialization()
+            Log.d("MyLog","OUT MESSAGE")
+            Log.d("MyLog","ConnexionInDateFormat: ${mSocket.connected()}")
+            result = "Error"
+        }
+        mSocket.on(event)
+        { args ->
+            socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, socketGeneralSetting.javaClass)
+            socketGeneralSetting = socketDataSerializer.doSerialization()
+            val field: String?
+            if(socketGeneralSetting.type == "expand_subtask")
+            {
+                val checker: Boolean? = socketGeneralSetting.field
+                if(checker == true)
+                    field = "Enabled"
+                else
+                    field = "Disabled"
+                Log.d("MyLog","$field")
+                userSubtaskSocketCallbackInterface.onChanged(field)
+                Log.d("MyLog","GOT ${args[0].toString()} MESSAGE: ${args[0]}")
+                Log.d("MyLog", "Serialized: ${socketGeneralSetting.field}")
+            }
+            //result = socketGeneralSetting.field
+        }
     }
 
-    fun changeNewTask()
+    fun changeNewTask(newTask: String?)
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        val type: String =  "date_format"
-        val field: Boolean = false
+        val type: String =  "new_task"
+        var field: Boolean = false
+        if(newTask == "Top")
+            field = true
+        else
+            field = false
         userGeneralSettingsSocket.onEmit(type, field)
     }
 
     fun onChangedNewTask(userNewTaskSocketCallbackInterface: UserNewTaskSocketCallbackInterface)
     {
-        val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userNewTaskSocketCallbackInterface.onChanged(userGeneralSettingsSocket.onReceive())
+        var socketDataSerializer: SocketDataSerializer<SocketGeneralSetting<Boolean>>
+        var socketGeneralSetting: SocketGeneralSetting<Boolean> = SocketGeneralSetting()
+        val event: String = "OUT_UserGeneralSettings"
+        var result: String? = null
+
+        var outMessage: SocketOutMessage = SocketOutMessage()
+        var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
+        mSocket.on("OUT_Message")
+        { args ->
+            socketDataSerializerOut = SocketDataSerializer(args[0] as JSONObject, outMessage.javaClass)
+            outMessage = socketDataSerializerOut.doSerialization()
+            Log.d("MyLog","OUT MESSAGE")
+            Log.d("MyLog","ConnexionInDateFormat: ${mSocket.connected()}")
+            result = "Error"
+        }
+        mSocket.on(event)
+        { args ->
+            socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, socketGeneralSetting.javaClass)
+            socketGeneralSetting = socketDataSerializer.doSerialization()
+            val field: String?
+            if(socketGeneralSetting.type == "new_task")
+            {
+                val checker: Boolean? = socketGeneralSetting.field
+                if(checker == true)
+                    field = "Top"
+                else
+                    field = "Bottom"
+
+                Log.d("MyLog","$field")
+                userNewTaskSocketCallbackInterface.onChanged(field)
+                Log.d("MyLog","GOT ${args[0].toString()} MESSAGE: ${args[0]}")
+                Log.d("MyLog", "Serialized: ${socketGeneralSetting.field}")
+            }
+            //result = socketGeneralSetting.field
+        }
     }
 }

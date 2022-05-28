@@ -29,8 +29,11 @@ class SettingsBaseSpinner(private val spinner: Spinner,private val array: Array<
                     {
                         //"lang" -> userViewModel.changeLanguage()
                         "homepage" -> userViewModel.changeHomepage(str)
-                        "dateFormat" -> userViewModel.changeDateFormat()
-                        "timeFormat" -> userViewModel.changeTimeFormat()
+                        "dateFormat" -> userViewModel.changeDateFormat(str)
+                        "timeFormat" -> userViewModel.changeTimeFormat(str)
+                        "weekStart" -> userViewModel.changeStartOfWeek(str)
+                        "expandSubtask" -> userViewModel.changeExpandSubtask(str)
+                        "newTask" -> userViewModel.changeNewTask(str)
                     }
                     Toast.makeText(context,str,Toast.LENGTH_SHORT).show()
                 }

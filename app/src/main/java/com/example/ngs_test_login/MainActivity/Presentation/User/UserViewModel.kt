@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ngs_test_login.MainActivity.Data.User.UserInterfaceImpl
-import com.example.ngs_test_login.MainActivity.Domain.Models.HomePage
 import com.example.ngs_test_login.MainActivity.Domain.Models.MainData
 import com.example.ngs_test_login.MainActivity.Domain.Models.Shortcut
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.LocalUserDbCloseUseCase
@@ -144,11 +143,11 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
-    fun changeEmail()
+    fun changeEmail(email: String?)
     {
         viewModelScope.launch(Dispatchers.IO) {
             val changeEmailUseCase: ChangeEmailUseCase = ChangeEmailUseCase(userInterfaceImpl)
-            changeEmailUseCase.execute()
+            changeEmailUseCase.execute(email)
         }
     }
 
@@ -204,11 +203,11 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
-    fun changeDateFormat()
+    fun changeDateFormat(dateFormat: String?)
     {
         viewModelScope.launch(Dispatchers.IO) {
             val changedDateFormatUseCase: ChangeDateFormatUseCase = ChangeDateFormatUseCase(userInterfaceImpl)
-            changedDateFormatUseCase.execute()
+            changedDateFormatUseCase.execute(dateFormat)
         }
     }
 
@@ -222,11 +221,11 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
-    fun changeTimeFormat()
+    fun changeTimeFormat(timeFormat: String?)
     {
         viewModelScope.launch(Dispatchers.IO) {
             val changeTimeFormatUseCase: ChangeTimeFormatUseCase = ChangeTimeFormatUseCase(userInterfaceImpl)
-            changeTimeFormatUseCase.execute()
+            changeTimeFormatUseCase.execute(timeFormat)
         }
     }
 
@@ -240,11 +239,11 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
-    fun changeStartOfWeek()
+    fun changeStartOfWeek(startOfWeek: String?)
     {
         viewModelScope.launch(Dispatchers.IO) {
             val changeStartOfWeekUseCase: ChangeStartOfWeekUseCase = ChangeStartOfWeekUseCase(userInterfaceImpl)
-            changeStartOfWeekUseCase.execute()
+            changeStartOfWeekUseCase.execute(startOfWeek)
         }
     }
 
@@ -258,11 +257,11 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
-    fun changeExpandSubtask()
+    fun changeExpandSubtask(expandSubtask: String?)
     {
         viewModelScope.launch(Dispatchers.IO) {
             val changeExpandSubtaskUseCaseUseCase: ChangeExpandSubtaskUseCase = ChangeExpandSubtaskUseCase(userInterfaceImpl)
-            changeExpandSubtaskUseCaseUseCase.execute()
+            changeExpandSubtaskUseCaseUseCase.execute(expandSubtask)
         }
     }
 
@@ -275,11 +274,11 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
-    fun changeNewTask()
+    fun changeNewTask(newTask: String?)
     {
         viewModelScope.launch(Dispatchers.IO) {
             val changeNewTaskUseCase: ChangeNewTaskUseCase = ChangeNewTaskUseCase(userInterfaceImpl)
-            changeNewTaskUseCase.execute()
+            changeNewTaskUseCase.execute(newTask)
         }
     }
 

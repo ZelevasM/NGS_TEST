@@ -57,9 +57,9 @@ class UserInterfaceImpl: UserInterface
         userSocket.onChangedName(userNameSocketCallbackInterface)
     }
 
-    override fun changeEmail()
+    override fun changeEmail(email: String?)
     {
-        userSocket.changeEmail()
+        userSocket.changeEmail(email)
     }
 
     override fun onChangedEmail(userEmailSocketCallbackInterface: UserEmailSocketCallbackInterface)
@@ -87,9 +87,9 @@ class UserInterfaceImpl: UserInterface
         userSocket.onChangedHomepage(userHomeSocketCallbackInterface)
     }
 
-    override fun changeDateFormat()
+    override fun changeDateFormat(dateFormat: String?)
     {
-        userSocket.changeDateFormat()
+        userSocket.changeDateFormat(dateFormat)
     }
 
     override fun onChangedDateFormat(userDateFormatSocketCallbackInterface: UserDateFormatSocketCallbackInterface)
@@ -97,9 +97,9 @@ class UserInterfaceImpl: UserInterface
         userSocket.onChangedDateFormat(userDateFormatSocketCallbackInterface)
     }
 
-    override fun changeTimeFormat()
+    override fun changeTimeFormat(timeFormat: String?)
     {
-        userSocket.changeTimeFormat()
+        userSocket.changeTimeFormat(timeFormat)
     }
 
     override fun onChangedTimeFormat(userTimeFormatSocketCallbackInterface: UserTimeFormatSocketCallbackInterface)
@@ -107,9 +107,9 @@ class UserInterfaceImpl: UserInterface
         userSocket.onChangedTimeFormat(userTimeFormatSocketCallbackInterface)
     }
 
-    override fun changeStartOfWeek()
+    override fun changeStartOfWeek(startOfWeek: String?)
     {
-        userSocket.changeStartOfWeek()
+        userSocket.changeStartOfWeek(startOfWeek)
     }
 
     override fun onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface: UserStartOfWeekSocketCallbackInterface)
@@ -117,9 +117,9 @@ class UserInterfaceImpl: UserInterface
         userSocket.onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface)
     }
 
-    override fun changeExpandSubtask()
+    override fun changeExpandSubtask(expandSubtask: String?)
     {
-        userSocket.changeExpandSubtask()
+        userSocket.changeExpandSubtask(expandSubtask)
     }
 
     override fun onChangedExpandSubtask(userSubtaskSocketCallbackInterface: UserSubtaskSocketCallbackInterface)
@@ -127,9 +127,9 @@ class UserInterfaceImpl: UserInterface
         userSocket.onChangedExpandSubtask(userSubtaskSocketCallbackInterface)
     }
 
-    override fun changeNewTask()
+    override fun changeNewTask(newTask: String?)
     {
-        userSocket.changeNewTask()
+        userSocket.changeNewTask(newTask)
     }
 
     override fun onChangedNewTask(userNewTaskSocketCallbackInterface: UserNewTaskSocketCallbackInterface)
