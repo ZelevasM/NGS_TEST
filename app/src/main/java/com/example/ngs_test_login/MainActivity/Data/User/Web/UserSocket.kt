@@ -4,15 +4,15 @@ import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ConvertClassToJson
 import com.example.ngs_test_login.MainActivity.Data.User.Models.*
+import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.*
 import io.socket.client.Socket
 import org.json.JSONObject
 
 class UserSocket(private val mSocket: Socket)
 {
-    fun changeName()
+    fun changeName(name: String?)
     {
         val type: String = "change_name"
-        val name: String = "ENZIO"
 
         val socketName: SocketName = SocketName(type, name)
         val socketNameJson: JSONObject = ConvertClassToJson(socketName).convert()
@@ -20,7 +20,7 @@ class UserSocket(private val mSocket: Socket)
         mSocket.emit(event, socketNameJson)
     }
 
-    fun onChangedName()
+    fun onChangedName(userNameSocketCallbackInterface: UserNameSocketCallbackInterface)
     {
         var socketDataSerializer: SocketDataSerializer<SocketName>
         var name: SocketName = SocketName()
@@ -35,6 +35,7 @@ class UserSocket(private val mSocket: Socket)
                 Log.d("MyLog","GOT NAME: ${args[0]}")
                 socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, name.javaClass)
                 name = socketDataSerializer.doSerialization()
+                userNameSocketCallbackInterface.onChanged(name = name.name)
                 Log.d("MyLog", "Serialized: $name")
         }
     }
@@ -51,7 +52,7 @@ class UserSocket(private val mSocket: Socket)
         mSocket.emit(event, socketEmailJson)
     }
 
-    fun onChangedEmail()
+    fun onChangedEmail(userEmailSocketCallbackInterface: UserEmailSocketCallbackInterface)
     {
         var socketDataSerializer: SocketDataSerializer<SocketEmail>
         var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
@@ -72,6 +73,7 @@ class UserSocket(private val mSocket: Socket)
             Log.d("MyLog","GOT EMAIL: ${args[0]}")
             socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, email.javaClass)
             email = socketDataSerializer.doSerialization()
+            userEmailSocketCallbackInterface.onChanged(email = email.email)
             Log.d("MyLog", "Serialized: $email")
         }
     }
@@ -88,7 +90,7 @@ class UserSocket(private val mSocket: Socket)
         mSocket.emit(event, socketPasswordJson)
     }
 
-    fun onChangedPassword()
+    fun onChangedPassword(userPassSocketCallbackInterface: UserPasswordSocketCallbackInterface)
     {
         var socketDataSerializer: SocketDataSerializer<SocketPasswordMessage>
         var newPassword: SocketPasswordMessage = SocketPasswordMessage()
@@ -108,6 +110,7 @@ class UserSocket(private val mSocket: Socket)
             Log.d("MyLog","GOT PASSWORD MESSAGE: ${args[0]}")
             socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, newPassword.javaClass)
             newPassword = socketDataSerializer.doSerialization()
+            userPassSocketCallbackInterface.onChanged(newPassword.message.toString())
             Log.d("MyLog", "Serialized: $newPassword")
         }
     }
@@ -115,10 +118,10 @@ class UserSocket(private val mSocket: Socket)
     fun changeLanguage()
     {}
 
-    fun changeHomepage()
+    fun changeHomepage(homepage: String?)
     {
         val type: String =  "homepage"
-        val fieldType: String = "medium_priority"
+        val fieldType: String? = homepage
         val fieldId: String? = null
 
         val field: SocketHomepageField = SocketHomepageField(fieldType, fieldId)
@@ -128,28 +131,30 @@ class UserSocket(private val mSocket: Socket)
         mSocket.emit(event, socketGeneralSettingJson)
     }
 
-    fun onChangedHomepage()
+    fun onChangedHomepage(userHomeSocketCallbackInterface: UserHomepageSocketCallbackInterface)
     {
-        var socketDataSerializer: SocketDataSerializer<SocketHomepage>
-        var socketHomepage: SocketHomepage = SocketHomepage()
-        val event: String = "OUT_UserGeneralSettings"
-
-        var outMessage: SocketOutMessage = SocketOutMessage()
-        var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
-        mSocket.on("OUT_Message")
-        { args ->
-            socketDataSerializerOut = SocketDataSerializer(args[0] as JSONObject, outMessage.javaClass)
-            outMessage = socketDataSerializerOut.doSerialization()
-            Log.d("MyLog","OUT MESSAGE")
-            Log.d("MyLog","ConnexionInHomepage: ${mSocket.connected()}")
-        }
-        mSocket.on(event)
-        { args ->
-            Log.d("MyLog","GOT HOMEPAGE MESSAGE: ${args[0]}")
-            socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, socketHomepage.javaClass)
-            socketHomepage = socketDataSerializer.doSerialization()
-            Log.d("MyLog", "Serialized: $socketHomepage")
-        }
+//        var socketDataSerializer: SocketDataSerializer<SocketHomepage>
+//        var socketHomepage: SocketHomepage = SocketHomepage()
+//        val event: String = "OUT_UserGeneralSettings"
+//
+//        var outMessage: SocketOutMessage = SocketOutMessage()
+//        var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
+//        mSocket.on("OUT_Message")
+//        { args ->
+//            socketDataSerializerOut = SocketDataSerializer(args[0] as JSONObject, outMessage.javaClass)
+//            outMessage = socketDataSerializerOut.doSerialization()
+//            Log.d("MyLog","OUT MESSAGE")
+//            Log.d("MyLog","ConnexionInHomepage: ${mSocket.connected()}")
+//        }
+//        mSocket.on(event)
+//        { args ->
+//            Log.d("MyLog","GOT HOMEPAGE MESSAGE: ${args[0]}")
+//            val generalSetting: SocketGeneralSetting = args[0]
+//            socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, SocketGeneralSetting)
+//            socketHomepage = socketDataSerializer.doSerialization()
+//            userHomeSocketCallbackInterface.onChanged(socketHomepage.field?.type)
+//            Log.d("MyLog", "Serialized: ${socketHomepage.field?.type}")
+//        }
     }
 
     fun changeDateFormat()
@@ -160,10 +165,36 @@ class UserSocket(private val mSocket: Socket)
         userGeneralSettingsSocket.onEmit(type, field)
     }
 
-    fun onChangedDateFormat()
+    fun onChangedDateFormat(userDateFormatSocketCallbackInterface: UserDateFormatSocketCallbackInterface)
     {
-        val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userGeneralSettingsSocket.onReceive()
+        var socketDataSerializer: SocketDataSerializer<SocketGeneralSetting<String>>
+        var socketGeneralSetting: SocketGeneralSetting<String> = SocketGeneralSetting()
+        val event: String = "OUT_UserGeneralSettings"
+        var result: String? = null
+
+        var outMessage: SocketOutMessage = SocketOutMessage()
+        var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
+        mSocket.on("OUT_Message")
+        { args ->
+            socketDataSerializerOut = SocketDataSerializer(args[0] as JSONObject, outMessage.javaClass)
+            outMessage = socketDataSerializerOut.doSerialization()
+            Log.d("MyLog","OUT MESSAGE")
+            Log.d("MyLog","ConnexionInDateFormat: ${mSocket.connected()}")
+            result = "Error"
+        }
+        mSocket.on(event)
+        { args ->
+            Log.d("MyLog","GOT ${args[0].toString()} MESSAGE: ${args[0]}")
+            socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, socketGeneralSetting.javaClass)
+            socketGeneralSetting = socketDataSerializer.doSerialization()
+            when(socketGeneralSetting.type)
+            {
+                "date_format" -> userDateFormatSocketCallbackInterface.onChanged(socketGeneralSetting.field)
+            }
+            Log.d("MyLog", "Serialized: ${socketGeneralSetting.field}")
+            //result = socketGeneralSetting.field
+        }
+
     }
 
     fun changeTimeFormat()
@@ -174,10 +205,10 @@ class UserSocket(private val mSocket: Socket)
         userGeneralSettingsSocket.onEmit(type, field)
     }
 
-    fun onChangedTimeFormat()
+    fun onChangedTimeFormat(userTimeFormatSocketCallbackInterface: UserTimeFormatSocketCallbackInterface)
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userGeneralSettingsSocket.onReceive()
+        userTimeFormatSocketCallbackInterface.onChanged(userGeneralSettingsSocket.onReceive())
     }
 
     fun changeStartOfWeek()
@@ -188,10 +219,10 @@ class UserSocket(private val mSocket: Socket)
         userGeneralSettingsSocket.onEmit(type, field)
     }
 
-    fun onChangedStartOfWeek()
+    fun onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface: UserStartOfWeekSocketCallbackInterface)
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userGeneralSettingsSocket.onReceive()
+        userStartOfWeekSocketCallbackInterface.onChanged(userGeneralSettingsSocket.onReceive())
     }
 
     fun changeExpandSubtask()
@@ -202,10 +233,10 @@ class UserSocket(private val mSocket: Socket)
         userGeneralSettingsSocket.onEmit(type, field)
     }
 
-    fun onChangedExpandSubtask()
+    fun onChangedExpandSubtask(userSubtaskSocketCallbackInterface: UserSubtaskSocketCallbackInterface)
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userGeneralSettingsSocket.onReceive()
+        userSubtaskSocketCallbackInterface.onChanged(userGeneralSettingsSocket.onReceive())
     }
 
     fun changeNewTask()
@@ -216,9 +247,9 @@ class UserSocket(private val mSocket: Socket)
         userGeneralSettingsSocket.onEmit(type, field)
     }
 
-    fun onChangedNewTask()
+    fun onChangedNewTask(userNewTaskSocketCallbackInterface: UserNewTaskSocketCallbackInterface)
     {
         val userGeneralSettingsSocket: UserGeneralSettingsSocket = UserGeneralSettingsSocket(mSocket)
-        userGeneralSettingsSocket.onReceive()
+        userNewTaskSocketCallbackInterface.onChanged(userGeneralSettingsSocket.onReceive())
     }
 }

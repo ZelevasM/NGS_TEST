@@ -43,4 +43,34 @@
     <string name="upgrade">Upgrade</string>
     <string name="imp">Import</string>
 
+    //Profile General Settings
+
+    //Profile General Settings Menus
+    <string-array name="language_menu">
+        <item>English</item>
+    </string-array>
+    <string-array name="homepage_menu">
+        <item>Today</item>
+        <item>Inbox</item>
+    </string-array>
+    <string-array name="date_format_menu">
+        <item>DD/MM/YYYY</item>
+        <item>MM/DD/YYYY</item>
+    </string-array>
+    <string-array name="time_format_menu">
+        <item>1:00 PM</item>
+        <item>13:00</item>
+    </string-array>
+    <string-array name="week_start_menu">
+        <item>Monday</item>
+        <item>Sunday</item>
+    </string-array>
+    <string-array name="expand_subtask_menu">
+        <item>Enabled</item>
+        <item>Disabled</item>
+    </string-array>
+    <string-array name="new_task_menu">
+        <item>Top</item>
+        <item>Bottom</item>
+    </string-array>
 </resources>

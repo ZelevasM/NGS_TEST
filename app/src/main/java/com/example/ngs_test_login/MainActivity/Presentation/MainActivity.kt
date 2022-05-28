@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity()
         setContentView(R.layout.activity_main)
         Init()
         socketInit()
-        changeNameEmailPassword()
         //addList()
     }
 
@@ -71,20 +70,6 @@ class MainActivity : AppCompatActivity()
         })
         //mainViewModel.socketInit()
     }
-
-    private fun changeNameEmailPassword()
-    {
-        //userViewModel.changeName()
-        //userViewModel.changeEmail()
-        //userViewModel.changePassword()
-        //userViewModel.changeHomepage()
-        //userViewModel.changeDateFormat()
-        //userViewModel.changeTimeFormat()
-        //userViewModel.changeStartOfWeek()
-        //userViewModel.changeExpandSubtask()
-        //userViewModel.changeNewTask()
-    }
-
     private fun lockUI()
     {}
 

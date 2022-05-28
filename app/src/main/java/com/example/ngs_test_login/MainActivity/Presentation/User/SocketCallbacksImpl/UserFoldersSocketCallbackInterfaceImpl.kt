@@ -1,4 +1,10 @@
 package com.example.ngs_test_login.MainActivity.Presentation.User.SocketCallbacksImpl
 
-class UserFoldersSocketCallbackInterfaceImpl
-{}
+import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserFoldersSocketCallbackInterface
+
+class UserFoldersSocketCallbackInterfaceImpl: UserFoldersSocketCallbackInterface
+{
+    override fun onChanged(folders: String?)
+    {
+    }
+}

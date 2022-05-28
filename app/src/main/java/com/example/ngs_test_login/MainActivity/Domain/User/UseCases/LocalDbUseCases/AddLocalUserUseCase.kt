@@ -7,8 +7,8 @@ import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
 
 class AddLocalUserUseCase(private val userInterface: UserInterface)
 {
-    fun execute(context: Context, user: User?)
+    fun execute(user: User?)
     {
-        userInterface.addLocalUser(context, user)
+        userInterface.addLocalUser(user)
     }
 }

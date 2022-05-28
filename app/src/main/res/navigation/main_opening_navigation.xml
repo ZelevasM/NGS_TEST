@@ -25,5 +25,22 @@
         android:id="@+id/mainProfileFragment"
         android:name="com.example.ngs_test_login.MainActivity.Presentation.User.Fragments.MainProfileFragment"
         android:label="MainProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_mainProfileFragment_to_mainProfileSettingsFragment"
+            app:destination="@id/mainProfileSettingsFragment" />
+        <action
+            android:id="@+id/action_mainProfileFragment_to_mainProfileUserSettings"
+            app:destination="@id/mainProfileUserSettings" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainProfileSettingsFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.User.Fragments.MainProfileSettingsFragment"
+        android:label="MainProfileSettingsFragment"
+        tools:layout="@layout/fragment_profile_settings"/>
+    <fragment
+        android:id="@+id/mainProfileUserSettings"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.User.Fragments.MainProfileUserSettingsFragment"
+        android:label="MainProfileUserSettings"
+        tools:layout="@layout/fragment_profile_user_settings"/>
 </navigation>

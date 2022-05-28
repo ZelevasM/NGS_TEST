@@ -1,111 +1,276 @@
 package com.example.ngs_test_login.MainActivity.Data.User
 
 import android.content.Context
-import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.UserDatabaseManager
-import com.example.ngs_test_login.MainActivity.Data.Base.Web.BaseSocket
+import android.database.sqlite.SQLiteDatabase
+import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.UsersDatabaseManager
 import com.example.ngs_test_login.MainActivity.Data.User.Web.UserSocket
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
+import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.*
 import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
-import com.example.ngs_test_login.MainActivity.Domain.User.UserLocalDbProviderInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.UserLocalProviderInterface
 import io.socket.client.Socket
 
 class UserInterfaceImpl: UserInterface
 {
     private lateinit var mSocket: Socket
+    private lateinit var userSocket: UserSocket
     //Local DB
-    private var userDatabaseManager: UserDatabaseManager? = null
+    private var usersDatabaseManager: UsersDatabaseManager? = null
+    private var mUser: User? = null
 
-    override fun socketInit()
+    override fun socketInit(bSocket: Socket)
     {
-        TODO("Not yet implemented")
+        mSocket = bSocket
+        userSocket = UserSocket(mSocket)
     }
 
     override fun localDbInit(context: Context)
     {
-        //userDatabaseManager = UserDatabaseManager.getInstance(context)
-        userDatabaseManager = UserDatabaseManager(context)
-        val newlyCreated: Boolean? = userDatabaseManager?.openDb()
+        usersDatabaseManager = UsersDatabaseManager(context)
+        val newlyCreated: Boolean? = usersDatabaseManager?.openDb()
     }
 
     override fun localDbClose()
     {
-        userDatabaseManager?.closeDb()
+        usersDatabaseManager?.closeDb()
     }
 
-    override fun addLocalUser(context: Context, user: User?)
+    override fun addLocalUser(user: User?)
     {
         //test db
-        userDatabaseManager?.writeToDb(user)
+        usersDatabaseManager?.writeToDb(user)
     }
 
     override fun getLocalUser(): User?
     {
-        val user: User? = userDatabaseManager?.readFromDb()
-        return user
+        mUser = usersDatabaseManager?.readFromDb()
+        return mUser
     }
 
-    override fun changeName()
+    override fun changeName(name: String?)
     {
+        userSocket.changeName(name)
+    }
 
-        val userSocket: UserSocket = UserSocket(mSocket)
-        userSocket.changeName()
-        userSocket.onChangedName()
+    override fun onChangedName(userNameSocketCallbackInterface: UserNameSocketCallbackInterface)
+    {
+        userSocket.onChangedName(userNameSocketCallbackInterface)
     }
 
     override fun changeEmail()
     {
-        val userSocket: UserSocket = UserSocket(mSocket)
         userSocket.changeEmail()
-        userSocket.onChangedEmail()
+    }
+
+    override fun onChangedEmail(userEmailSocketCallbackInterface: UserEmailSocketCallbackInterface)
+    {
+        userSocket.onChangedEmail(userEmailSocketCallbackInterface)
     }
 
     override fun changePassword()
     {
-        val userSocket: UserSocket = UserSocket(mSocket)
         userSocket.changePassword()
-        userSocket.onChangedPassword()
     }
 
-    override fun changeHomepage()
+    override fun onChangedPassword(userPassSocketCallbackInterface: UserPasswordSocketCallbackInterface)
     {
-        val userSocket: UserSocket = UserSocket(mSocket)
-        userSocket.changeHomepage()
-        userSocket.onChangedHomepage()
+        userSocket.onChangedPassword(userPassSocketCallbackInterface)
+    }
+
+    override fun changeHomepage(homepage: String?)
+    {
+        userSocket.changeHomepage(homepage)
+    }
+
+    override fun onChangedHomepage(userHomeSocketCallbackInterface: UserHomepageSocketCallbackInterface)
+    {
+        userSocket.onChangedHomepage(userHomeSocketCallbackInterface)
     }
 
     override fun changeDateFormat()
     {
-        //mSocket = BaseSocket().initialize()
-        val userSocket: UserSocket = UserSocket(mSocket)
         userSocket.changeDateFormat()
-        userSocket.onChangedDateFormat()
+    }
+
+    override fun onChangedDateFormat(userDateFormatSocketCallbackInterface: UserDateFormatSocketCallbackInterface)
+    {
+        userSocket.onChangedDateFormat(userDateFormatSocketCallbackInterface)
     }
 
     override fun changeTimeFormat()
     {
-        val userSocket: UserSocket = UserSocket(mSocket)
         userSocket.changeTimeFormat()
-        userSocket.onChangedTimeFormat()
+    }
+
+    override fun onChangedTimeFormat(userTimeFormatSocketCallbackInterface: UserTimeFormatSocketCallbackInterface)
+    {
+        userSocket.onChangedTimeFormat(userTimeFormatSocketCallbackInterface)
     }
 
     override fun changeStartOfWeek()
     {
-        val userSocket: UserSocket = UserSocket(mSocket)
         userSocket.changeStartOfWeek()
-        userSocket.onChangedStartOfWeek()
+    }
+
+    override fun onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface: UserStartOfWeekSocketCallbackInterface)
+    {
+        userSocket.onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface)
     }
 
     override fun changeExpandSubtask()
     {
-        val userSocket: UserSocket = UserSocket(mSocket)
         userSocket.changeExpandSubtask()
-        userSocket.onChangedExpandSubtask()
+    }
+
+    override fun onChangedExpandSubtask(userSubtaskSocketCallbackInterface: UserSubtaskSocketCallbackInterface)
+    {
+        userSocket.onChangedExpandSubtask(userSubtaskSocketCallbackInterface)
     }
 
     override fun changeNewTask()
     {
-        val userSocket: UserSocket = UserSocket(mSocket)
         userSocket.changeNewTask()
-        userSocket.onChangedNewTask()
+    }
+
+    override fun onChangedNewTask(userNewTaskSocketCallbackInterface: UserNewTaskSocketCallbackInterface)
+    {
+        userSocket.onChangedNewTask(userNewTaskSocketCallbackInterface)
+    }
+
+    //USER SETTINGS
+
+    override fun saveName(vararg user: User?,db: SQLiteDatabase?,name: String?)
+    {
+        usersDatabaseManager?.saveName(mUser,db=null,name = name)
+    }
+
+    override fun getName(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getName(mUser, db = null)
+    }
+
+    override fun saveEmail(vararg user: User?,db: SQLiteDatabase?,email: String?)
+    {
+        usersDatabaseManager?.saveEmail(mUser,db=null,email = email)
+    }
+
+    override fun getEmail(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getEmail(mUser, db = null)
+    }
+
+    //USER GENERAL SETTINGS
+
+    override fun saveLanguage(vararg user: User?,db: SQLiteDatabase?,language: String?)
+    {
+        usersDatabaseManager?.saveLanguage(mUser,db=null,language = language)
+    }
+
+    override fun getLanguage(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getLanguage(mUser, db = null)
+    }
+
+    override fun saveHomepage(vararg user: User?,db: SQLiteDatabase?,homepage: String?)
+    {
+        usersDatabaseManager?.saveHomepage(mUser,db = null, homepage = homepage)
+    }
+
+    override fun getHomepage(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getHomepage(mUser,db = null)
+    }
+
+    override fun saveDateFormat(vararg user: User?,db: SQLiteDatabase?,dateFormat: String?)
+    {
+        usersDatabaseManager?.saveDateFormat(mUser,db=null,dateFormat = dateFormat)
+    }
+
+    override fun getDateFormat(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getDateFormat(mUser,db=null)
+    }
+
+    override fun saveTimeFormat(vararg user: User?,db: SQLiteDatabase?,timeFormat: String?)
+    {
+        usersDatabaseManager?.saveTimeFormat(mUser,db = null, timeFormat = timeFormat)
+    }
+
+    override fun getTimeFormat(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getTimeFormat(mUser,db = null)
+    }
+
+    override fun saveStartOfWeek(vararg user: User?,db: SQLiteDatabase?,startOfWeek: String?)
+    {
+        usersDatabaseManager?.saveStartOfWeek(mUser,db = null, startOfWeek = startOfWeek)
+    }
+
+    override fun getStartOfWeek(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getStartOfWeek(mUser,db = null)
+    }
+
+    override fun saveExpandSubtask(vararg user: User?,db: SQLiteDatabase?,expandSubtask: String?)
+    {
+        usersDatabaseManager?.saveExpandSubtask(mUser,db=null,expandSubtask = expandSubtask)
+    }
+
+    override fun getExpandSubtask(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getExpandSubtask(mUser, db = null)
+    }
+
+    override fun saveNewTask(vararg user: User?,db: SQLiteDatabase?,newTask: String?)
+    {
+        usersDatabaseManager?.saveNewTask(mUser,db=null,newTask = newTask)
+    }
+
+    override fun getNewTask(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getNewTask(mUser, db = null)
+    }
+
+
+    //IRRELEVANT
+
+    override fun saveShortcutInbox(vararg user: User?,db: SQLiteDatabase?)
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getShortcutInbox(vararg user: User?)
+    {
+        usersDatabaseManager?.getShortcutInbox(mUser)
+    }
+
+    override fun saveId(vararg user: User?,db: SQLiteDatabase?)
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getId(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getId(mUser, db = null)
+    }
+
+    override fun saveShowSidebar(vararg user: User?,db: SQLiteDatabase?,sidebar: String?)
+    {
+        usersDatabaseManager?.saveShowSidebar(mUser,db=null,sidebar= sidebar)
+    }
+
+    override fun getShowSidebar(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getShowSidebar(mUser, db = null)
+    }
+
+    override fun saveDiskSpace(vararg user: User?,db: SQLiteDatabase?,diskSpace: String?)
+    {
+        usersDatabaseManager?.saveDiskSpace(mUser,db=null,diskSpace= diskSpace)
+    }
+
+    override fun getDiskSpace(vararg user: User?,db: SQLiteDatabase?): String?
+    {
+        return usersDatabaseManager?.getDiskSpace(mUser, db = null)
     }
 }

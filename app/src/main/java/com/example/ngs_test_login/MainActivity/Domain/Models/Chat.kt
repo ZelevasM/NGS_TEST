@@ -9,6 +9,9 @@ data class Chat(
     @field:SerializedName("auth")
     val auth: String? = null,
 
+    @field:SerializedName("color")
+    val color: String? = null,
+
     @field:SerializedName("project_id")
     val projectId: String? = null,
 

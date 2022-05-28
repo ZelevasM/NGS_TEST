@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ngs_test_login.MainActivity.Domain.Models.Shortcut
 import com.example.ngs_test_login.MainActivity.Presentation.Adapters.ShortcutAdapter
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
+import com.example.ngs_test_login.MainActivity.Presentation.User.UserViewModel
 import com.example.ngs_test_login.R
 
 class MainShortcutsFragment: Fragment()
 {
-    private val shortcutViewModel: MainViewModel by activityViewModels()
+    private val shortcutMainViewModel: MainViewModel by activityViewModels()
+    private val shortcutUserViewModel: UserViewModel by activityViewModels()
     private lateinit var shortRecView: RecyclerView
 
     //TODO FIX
@@ -48,7 +50,7 @@ class MainShortcutsFragment: Fragment()
         shortRecView = view.findViewById(R.id.shortRecView)
         shortRecView.layoutManager = LinearLayoutManager(this.context)
         shortRecView.setHasFixedSize(true)
-        shortcutViewModel.shortcutsLiveData.observe(viewLifecycleOwner, Observer {
+        shortcutUserViewModel.shortcutsLiveData.observe(viewLifecycleOwner, Observer {
             shortcuts = it
             adaper = ShortcutAdapter(shortcuts)
             shortRecView.adapter= adaper

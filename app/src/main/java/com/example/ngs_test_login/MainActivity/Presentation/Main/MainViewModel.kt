@@ -29,8 +29,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
     private val chatsData = MutableLiveData<ArrayList<Chat?>?>()
     val chatsLiveData: LiveData<ArrayList<Chat?>?> = chatsData
 
-    private val shortcutsData = MutableLiveData<ArrayList<Shortcut?>?>()
-    val shortcutsLiveData: LiveData<ArrayList<Shortcut?>?> = shortcutsData
+
 
     private var lists: ArrayList<DataList?>? = null
     private var chats: ArrayList<Chat?>? = null
@@ -38,16 +37,20 @@ class MainViewModel: ViewModel(), ViewModelInterface
 
     private val mainInterfaceImpl = MainInterfaceImpl()
 
+    //1. get all local lists - getLocalLists
+    //1. get all local chats - getLocalChats
+    //1. display local data
+    //1. add new local lists - addLocalLists
+    //1. add new local chats - addLocalChats
+    //1. display data - data establisher
+
     fun dataEstablisher(mainData: MainData?)
     {
         lists = mainData?.dataLists
         chats = mainData?.chats
-        user = mainData?.user
-        val shortcuts: ArrayList<Shortcut?>? = user?.shortcuts as ArrayList<Shortcut?>?
 
         Log.d("MyLog","lists: $lists")
         Log.d("MyLog","chats: $chats")
-        Log.d("MyLog","user: $user")
 
         if (ListValidator().validateIncomingList(lists))
         {
@@ -66,11 +69,6 @@ class MainViewModel: ViewModel(), ViewModelInterface
         } else
         {
             getChat()
-        }
-        if (ShortcutValidator().validateIncomingShortcut(shortcuts))
-        {
-            shortcutsData.postValue(shortcuts)
-            //write data to local storage
         }
     }
 

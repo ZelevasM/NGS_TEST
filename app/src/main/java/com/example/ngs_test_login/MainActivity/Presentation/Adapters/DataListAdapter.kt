@@ -1,8 +1,10 @@
 package com.example.ngs_test_login.MainActivity.Presentation.Adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
@@ -13,10 +15,7 @@ class DataListAdapter(private val lists: ArrayList<DataList?>?): RecyclerView.Ad
     private lateinit var clickListener: onItemClickListener
     interface onItemClickListener
     {
-        fun onItemClicked(position: Int,id: String?)
-        {
-
-        }
+        fun onItemClicked(position: Int,id: String?){}
     }
 
     fun setOnItemClickListener(listener: onItemClickListener)
@@ -32,6 +31,7 @@ class DataListAdapter(private val lists: ArrayList<DataList?>?): RecyclerView.Ad
                 listener.onItemClicked(adapterPosition, lists?.get(adapterPosition)?.id)
             }
         }
+        val iconBackground: RelativeLayout = itemView.findViewById(R.id.list_item_cardView_mainIcon_layout)
         val iconTextView: TextView = itemView.findViewById(R.id.list_item_cardView_mainIcon_textView)
         val titleTextView: TextView = itemView.findViewById(R.id.list_item_cardView_title_textView)
         val tasksTextView: TextView = itemView.findViewById(R.id.list_item_cardView_tasks_textView)
@@ -46,7 +46,13 @@ class DataListAdapter(private val lists: ArrayList<DataList?>?): RecyclerView.Ad
     override fun onBindViewHolder(holder: ListViewHolder,position: Int)
     {
         val currentList = lists?.get(position)
-        //holder.iconTextView.setText(currentList.)
+        if(currentList?.color != null)
+        {
+            val color: Int = Color.parseColor(currentList.color)
+            holder.iconBackground.setBackgroundColor(color)
+        }
+        val firstLetter: Char? = currentList?.name?.get(0)
+        holder.iconTextView.text = firstLetter.toString()
         holder.titleTextView.text = currentList?.name
         holder.tasksTextView.text = currentList?.tasks?.size.toString()
     }

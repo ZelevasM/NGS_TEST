@@ -10,6 +10,9 @@ data class DataList(
     @field:SerializedName("author")
     val author: String? = null,
 
+    @field:SerializedName("color")
+    val color: String? = null,
+
     @field:SerializedName("__v")
     val V: Int? = null,
 

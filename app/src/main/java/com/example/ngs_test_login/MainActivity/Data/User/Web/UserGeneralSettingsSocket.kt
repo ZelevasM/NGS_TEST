@@ -18,11 +18,12 @@ class UserGeneralSettingsSocket(private val mSocket: Socket)
         mSocket.emit(event, socketGeneralSettingJson)
     }
 
-    fun onReceive()
+    fun onReceive(): String?
     {
         var socketDataSerializer: SocketDataSerializer<SocketGeneralSetting<String>>
         var socketGeneralSetting: SocketGeneralSetting<String> = SocketGeneralSetting()
         val event: String = "OUT_UserGeneralSettings"
+        var result: String? = null
 
         var outMessage: SocketOutMessage = SocketOutMessage()
         var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
@@ -32,13 +33,16 @@ class UserGeneralSettingsSocket(private val mSocket: Socket)
             outMessage = socketDataSerializerOut.doSerialization()
             Log.d("MyLog","OUT MESSAGE")
             Log.d("MyLog","ConnexionInDateFormat: ${mSocket.connected()}")
+            result = "Error"
         }
         mSocket.on(event)
         { args ->
-            Log.d("MyLog","GOT DATE FORMAT MESSAGE: ${args[0]}")
+            Log.d("MyLog","GOT ${args[0].toString()} MESSAGE: ${args[0]}")
             socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, socketGeneralSetting.javaClass)
             socketGeneralSetting = socketDataSerializer.doSerialization()
             Log.d("MyLog", "Serialized: $socketGeneralSetting")
+            result = socketGeneralSetting.field
         }
+        return result
     }
 }

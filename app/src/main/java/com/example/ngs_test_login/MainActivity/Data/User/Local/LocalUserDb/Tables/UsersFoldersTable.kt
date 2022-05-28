@@ -1,9 +1,9 @@
 package com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables
 
-object FoldersTable
+object UsersFoldersTable
 {
     //FOLDERS' TABLE ->
-    const val FOLDERS_TABLE_NAME: String = "Folders"
+    const val FOLDERS_TABLE_NAME: String = "Users_Folders"
     const val FOLDERS_COLUMN_NAME_KEY: String = "Key"
     const val FOLDERS_COLUMN_NAME_ID: String = "Id"
     const val FOLDERS_COLUMN_NAME_NAME: String = "Name"

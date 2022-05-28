@@ -3,7 +3,7 @@ package com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalChatsDb.Tab
 object ChatsTable
 {
     //CHATS' BASIC TABLE ->
-    const val TABLE_NAME: String = "Lists"
+    const val TABLE_NAME: String = "Chats"
     const val COLUMN_NAME_DATE: String = "Date"
     const val COLUMN_NAME_AUTHOR: String = "Author"
     const val COLUMN_NAME_PROJECT_ID: String = "Project_Id"

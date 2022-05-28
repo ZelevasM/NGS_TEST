@@ -44,6 +44,7 @@ class BaseViewModel(private val mainViewModel: MainViewModel,
 
     override fun localDbInit(context: Context)
     {
+        //1. init local dbs and display res
         mainViewModel.localDbInit(context)
         userViewModel.localDbInit(context)
     }
@@ -67,7 +68,11 @@ class BaseViewModel(private val mainViewModel: MainViewModel,
         viewModelScope.launch(Dispatchers.IO) {
             val getDataUseCase = GetDataUseCase(baseInterfaceImpl)
             val mainData: MainData? = getDataUseCase.execute()
+            //change or delete
             mainViewModel.dataEstablisher(mainData)
+
+            userViewModel.addLocalUserAtomic(mainData)
+            userViewModel.dataAtomicAssigner()
         }
     }
 }
