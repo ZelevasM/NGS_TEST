@@ -7,14 +7,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ngs_test_login.MainActivity.Data.Main.MainInterfaceImpl
-import com.example.ngs_test_login.MainActivity.Domain.Base.UseCases.GetDataUseCase
-import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.*
+import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases.*
+import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.*
 import com.example.ngs_test_login.MainActivity.Domain.Models.*
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.ChatSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.ListSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.ChatValidator
 import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.ListValidator
-import com.example.ngs_test_login.MainActivity.Presentation.User.Validators.ShortcutValidator
 import com.example.ngs_test_login.MainActivity.Presentation.ViewModelInterface
 import io.socket.client.Socket
 import kotlinx.coroutines.Dispatchers
@@ -29,80 +28,80 @@ class MainViewModel: ViewModel(), ViewModelInterface
     private val chatsData = MutableLiveData<ArrayList<Chat?>?>()
     val chatsLiveData: LiveData<ArrayList<Chat?>?> = chatsData
 
-
-
     private var lists: ArrayList<DataList?>? = null
     private var chats: ArrayList<Chat?>? = null
     private var user: User? = null
 
     private val mainInterfaceImpl = MainInterfaceImpl()
 
-    //1. get all local lists - getLocalLists
-    //1. get all local chats - getLocalChats
-    //1. display local data
-    //1. add new local lists - addLocalLists
-    //1. add new local chats - addLocalChats
-    //1. display data - data establisher
 
-    fun dataEstablisher(mainData: MainData?)
-    {
-        lists = mainData?.dataLists
-        chats = mainData?.chats
-
-        Log.d("MyLog","lists: $lists")
-        Log.d("MyLog","chats: $chats")
-
-        if (ListValidator().validateIncomingList(lists))
-        {
-            listsData.postValue(lists)
-            getList()
-            //write data to local storage
-        } else
-        {
-            getList()
-        }
-        if (ChatValidator().validateIncomingChat(chats))
-        {
-            chatsData.postValue(chats)
-            getChat()
-            //write data to local storage
-        } else
-        {
-            getChat()
-        }
-    }
-
-    override fun socketInit(vararg bSocket: Socket)
-    {
-        val mainSocketInitUseCase: MainSocketInitUseCase = MainSocketInitUseCase(mainInterfaceImpl)
-        mainSocketInitUseCase.execute(bSocket[0])
-    }
-
+    //LOCAL DB METHODS
+    //LISTS' METHODS
     override fun localDbInit(context: Context)
     {
+        val localDbInitUseCase: LocalDbInitUseCase = LocalDbInitUseCase(mainInterfaceImpl)
+        localDbInitUseCase.execute(context)
 
+        dataAtomicAssigner()
     }
 
     override fun localDbClose()
     {
-
+        val localDbCloseUseCase: LocalDbCloseUseCase = LocalDbCloseUseCase(mainInterfaceImpl)
+        localDbCloseUseCase.execute()
     }
 
-    fun addLocalLists()
+    fun dataAtomicAssigner()
     {
+        lists = getLocalListsAtomic()
+        chats = getLocalChatsAtomic()
+        //chats = mainData?.chats
 
+        Log.d("MyLog","lists: $lists")
+        //Log.d("MyLog","chats: $chats")
+
+        if (ListValidator().validateIncomingList(lists))
+        {
+            listsData.postValue(lists)
+        }
+        if (ChatValidator().validateIncomingChat(chats))
+        {
+            chatsData.postValue(chats)
+        }
     }
 
-    fun getLocalLists()
+    fun addLocalListsAtomic(mainData: MainData?)
     {
+        val addLocalListsUseCase: AddLocalListsUseCase = AddLocalListsUseCase(mainInterfaceImpl)
+        addLocalListsUseCase.execute(mainData?.dataLists)
     }
 
-    fun addLocalChats()
+    fun getLocalListsAtomic(): ArrayList<DataList?>?
     {
+        val getLocalListsUseCase: GetLocalListsUseCase = GetLocalListsUseCase(mainInterfaceImpl)
+        return getLocalListsUseCase.execute()
     }
 
-    fun getLocalChat()
+    fun addLocalChatsAtomic(mainData: MainData?)
     {
+        val addLocalChatsUseCase: AddLocalChatsUseCase = AddLocalChatsUseCase(mainInterfaceImpl)
+        addLocalChatsUseCase.execute(mainData?.chats)
+    }
+
+    fun getLocalChatsAtomic(): ArrayList<Chat?>?
+    {
+        val getLocalChatsUseCase: GetLocalChatsUseCase = GetLocalChatsUseCase(mainInterfaceImpl)
+        return getLocalChatsUseCase.execute()
+    }
+
+
+    //SOCKET METHODS
+    //LISTS' METHODS
+    override fun socketInit(vararg bSocket: Socket)
+    {
+        val mainSocketInitUseCase: MainSocketInitUseCase = MainSocketInitUseCase(mainInterfaceImpl)
+        mainSocketInitUseCase.execute(bSocket[0])
+        invokeSocket()
     }
 
     fun addList(name: String)
@@ -139,5 +138,11 @@ class MainViewModel: ViewModel(), ViewModelInterface
                 chatsData)
             getChatUseCase.execute(chatSocketCallbackImpl)
         }
+    }
+
+    fun invokeSocket()
+    {
+        getList()
+        getChat()
     }
 }

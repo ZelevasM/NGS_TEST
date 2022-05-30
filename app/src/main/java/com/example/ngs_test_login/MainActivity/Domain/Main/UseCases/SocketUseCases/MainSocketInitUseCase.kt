@@ -1,4 +1,4 @@
-package com.example.ngs_test_login.MainActivity.Domain.Main.UseCases
+package com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases
 
 import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
 import io.socket.client.Socket

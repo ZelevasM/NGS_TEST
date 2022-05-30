@@ -5,34 +5,37 @@ import kotlin.collections.List
 
 data class DataList(
     @field:SerializedName("date")
-    val date: String? = null,
+    var date: String? = null,
 
     @field:SerializedName("author")
-    val author: String? = null,
+    var author: String? = null,
 
     @field:SerializedName("color")
-    val color: String? = null,
+    var color: String? = null,
 
     @field:SerializedName("__v")
-    val V: Int? = null,
+    var V: Int? = null,
 
     @field:SerializedName("name")
-    val name: String? = null,
+    var name: String? = null,
 
     @field:SerializedName("order_by")
-    val orderBy: String? = null,
+    var orderBy: String? = null,
+
+    @field:SerializedName("order")
+    var order: Int? = null,
 
     @field:SerializedName("_id")
-    val id: String? = null,
+    var id: String? = null,
 
     @field:SerializedName("users")
-    val users: List<ListUser?>? = null,
+    var users: ArrayList<ListUser?>? = null,
 
     @field:SerializedName("sections")
-    val sections: List<ListSection?>? = null,
+    var sections: ArrayList<ListSection?>? = null,
 
     @field:SerializedName("tasks")
-    val tasks: List<Task?>? = null)
+    var tasks: ArrayList<Task?>? = null)
 {
 
 }

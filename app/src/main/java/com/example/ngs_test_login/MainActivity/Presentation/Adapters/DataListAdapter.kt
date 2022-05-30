@@ -55,6 +55,10 @@ class DataListAdapter(private val lists: ArrayList<DataList?>?): RecyclerView.Ad
         holder.iconTextView.text = firstLetter.toString()
         holder.titleTextView.text = currentList?.name
         holder.tasksTextView.text = currentList?.tasks?.size.toString()
+        if(holder.tasksTextView.text == "null")
+        {
+            holder.tasksTextView.text = "0"
+        }
     }
 
     override fun getItemCount(): Int

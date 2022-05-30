@@ -71,15 +71,6 @@ class UsersTableManager(): UserLocalProviderInterface
             showSidebar = ConvertStringToBoolean(sidebar.toString()).convert(),
             diskSpace = diskSpace, expandSubtask = ConvertStringToBoolean(expandSubtask.toString()).convert(),
             newTask = ConvertStringToBoolean(newTask.toString()).convert(), shortcutInbox = shortInbox)
-//        user?.name = name
-//        user?.id = id
-//        user?.email = email
-//        user?.language = language
-//        user?.showSidebar = ConvertStringToBoolean(sidebar.toString()).convert()
-//        user?.diskSpace = diskSpace
-//        user?.expandSubtask = ConvertStringToBoolean(expandSubtask.toString()).convert()
-//        user?.newTask = ConvertStringToBoolean(newTask.toString()).convert()
-//        user?.shortcutInbox = shortInbox
         return user
     }
 

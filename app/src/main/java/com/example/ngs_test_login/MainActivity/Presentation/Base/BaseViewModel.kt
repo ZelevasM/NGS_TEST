@@ -69,7 +69,9 @@ class BaseViewModel(private val mainViewModel: MainViewModel,
             val getDataUseCase = GetDataUseCase(baseInterfaceImpl)
             val mainData: MainData? = getDataUseCase.execute()
             //change or delete
-            mainViewModel.dataEstablisher(mainData)
+            mainViewModel.addLocalListsAtomic(mainData)
+            mainViewModel.addLocalChatsAtomic(mainData)
+            mainViewModel.dataAtomicAssigner()
 
             userViewModel.addLocalUserAtomic(mainData)
             userViewModel.dataAtomicAssigner()

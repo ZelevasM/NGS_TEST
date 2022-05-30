@@ -31,7 +31,7 @@ class UsersDateFormatsTableManager: DateFormatLocalProviderInterface
     @SuppressLint("Range")
     fun read(user: User?,db: SQLiteDatabase?): User?
     {
-        val cursor = db?.query(UsersFoldersListsTable.FOLDERS_LISTS_TABLE_NAME,
+        val cursor = db?.query(UsersDateFormatsTable.TABLE_NAME,
             null,
             null,
             null,

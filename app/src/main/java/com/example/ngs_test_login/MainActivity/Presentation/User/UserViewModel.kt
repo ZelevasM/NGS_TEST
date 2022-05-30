@@ -102,7 +102,6 @@ class UserViewModel: ViewModel(), ViewModelInterface
             //userLocalDbProvider.getDiskSpace(db=null)
             //write data to local storage
         }
-
     }
 
     fun addLocalUserAtomic(mainData: MainData?)

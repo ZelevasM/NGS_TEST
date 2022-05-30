@@ -3,11 +3,15 @@ package com.example.ngs_test_login.MainActivity.Data.Main
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalChatsDb.ChatsDatabaseManager
+import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalListsDb.ListsDatabaseManager
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ChatSocket
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListSocket
 import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ChatSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ListSocketCallbackInterface
+import com.example.ngs_test_login.MainActivity.Domain.Models.Chat
+import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
 import io.socket.client.Socket
 
 class MainInterfaceImpl: MainInterface
@@ -18,6 +22,10 @@ class MainInterfaceImpl: MainInterface
     private lateinit var chatSocket: ChatSocket
 
     //Local DB
+    private var dataLists: ArrayList<DataList?>? = null
+    private var chats: ArrayList<DataList?>? = null
+    private var listsDatabaseManager: ListsDatabaseManager? = null
+    private var chatsDatabaseManager: ChatsDatabaseManager? = null
 
     override fun socketInit(bSocket: Socket)
     {
@@ -28,12 +36,36 @@ class MainInterfaceImpl: MainInterface
 
     override fun localDbInit(context: Context)
     {
-
+        listsDatabaseManager = ListsDatabaseManager(context)
+        listsDatabaseManager?.openDb()
+        chatsDatabaseManager = ChatsDatabaseManager(context)
+        chatsDatabaseManager?.openDb()
     }
 
     override fun localDbClose()
     {
+        listsDatabaseManager?.closeDb()
+        chatsDatabaseManager?.closeDb()
+    }
 
+    override fun addLocalLists(dataLists: ArrayList<DataList?>?)
+    {
+        listsDatabaseManager?.writeToDb(dataLists)
+    }
+
+    override fun getLocalLists(): ArrayList<DataList?>?
+    {
+        return listsDatabaseManager?.readFromDb()
+    }
+
+    override fun addLocalChats(chats: ArrayList<Chat?>?)
+    {
+        chatsDatabaseManager?.writeToDb(chats)
+    }
+
+    override fun getLocalChats(): ArrayList<Chat?>?
+    {
+        return chatsDatabaseManager?.readFromDb()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

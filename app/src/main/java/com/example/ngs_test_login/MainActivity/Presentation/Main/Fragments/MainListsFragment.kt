@@ -1,5 +1,6 @@
 package com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -42,8 +43,6 @@ class MainListsFragment: Fragment()
     {
         nullIcon = view.findViewById(R.id.lists_imageView)
         nullText = view.findViewById(R.id.textView_lists_warn)
-
-
         var lists: ArrayList<DataList?>?
         var adapter: DataListAdapter
         listRecView = view.findViewById(R.id.listRecView)
@@ -60,10 +59,10 @@ class MainListsFragment: Fragment()
                     Toast.makeText(activity,"$position + $id" ,Toast.LENGTH_SHORT).show()
                 }
             })
-
             nullIcon.visibility = View.GONE
             nullText.visibility = View.GONE
         })
+
 
     }
 }

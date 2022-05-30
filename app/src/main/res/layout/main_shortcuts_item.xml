@@ -30,6 +30,7 @@
                     android:layout_height="wrap_content"
 
                     android:text="S"
+                    android:textColor="@color/white"
                     android:textSize="56sp" />
             </RelativeLayout>
 

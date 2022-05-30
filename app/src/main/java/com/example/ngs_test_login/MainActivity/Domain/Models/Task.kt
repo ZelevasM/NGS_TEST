@@ -4,41 +4,41 @@ import com.google.gson.annotations.SerializedName
 
 data class Task(
     @field:SerializedName("assign")
-    val assign: TaskAssign? = null,
+    var assign: TaskAssign? = null,
 
     @field:SerializedName("done")
-    val done: Boolean? = null,
-
-    @field:SerializedName("notes")
-    val notes: String? = null,
+    var done: Boolean? = null,
 
     @field:SerializedName("_id")
-    val id: String? = null,
+    var id: String? = null,
+
+    @field:SerializedName("notes")
+    var notes: String? = null,
 
     @field:SerializedName("name")
-    val name: String? = null,
+    var name: String? = null,
 
     @field:SerializedName("order")
-    val order: Int? = null,
+    var order: Int? = null,
 
     @field:SerializedName("auth")
-    val auth: String? = null,
+    var auth: String? = null,
 
     @field:SerializedName("users")
-    val users: List<ListUser?>? = null,
+    var users: List<ListUser?>? = null,
 
     @field:SerializedName("parent")
-    val parent: String? = null,
+    var parent: String? = null,
 
     @field:SerializedName("date")
-    val date: String? = null,
+    var date: String? = null,
 
     @field:SerializedName("messages")
-    val messages: List<TaskMessage?>? = null,
+    var messages: ArrayList<TaskMessage?>? = null,
 
     @field:SerializedName("section")
-    val section: String? = null,
+    var section: String? = null,
 
     @field:SerializedName("priority")
-    val priority: String? = null)
+    var priority: String? = null)
 {}
