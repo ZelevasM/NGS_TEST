@@ -24,6 +24,7 @@ class MainFragment: Fragment()
     private lateinit var actionBar: MaterialToolbar
     private lateinit var actionBarLayout: AppBarLayout
     private lateinit var addButton: Button
+    //private lateinit var actionBarProfileButton: MenuItem
     //private lateinit var action: NavDirections
 
     override fun onCreate(savedInstanceState: Bundle?)

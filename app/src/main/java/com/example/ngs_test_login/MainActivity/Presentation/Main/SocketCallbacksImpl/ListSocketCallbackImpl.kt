@@ -9,10 +9,38 @@ class ListSocketCallbackImpl(private var lists: ArrayList<DataList?>?,
                              private var listsData: MutableLiveData<ArrayList<DataList?>?>):
     ListSocketCallbackInterface
 {
-    override fun onChanged(list: DataList)
+    override fun onAdded(list: DataList)
     {
         lists?.add(list)
         listsData.postValue(lists)
         Log.d("MyLog","List ADDDEEED")
+    }
+
+    override fun onUpdated(list: DataList)
+    {
+        for(i in lists?.indices!!)
+        {
+            if(list.id == lists!![i]?.id)
+            {
+                lists!![i]?.name = list.name
+                break
+            }
+        }
+        listsData.postValue(lists)
+        Log.d("MyLog","List UPDATEEED")
+    }
+
+    override fun onDeleted(list: DataList)
+    {
+        for(i in lists?.indices!!)
+        {
+            if(list.id == lists!![i]?.id)
+            {
+                lists?.removeAt(i)
+                break
+            }
+        }
+        listsData.postValue(lists)
+        Log.d("MyLog","List DELETEEED")
     }
 }

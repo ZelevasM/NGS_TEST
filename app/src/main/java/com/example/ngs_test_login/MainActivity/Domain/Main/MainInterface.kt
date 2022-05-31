@@ -11,8 +11,7 @@ import io.socket.client.Socket
 
 interface MainInterface
 {
-    fun socketInit(bSocket: Socket)
-
+    //LocalDB's Methods
     fun localDbInit(context: Context)
 
     fun localDbClose()
@@ -25,7 +24,30 @@ interface MainInterface
 
     fun getLocalChats(): ArrayList<Chat?>?
 
+    fun addLocalList(dataList: DataList)
+
+    fun updateLocalList(dataList: DataList)
+
+    fun deleteLocalList(dataList: DataList)
+
+    fun getLocalList(dataList: DataList)
+
+    fun addLocalChat()
+
+    fun updateLocalChat()
+
+    fun deleteLocalChat()
+
+    fun getLocalChat()
+
+    //Sockets' Methods
+    fun socketInit(bSocket: Socket)
+
     fun addList(name: String)
+
+    fun updateList(id: String, newName: String)
+
+    fun deleteList(id: String)
 
     fun getList(listSocketCallbackInterface: ListSocketCallbackInterface)
 

@@ -25,6 +25,22 @@ class ListSocket(private val mSocket: Socket)
         mSocket.emit(event, socketList)
     }
 
+    fun updateList(id: String, newName: String)
+    {
+        val socketSendList: SocketSendList = SocketSendList(name = newName, id = id)
+        val socketList: JSONObject = ConvertClassToJson(socketSendList).convert()
+        val event: String = "IN_ProjectRename"
+        mSocket.emit(event, socketList)
+    }
+
+    fun deleteList(id: String)
+    {
+        val socketSendList: SocketSendList = SocketSendList(id = id)
+        val socketList: JSONObject = ConvertClassToJson(socketSendList).convert()
+        val event: String = "IN_ProjectDelete"
+        mSocket.emit(event, socketList)
+    }
+
     fun getList(listSocketCallbackInterface: ListSocketCallbackInterface)
     {
         var serializerSocket: SocketDataSerializer<DataList>
@@ -40,7 +56,27 @@ class ListSocket(private val mSocket: Socket)
             args->
                 Log.d("MyLog","GOT LIST: ${args[0]}")
                 serializerSocket = SocketDataSerializer(args[0] as JSONObject, list.javaClass)
-                listSocketCallbackInterface.onChanged(serializerSocket.doSerialization())
+                listSocketCallbackInterface.onAdded(serializerSocket.doSerialization())
         }
+
+        mSocket.on("OUT_ProjectRename")
+        {
+                args->
+            Log.d("MyLog","GOT LIST UPDATE: ${args[0]}")
+            serializerSocket = SocketDataSerializer(args[0] as JSONObject, list.javaClass)
+            listSocketCallbackInterface.onUpdated(serializerSocket.doSerialization())
+        }
+
+        mSocket.on("OUT_ProjectDelete")
+        {
+                args->
+            Log.d("MyLog","GOT LIST DELETE: ${args[0]}")
+            serializerSocket = SocketDataSerializer(args[0] as JSONObject, list.javaClass)
+            listSocketCallbackInterface.onDeleted(serializerSocket.doSerialization())
+        }
+
+        //onUpdated
+        //onDeleted
+        //change methods inside of callbackInterfaceAccordingly
     }
 }

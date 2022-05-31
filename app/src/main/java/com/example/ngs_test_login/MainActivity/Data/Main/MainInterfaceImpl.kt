@@ -22,8 +22,8 @@ class MainInterfaceImpl: MainInterface
     private lateinit var chatSocket: ChatSocket
 
     //Local DB
-    private var dataLists: ArrayList<DataList?>? = null
-    private var chats: ArrayList<DataList?>? = null
+    private var dataLists: ArrayList<DataList?>? = ArrayList()
+    private var chats: ArrayList<DataList?>? = ArrayList()
     private var listsDatabaseManager: ListsDatabaseManager? = null
     private var chatsDatabaseManager: ChatsDatabaseManager? = null
 
@@ -55,7 +55,8 @@ class MainInterfaceImpl: MainInterface
 
     override fun getLocalLists(): ArrayList<DataList?>?
     {
-        return listsDatabaseManager?.readFromDb()
+        dataLists = listsDatabaseManager?.readFromDb()
+        return dataLists
     }
 
     override fun addLocalChats(chats: ArrayList<Chat?>?)
@@ -68,10 +69,60 @@ class MainInterfaceImpl: MainInterface
         return chatsDatabaseManager?.readFromDb()
     }
 
+    override fun addLocalList(dataList: DataList)
+    {
+        listsDatabaseManager?.addLocalList(dataList, dataLists)
+    }
+
+    override fun updateLocalList(dataList: DataList)
+    {
+        listsDatabaseManager?.updateLocalList(dataList, dataLists)
+    }
+
+    override fun deleteLocalList(dataList: DataList)
+    {
+        listsDatabaseManager?.deleteLocalList(dataList, dataLists)
+    }
+
+    override fun getLocalList(dataList: DataList)
+    {
+        listsDatabaseManager?.getLocalList(dataList, dataLists)
+    }
+
+    override fun addLocalChat()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateLocalChat()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteLocalChat()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLocalChat()
+    {
+        TODO("Not yet implemented")
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun addList(name: String)
     {
         listSocket.addList(name)
+    }
+
+    override fun updateList(id: String,newName: String)
+    {
+        listSocket.updateList(id, newName)
+    }
+
+    override fun deleteList(id: String)
+    {
+        listSocket.deleteList(id)
     }
 
     override fun getList(listSocketCallbackInterface: ListSocketCallbackInterface)

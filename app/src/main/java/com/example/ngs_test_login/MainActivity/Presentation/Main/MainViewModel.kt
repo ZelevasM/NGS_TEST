@@ -30,7 +30,6 @@ class MainViewModel: ViewModel(), ViewModelInterface
 
     private var lists: ArrayList<DataList?>? = null
     private var chats: ArrayList<Chat?>? = null
-    private var user: User? = null
 
     private val mainInterfaceImpl = MainInterfaceImpl()
 
@@ -102,6 +101,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
         val mainSocketInitUseCase: MainSocketInitUseCase = MainSocketInitUseCase(mainInterfaceImpl)
         mainSocketInitUseCase.execute(bSocket[0])
         invokeSocket()
+        //updateList("AyUxNpkglkxyBdazZCaMh2I=", "AAAAAQQQQQQQQQQQQ")
     }
 
     fun addList(name: String)
@@ -109,6 +109,22 @@ class MainViewModel: ViewModel(), ViewModelInterface
         viewModelScope.launch(Dispatchers.IO) {
             val addListUseCase: AddListUseCase = AddListUseCase(mainInterfaceImpl)
             addListUseCase.execute(name)
+        }
+    }
+
+    fun updateList(id: String, newName: String)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            val updateListUseCase: UpdateListUseCase = UpdateListUseCase(mainInterfaceImpl)
+            updateListUseCase.execute(id, newName)
+        }
+    }
+
+    fun deleteList(id: String)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            val deleteListsUseCase: DeleteListUseCase = DeleteListUseCase(mainInterfaceImpl)
+            deleteListsUseCase.execute(id)
         }
     }
 

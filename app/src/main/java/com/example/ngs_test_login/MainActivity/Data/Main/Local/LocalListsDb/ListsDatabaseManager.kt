@@ -9,9 +9,10 @@ import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalListsDb.Tabl
 import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalListsDb.TableManagers.ListsTasksMessagesTableManager
 import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalListsDb.TableManagers.ListsUsersTableManager
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.TableManagers.*
+import com.example.ngs_test_login.MainActivity.Domain.Main.ListsLocalDbProviderInterface
 import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
 
-class ListsDatabaseManager(private val context: Context)
+class ListsDatabaseManager(private val context: Context): ListsLocalDbProviderInterface
 {
     private val listsDatabaseHelper: ListsDatabaseHelper = ListsDatabaseHelper(context)
     private var mDb: SQLiteDatabase? = null
@@ -60,4 +61,21 @@ class ListsDatabaseManager(private val context: Context)
         //close db helper
         listsDatabaseHelper.close()
     }
+
+    override fun addLocalList(dataList: DataList,dataLists: ArrayList<DataList?>?)
+    {
+        listsTableManager
+        listsTasksTableManager
+        listsTasksMessagesTableManager
+        listsUsersTableManager
+    }
+
+    override fun updateLocalList(dataList: DataList,dataLists: ArrayList<DataList?>?)
+    {}
+
+    override fun deleteLocalList(dataList: DataList,dataLists: ArrayList<DataList?>?)
+    {}
+
+    override fun getLocalList(dataList: DataList,dataLists: ArrayList<DataList?>?)
+    {}
 }

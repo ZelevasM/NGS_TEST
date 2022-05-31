@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity()
                 Toast.makeText(this,"LOST CONNECTION", Toast.LENGTH_SHORT).show()
                 //lock UI elements, in fragments
             }
-
         })
         //mainViewModel.socketInit()
     }

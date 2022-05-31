@@ -5,5 +5,9 @@ import com.example.ngs_test_login.MainActivity.Domain.Models.SocketList
 
 interface ListSocketCallbackInterface
 {
-    fun onChanged(list: DataList)
+    fun onAdded(list: DataList)
+
+    fun onUpdated(list: DataList)
+
+    fun onDeleted(list: DataList)
 }
