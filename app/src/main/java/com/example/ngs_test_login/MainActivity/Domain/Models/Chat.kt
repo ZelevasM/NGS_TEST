@@ -22,12 +22,12 @@ data class Chat(
     val name: String? = null,
 
     @field:SerializedName("messages")
-    var messages: ArrayList<ChatMessage?>? = null,
+    var messages: ArrayList<ChatMessage?>? = ArrayList(),
 
     @field:SerializedName("_id")
     val id: String? = null,
 
     @field:SerializedName("users")
-    val users: ArrayList<ListUser?>? = null)
+    val users: ArrayList<ListUser?>? = ArrayList())
 {}
 

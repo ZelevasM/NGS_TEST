@@ -16,7 +16,7 @@ data class ChatMessage(
     val read: Boolean? = null,
 
     @field:SerializedName("files")
-    val files: List<Any?>? = null,
+    val files: ArrayList<Any?>? = ArrayList(),
 
     @field:SerializedName("reply")
     val reply: String? = null,

@@ -59,6 +59,13 @@ class MainListsFragment: Fragment()
                     Toast.makeText(activity,"$position + $id" ,Toast.LENGTH_SHORT).show()
                 }
             })
+            adapter.setOnItemLongClickListener(object: DataListAdapter.onItemLongClickListener{
+                override fun onItemLongClicked(position: Int,id: String?)
+                {
+                    super.onItemLongClicked(position,id)
+                    Toast.makeText(activity,"$position + $id" ,Toast.LENGTH_SHORT).show()
+                }
+            })
             nullIcon.visibility = View.GONE
             nullText.visibility = View.GONE
         })

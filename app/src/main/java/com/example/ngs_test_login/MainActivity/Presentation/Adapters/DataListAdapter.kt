@@ -10,12 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
 import com.example.ngs_test_login.R
 
-class DataListAdapter(private val lists: ArrayList<DataList?>?): RecyclerView.Adapter<DataListAdapter.ListViewHolder>()
+class DataListAdapter(private val lists: ArrayList<DataList?>?):
+    RecyclerView.Adapter<DataListAdapter.ListViewHolder>()
 {
     private lateinit var clickListener: onItemClickListener
+    private lateinit var clickLongListener: onItemLongClickListener
     interface onItemClickListener
     {
         fun onItemClicked(position: Int,id: String?){}
+    }
+
+    interface onItemLongClickListener
+    {
+        fun onItemLongClicked(position: Int, id: String?){}
     }
 
     fun setOnItemClickListener(listener: onItemClickListener)
@@ -23,12 +30,22 @@ class DataListAdapter(private val lists: ArrayList<DataList?>?): RecyclerView.Ad
         clickListener = listener
     }
 
-    class ListViewHolder(itemView: View,listener: onItemClickListener,lists: ArrayList<DataList?>?): RecyclerView.ViewHolder(itemView)
+    fun setOnItemLongClickListener(longListener: onItemLongClickListener)
+    {
+        clickLongListener = longListener
+    }
+
+    class ListViewHolder(itemView: View,listener: onItemClickListener, longListener: onItemLongClickListener,
+                         lists: ArrayList<DataList?>?): RecyclerView.ViewHolder(itemView)
     {
         init
         {
             itemView.setOnClickListener {
                 listener.onItemClicked(adapterPosition, lists?.get(adapterPosition)?.id)
+            }
+            itemView.setOnLongClickListener {
+                longListener.onItemLongClicked(adapterPosition, lists?.get(adapterPosition)?.name)
+                true
             }
         }
         val iconBackground: RelativeLayout = itemView.findViewById(R.id.list_item_cardView_mainIcon_layout)
@@ -39,8 +56,9 @@ class DataListAdapter(private val lists: ArrayList<DataList?>?): RecyclerView.Ad
 
     override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): ListViewHolder
     {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.main_lists_item, parent, false)
-        return ListViewHolder(itemView, clickListener, lists)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.main_lists_item,
+            parent, false)
+        return ListViewHolder(itemView, clickListener, clickLongListener, lists)
     }
 
     override fun onBindViewHolder(holder: ListViewHolder,position: Int)

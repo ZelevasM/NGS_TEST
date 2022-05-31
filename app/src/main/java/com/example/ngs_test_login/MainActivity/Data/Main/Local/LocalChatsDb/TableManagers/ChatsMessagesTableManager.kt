@@ -44,7 +44,6 @@ class ChatsMessagesTableManager
         var message: String? = null
         var read: String? = null
 
-        val chatMessages: ArrayList<ChatMessage?> = ArrayList()
         var chatMessage: ChatMessage? = null
         while (cursor?.moveToNext() == true)
         {
@@ -64,22 +63,15 @@ class ChatsMessagesTableManager
             {
                 for (i in chats.indices)
                 {
-                    if(chats[i]?.messages?.indices !=null)
+                    if (chats[i]?.id == key)
                     {
-                        for (j in chats[i]?.messages?.indices!!)
-                        {
-                            if (chats[i]?.id == key)
-                            {
-                                chatMessage = ChatMessage(id = id,
-                                    userId = userId,
-                                    date = date,
-                                    reply = reply,
-                                    message = message,
-                                    read = read.toBoolean())
-                                chatMessages.add(chatMessage)
-                                chats[i]?.messages = chatMessages
-                            }
-                        }
+                        chatMessage = ChatMessage(id = id,
+                            userId = userId,
+                            date = date,
+                            reply = reply,
+                            message = message,
+                            read = read.toBoolean())
+                        chats[i]?.messages?.add(chatMessage)
                     }
                 }
             }

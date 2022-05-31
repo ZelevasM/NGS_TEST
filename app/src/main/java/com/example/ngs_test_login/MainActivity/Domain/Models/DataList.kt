@@ -29,13 +29,13 @@ data class DataList(
     var id: String? = null,
 
     @field:SerializedName("users")
-    var users: ArrayList<ListUser?>? = null,
+    var users: ArrayList<ListUser?>? = ArrayList(),
 
     @field:SerializedName("sections")
-    var sections: ArrayList<ListSection?>? = null,
+    var sections: ArrayList<ListSection?>? = ArrayList(),
 
     @field:SerializedName("tasks")
-    var tasks: ArrayList<Task?>? = null)
+    var tasks: ArrayList<Task?>? = ArrayList())
 {
 
 }
