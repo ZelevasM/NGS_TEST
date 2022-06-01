@@ -1,4 +1,4 @@
-package com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments
+package com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainAddFragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle

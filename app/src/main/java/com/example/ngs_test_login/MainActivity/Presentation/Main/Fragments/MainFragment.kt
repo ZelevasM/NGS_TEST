@@ -65,6 +65,7 @@ class MainFragment: Fragment()
         navController.addOnDestinationChangedListener {
                 controller, destination, arguments ->
             actionBar.title = navController.currentDestination?.label
+            actionBar.isTitleCentered = true
         }
 
         addButton = view.findViewById(R.id.button_add)

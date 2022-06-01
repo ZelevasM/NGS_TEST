@@ -15,10 +15,13 @@
         <action
             android:id="@+id/action_mainFragment3_to_mainProfileFragment"
             app:destination="@id/mainProfileFragment" />
+        <action
+            android:id="@+id/action_mainFragment3_to_mainListHostFragment"
+            app:destination="@id/mainListHostFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainAddFragment"
-        android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainAddFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainAddFragments.MainAddFragment"
         android:label="MainAddFragment"
         tools:layout="@layout/fragment_main_add"/>
     <fragment
@@ -43,4 +46,9 @@
         android:name="com.example.ngs_test_login.MainActivity.Presentation.User.Fragments.MainProfileUserSettingsFragment"
         android:label="MainProfileUserSettings"
         tools:layout="@layout/fragment_profile_user_settings"/>
+    <fragment
+        android:id="@+id/mainListHostFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainListHostFragment"
+        android:label="MainListHostFragment"
+        tools:layout="@layout/fragment_main_list_host"/>
 </navigation>

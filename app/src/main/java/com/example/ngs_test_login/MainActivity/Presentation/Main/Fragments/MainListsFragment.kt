@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
@@ -58,9 +59,10 @@ class MainListsFragment: Fragment()
                 {
                     super.onItemClicked(position, id)
                     Toast.makeText(activity,"$position + $id" ,Toast.LENGTH_SHORT).show()
-//                    val host: Int = R.id.main_activity_nav_host_fragment
-//                    val destination: Int = R.id.mainAddFragment
-//                    requireActivity().findNavController(host).navigate(destination)
+                    val host: Int = R.id.main_activity_nav_host_fragment
+                    val destination: Int = R.id.mainListHostFragment
+                    requireActivity().findNavController(host).navigate(destination)
+
                 }
             })
             adapter.setOnItemLongClickListener(object: DataListAdapter.onItemLongClickListener{
