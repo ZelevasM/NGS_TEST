@@ -36,6 +36,12 @@
 
     //Main Add
     <string name="add_new">Add new</string>
+    <string name="add_list">Add List</string>
+    <string name="add_chat">Add Chat</string>
+
+    //Main List
+    <string name="users">Users</string>
+    <string name="sort">Sort Out</string>
 
     //Profile
     <string name="gen_settings">General Settings</string>

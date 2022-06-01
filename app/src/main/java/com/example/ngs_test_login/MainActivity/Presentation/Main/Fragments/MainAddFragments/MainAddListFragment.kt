@@ -15,6 +15,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.R
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 
 class MainAddListFragment: Fragment()
 {
@@ -24,8 +28,11 @@ class MainAddListFragment: Fragment()
     private lateinit var createList: Button
     private lateinit var cancelButton: Button
 
-    private lateinit var navHost: NavHostFragment
-    private lateinit var navController: NavController
+
+//
+//    private lateinit var actionBar: MaterialToolbar
+//    private lateinit var actionBarLayout: AppBarLayout
+//    private lateinit var navHost: NavHostFragment
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?) : View?
     {
@@ -46,6 +53,7 @@ class MainAddListFragment: Fragment()
         addMemberButton = view.findViewById(R.id.main_add_list_add_button)
         createList = view.findViewById(R.id.main_add_list_create_button)
         cancelButton = view.findViewById(R.id.main_add_list_cancel_button)
+
         val host: Int = R.id.main_activity_nav_host_fragment
         val destination: Int = R.id.mainFragment3
 
@@ -69,6 +77,22 @@ class MainAddListFragment: Fragment()
             requireActivity().findNavController(host).popBackStack(destination, true)
             requireActivity().findNavController(host).navigate(destination)
         }
+
+
+//        navHost = childFragmentManager.findFragmentById(R.id.main_add_nav_host_fragment) as NavHostFragment
+//
+//        actionBar = requireActivity().findViewById(R.id.main_add_topAppBar)
+//
+////        val host: Int = R.id.main_activity_nav_host_fragment
+////        val destination: Int = R.id.mainFragment3
+//        actionBar.setOnMenuItemClickListener {
+//            if(it.itemId == R.id.action_done)
+//            {
+//                requireActivity().findNavController(host).popBackStack(destination, true)
+//                requireActivity().findNavController(host).navigate(destination)
+//            }
+//            true
+//        }
     }
 
     private fun verifyName(name: String): Boolean

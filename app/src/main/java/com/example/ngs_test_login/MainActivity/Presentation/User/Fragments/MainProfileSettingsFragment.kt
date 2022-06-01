@@ -10,9 +10,13 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
+import com.example.ngs_test_login.MainActivity.Presentation.User.SettingsBaseSpinner
 import com.example.ngs_test_login.MainActivity.Presentation.User.UserViewModel
 import com.example.ngs_test_login.R
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.MaterialToolbar
 
 class MainProfileSettingsFragment: Fragment()
 {
@@ -26,6 +30,8 @@ class MainProfileSettingsFragment: Fragment()
     private lateinit var weekStartSpinner: Spinner
     private lateinit var expandSubtaskSpinner: Spinner
     private lateinit var newTaskSpinner: Spinner
+    private lateinit var actionBar: MaterialToolbar
+    private lateinit var actionBarLayout: AppBarLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -126,5 +132,18 @@ class MainProfileSettingsFragment: Fragment()
             else
                 newTaskSpinner.setSelection(1)
         })
+
+        actionBarLayout = view.findViewById(R.id.profile_toolbar_layout)
+        actionBar = view.findViewById(R.id.profile_toolbar)
+        actionBar.isTitleCentered = true
+        actionBar.title = "General Settings"
+//        val host: Int = R.id.main_activity_nav_host_fragment
+//        val destination: Int = R.id.mainFragment3
+        actionBar.setNavigationOnClickListener {
+//            requireActivity().findNavController(host).popBackStack(destination,true)
+//            requireActivity().findNavController(host).navigate(destination)
+            findNavController().popBackStack()
+            findNavController().navigate(R.id.mainProfileFragment)
+        }
     }
 }

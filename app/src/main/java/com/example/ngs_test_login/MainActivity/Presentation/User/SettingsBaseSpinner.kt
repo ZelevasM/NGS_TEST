@@ -1,4 +1,4 @@
-package com.example.ngs_test_login.MainActivity.Presentation.User.Fragments
+package com.example.ngs_test_login.MainActivity.Presentation.User
 
 import android.content.Context
 import android.view.View
@@ -6,8 +6,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import com.example.ngs_test_login.MainActivity.Presentation.User.UserViewModel
-import com.example.ngs_test_login.R
 
 class SettingsBaseSpinner(private val spinner: Spinner,private val array: Array<String>,private val context: Context?)
 {

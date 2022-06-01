@@ -17,7 +17,7 @@ class DataListAdapter(private val lists: ArrayList<DataList?>?):
     private lateinit var clickLongListener: onItemLongClickListener
     interface onItemClickListener
     {
-        fun onItemClicked(position: Int,id: String?){}
+        fun onItemClicked(position: Int,id: String?, name: String?){}
     }
 
     interface onItemLongClickListener
@@ -41,7 +41,8 @@ class DataListAdapter(private val lists: ArrayList<DataList?>?):
         init
         {
             itemView.setOnClickListener {
-                listener.onItemClicked(adapterPosition, lists?.get(adapterPosition)?.id)
+                listener.onItemClicked(adapterPosition, lists?.get(adapterPosition)?.id,
+                lists?.get(adapterPosition)?.name)
             }
             itemView.setOnLongClickListener {
                 longListener.onItemLongClicked(adapterPosition, lists?.get(adapterPosition)?.name)

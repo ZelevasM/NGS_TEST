@@ -7,10 +7,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.MainActivity.Presentation.User.UserViewModel
 import com.example.ngs_test_login.R
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.MaterialToolbar
 
 class MainProfileFragment: Fragment()
 {
@@ -21,6 +24,8 @@ class MainProfileFragment: Fragment()
     private lateinit var userSettings: LinearLayout
     private lateinit var userName: TextView
     private lateinit var userEmail: TextView
+    private lateinit var actionBar: MaterialToolbar
+    private lateinit var actionBarLayout: AppBarLayout
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -45,7 +50,7 @@ class MainProfileFragment: Fragment()
         genSettings.setOnClickListener{
             findNavController().navigate(R.id.action_mainProfileFragment_to_mainProfileSettingsFragment)
         }
-        userSettings = view.findViewById(R.id.profile_main_info_layout)
+        userSettings = view.findViewById(R.id.main_profile_info_layout)
         userSettings.setOnClickListener {
             findNavController().navigate(R.id.action_mainProfileFragment_to_mainProfileUserSettings)
         }
@@ -57,5 +62,16 @@ class MainProfileFragment: Fragment()
         userViewModel.userEmailLiveData.observe(viewLifecycleOwner, Observer {
             userEmail.text = it
         })
+
+        actionBarLayout = view.findViewById(R.id.main_profile_toolbar_layout)
+        actionBar = view.findViewById(R.id.main_profile_toolbar)
+        actionBar.isTitleCentered = true
+        actionBar.title = "Settings"
+        val host: Int = R.id.main_activity_nav_host_fragment
+        val destination: Int = R.id.mainFragment3
+        actionBar.setNavigationOnClickListener {
+            requireActivity().findNavController(host).popBackStack(destination,true)
+            requireActivity().findNavController(host).navigate(destination)
+        }
     }
 }

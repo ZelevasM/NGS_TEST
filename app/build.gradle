@@ -56,7 +56,7 @@ dependencies {
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
-    //activity and fragments
+    //Activity and Fragments
     def activity_version = "1.4.0"
     implementation "androidx.activity:activity-ktx:$activity_version"
     def fragment_version = "1.4.1"
@@ -74,4 +74,9 @@ dependencies {
     //Socket
     def socket_version = "2.0.1"
     implementation "io.socket:socket.io-client:$socket_version"
+
+    //Room
+    def room_version = "2.4.2"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }

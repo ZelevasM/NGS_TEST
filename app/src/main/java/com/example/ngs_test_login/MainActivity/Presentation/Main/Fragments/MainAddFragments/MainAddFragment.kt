@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -52,6 +53,14 @@ class MainAddFragment: Fragment()
 
         actionBarLayout = view.findViewById(R.id.main_add_topAppBarLayout)
         actionBar = view.findViewById(R.id.main_add_topAppBar)
+        actionBar.isTitleCentered = true
+
+        val host: Int = R.id.main_activity_nav_host_fragment
+        val destination: Int = R.id.mainFragment3
+        actionBar.setNavigationOnClickListener {
+            requireActivity().findNavController(host).popBackStack(destination, true)
+            requireActivity().findNavController(host).navigate(destination)
+        }
 
         navController.addOnDestinationChangedListener{
             controller, destination, arguments->

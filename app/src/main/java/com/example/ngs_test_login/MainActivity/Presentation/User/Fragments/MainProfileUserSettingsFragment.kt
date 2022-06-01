@@ -8,10 +8,13 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.MainActivity.Presentation.User.UserViewModel
 import com.example.ngs_test_login.R
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.MaterialToolbar
 
 class MainProfileUserSettingsFragment: Fragment()
 {
@@ -25,6 +28,8 @@ class MainProfileUserSettingsFragment: Fragment()
     private lateinit var userEmailEditText: EditText
     private lateinit var userNameButton: Button
     private lateinit var userEmailButton: Button
+    private lateinit var actionBar: MaterialToolbar
+    private lateinit var actionBarLayout: AppBarLayout
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -72,5 +77,16 @@ class MainProfileUserSettingsFragment: Fragment()
                 Toast.makeText(context, "Enter Correctly!", Toast.LENGTH_SHORT).show()
         }
 
+        actionBarLayout = view.findViewById(R.id.profile_main_toolbar_layout)
+        actionBar = view.findViewById(R.id.profile_main_toolbar)
+        actionBar.isTitleCentered = true
+//        val host: Int = R.id.main_activity_nav_host_fragment
+//        val destination: Int = R.id.mainFragment3
+        actionBar.setNavigationOnClickListener {
+//            requireActivity().findNavController(host).popBackStack(destination,true)
+//            requireActivity().findNavController(host).navigate(destination)
+            findNavController().popBackStack()
+            findNavController().navigate(R.id.mainProfileFragment)
+        }
     }
 }

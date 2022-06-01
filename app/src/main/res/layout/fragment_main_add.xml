@@ -19,6 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:titleTextColor="@color/black"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:navigationIconTint="@color/black"
+            app:menu="@menu/action_bar_done_menu"
             style="@style/Widget.MaterialComponents.Toolbar.Primary" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -27,11 +30,11 @@
         android:id="@+id/main_add_navigation_bar"
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_below="@+id/main_add_topAppBarLayout"
         app:menu="@menu/top_navigation_menu"
-        android:paddingBottom="1dp"
-        android:clipToPadding="false"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="16dp"
         app:itemIconTint="@color/nav_item_selector_add_page"
         app:itemTextColor="@color/nav_item_selector_add_page"/>
 

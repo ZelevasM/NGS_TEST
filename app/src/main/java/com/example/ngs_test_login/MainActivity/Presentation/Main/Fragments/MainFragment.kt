@@ -3,6 +3,7 @@ package com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.*
@@ -53,6 +54,8 @@ class MainFragment: Fragment()
 
         actionBar = view.findViewById(R.id.topAppBar)
         actionBarLayout = view.findViewById(R.id.topAppBarLayout)
+        actionBar.isTitleCentered = true
+        //actionBar.menu.findItem(R.id.action_account).setIcon(R.drawable.ic_apple)
         actionBar.setOnMenuItemClickListener{
             if(it.itemId == R.id.action_account)
             {
@@ -65,9 +68,7 @@ class MainFragment: Fragment()
         navController.addOnDestinationChangedListener {
                 controller, destination, arguments ->
             actionBar.title = navController.currentDestination?.label
-            actionBar.isTitleCentered = true
         }
-
         addButton = view.findViewById(R.id.button_add)
         //action  = view.findViewById(R.id.action_mainFragment3_to_mainAddFragment)
         addButton.setOnClickListener {

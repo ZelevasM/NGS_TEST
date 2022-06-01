@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/main_list_toolbar_layout"
         android:layout_width="match_parent"
@@ -11,6 +11,10 @@
             android:id="@+id/main_list_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:titleTextColor="@color/black"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:navigationIconTint="@color/black"
+            app:menu="@menu/action_bar_list_menu"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
     </com.google.android.material.appbar.AppBarLayout>
     <LinearLayout
@@ -20,14 +24,27 @@
         android:orientation="vertical"
         android:layout_below="@+id/main_list_toolbar_layout"
         android:background="@color/light_pink">
-        <Button
-            android:id="@+id/main_list_add_task_button"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/main_list_add_task_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/semi_transparent_black"
-            android:backgroundTintMode="src_over"
-            android:text="@string/add_new"
-            android:layout_margin="8dp"/>
+            style="@style/Widget.NGS_Test_Login.TextInput"
+            android:focusableInTouchMode="true"
+            android:layout_margin="8dp"
+            android:hint="@string/add_new"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_add"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/black">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/main_list_add_task_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/add_new"
+                android:background="@color/semi_transparent_black"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
 </RelativeLayout>

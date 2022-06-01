@@ -31,6 +31,10 @@ class MainViewModel: ViewModel(), ViewModelInterface
     private var lists: ArrayList<DataList?>? = null
     private var chats: ArrayList<Chat?>? = null
 
+    //TODO Change
+    private var currentListName: String? = null
+    private var currentListID: String? = null
+
     private val mainInterfaceImpl = MainInterfaceImpl()
 
 
@@ -161,4 +165,15 @@ class MainViewModel: ViewModel(), ViewModelInterface
         getList()
         getChat()
     }
+
+    //UI methods
+    //TODO Change
+    fun setCurrentList(id: String?, name: String?)
+    {
+        currentListID = id
+        currentListName = name
+    }
+
+    fun getCurrentListName(): String?{return currentListName}
+    fun getCurrentListID(): String?{return currentListID}
 }

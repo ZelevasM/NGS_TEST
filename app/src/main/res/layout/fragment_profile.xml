@@ -5,183 +5,233 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/main_profile_toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/profile_main_info_cardView"
-        android:layout_margin="10dp">
-        <LinearLayout
+        app:elevation="0dp">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/main_profile_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/profile_main_info_layout"
-            android:orientation="horizontal"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:focusable="true">
-            <RelativeLayout
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:background="@color/light_blue">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="N"
-                    android:textSize="56sp" />
-            </RelativeLayout>
+            app:titleTextColor="@color/black"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:navigationIconTint="@color/black"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
+    </com.google.android.material.appbar.AppBarLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/main_profile_info_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/name"
-                    android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Heading" />
-
-                <TextView
-                    android:id="@+id/main_profile_info_email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/main_profile_info_name"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:text="@string/email"
-                    android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Small" />
-            </RelativeLayout>
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_forward_angled"
-                android:layout_weight="0.1"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/profile_options_cardView"
-        android:layout_below="@+id/profile_main_info_cardView"
-        android:layout_margin="10dp">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_below="@+id/main_profile_toolbar_layout">
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/profile_options_layout"
-            android:orientation="vertical">
+            android:id="@+id/profile_main_info_cardView"
+            android:layout_margin="10dp">
             <LinearLayout
-                android:id="@+id/main_profile_general_settings_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_profile_info_layout"
                 android:orientation="horizontal"
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:focusable="true">
-                <ImageView
+                <RelativeLayout
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:background="@color/light_blue">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="N"
+                        android:textSize="56sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:srcCompat = "@drawable/ic_settings"/>
-                <TextView
-                    android:id="@+id/main_profile_general_settings_TV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/gen_settings"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Normal"/>
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/main_profile_info_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/name"
+                        android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Heading" />
+
+                    <TextView
+                        android:id="@+id/main_profile_info_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/main_profile_info_name"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/email"
+                        android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Small" />
+                </RelativeLayout>
                 <ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:src="@drawable/ic_forward_angled"
                     android:layout_weight="0.1"/>
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="40dp"
-                android:background="@color/light_grey"/>
-
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_options_cardView"
+            android:layout_below="@+id/profile_main_info_cardView"
+            android:layout_margin="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:srcCompat = "@drawable/ic_backups"/>
-                <TextView
+                android:layout_height="wrap_content"
+                android:id="@+id/profile_options_layout"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/main_profile_general_settings_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/backups"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Normal"/>
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_forward_angled"
-                    android:layout_weight="0.1"/>
-            </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:focusable="true">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        app:srcCompat = "@drawable/ic_settings"/>
+                    <TextView
+                        android:id="@+id/main_profile_general_settings_TV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gen_settings"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Normal"/>
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_forward_angled"
+                        android:layout_weight="0.1"/>
+                </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="40dp"
-                android:background="@color/light_grey"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:srcCompat = "@drawable/ic_upgrade"/>
-                <TextView
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/upgrade"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Normal" />
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_forward_angled"
-                    android:layout_weight="0.1"/>
+                    android:layout_height="1dp"
+                    android:layout_marginStart="40dp"
+                    android:background="@color/light_grey"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        app:srcCompat = "@drawable/ic_backups"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/backups"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Normal"/>
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_forward_angled"
+                        android:layout_weight="0.1"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="40dp"
+                    android:background="@color/light_grey"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        app:srcCompat = "@drawable/ic_upgrade"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/upgrade"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Normal" />
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_forward_angled"
+                        android:layout_weight="0.1"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="40dp"
+                    android:background="@color/light_grey"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat = "@drawable/ic_notif"
+                        android:layout_margin="10dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/notifications"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Normal"/>
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_forward_angled"
+                        android:layout_weight="0.1"/>
+                </LinearLayout>
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="40dp"
-                android:background="@color/light_grey"/>
-
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_import_cardView"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/profile_options_cardView">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:gravity="center_vertical">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat = "@drawable/ic_notif"
+                    app:srcCompat = "@drawable/ic_import"
                     android:layout_margin="10dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/notifications"
+                    android:text="@string/imp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Normal"/>
@@ -191,37 +241,7 @@
                     android:src="@drawable/ic_forward_angled"
                     android:layout_weight="0.1"/>
             </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/profile_import_cardView"
-        android:layout_margin="10dp"
-        android:layout_below="@+id/profile_options_cardView">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat = "@drawable/ic_import"
-                android:layout_margin="10dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/imp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Normal"/>
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_forward_angled"
-                android:layout_weight="0.1"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
+    </RelativeLayout>
 </RelativeLayout>
