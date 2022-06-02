@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ConvertClassToJson
 import com.example.ngs_test_login.MainActivity.Data.User.Models.*
+import com.example.ngs_test_login.MainActivity.Domain.Models.Shortcut
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.*
 import io.socket.client.Socket
 import org.json.JSONObject
@@ -374,5 +375,28 @@ class UserSocket(private val mSocket: Socket)
             }
             //result = socketGeneralSetting.field
         }
+    }
+
+    fun changeShortcut(shortcuts: ArrayList<Shortcut?>?)
+    {
+        //val socketShortcuts: Array<Shortcut?>? = SocketShortcut(type)
+        val socketShortcutJson: ArrayList<JSONObject?> = ArrayList()
+        if(shortcuts !=null)
+        {
+            for (i in shortcuts.indices)
+            {
+                socketShortcutJson.add(ConvertClassToJson(shortcuts[i]).convert())
+            }
+        }
+        //val socketShortcutsJsonArray: Array<*>? = socketShortcutJson.toArray() as Array<*>?
+
+        val event: String = "IN_Shortcuts"
+        mSocket.emit(event, socketShortcutJson)
+        Log.d("MyLog","SHORTS: $socketShortcutJson")
+    }
+
+    fun onChangedShortcut(userShortcutsSocketCallbackInterface: UserShortcutsSocketCallbackInterface)
+    {
+
     }
 }

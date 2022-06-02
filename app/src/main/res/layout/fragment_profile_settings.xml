@@ -42,7 +42,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Language"
+                    android:text="@string/language"
                     android:textColor="@color/light_pink"
                     android:gravity="center_vertical"
                     android:layout_margin="10dp"
@@ -72,7 +72,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Homepage"
+                    android:text="@string/homepage"
                     android:textColor="@color/light_pink"
                     android:gravity="center_vertical"
                     android:layout_margin="10dp"
@@ -102,7 +102,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Date Format"
+                    android:text="@string/date_format"
                     android:textColor="@color/light_pink"
                     android:gravity="center_vertical"
                     android:layout_margin="10dp"
@@ -132,7 +132,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Time Format"
+                    android:text="@string/time_format"
                     android:textColor="@color/light_pink"
                     android:gravity="center_vertical"
                     android:layout_margin="10dp"
@@ -162,7 +162,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Week Start"
+                    android:text="@string/week_start"
                     android:textColor="@color/light_pink"
                     android:gravity="center_vertical"
                     android:layout_margin="10dp"
@@ -192,7 +192,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Expand Subtasks by Default"
+                    android:text="@string/expand_subtask"
                     android:textColor="@color/light_pink"
                     android:gravity="center_vertical"
                     android:layout_margin="10dp"
@@ -222,7 +222,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Add Tasks"
+                    android:text="@string/add_task"
                     android:textColor="@color/light_pink"
                     android:gravity="center_vertical"
                     android:layout_margin="10dp"

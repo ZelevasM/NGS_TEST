@@ -290,14 +290,23 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
+    fun changeShortcut(shortcuts: ArrayList<Shortcut?>?)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            ChangeShortcutUseCase(userInterfaceImpl).execute(shortcuts)
+        }
+    }
+
+    fun onChangedShortcut()
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            val userShortcutCallbackInterfaceImpl = UserShortcutsSocketCallbackImpl(shortcutsData)
+            OnChangedShortcutsUseCase(userInterfaceImpl).execute(userShortcutCallbackInterfaceImpl)
+        }
+    }
+
 
     //IRRELEVANT
-
-    fun changedShortcuts()
-    {}
-
-    fun onChangedShortcuts()
-    {}
 
     fun changeDiskSpace()
     {}
@@ -322,5 +331,6 @@ class UserViewModel: ViewModel(), ViewModelInterface
         onChangedStartOfWeek()
         onChangedExpandSubtask()
         onChangedNewTask()
+        onChangedShortcut()
     }
 }

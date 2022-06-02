@@ -22,6 +22,7 @@ class MainProfileFragment: Fragment()
 
     private lateinit var genSettings: LinearLayout
     private lateinit var userSettings: LinearLayout
+    private lateinit var shortcutsSettings: LinearLayout
     private lateinit var userName: TextView
     private lateinit var userEmail: TextView
     private lateinit var actionBar: MaterialToolbar
@@ -54,6 +55,12 @@ class MainProfileFragment: Fragment()
         userSettings.setOnClickListener {
             findNavController().navigate(R.id.action_mainProfileFragment_to_mainProfileUserSettings)
         }
+
+        shortcutsSettings = view.findViewById(R.id.main_profile_shortcuts_layout)
+        shortcutsSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_mainProfileFragment_to_mainProfileShortcutsFragment)
+        }
+
         userName = view.findViewById(R.id.main_profile_info_name)
         userEmail = view.findViewById(R.id.main_profile_info_email)
         userViewModel.userNameLiveData.observe(viewLifecycleOwner, Observer {
@@ -66,7 +73,7 @@ class MainProfileFragment: Fragment()
         actionBarLayout = view.findViewById(R.id.main_profile_toolbar_layout)
         actionBar = view.findViewById(R.id.main_profile_toolbar)
         actionBar.isTitleCentered = true
-        actionBar.title = "Settings"
+        actionBar.title = getString(R.string.settings)
         val host: Int = R.id.main_activity_nav_host_fragment
         val destination: Int = R.id.mainFragment3
         actionBar.setNavigationOnClickListener {

@@ -19,7 +19,7 @@
         <item name="android:fontFamily">@font/roboto_regular_family</item>
 
         <!-- View Styles -->
-        <item name="android:button">@style/Widget.NGS_Test_Login.Button</item>
+        <!--<item name="android:button">@style/Widget.NGS_Test_Login.Button</item> -->
         <!-- Customize your theme here. -->
     </style>
 

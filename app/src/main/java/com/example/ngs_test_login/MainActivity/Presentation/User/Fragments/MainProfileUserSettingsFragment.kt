@@ -80,6 +80,7 @@ class MainProfileUserSettingsFragment: Fragment()
         actionBarLayout = view.findViewById(R.id.profile_main_toolbar_layout)
         actionBar = view.findViewById(R.id.profile_main_toolbar)
         actionBar.isTitleCentered = true
+        actionBar.title = getString(R.string.user_settings)
 //        val host: Int = R.id.main_activity_nav_host_fragment
 //        val destination: Int = R.id.mainFragment3
         actionBar.setNavigationOnClickListener {

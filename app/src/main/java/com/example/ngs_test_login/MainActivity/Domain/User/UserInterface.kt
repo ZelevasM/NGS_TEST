@@ -1,6 +1,7 @@
 package com.example.ngs_test_login.MainActivity.Domain.User
 
 import android.content.Context
+import com.example.ngs_test_login.MainActivity.Domain.Models.Shortcut
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.*
 import io.socket.client.Socket
@@ -52,4 +53,8 @@ interface UserInterface: UserLocalProviderInterface, DateFormatLocalProviderInte
     fun changeNewTask(newTask: String?)
 
     fun onChangedNewTask(userNewTaskSocketCallbackInterface: UserNewTaskSocketCallbackInterface)
+
+    fun changeShortcut(shortcuts: ArrayList<Shortcut?>?)
+
+    fun onChangedShortcut(userShortcutsSocketCallbackInterface: UserShortcutsSocketCallbackInterface)
 }

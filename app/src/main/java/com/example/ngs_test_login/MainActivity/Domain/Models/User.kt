@@ -44,6 +44,4 @@ data class User(
 
     @field:SerializedName("homepage")
     var homepage: HomePage? = null)
-{
-
-}
+{}

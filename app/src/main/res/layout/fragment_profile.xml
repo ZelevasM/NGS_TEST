@@ -210,6 +210,36 @@
                         android:src="@drawable/ic_forward_angled"
                         android:layout_weight="0.1"/>
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="40dp"
+                    android:background="@color/light_grey"/>
+
+                <LinearLayout
+                    android:id="@+id/main_profile_shortcuts_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        app:srcCompat = "@drawable/ic_settings_shortcuts"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shortcuts"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.NGS_Profile.TextAppearance.Normal"/>
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_forward_angled"
+                        android:layout_weight="0.1"/>
+                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

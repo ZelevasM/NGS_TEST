@@ -13,4 +13,10 @@
     <color name="light_grey">#F0F0F0</color>
     <color name="light_blue">#489CDC</color>
     <color name="semi_transparent_black">#5E000000</color>
+    //shortcuts' colors
+    <color name="dark_blue">#6CB2CE</color>
+    <color name="dark_green">#6DA67A</color>
+    <color name="dark_orange">#E1B26B</color>
+    <color name="lime_yellow">#CFC569</color>
+    <color name="grapefruit_red">#FF6361</color>
 </resources>

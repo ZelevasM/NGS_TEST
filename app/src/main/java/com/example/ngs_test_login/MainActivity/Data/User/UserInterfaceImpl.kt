@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.UsersDatabaseManager
 import com.example.ngs_test_login.MainActivity.Data.User.Web.UserSocket
+import com.example.ngs_test_login.MainActivity.Domain.Models.Shortcut
 import com.example.ngs_test_login.MainActivity.Domain.Models.User
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.*
 import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
@@ -46,6 +47,8 @@ class UserInterfaceImpl: UserInterface
         mUser = usersDatabaseManager?.readFromDb()
         return mUser
     }
+
+    //USER SETTINGS
 
     override fun changeName(name: String?)
     {
@@ -137,7 +140,17 @@ class UserInterfaceImpl: UserInterface
         userSocket.onChangedNewTask(userNewTaskSocketCallbackInterface)
     }
 
-    //USER SETTINGS
+    override fun changeShortcut(shortcuts: ArrayList<Shortcut?>?)
+    {
+        userSocket.changeShortcut(shortcuts)
+    }
+
+    override fun onChangedShortcut(userShortcutsSocketCallbackInterface: UserShortcutsSocketCallbackInterface)
+    {
+       userSocket.onChangedShortcut(userShortcutsSocketCallbackInterface)
+    }
+
+    //USER LOCAL SETTINGS
 
     override fun saveName(vararg user: User?,db: SQLiteDatabase?,name: String?)
     {
@@ -159,7 +172,7 @@ class UserInterfaceImpl: UserInterface
         return usersDatabaseManager?.getEmail(mUser, db = null)
     }
 
-    //USER GENERAL SETTINGS
+    //USER LOCAL GENERAL SETTINGS
 
     override fun saveLanguage(vararg user: User?,db: SQLiteDatabase?,language: String?)
     {
@@ -232,7 +245,7 @@ class UserInterfaceImpl: UserInterface
     }
 
 
-    //IRRELEVANT
+    //IRRELEVANT LOCAL
 
     override fun saveShortcutInbox(vararg user: User?,db: SQLiteDatabase?)
     {

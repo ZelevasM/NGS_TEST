@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_mainProfileFragment_to_mainProfileUserSettings"
             app:destination="@id/mainProfileUserSettings" />
+        <action
+            android:id="@+id/action_mainProfileFragment_to_mainProfileShortcutsFragment"
+            app:destination="@id/mainProfileShortcutsFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainProfileSettingsFragment"
@@ -51,4 +54,9 @@
         android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainListHostFragment"
         android:label="MainListHostFragment"
         tools:layout="@layout/fragment_main_list_host"/>
+    <fragment
+        android:id="@+id/mainProfileShortcutsFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.User.Fragments.MainProfileShortcutsFragment"
+        android:label="MainProfileShortcutsFragment"
+        tools:layout="@layout/fragment_profile_shortcuts"/>
 </navigation>

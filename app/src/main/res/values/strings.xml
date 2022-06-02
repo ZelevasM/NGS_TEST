@@ -44,39 +44,25 @@
     <string name="sort">Sort Out</string>
 
     //Profile
+    <string name="settings">Settings</string>
     <string name="gen_settings">General Settings</string>
+    <string name="user_settings">User Settings</string>
     <string name="backups">Backups</string>
     <string name="upgrade">Upgrade</string>
     <string name="imp">Import</string>
 
     //Profile General Settings
-
-    //Profile General Settings Menus
-    <string-array name="language_menu">
-        <item>English</item>
-    </string-array>
-    <string-array name="homepage_menu">
-        <item>Today</item>
-        <item>Inbox</item>
-    </string-array>
-    <string-array name="date_format_menu">
-        <item>DD/MM/YYYY</item>
-        <item>MM/DD/YYYY</item>
-    </string-array>
-    <string-array name="time_format_menu">
-        <item>1:00 PM</item>
-        <item>13:00</item>
-    </string-array>
-    <string-array name="week_start_menu">
-        <item>Monday</item>
-        <item>Sunday</item>
-    </string-array>
-    <string-array name="expand_subtask_menu">
-        <item>Enabled</item>
-        <item>Disabled</item>
-    </string-array>
-    <string-array name="new_task_menu">
-        <item>Top</item>
-        <item>Bottom</item>
-    </string-array>
+    <string name="language">Language</string>
+    <string name="homepage">Homepage</string>
+    <string name="date_format">Date Format</string>
+    <string name="time_format">Time Format</string>
+    <string name="week_start">Week Start</string>
+    <string name="expand_subtask">Expand Subtasks by Default</string>
+    <string name="add_task">Add Task</string>
+    //Shortcuts
+    <string name="inbox">Inbox</string>
+    <string name="today">Today</string>
+    <string name="assigned_to_me">Assigned to Me</string>
+    <string name="high_priority">High Priority</string>
+    <string name="medium_priority">Medium Priority</string>
 </resources>
