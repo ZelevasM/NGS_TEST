@@ -3,8 +3,8 @@ package com.example.ngs_test_login.MainActivity.Data.User.Web
 import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ConvertClassToJson
-import com.example.ngs_test_login.MainActivity.Data.User.Models.SocketGeneralSetting
-import com.example.ngs_test_login.MainActivity.Data.User.Models.SocketOutMessage
+import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.SocketGeneralSetting
+import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.SocketOutMessage
 import io.socket.client.Socket
 import org.json.JSONObject
 

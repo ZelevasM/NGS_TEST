@@ -1,18 +1,18 @@
 package com.example.ngs_test_login.MainActivity.Presentation.User.Validators
 
 import android.util.Log
-import com.example.ngs_test_login.MainActivity.Data.User.Models.ShortcutWeb
+import com.example.ngs_test_login.MainActivity.Domain.User.Models.Shortcut
 
 class ShortcutValidator
 {
-    fun validateIncomingShortcut(shortcutWebs: ArrayList<ShortcutWeb?>?): Boolean
+    fun validateIncomingShortcut(shortcuts: ArrayList<Shortcut?>?): Boolean
     {
         var checker: Boolean = false
-        if (shortcutWebs != null)
+        if (shortcuts != null)
         {
-            if (shortcutWebs.size == 0)
+            if (shortcuts.size == 0)
             {
-                Log.d("MyLog","Shorts are empty: $shortcutWebs")
+                Log.d("MyLog","Shorts are empty: $shortcuts")
             }
             else
             {

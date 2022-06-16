@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class SaveLocalUserLanguageUseCase(private val userInterface: UserInterface)
+class SaveLocalUserLanguageUseCase(private val userRepository: UserRepository)
 {
     fun execute(language: String?)
     {
-        userInterface.saveLanguage(null, db = null, language = language)
+        userRepository.saveLanguage(null, db = null, language = language)
     }
 }

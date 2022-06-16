@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Switch
 import androidx.core.content.ContextCompat
-import com.example.ngs_test_login.MainActivity.Data.User.Models.ShortcutWeb
+import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.ShortcutWeb
 import com.example.ngs_test_login.R
 
 class ShortcutsStateChecker(private val switches: ArrayList<Switch?>?, private val context: Context)

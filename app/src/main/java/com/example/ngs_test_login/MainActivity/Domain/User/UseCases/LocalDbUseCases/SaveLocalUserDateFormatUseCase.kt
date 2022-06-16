@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class SaveLocalUserDateFormatUseCase(private val userInterface: UserInterface)
+class SaveLocalUserDateFormatUseCase(private val userRepository: UserRepository)
 {
     fun execute(dateFormat: String?)
     {
-        userInterface.saveDateFormat(db = null, dateFormat = dateFormat)
+        userRepository.saveDateFormat(db = null, dateFormat = dateFormat)
     }
 }

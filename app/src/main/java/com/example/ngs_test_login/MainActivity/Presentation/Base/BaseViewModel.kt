@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ngs_test_login.MainActivity.Data.Base.BaseInterfaceImpl
+import com.example.ngs_test_login.MainActivity.Data.Base.BaseRepositoryImpl
 import com.example.ngs_test_login.MainActivity.Domain.Base.UseCases.BaseSocketInitUseCase
 import com.example.ngs_test_login.MainActivity.Domain.Base.UseCases.GetDataUseCase
 import com.example.ngs_test_login.MainActivity.Domain.Base.Models.MainData
@@ -23,7 +23,7 @@ class BaseViewModel(private val mainViewModel: MainViewModel,
     private val responseData: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val responseLiveData: LiveData<Boolean> = responseData
 
-    private val baseInterfaceImpl: BaseInterfaceImpl = BaseInterfaceImpl()
+    private val baseInterfaceImpl: BaseRepositoryImpl = BaseRepositoryImpl()
 
     private fun baseSocketInit()
     {

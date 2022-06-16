@@ -28,7 +28,7 @@ abstract class ChatsDatabase: RoomDatabase()
 
             synchronized(this)
             {
-                val instance = Room.databaseBuilder(context.applicationContext, ChatsDatabase::class.java, "user_database").build()
+                val instance = Room.databaseBuilder(context.applicationContext, ChatsDatabase::class.java, "chats_database").build()
                 INSTANCE = instance
                 return instance
             }

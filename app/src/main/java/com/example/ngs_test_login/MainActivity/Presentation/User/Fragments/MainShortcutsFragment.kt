@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ngs_test_login.MainActivity.Data.User.Models.ShortcutWeb
+import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.ShortcutWeb
 import com.example.ngs_test_login.MainActivity.Presentation.Adapters.ShortcutAdapter
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.MainActivity.Presentation.User.UserViewModel

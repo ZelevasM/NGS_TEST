@@ -8,21 +8,21 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Cha
 @Entity(tableName = "chats_table")
 data class ChatsEntity(
     @PrimaryKey(autoGenerate = false)
-    val id: String,
+    var id: String,
 
-    val name: String? = null,
+    var name: String? = null,
 
-    val auth: String? = null,
+    var auth: String? = null,
 
-    val date: String? = null,
+    var date: String? = null,
 
-    val color: String? = null,
+    var color: String? = null,
 
-    val projectId: String? = null,
+    var projectId: String? = null,
 
-    val messages: ArrayList<ChatMessage?>? = ArrayList(),
+    var messages: ArrayList<ChatMessage?>? = null,
 
-    val users: ArrayList<ChatUser?>? = ArrayList(),
+    var users: ArrayList<ChatUser?>? = null,
 
-    val V: Int? = null)
+    var V: Int? = null)
 {}

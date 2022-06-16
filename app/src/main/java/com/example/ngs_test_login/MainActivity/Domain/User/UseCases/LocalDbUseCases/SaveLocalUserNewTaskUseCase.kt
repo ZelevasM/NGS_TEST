@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class SaveLocalUserNewTaskUseCase(private val userInterface: UserInterface)
+class SaveLocalUserNewTaskUseCase(private val userRepository: UserRepository)
 {
     fun execute(newTask: String?)
     {
-        userInterface.saveNewTask(null, db = null, newTask = newTask)
+        userRepository.saveNewTask(null, db = null, newTask = newTask)
     }
 }

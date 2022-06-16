@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ngs_test_login.MainActivity.Data.User.Models.ShortcutWeb
+import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.ShortcutWeb
 import com.example.ngs_test_login.R
 
 class ShortcutAdapter(private val shortcutWebs: ArrayList<ShortcutWeb?>?): RecyclerView.Adapter<ShortcutAdapter.ShortcutViewHolder>()

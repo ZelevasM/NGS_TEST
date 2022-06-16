@@ -11,7 +11,7 @@ interface ListsDao
     fun insertAllLists(dataLists: ArrayList<ListsEntity?>?)
 
     @Query("SELECT * FROM lists_table")
-    fun getAllLists(): ArrayList<ListsEntity?>?
+    fun getAllLists(): List<ListsEntity?>?
 
     @Insert(onConflict = REPLACE)
     fun insertList(dataList: ListsEntity?)

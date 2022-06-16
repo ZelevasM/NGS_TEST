@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class SaveLocalUserTimeFormatUseCase(private val userInterface: UserInterface)
+class SaveLocalUserTimeFormatUseCase(private val userRepository: UserRepository)
 {
     fun execute(timeFormat: String?)
     {
-        return userInterface.saveTimeFormat(db = null, timeFormat = timeFormat)
+        return userRepository.saveTimeFormat(db = null, timeFormat = timeFormat)
     }
 }

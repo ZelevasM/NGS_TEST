@@ -1,12 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Presentation.User.SocketCallbacksImpl
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserDateFormatSocketCallbackInterface
-import com.example.ngs_test_login.MainActivity.Presentation.User.LocalDbProviders.UserLocalProvider
+import com.example.ngs_test_login.MainActivity.Presentation.User.LocalDbProviders.User
 
 class UserDateFormatSocketCallbackInterfaceImpl(private val dateFormatData: MutableLiveData<String?>,
-                                                private val userLocalDbProvider: UserLocalProvider):
+                                                private val userLocalDbProvider: User):
     UserDateFormatSocketCallbackInterface
 {
     override fun onChanged(date: String?)

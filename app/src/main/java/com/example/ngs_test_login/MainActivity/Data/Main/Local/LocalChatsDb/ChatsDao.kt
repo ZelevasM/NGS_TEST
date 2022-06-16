@@ -11,7 +11,7 @@ interface ChatsDao
     fun insertAllChats(chats: ArrayList<ChatsEntity?>?)
 
     @Query("SELECT * FROM chats_table")
-    fun getAllChats(): ArrayList<ChatsEntity?>?
+    fun getAllChats(): List<ChatsEntity?>?
 
     @Insert(onConflict = REPLACE)
     fun insertChat(chat: ChatsEntity?)

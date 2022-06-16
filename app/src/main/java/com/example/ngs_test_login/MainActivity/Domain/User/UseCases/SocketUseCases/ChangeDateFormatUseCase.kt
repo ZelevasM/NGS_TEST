@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.SocketUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class ChangeDateFormatUseCase(private val userInterface: UserInterface)
+class ChangeDateFormatUseCase(private val userRepository: UserRepository)
 {
     fun execute(dateFormat: String?)
     {
-        userInterface.changeDateFormat(dateFormat)
+        userRepository.changeDateFormat(dateFormat)
     }
 }

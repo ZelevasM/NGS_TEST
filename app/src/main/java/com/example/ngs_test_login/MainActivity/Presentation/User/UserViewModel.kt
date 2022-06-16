@@ -6,16 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ngs_test_login.MainActivity.Data.User.UserInterfaceImpl
+import com.example.ngs_test_login.MainActivity.Data.User.UserRepositoryImpl
 import com.example.ngs_test_login.MainActivity.Domain.Base.Models.MainData
-import com.example.ngs_test_login.MainActivity.Data.User.Models.ShortcutWeb
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.LocalUserDbCloseUseCase
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.LocalUserDbInitUseCase
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.AddLocalUserUseCase
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.GetLocalUserUseCase
-import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.SocketUseCases.*
-import com.example.ngs_test_login.MainActivity.Presentation.User.LocalDbProviders.UserLocalProvider
 import com.example.ngs_test_login.MainActivity.Presentation.User.SocketCallbacksImpl.*
 import com.example.ngs_test_login.MainActivity.Presentation.User.Validators.ShortcutValidator
 import com.example.ngs_test_login.MainActivity.Presentation.ViewModelInterface
@@ -57,8 +54,8 @@ class UserViewModel: ViewModel(), ViewModelInterface
     private val userNewTaskData = MutableLiveData<String?>()
     val userNewTaskLiveData: LiveData<String?> = userNewTaskData
 
-    private val userInterfaceImpl: UserInterfaceImpl = UserInterfaceImpl()
-    private val userLocalDbProvider: UserLocalProvider = UserLocalProvider(userInterfaceImpl)
+    private val userInterfaceImpl: UserRepositoryImpl = UserRepositoryImpl()
+    private val userLocalDbProvider: com.example.ngs_test_login.MainActivity.Presentation.User.LocalDbProviders.User = com.example.ngs_test_login.MainActivity.Presentation.User.LocalDbProviders.User(userInterfaceImpl)
 
     override fun socketInit(vararg bSocket: Socket)
     {
@@ -89,16 +86,16 @@ class UserViewModel: ViewModel(), ViewModelInterface
         {
             shortcutsData.postValue(shortcutWebs)
             //load user settings
-            userNameData.postValue(userLocalDbProvider.getName(db=null))
-            userEmailData.postValue(userLocalDbProvider.getEmail(db=null))
+            userNameData.postValue(userLocalDbProvider.getName())
+            userEmailData.postValue(userLocalDbProvider.getEmail())
             //load general settings
-            userLanguageData.postValue(userLocalDbProvider.getLanguage(db=null))
-            userHomepageData.postValue(userLocalDbProvider.getHomepage(db=null))
-            userDateFormatData.postValue(userLocalDbProvider.getDateFormat(db=null))
-            userTimeFormatData.postValue(userLocalDbProvider.getTimeFormat(db=null))
-            userWeekStartData.postValue(userLocalDbProvider.getStartOfWeek(db = null))
-            userSubtaskData.postValue(userLocalDbProvider.getExpandSubtask(db=null))
-            userNewTaskData.postValue(userLocalDbProvider.getNewTask(db=null))
+            userLanguageData.postValue(userLocalDbProvider.getLanguage())
+            userHomepageData.postValue(userLocalDbProvider.getHomepage())
+            userDateFormatData.postValue(userLocalDbProvider.getDateFormat())
+            userTimeFormatData.postValue(userLocalDbProvider.getTimeFormat())
+            userWeekStartData.postValue(userLocalDbProvider.getStartOfWeek())
+            userSubtaskData.postValue(userLocalDbProvider.getExpandSubtask())
+            userNewTaskData.postValue(userLocalDbProvider.getNewTask())
             //userLocalDbProvider.getDiskSpace(db=null)
             //write data to local storage
         }
@@ -106,9 +103,9 @@ class UserViewModel: ViewModel(), ViewModelInterface
 
     fun addLocalUserAtomic(mainData: MainData?)
     {
-        val userWeb: UserWeb? = mainData?.userWeb
+        val user: com.example.ngs_test_login.MainActivity.Domain.User.Models.User? = mainData?.user
         val addLocalUserUseCase: AddLocalUserUseCase = AddLocalUserUseCase(userInterfaceImpl)
-        addLocalUserUseCase.execute(userWeb)
+        addLocalUserUseCase.execute(user)
     }
 
     fun getLocalUserAtomic(): UserWeb?

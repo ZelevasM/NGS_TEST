@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class SaveLocalUserStartOfWeekUseCase(private val userInterface: UserInterface)
+class SaveLocalUserStartOfWeekUseCase(private val userRepository: UserRepository)
 {
     fun execute(startOfWeek: String?)
     {
-        userInterface.saveStartOfWeek(db = null, startOfWeek = startOfWeek)
+        userRepository.saveStartOfWeek(db = null, startOfWeek = startOfWeek)
     }
 }

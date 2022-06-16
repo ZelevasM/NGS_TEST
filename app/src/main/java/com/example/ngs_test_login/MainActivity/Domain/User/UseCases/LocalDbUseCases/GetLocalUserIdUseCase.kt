@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class GetLocalUserIdUseCase(private val userInterface: UserInterface)
+class GetLocalUserIdUseCase(private val userRepository: UserRepository)
 {
     fun execute(): String?
     {
-        return userInterface.getId(db = null)
+        return userRepository.getId(db = null)
     }
 }

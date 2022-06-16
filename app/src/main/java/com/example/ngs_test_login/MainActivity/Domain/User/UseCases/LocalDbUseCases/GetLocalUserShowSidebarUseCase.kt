@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class GetLocalUserShowSidebarUseCase(private val userInterface: UserInterface)
+class GetLocalUserShowSidebarUseCase(private val userRepository: UserRepository)
 {
     fun execute(): String?
     {
-       return userInterface.getShowSidebar(db=null)
+       return userRepository.getShowSidebar(db=null)
     }
 }

@@ -1,12 +1,12 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.SocketUseCases
 
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserShortcutsSocketCallbackInterface
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class OnChangedShortcutsUseCase(private val userInterface: UserInterface)
+class OnChangedShortcutsUseCase(private val userRepository: UserRepository)
 {
     fun execute(userShortcutsSocketCallbackInterface: UserShortcutsSocketCallbackInterface)
     {
-        userInterface.onChangedShortcut(userShortcutsSocketCallbackInterface)
+        userRepository.onChangedShortcut(userShortcutsSocketCallbackInterface)
     }
 }

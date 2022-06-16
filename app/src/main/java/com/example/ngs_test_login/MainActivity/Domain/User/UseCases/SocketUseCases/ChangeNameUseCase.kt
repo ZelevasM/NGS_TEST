@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.SocketUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class ChangeNameUseCase(private val userInterface: UserInterface)
+class ChangeNameUseCase(private val userRepository: UserRepository)
 {
     fun execute(name: String?)
     {
-        userInterface.changeName(name)
+        userRepository.changeName(name)
     }
 }

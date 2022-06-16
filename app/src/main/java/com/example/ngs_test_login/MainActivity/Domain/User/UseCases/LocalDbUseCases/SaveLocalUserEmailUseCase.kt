@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class SaveLocalUserEmailUseCase(private val userInterface: UserInterface)
+class SaveLocalUserEmailUseCase(private val userRepository: UserRepository)
 {
     fun execute(email: String?)
     {
-        userInterface.saveEmail(null,db = null,email = email)
+        userRepository.saveEmail(null,db = null,email = email)
     }
 }

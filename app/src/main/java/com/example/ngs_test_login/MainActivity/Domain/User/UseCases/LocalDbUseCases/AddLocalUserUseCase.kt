@@ -1,12 +1,12 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Models.User
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class AddLocalUserUseCase(private val userInterface: UserInterface)
+class AddLocalUserUseCase(private val userRepository: UserRepository)
 {
-    fun execute(userWeb: UserWeb?)
+    fun execute(user: User?)
     {
-        userInterface.addLocalUser(userWeb)
+        userRepository.addLocalUser(user)
     }
 }

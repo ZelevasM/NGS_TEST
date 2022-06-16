@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class SaveLocalUserExpandSubtaskUseCase(private val userInterface: UserInterface)
+class SaveLocalUserExpandSubtaskUseCase(private val userRepository: UserRepository)
 {
     fun execute(expandSubtask: String?)
     {
-        userInterface.saveExpandSubtask(null, db = null, expandSubtask = expandSubtask)
+        userRepository.saveExpandSubtask(null, db = null, expandSubtask = expandSubtask)
     }
 }

@@ -34,6 +34,8 @@ class ChatMapper: DoubleMapper<Chat?, ChatWeb?>
 
     override fun mapFromKTOT(value: ChatWeb?): Chat?
     {
+        if(value?.id == null)
+            throw Exception("No Id")
         val messages: ArrayList<ChatMessage?>? = ArrayList()
         if(value?.messages != null)
         {
@@ -50,6 +52,7 @@ class ChatMapper: DoubleMapper<Chat?, ChatWeb?>
                 users?.add(ChatUserMapper().mapFromKTOT(i))
             }
         }
+
         return Chat(id = value?.id, name = value?.name, auth = value?.auth, date = value?.date, color = value?.color,
             projectId = value?.projectId, V = value?.V, messages = messages, users = users)
     }

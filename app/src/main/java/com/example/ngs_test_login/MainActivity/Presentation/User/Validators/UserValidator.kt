@@ -1,14 +1,14 @@
 package com.example.ngs_test_login.MainActivity.Presentation.User.Validators
 
 import android.util.Log
-import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
+import com.example.ngs_test_login.MainActivity.Domain.User.Models.User
 
 class UserValidator
 {
-    fun validateIncomingUser(userWeb: UserWeb?): Boolean
+    fun validateIncomingUser(user: User?): Boolean
     {
         var checker: Boolean = false
-        if (userWeb != null)
+        if (user != null)
         {
             checker = true
             //Log.d("MyLog","User contain $user")

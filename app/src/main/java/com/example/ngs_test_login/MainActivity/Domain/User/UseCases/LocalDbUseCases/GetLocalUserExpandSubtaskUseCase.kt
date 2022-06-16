@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class GetLocalUserExpandSubtaskUseCase(private val userInterface: UserInterface)
+class GetLocalUserExpandSubtaskUseCase(private val userRepository: UserRepository)
 {
     fun execute(): String?
     {
-        return userInterface.getExpandSubtask(db=null)
+        return userRepository.getExpandSubtask(db=null)
     }
 }

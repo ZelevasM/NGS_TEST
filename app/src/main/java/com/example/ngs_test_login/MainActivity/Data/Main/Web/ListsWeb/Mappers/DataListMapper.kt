@@ -44,6 +44,8 @@ class DataListMapper: DoubleMapper<DataList?, DataListWeb?>
 
     override fun mapFromKTOT(value: DataListWeb?): DataList?
     {
+        if(value?.id == null)
+            throw Exception("No Id")
         val users: ArrayList<TaskUser?>? = ArrayList()
         if(value?.users != null)
         {
@@ -68,7 +70,7 @@ class DataListMapper: DoubleMapper<DataList?, DataListWeb?>
                 tasks?.add(TaskMapper().mapFromKTOT(i))
             }
         }
-        return DataList(id = value?.id, name = value?.id, date = value?.date, author = value?.author, color = value?.color, V = value?.V,
+        return DataList(id = value?.id!!, name = value?.id, date = value?.date, author = value?.author, color = value?.color, V = value?.V,
             orderBy = value?.orderBy, order = value?.order, users = users, sections = sections, tasks = tasks)
     }
 }

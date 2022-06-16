@@ -1,12 +1,12 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.SocketUseCases
 
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserNewTaskSocketCallbackInterface
-import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
-class OnChangedNewTaskUseCase(private val userInterface: UserInterface)
+class OnChangedNewTaskUseCase(private val userRepository: UserRepository)
 {
     fun execute(userNewTaskSocketCallbackInterface: UserNewTaskSocketCallbackInterface)
     {
-        userInterface.onChangedNewTask(userNewTaskSocketCallbackInterface)
+        userRepository.onChangedNewTask(userNewTaskSocketCallbackInterface)
     }
 }

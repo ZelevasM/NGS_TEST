@@ -2,10 +2,10 @@ package com.example.ngs_test_login.MainActivity.Presentation.User.SocketCallback
 
 import androidx.lifecycle.MutableLiveData
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserSubtaskSocketCallbackInterface
-import com.example.ngs_test_login.MainActivity.Presentation.User.LocalDbProviders.UserLocalProvider
+import com.example.ngs_test_login.MainActivity.Presentation.User.LocalDbProviders.User
 
 class UserSubtaskSocketCallbackInterfaceImpl(private val expandSubtask: MutableLiveData<String?>,
-                                        private val userLocalDbProvider: UserLocalProvider):
+                                        private val userLocalDbProvider: User):
     UserSubtaskSocketCallbackInterface
 {
     override fun onChanged(subTask: String?)
