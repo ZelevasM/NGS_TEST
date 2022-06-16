@@ -4,11 +4,10 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.UsersDatabaseManager
 import com.example.ngs_test_login.MainActivity.Data.User.Web.UserSocket
-import com.example.ngs_test_login.MainActivity.Domain.Models.Shortcut
-import com.example.ngs_test_login.MainActivity.Domain.Models.User
+import com.example.ngs_test_login.MainActivity.Data.User.Models.ShortcutWeb
+import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.*
 import com.example.ngs_test_login.MainActivity.Domain.User.UserInterface
-import com.example.ngs_test_login.MainActivity.Domain.User.UserLocalProviderInterface
 import io.socket.client.Socket
 
 class UserInterfaceImpl: UserInterface
@@ -17,7 +16,7 @@ class UserInterfaceImpl: UserInterface
     private lateinit var userSocket: UserSocket
     //Local DB
     private var usersDatabaseManager: UsersDatabaseManager? = null
-    private var mUser: User? = null
+    private var mUserWeb: UserWeb? = null
 
     override fun socketInit(bSocket: Socket)
     {
@@ -36,16 +35,16 @@ class UserInterfaceImpl: UserInterface
         usersDatabaseManager?.closeDb()
     }
 
-    override fun addLocalUser(user: User?)
+    override fun addLocalUser(userWeb: UserWeb?)
     {
         //test db
-        usersDatabaseManager?.writeToDb(user)
+        usersDatabaseManager?.writeToDb(userWeb)
     }
 
-    override fun getLocalUser(): User?
+    override fun getLocalUser(): UserWeb?
     {
-        mUser = usersDatabaseManager?.readFromDb()
-        return mUser
+        mUserWeb = usersDatabaseManager?.readFromDb()
+        return mUserWeb
     }
 
     //USER SETTINGS
@@ -140,9 +139,9 @@ class UserInterfaceImpl: UserInterface
         userSocket.onChangedNewTask(userNewTaskSocketCallbackInterface)
     }
 
-    override fun changeShortcut(shortcuts: ArrayList<Shortcut?>?)
+    override fun changeShortcut(shortcutWebs: ArrayList<ShortcutWeb?>?)
     {
-        userSocket.changeShortcut(shortcuts)
+        userSocket.changeShortcut(shortcutWebs)
     }
 
     override fun onChangedShortcut(userShortcutsSocketCallbackInterface: UserShortcutsSocketCallbackInterface)
@@ -152,138 +151,137 @@ class UserInterfaceImpl: UserInterface
 
     //USER LOCAL SETTINGS
 
-    override fun saveName(vararg user: User?,db: SQLiteDatabase?,name: String?)
+    override fun saveName(vararg userWeb: UserWeb?,db: SQLiteDatabase?,name: String?)
     {
-        usersDatabaseManager?.saveName(mUser,db=null,name = name)
+        usersDatabaseManager?.saveName(mUserWeb,db=null,name = name)
     }
 
-    override fun getName(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getName(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getName(mUser, db = null)
+        return usersDatabaseManager?.getName(mUserWeb, db = null)
     }
 
-    override fun saveEmail(vararg user: User?,db: SQLiteDatabase?,email: String?)
+    override fun saveEmail(vararg userWeb: UserWeb?,db: SQLiteDatabase?,email: String?)
     {
-        usersDatabaseManager?.saveEmail(mUser,db=null,email = email)
+        usersDatabaseManager?.saveEmail(mUserWeb,db=null,email = email)
     }
 
-    override fun getEmail(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getEmail(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getEmail(mUser, db = null)
+        return usersDatabaseManager?.getEmail(mUserWeb, db = null)
     }
 
     //USER LOCAL GENERAL SETTINGS
 
-    override fun saveLanguage(vararg user: User?,db: SQLiteDatabase?,language: String?)
+    override fun saveLanguage(vararg userWeb: UserWeb?,db: SQLiteDatabase?,language: String?)
     {
-        usersDatabaseManager?.saveLanguage(mUser,db=null,language = language)
+        usersDatabaseManager?.saveLanguage(mUserWeb,db=null,language = language)
     }
 
-    override fun getLanguage(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getLanguage(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getLanguage(mUser, db = null)
+        return usersDatabaseManager?.getLanguage(mUserWeb, db = null)
     }
 
-    override fun saveHomepage(vararg user: User?,db: SQLiteDatabase?,homepage: String?)
+    override fun saveHomepage(vararg userWeb: UserWeb?,db: SQLiteDatabase?,homepage: String?)
     {
-        usersDatabaseManager?.saveHomepage(mUser,db = null, homepage = homepage)
+        usersDatabaseManager?.saveHomepage(mUserWeb,db = null, homepage = homepage)
     }
 
-    override fun getHomepage(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getHomepage(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getHomepage(mUser,db = null)
+        return usersDatabaseManager?.getHomepage(mUserWeb,db = null)
     }
 
-    override fun saveDateFormat(vararg user: User?,db: SQLiteDatabase?,dateFormat: String?)
+    override fun saveDateFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?,dateFormat: String?)
     {
-        usersDatabaseManager?.saveDateFormat(mUser,db=null,dateFormat = dateFormat)
+        usersDatabaseManager?.saveDateFormat(mUserWeb,db=null,dateFormat = dateFormat)
     }
 
-    override fun getDateFormat(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getDateFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getDateFormat(mUser,db=null)
+        return usersDatabaseManager?.getDateFormat(mUserWeb,db=null)
     }
 
-    override fun saveTimeFormat(vararg user: User?,db: SQLiteDatabase?,timeFormat: String?)
+    override fun saveTimeFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?,timeFormat: String?)
     {
-        usersDatabaseManager?.saveTimeFormat(mUser,db = null, timeFormat = timeFormat)
+        usersDatabaseManager?.saveTimeFormat(mUserWeb,db = null, timeFormat = timeFormat)
     }
 
-    override fun getTimeFormat(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getTimeFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getTimeFormat(mUser,db = null)
+        return usersDatabaseManager?.getTimeFormat(mUserWeb,db = null)
     }
 
-    override fun saveStartOfWeek(vararg user: User?,db: SQLiteDatabase?,startOfWeek: String?)
+    override fun saveStartOfWeek(vararg userWeb: UserWeb?,db: SQLiteDatabase?,startOfWeek: String?)
     {
-        usersDatabaseManager?.saveStartOfWeek(mUser,db = null, startOfWeek = startOfWeek)
+        usersDatabaseManager?.saveStartOfWeek(mUserWeb,db = null, startOfWeek = startOfWeek)
     }
 
-    override fun getStartOfWeek(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getStartOfWeek(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getStartOfWeek(mUser,db = null)
+        return usersDatabaseManager?.getStartOfWeek(mUserWeb,db = null)
     }
 
-    override fun saveExpandSubtask(vararg user: User?,db: SQLiteDatabase?,expandSubtask: String?)
+    override fun saveExpandSubtask(vararg userWeb: UserWeb?,db: SQLiteDatabase?,expandSubtask: String?)
     {
-        usersDatabaseManager?.saveExpandSubtask(mUser,db=null,expandSubtask = expandSubtask)
+        usersDatabaseManager?.saveExpandSubtask(mUserWeb,db=null,expandSubtask = expandSubtask)
     }
 
-    override fun getExpandSubtask(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getExpandSubtask(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getExpandSubtask(mUser, db = null)
+        return usersDatabaseManager?.getExpandSubtask(mUserWeb, db = null)
     }
 
-    override fun saveNewTask(vararg user: User?,db: SQLiteDatabase?,newTask: String?)
+    override fun saveNewTask(vararg userWeb: UserWeb?,db: SQLiteDatabase?,newTask: String?)
     {
-        usersDatabaseManager?.saveNewTask(mUser,db=null,newTask = newTask)
+        usersDatabaseManager?.saveNewTask(mUserWeb,db=null,newTask = newTask)
     }
 
-    override fun getNewTask(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getNewTask(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getNewTask(mUser, db = null)
+        return usersDatabaseManager?.getNewTask(mUserWeb, db = null)
     }
-
 
     //IRRELEVANT LOCAL
 
-    override fun saveShortcutInbox(vararg user: User?,db: SQLiteDatabase?)
+    override fun saveShortcutInbox(vararg userWeb: UserWeb?,db: SQLiteDatabase?)
     {
         TODO("Not yet implemented")
     }
 
-    override fun getShortcutInbox(vararg user: User?)
+    override fun getShortcutInbox(vararg userWeb: UserWeb?)
     {
-        usersDatabaseManager?.getShortcutInbox(mUser)
+        usersDatabaseManager?.getShortcutInbox(mUserWeb)
     }
 
-    override fun saveId(vararg user: User?,db: SQLiteDatabase?)
+    override fun saveId(vararg userWeb: UserWeb?,db: SQLiteDatabase?)
     {
         TODO("Not yet implemented")
     }
 
-    override fun getId(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getId(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getId(mUser, db = null)
+        return usersDatabaseManager?.getId(mUserWeb, db = null)
     }
 
-    override fun saveShowSidebar(vararg user: User?,db: SQLiteDatabase?,sidebar: String?)
+    override fun saveShowSidebar(vararg userWeb: UserWeb?,db: SQLiteDatabase?,sidebar: String?)
     {
-        usersDatabaseManager?.saveShowSidebar(mUser,db=null,sidebar= sidebar)
+        usersDatabaseManager?.saveShowSidebar(mUserWeb,db=null,sidebar= sidebar)
     }
 
-    override fun getShowSidebar(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getShowSidebar(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getShowSidebar(mUser, db = null)
+        return usersDatabaseManager?.getShowSidebar(mUserWeb, db = null)
     }
 
-    override fun saveDiskSpace(vararg user: User?,db: SQLiteDatabase?,diskSpace: String?)
+    override fun saveDiskSpace(vararg userWeb: UserWeb?,db: SQLiteDatabase?,diskSpace: String?)
     {
-        usersDatabaseManager?.saveDiskSpace(mUser,db=null,diskSpace= diskSpace)
+        usersDatabaseManager?.saveDiskSpace(mUserWeb,db=null,diskSpace= diskSpace)
     }
 
-    override fun getDiskSpace(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getDiskSpace(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatabaseManager?.getDiskSpace(mUser, db = null)
+        return usersDatabaseManager?.getDiskSpace(mUserWeb, db = null)
     }
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ngs_test_login.MainActivity.Domain.Models.Chat
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Chat
 import com.example.ngs_test_login.R
 
 class ChatAdapter(private val chats: ArrayList<Chat?>?): RecyclerView.Adapter<ChatAdapter.ChatViewHolder>()
@@ -23,7 +23,7 @@ class ChatAdapter(private val chats: ArrayList<Chat?>?): RecyclerView.Adapter<Ch
         clickListener = listener
     }
 
-    class ChatViewHolder(itemView: View, listener: onItemClickListener, chats: ArrayList<Chat?>?): RecyclerView.ViewHolder(itemView)
+    class ChatViewHolder(itemView: View,listener: onItemClickListener,chats: ArrayList<Chat?>?): RecyclerView.ViewHolder(itemView)
     {
         init
         {

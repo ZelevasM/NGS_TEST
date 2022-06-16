@@ -4,16 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.ExpandableListView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
-import com.example.ngs_test_login.MainActivity.Presentation.Adapters.DataListAdapter
+import com.example.ngs_test_login.MainActivity.Presentation.Adapters.TasksExpandableListAdapter
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.R
 import com.google.android.material.appbar.AppBarLayout
@@ -22,7 +17,7 @@ import com.google.android.material.appbar.MaterialToolbar
 class MainListFragment: Fragment()
 {
     private val mainViewModel: MainViewModel by activityViewModels()
-    private lateinit var listRecView: RecyclerView
+    private lateinit var tasksList: ExpandableListView
     private lateinit var actionBar: MaterialToolbar
     private lateinit var actionBarLayout: AppBarLayout
 
@@ -51,5 +46,23 @@ class MainListFragment: Fragment()
             requireActivity().findNavController(host).popBackStack(destination,true)
             requireActivity().findNavController(host).navigate(destination)
         }
+        tasksList = view.findViewById(R.id.main_list_tasks_expandableListView)
+
+
+        //TESTING
+        val groups: ArrayList<String> = ArrayList()
+        val children: HashMap<String, ArrayList<String>> = HashMap()
+        for(i in 0 until 5)
+        {
+            groups.add("Task: $i")
+            val childrenArray = ArrayList<String>()
+            for(j in 0 until 5)
+            {
+                childrenArray.add("SubTask: $j")
+            }
+            children.put(groups[i], childrenArray)
+        }
+        val tasksListAdapter: TasksExpandableListAdapter = TasksExpandableListAdapter(requireContext(), groups, children)
+        tasksList.setAdapter(tasksListAdapter)
     }
 }

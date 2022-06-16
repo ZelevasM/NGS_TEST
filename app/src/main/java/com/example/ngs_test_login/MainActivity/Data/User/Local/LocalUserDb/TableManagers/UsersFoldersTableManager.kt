@@ -5,30 +5,30 @@ import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.UsersFoldersTable
-import com.example.ngs_test_login.MainActivity.Domain.Models.Folder
-import com.example.ngs_test_login.MainActivity.Domain.Models.User
+import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.FolderWeb
+import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
 
 class UsersFoldersTableManager
 {
-    fun write(user: User?, db: SQLiteDatabase?)
+    fun write(userWeb: UserWeb?,db: SQLiteDatabase?)
     {
         val folderValues: ContentValues = ContentValues()
-        if(user?.folder != null)
+        if(userWeb?.folderWeb != null)
         {
-            Log.d("LocalDb", "SIZE: ${user.folder?.size}")
-            for(i in user.folder?.indices!!)
+            Log.d("LocalDb", "SIZE: ${userWeb.folderWeb?.size}")
+            for(i in userWeb.folderWeb?.indices!!)
             {
-                folderValues.put(UsersFoldersTable.FOLDERS_COLUMN_NAME_KEY,user.id)
-                folderValues.put(UsersFoldersTable.FOLDERS_COLUMN_NAME_ID, user.folder?.get(i)?.id)
-                folderValues.put(UsersFoldersTable.FOLDERS_COLUMN_NAME_NAME, user.folder?.get(i)?.name)
-                folderValues.put(UsersFoldersTable.FOLDERS_COLUMN_NAME_ORDER, user.folder?.get(i)?.order)
+                folderValues.put(UsersFoldersTable.FOLDERS_COLUMN_NAME_KEY,userWeb.id)
+                folderValues.put(UsersFoldersTable.FOLDERS_COLUMN_NAME_ID, userWeb.folderWeb?.get(i)?.id)
+                folderValues.put(UsersFoldersTable.FOLDERS_COLUMN_NAME_NAME, userWeb.folderWeb?.get(i)?.name)
+                folderValues.put(UsersFoldersTable.FOLDERS_COLUMN_NAME_ORDER, userWeb.folderWeb?.get(i)?.order)
                 db?.insert(UsersFoldersTable.FOLDERS_TABLE_NAME, null, folderValues)
             }
         }
     }
 
     @SuppressLint("Range")
-    fun read(user: User?,db: SQLiteDatabase?): User?
+    fun read(userWeb: UserWeb?,db: SQLiteDatabase?): UserWeb?
     {
         val cursor = db?.query(UsersFoldersTable.FOLDERS_TABLE_NAME, null, null, null,
             null, null, null)
@@ -38,7 +38,7 @@ class UsersFoldersTableManager
         var name: String? = null
         var order: String? = null
         var i: Int = 0
-        var userFolder: ArrayList<Folder?>? = ArrayList()
+        var userFolderWeb: ArrayList<FolderWeb?>? = ArrayList()
         while(cursor?.moveToNext() == true)
         {
             key = cursor.getString(cursor.getColumnIndex(UsersFoldersTable.FOLDERS_COLUMN_NAME_KEY))
@@ -50,15 +50,15 @@ class UsersFoldersTableManager
             Log.d("LocalDb", "${UsersFoldersTable.FOLDERS_TABLE_NAME} NAME : $name")
             Log.d("LocalDb", "${UsersFoldersTable.FOLDERS_TABLE_NAME} ORDER : $order")
             Log.d("LocalDb", "READ ITERATION: $i \n=")
-            if(user?.id == key)
+            if(userWeb?.id == key)
             {
-                userFolder?.add(Folder(id = id, name = name, order = order))
+                userFolderWeb?.add(FolderWeb(id = id, name = name, order = order))
             }
             i+=1
         }
         cursor?.close()
-        user?.folder = userFolder
+        userWeb?.folderWeb = userFolderWeb
 
-        return user
+        return userWeb
     }
 }

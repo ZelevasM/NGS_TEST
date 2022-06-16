@@ -1,7 +1,7 @@
 package com.example.ngs_test_login.MainActivity.Presentation.Main.Validators
 
 import android.util.Log
-import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
 
 class ListValidator
 {

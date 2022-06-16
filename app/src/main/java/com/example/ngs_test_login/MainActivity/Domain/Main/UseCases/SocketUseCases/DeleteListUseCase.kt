@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
+import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.MainRepository
 
-class DeleteListUseCase(private val mainInterface: MainInterface)
+class DeleteListUseCase(private val mainRepository: MainRepository)
 {
     fun execute(id: String)
     {
-        mainInterface.deleteList(id)
+        mainRepository.deleteList(id)
     }
 }

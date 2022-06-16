@@ -8,8 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.ngs_test_login.MainActivity.Data.Base.BaseInterfaceImpl
 import com.example.ngs_test_login.MainActivity.Domain.Base.UseCases.BaseSocketInitUseCase
 import com.example.ngs_test_login.MainActivity.Domain.Base.UseCases.GetDataUseCase
-import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
-import com.example.ngs_test_login.MainActivity.Domain.Models.MainData
+import com.example.ngs_test_login.MainActivity.Domain.Base.Models.MainData
 import com.example.ngs_test_login.MainActivity.Presentation.Base.SocketCallbacksImpl.BaseSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.MainActivity.Presentation.User.UserViewModel

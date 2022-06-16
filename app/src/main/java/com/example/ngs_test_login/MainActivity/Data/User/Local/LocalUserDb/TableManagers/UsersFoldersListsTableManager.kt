@@ -5,24 +5,24 @@ import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.UsersFoldersListsTable
-import com.example.ngs_test_login.MainActivity.Domain.Models.User
+import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
 
 class UsersFoldersListsTableManager
 {
-    fun write(user: User?, db: SQLiteDatabase?)
+    fun write(userWeb: UserWeb?,db: SQLiteDatabase?)
     {
         val folderListsValues: ContentValues = ContentValues()
-        if(user?.folder != null)
+        if(userWeb?.folderWeb != null)
         {
-            for(i in user.folder!!.indices)
+            for(i in userWeb.folderWeb!!.indices)
             {
-                if(user.folder?.get(i)?.lists != null)
+                if(userWeb.folderWeb?.get(i)?.lists != null)
                 {
-                    Log.d("LocalDb", "FOLDER LISTS NULLNESS: ${user.folder?.get(i)?.lists}")
-                    for(j in user.folder?.get(i)?.lists?.indices!!)
+                    Log.d("LocalDb", "FOLDER LISTS NULLNESS: ${userWeb.folderWeb?.get(i)?.lists}")
+                    for(j in userWeb.folderWeb?.get(i)?.lists?.indices!!)
                     {
-                      folderListsValues.put(UsersFoldersListsTable.FOLDERS_LISTS_COLUMN_NAME_KEY,user.folder?.get(i)?.id)
-                      folderListsValues.put(UsersFoldersListsTable.FOLDERS_LISTS_COLUMN_NAME_ID, user.folder?.get(i)?.lists?.get(j))
+                      folderListsValues.put(UsersFoldersListsTable.FOLDERS_LISTS_COLUMN_NAME_KEY,userWeb.folderWeb?.get(i)?.id)
+                      folderListsValues.put(UsersFoldersListsTable.FOLDERS_LISTS_COLUMN_NAME_ID, userWeb.folderWeb?.get(i)?.lists?.get(j))
                       db?.insert(UsersFoldersListsTable.FOLDERS_LISTS_TABLE_NAME, null, folderListsValues)
                     }
                 }
@@ -31,7 +31,7 @@ class UsersFoldersListsTableManager
     }
 
     @SuppressLint("Range")
-    fun read(user: User?,db: SQLiteDatabase?): User?
+    fun read(userWeb: UserWeb?,db: SQLiteDatabase?): UserWeb?
     {
         val cursor = db?.query(UsersFoldersListsTable.FOLDERS_LISTS_TABLE_NAME, null, null, null,
             null, null, null)
@@ -45,13 +45,13 @@ class UsersFoldersListsTableManager
             Log.d("LocalDb", "LIST# $i")
             Log.d("LocalDb", "${UsersFoldersListsTable.FOLDERS_LISTS_TABLE_NAME} KEY : $key")
             Log.d("LocalDb", "${UsersFoldersListsTable.FOLDERS_LISTS_TABLE_NAME} ID : $id")
-            if(user?.folder != null)
+            if(userWeb?.folderWeb != null)
             {
-                for(k in user.folder?.indices!!)
+                for(k in userWeb.folderWeb?.indices!!)
                 {
-                    if(user.folder?.get(k)?.id == key)
+                    if(userWeb.folderWeb?.get(k)?.id == key)
                     {
-                        user.folder?.get(k)?.lists?.add(id)
+                        userWeb.folderWeb?.get(k)?.lists?.add(id)
                         break
                     }
                 }
@@ -60,6 +60,6 @@ class UsersFoldersListsTableManager
         }
         cursor?.close()
 
-        return user
+        return userWeb
     }
 }

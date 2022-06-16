@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ngs_test_login.MainActivity.Domain.Models.Shortcut
+import com.example.ngs_test_login.MainActivity.Data.User.Models.ShortcutWeb
 import com.example.ngs_test_login.R
 
-class ShortcutAdapter(private val shortcuts: ArrayList<Shortcut?>?): RecyclerView.Adapter<ShortcutAdapter.ShortcutViewHolder>()
+class ShortcutAdapter(private val shortcutWebs: ArrayList<ShortcutWeb?>?): RecyclerView.Adapter<ShortcutAdapter.ShortcutViewHolder>()
 {
     class ShortcutViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
@@ -27,7 +27,7 @@ class ShortcutAdapter(private val shortcuts: ArrayList<Shortcut?>?): RecyclerVie
 
     override fun onBindViewHolder(holder: ShortcutViewHolder,position: Int)
     {
-        val currentShortcut = shortcuts?.get(position)
+        val currentShortcut = shortcutWebs?.get(position)
         val color: Int = Color.parseColor(currentShortcut?.color)
         holder.iconTextViewBackColor.setBackgroundColor(color)
         holder.titleTextView.text = currentShortcut?.type
@@ -35,6 +35,6 @@ class ShortcutAdapter(private val shortcuts: ArrayList<Shortcut?>?): RecyclerVie
 
     override fun getItemCount(): Int
     {
-        return shortcuts!!.size
+        return shortcutWebs!!.size
     }
 }

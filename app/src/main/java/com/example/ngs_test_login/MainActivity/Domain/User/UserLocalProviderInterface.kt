@@ -1,53 +1,52 @@
 package com.example.ngs_test_login.MainActivity.Domain.User
 
 import android.database.sqlite.SQLiteDatabase
-import com.example.ngs_test_login.MainActivity.Domain.Models.User
+import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
 
 interface UserLocalProviderInterface
 {
     //USER SETTINGS
-    fun saveName(vararg user: User?, db: SQLiteDatabase?, name: String?)
+    fun saveName(vararg userWeb: UserWeb?,db: SQLiteDatabase?,name: String?)
 
-    fun getName(vararg user: User?, db: SQLiteDatabase?): String?
+    fun getName(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
 
-    fun saveEmail(vararg user: User?, db: SQLiteDatabase?, email: String?)
+    fun saveEmail(vararg userWeb: UserWeb?,db: SQLiteDatabase?,email: String?)
 
-    fun getEmail(vararg user: User?, db: SQLiteDatabase?): String?
+    fun getEmail(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
 
     //fun save/get Password
 
     //USER GENERAL SETTINGS
-    fun saveLanguage(vararg user: User?, db: SQLiteDatabase?, language: String?)
+    fun saveLanguage(vararg userWeb: UserWeb?,db: SQLiteDatabase?,language: String?)
 
-    fun getLanguage(vararg user: User?, db: SQLiteDatabase?): String?
+    fun getLanguage(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
 
-    fun saveHomepage(vararg user: User?, db: SQLiteDatabase?, homepage: String?)
+    fun saveHomepage(vararg userWeb: UserWeb?,db: SQLiteDatabase?,homepage: String?)
 
-    fun getHomepage(vararg user: User?, db: SQLiteDatabase?): String?
+    fun getHomepage(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
 
-    fun saveExpandSubtask(vararg user: User?, db: SQLiteDatabase?, expandSubtask: String?)
+    fun saveExpandSubtask(vararg userWeb: UserWeb?,db: SQLiteDatabase?,expandSubtask: String?)
 
-    fun getExpandSubtask(vararg user: User?, db: SQLiteDatabase?): String?
+    fun getExpandSubtask(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
 
-    fun saveNewTask(vararg user: User?, db: SQLiteDatabase?, newTask: String?)
+    fun saveNewTask(vararg userWeb: UserWeb?,db: SQLiteDatabase?,newTask: String?)
 
-    fun getNewTask(vararg user: User?, db: SQLiteDatabase?): String?
-
+    fun getNewTask(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     //IRRELEVANT
 
-    fun saveDiskSpace(vararg user: User?, db: SQLiteDatabase?, diskSpace: String?)
+    fun saveDiskSpace(vararg userWeb: UserWeb?,db: SQLiteDatabase?,diskSpace: String?)
 
-    fun getDiskSpace(vararg user: User?, db: SQLiteDatabase?): String?
+    fun getDiskSpace(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
 
-    fun saveShortcutInbox(vararg user: User?, db: SQLiteDatabase?)
+    fun saveShortcutInbox(vararg userWeb: UserWeb?,db: SQLiteDatabase?)
 
-    fun getShortcutInbox(vararg user: User?)
+    fun getShortcutInbox(vararg userWeb: UserWeb?)
 
-    fun saveShowSidebar(vararg user: User?, db: SQLiteDatabase?, sidebar: String?)
+    fun saveShowSidebar(vararg userWeb: UserWeb?,db: SQLiteDatabase?,sidebar: String?)
 
-    fun getShowSidebar(vararg user: User?, db: SQLiteDatabase?): String?
+    fun getShowSidebar(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
 
-    fun saveId(vararg user: User?, db: SQLiteDatabase?)
+    fun saveId(vararg userWeb: UserWeb?,db: SQLiteDatabase?)
 
-    fun getId(vararg user: User?, db: SQLiteDatabase?): String?
+    fun getId(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
 }

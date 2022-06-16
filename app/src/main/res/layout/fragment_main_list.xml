@@ -45,6 +45,12 @@
                 android:background="@color/semi_transparent_black"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+        <ExpandableListView
+            android:id="@+id/main_list_tasks_expandableListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:childDivider="@color/white"
+            android:dividerHeight="2dp"/>
     </LinearLayout>
 
 </RelativeLayout>

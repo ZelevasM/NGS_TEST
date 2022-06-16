@@ -4,31 +4,30 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
-import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.UsersFoldersListsTable
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.UsersShortcutsTable
-import com.example.ngs_test_login.MainActivity.Domain.Models.Shortcut
-import com.example.ngs_test_login.MainActivity.Domain.Models.User
+import com.example.ngs_test_login.MainActivity.Data.User.Models.ShortcutWeb
+import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
 
 class UsersShortcutsTableManager
 {
-    fun write(user: User?,db: SQLiteDatabase?)
+    fun write(userWeb: UserWeb?,db: SQLiteDatabase?)
     {
         val shortcutsValues: ContentValues = ContentValues()
-        if(user?.shortcuts != null)
+        if(userWeb?.shortcutWebs != null)
         {
-            for(i in user.shortcuts?.indices!!)
+            for(i in userWeb.shortcutWebs?.indices!!)
             {
-                shortcutsValues.put(UsersShortcutsTable.COLUMN_NAME_KEY, user.id)
-                shortcutsValues.put(UsersShortcutsTable.COLUMN_NAME_COLOR, user.shortcuts?.get(i)?.color)
-                shortcutsValues.put(UsersShortcutsTable.COLUMN_NAME_TYPE, user.shortcuts?.get(i)?.type)
-                shortcutsValues.put(UsersShortcutsTable.COLUMN_NAME_PROJECT_ID, user.shortcuts?.get(i)?.projectId)
+                shortcutsValues.put(UsersShortcutsTable.COLUMN_NAME_KEY, userWeb.id)
+                shortcutsValues.put(UsersShortcutsTable.COLUMN_NAME_COLOR, userWeb.shortcutWebs?.get(i)?.color)
+                shortcutsValues.put(UsersShortcutsTable.COLUMN_NAME_TYPE, userWeb.shortcutWebs?.get(i)?.type)
+                shortcutsValues.put(UsersShortcutsTable.COLUMN_NAME_PROJECT_ID, userWeb.shortcutWebs?.get(i)?.projectId)
                 db?.insert(UsersShortcutsTable.TABLE_NAME, null, shortcutsValues)
             }
         }
     }
 
     @SuppressLint("Range")
-    fun read(user: User?,db: SQLiteDatabase?): User?
+    fun read(userWeb: UserWeb?,db: SQLiteDatabase?): UserWeb?
     {
         val cursor = db?.query(UsersShortcutsTable.TABLE_NAME, null, null, null,
             null, null, null)
@@ -36,8 +35,8 @@ class UsersShortcutsTableManager
         var color: String? = null
         var type: String? = null
         var projectId: String? = null
-        var shortcuts: ArrayList<Shortcut?>? = ArrayList()
-        var shortcut: Shortcut? = null
+        var shortcutWebs: ArrayList<ShortcutWeb?>? = ArrayList()
+        var shortcutWeb: ShortcutWeb? = null
         var i: Int = 0
         while(cursor?.moveToNext() == true)
         {
@@ -50,14 +49,14 @@ class UsersShortcutsTableManager
             Log.d("LocalDb", "${UsersShortcutsTable.TABLE_NAME} COLOR : $color")
             Log.d("LocalDb", "${UsersShortcutsTable.TABLE_NAME} TYPE : $type")
             Log.d("LocalDb", "${UsersShortcutsTable.TABLE_NAME} PROJECT ID : $projectId")
-            if(user?.id == key)
+            if(userWeb?.id == key)
             {
-                shortcuts?.add(Shortcut(color = color, type = type, projectId = projectId))
+                shortcutWebs?.add(ShortcutWeb(color = color, type = type, projectId = projectId))
             }
             i += 1
         }
         cursor?.close()
-        user?.shortcuts = shortcuts
-        return user
+        userWeb?.shortcutWebs = shortcutWebs
+        return userWeb
     }
 }

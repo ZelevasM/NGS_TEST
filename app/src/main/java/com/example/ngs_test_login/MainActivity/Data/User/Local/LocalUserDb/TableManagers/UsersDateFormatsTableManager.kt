@@ -7,29 +7,27 @@ import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import androidx.core.content.contentValuesOf
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.UsersDateFormatsTable
-import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.UsersFoldersListsTable
-import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.UsersTable
-import com.example.ngs_test_login.MainActivity.Domain.Models.DateFormat
-import com.example.ngs_test_login.MainActivity.Domain.Models.User
+import com.example.ngs_test_login.MainActivity.Data.User.Models.DateFormatWeb
+import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
 import com.example.ngs_test_login.MainActivity.Domain.User.DateFormatLocalProviderInterface
 
 class UsersDateFormatsTableManager: DateFormatLocalProviderInterface
 {
-    fun write(user: User?,db: SQLiteDatabase?)
+    fun write(userWeb: UserWeb?,db: SQLiteDatabase?)
     {
         val dateFormatValues: ContentValues = ContentValues()
-        if(user?.dateFormat != null)
+        if(userWeb?.dateFormatWeb != null)
         {
-            dateFormatValues.put(UsersDateFormatsTable.COLUMN_NAME_KEY, user.id)
-            dateFormatValues.put(UsersDateFormatsTable.COLUMN_NAME_DATE, user.dateFormat?.date)
-            dateFormatValues.put(UsersDateFormatsTable.COLUMN_NAME_START_OF_WEEK, user.dateFormat?.startOfTheWeek)
-            dateFormatValues.put(UsersDateFormatsTable.COLUMN_NAME_TIME, user.dateFormat?.time)
+            dateFormatValues.put(UsersDateFormatsTable.COLUMN_NAME_KEY, userWeb.id)
+            dateFormatValues.put(UsersDateFormatsTable.COLUMN_NAME_DATE, userWeb.dateFormatWeb?.date)
+            dateFormatValues.put(UsersDateFormatsTable.COLUMN_NAME_START_OF_WEEK, userWeb.dateFormatWeb?.startOfTheWeek)
+            dateFormatValues.put(UsersDateFormatsTable.COLUMN_NAME_TIME, userWeb.dateFormatWeb?.time)
             db?.insert(UsersDateFormatsTable.TABLE_NAME, null, dateFormatValues)
         }
     }
 
     @SuppressLint("Range")
-    fun read(user: User?,db: SQLiteDatabase?): User?
+    fun read(userWeb: UserWeb?,db: SQLiteDatabase?): UserWeb?
     {
         val cursor = db?.query(UsersDateFormatsTable.TABLE_NAME,
             null,
@@ -43,7 +41,7 @@ class UsersDateFormatsTableManager: DateFormatLocalProviderInterface
         var startOfWeek: String? = null
         var time: String? = null
         var i: Int = 0
-        var dateFormat: DateFormat? = null
+        var dateFormatWeb: DateFormatWeb? = null
         while (cursor?.moveToNext() == true)
         {
             key = cursor.getString(cursor.getColumnIndex(UsersDateFormatsTable.COLUMN_NAME_KEY))
@@ -56,28 +54,28 @@ class UsersDateFormatsTableManager: DateFormatLocalProviderInterface
             Log.d("LocalDb","${UsersDateFormatsTable.TABLE_NAME} START OF WEEK : $startOfWeek")
             Log.d("LocalDb","${UsersDateFormatsTable.TABLE_NAME} TIME : $time")
             i += 1
-            if(user?.id == key)
+            if(userWeb?.id == key)
             {
-                dateFormat = DateFormat(date, startOfWeek, time)
+                dateFormatWeb = DateFormatWeb(date, startOfWeek, time)
             }
         }
         cursor?.close()
-        user?.dateFormat = dateFormat
-        return user
+        userWeb?.dateFormatWeb = dateFormatWeb
+        return userWeb
     }
 
-    override fun saveDateFormat(vararg user: User?,db: SQLiteDatabase?,dateFormat: String?)
+    override fun saveDateFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?,dateFormat: String?)
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         db?.update(UsersDateFormatsTable.TABLE_NAME, contentValuesOf(
             UsersDateFormatsTable.COLUMN_NAME_DATE to dateFormat),
             "${UsersDateFormatsTable.COLUMN_NAME_KEY} = ?",arrayOf(id))
     }
 
     @SuppressLint("Range")
-    override fun getDateFormat(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getDateFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
 
         val cursor: Cursor? = db?.query(UsersDateFormatsTable.TABLE_NAME,
             arrayOf(UsersDateFormatsTable.COLUMN_NAME_DATE),
@@ -93,18 +91,18 @@ class UsersDateFormatsTableManager: DateFormatLocalProviderInterface
         return dateFormat
     }
 
-    override fun saveTimeFormat(vararg user: User?,db: SQLiteDatabase?,timeFormat: String?)
+    override fun saveTimeFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?,timeFormat: String?)
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         db?.update(UsersDateFormatsTable.TABLE_NAME, contentValuesOf(
             UsersDateFormatsTable.COLUMN_NAME_TIME to timeFormat),
             "${UsersDateFormatsTable.COLUMN_NAME_KEY} = ?",arrayOf(id))
     }
 
     @SuppressLint("Range")
-    override fun getTimeFormat(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getTimeFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
 
         val cursor: Cursor? = db?.query(UsersDateFormatsTable.TABLE_NAME,
             arrayOf(UsersDateFormatsTable.COLUMN_NAME_TIME),
@@ -120,18 +118,18 @@ class UsersDateFormatsTableManager: DateFormatLocalProviderInterface
         return timeFormat
     }
 
-    override fun saveStartOfWeek(vararg user: User?,db: SQLiteDatabase?,startOfWeek: String?)
+    override fun saveStartOfWeek(vararg userWeb: UserWeb?,db: SQLiteDatabase?,startOfWeek: String?)
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         db?.update(UsersDateFormatsTable.TABLE_NAME, contentValuesOf(
             UsersDateFormatsTable.COLUMN_NAME_START_OF_WEEK to startOfWeek),
             "${UsersDateFormatsTable.COLUMN_NAME_KEY} = ?",arrayOf(id))
     }
 
     @SuppressLint("Range")
-    override fun getStartOfWeek(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getStartOfWeek(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
 
         val cursor: Cursor? = db?.query(UsersDateFormatsTable.TABLE_NAME,
             arrayOf(UsersDateFormatsTable.COLUMN_NAME_START_OF_WEEK),

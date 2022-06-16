@@ -1,5 +1,6 @@
 package com.example.ngs_test_login.MainActivity.Presentation.Adapters
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +8,18 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
 import com.example.ngs_test_login.R
 
-class DataListAdapter(private val lists: ArrayList<DataList?>?):
+class DataListAdapter():
     RecyclerView.Adapter<DataListAdapter.ListViewHolder>()
 {
+    var lists: ArrayList<DataList?>? = ArrayList()
+    @SuppressLint("NotifyDataSetChanged") set(value)
+    {
+        field = value
+        notifyDataSetChanged()
+    }
     private lateinit var clickListener: onItemClickListener
     private lateinit var clickLongListener: onItemLongClickListener
     interface onItemClickListener

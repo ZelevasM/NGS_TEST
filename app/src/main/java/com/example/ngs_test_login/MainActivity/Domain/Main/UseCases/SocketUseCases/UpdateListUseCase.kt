@@ -1,11 +1,11 @@
 package com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
+import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.MainRepository
 
-class UpdateListUseCase(private val mainInterface: MainInterface)
+class UpdateListUseCase(private val mainRepository: MainRepository)
 {
     fun execute(id: String, newName: String)
     {
-        mainInterface.updateList(id, newName)
+        mainRepository.updateList(id, newName)
     }
 }

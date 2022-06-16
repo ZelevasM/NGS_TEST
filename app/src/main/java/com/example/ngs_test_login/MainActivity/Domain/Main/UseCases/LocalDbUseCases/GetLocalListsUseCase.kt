@@ -1,12 +1,12 @@
 package com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
-import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
+import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.MainRepository
 
-class GetLocalListsUseCase(private val mainInterface: MainInterface)
+class GetLocalListsUseCase(private val mainRepository: MainRepository)
 {
     fun execute(): ArrayList<DataList?>?
     {
-        return mainInterface.getLocalLists()
+        return mainRepository.getLocalLists()
     }
 }

@@ -1,19 +1,19 @@
 package com.example.ngs_test_login.MainActivity.Presentation.Main.Validators
 
 import android.util.Log
-import com.example.ngs_test_login.MainActivity.Domain.Models.Chat
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Chat
 
 class ChatValidator
 {
     //TODO Change Validators to get exact results
-    fun validateIncomingChat(chats: ArrayList<Chat?>?): Boolean
+    fun validateIncomingChat(chatWebs: ArrayList<Chat?>?): Boolean
     {
         var checker: Boolean = false
-        if (chats != null)
+        if (chatWebs != null)
         {
-            if (chats.size == 0)
+            if (chatWebs.size == 0)
             {
-                Log.d("MyLog","Chats are empty: $chats")
+                Log.d("MyLog","Chats are empty: $chatWebs")
             }
             else
             {

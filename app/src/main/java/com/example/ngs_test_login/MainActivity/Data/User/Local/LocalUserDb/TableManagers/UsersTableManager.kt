@@ -8,29 +8,29 @@ import android.util.Log
 import androidx.core.content.contentValuesOf
 import com.example.ngs_test_login.MainActivity.Data.Main.Local.ConvertStringToBoolean
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.Tables.UsersTable
-import com.example.ngs_test_login.MainActivity.Domain.Models.User
+import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
 import com.example.ngs_test_login.MainActivity.Domain.User.UserLocalProviderInterface
 
 class UsersTableManager(): UserLocalProviderInterface
 {
-    fun write(user: User?, db: SQLiteDatabase?)
+    fun write(userWeb: UserWeb?,db: SQLiteDatabase?)
     {
         val values: ContentValues = ContentValues().apply {
-            put(UsersTable.COLUMN_NAME_NAME, user?.name)
-            put(UsersTable.COLUMN_NAME_ID, user?.id)
-            put(UsersTable.COLUMN_NAME_EMAIL, user?.email)
-            put(UsersTable.COLUMN_NAME_LANGUAGE, user?.language)
-            put(UsersTable.COLUMN_NAME_SIDEBAR, user?.showSidebar)
-            put(UsersTable.COLUMN_NAME_DISK_SPACE, user?.diskSpace)
-            put(UsersTable.COLUMN_NAME_EXPAND_SUBTASK, user?.expandSubtask)
-            put(UsersTable.COLUMN_NAME_NEW_TASK, user?.newTask)
-            put(UsersTable.COLUMN_NAME_SHORTCUT_INBOX, user?.shortcutInbox)
+            put(UsersTable.COLUMN_NAME_NAME, userWeb?.name)
+            put(UsersTable.COLUMN_NAME_ID, userWeb?.id)
+            put(UsersTable.COLUMN_NAME_EMAIL, userWeb?.email)
+            put(UsersTable.COLUMN_NAME_LANGUAGE, userWeb?.language)
+            put(UsersTable.COLUMN_NAME_SIDEBAR, userWeb?.showSidebar)
+            put(UsersTable.COLUMN_NAME_DISK_SPACE, userWeb?.diskSpace)
+            put(UsersTable.COLUMN_NAME_EXPAND_SUBTASK, userWeb?.expandSubtask)
+            put(UsersTable.COLUMN_NAME_NEW_TASK, userWeb?.newTask)
+            put(UsersTable.COLUMN_NAME_SHORTCUT_INBOX, userWeb?.shortcutInbox)
         }
         db?.insert(UsersTable.TABLE_NAME, null, values)
     }
 
     @SuppressLint("Range")
-    fun read(db: SQLiteDatabase?): User?
+    fun read(db: SQLiteDatabase?): UserWeb?
     {
         val cursor: Cursor? = db?.query(UsersTable.TABLE_NAME, null, null, null,
             null, null, null)
@@ -67,26 +67,26 @@ class UsersTableManager(): UserLocalProviderInterface
         }
         cursor?.close()
 
-        val user: User? = User(name = name, id = id, email = email, language = language,
+        val userWeb: UserWeb? = UserWeb(name = name, id = id, email = email, language = language,
             showSidebar = ConvertStringToBoolean(sidebar.toString()).convert(),
             diskSpace = diskSpace, expandSubtask = ConvertStringToBoolean(expandSubtask.toString()).convert(),
             newTask = ConvertStringToBoolean(newTask.toString()).convert(), shortcutInbox = shortInbox)
-        return user
+        return userWeb
     }
 
 
     //USER SETTINGS
-    override fun saveName(vararg user: User?,db: SQLiteDatabase?,name: String?)
+    override fun saveName(vararg userWeb: UserWeb?,db: SQLiteDatabase?,name: String?)
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         db?.update(UsersTable.TABLE_NAME, contentValuesOf(UsersTable.COLUMN_NAME_NAME to name),
         "${UsersTable.COLUMN_NAME_ID} = ?",arrayOf(id))
     }
 
     @SuppressLint("Range")
-    override fun getName(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getName(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         val cursor: Cursor? = db?.query(UsersTable.TABLE_NAME,
             arrayOf(UsersTable.COLUMN_NAME_NAME),"${UsersTable.COLUMN_NAME_ID} = ?",arrayOf(id),
         null, null, null)
@@ -99,17 +99,17 @@ class UsersTableManager(): UserLocalProviderInterface
         return name
     }
 
-    override fun saveEmail(vararg user: User?,db: SQLiteDatabase?,email: String?)
+    override fun saveEmail(vararg userWeb: UserWeb?,db: SQLiteDatabase?,email: String?)
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         db?.update(UsersTable.TABLE_NAME, contentValuesOf(UsersTable.COLUMN_NAME_EMAIL to email),
             "${UsersTable.COLUMN_NAME_ID} = ?",arrayOf(id))
     }
 
     @SuppressLint("Range")
-    override fun getEmail(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getEmail(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
 
         val cursor: Cursor? = db?.query(UsersTable.TABLE_NAME,
             arrayOf(UsersTable.COLUMN_NAME_EMAIL),
@@ -126,17 +126,17 @@ class UsersTableManager(): UserLocalProviderInterface
 
     //USER GENERAL SETTINGS
 
-    override fun saveLanguage(vararg user: User?,db: SQLiteDatabase?,language: String?)
+    override fun saveLanguage(vararg userWeb: UserWeb?,db: SQLiteDatabase?,language: String?)
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         db?.update(UsersTable.TABLE_NAME, contentValuesOf(UsersTable.COLUMN_NAME_LANGUAGE to language),
             "${UsersTable.COLUMN_NAME_ID} = ?",arrayOf(id))
     }
 
     @SuppressLint("Range")
-    override fun getLanguage(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getLanguage(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
 
         val cursor: Cursor? = db?.query(UsersTable.TABLE_NAME,
             arrayOf(UsersTable.COLUMN_NAME_LANGUAGE),
@@ -151,17 +151,17 @@ class UsersTableManager(): UserLocalProviderInterface
         return language
     }
 
-    override fun saveHomepage(vararg user: User?,db: SQLiteDatabase?,homepage: String?)
+    override fun saveHomepage(vararg userWeb: UserWeb?,db: SQLiteDatabase?,homepage: String?)
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         db?.update(UsersTable.TABLE_NAME, contentValuesOf(UsersTable.COLUMN_NAME_HOMEPAGE_ID to homepage),
             "${UsersTable.COLUMN_NAME_ID} = ?",arrayOf(id))
     }
 
     @SuppressLint("Range")
-    override fun getHomepage(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getHomepage(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
 
         val cursor: Cursor? = db?.query(UsersTable.TABLE_NAME,
             arrayOf(UsersTable.COLUMN_NAME_HOMEPAGE_ID),
@@ -176,18 +176,18 @@ class UsersTableManager(): UserLocalProviderInterface
         return homepage
     }
 
-    override fun saveExpandSubtask(vararg user: User?,db: SQLiteDatabase?,expandSubtask: String?)
+    override fun saveExpandSubtask(vararg userWeb: UserWeb?,db: SQLiteDatabase?,expandSubtask: String?)
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         db?.update(UsersTable.TABLE_NAME, contentValuesOf(UsersTable.COLUMN_NAME_EXPAND_SUBTASK
                 to expandSubtask),
             "${UsersTable.COLUMN_NAME_ID} = ?",arrayOf(id))
     }
 
     @SuppressLint("Range")
-    override fun getExpandSubtask(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getExpandSubtask(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
 
         val cursor: Cursor? = db?.query(UsersTable.TABLE_NAME,
             arrayOf(UsersTable.COLUMN_NAME_EXPAND_SUBTASK),
@@ -202,17 +202,17 @@ class UsersTableManager(): UserLocalProviderInterface
         return expandSubtask
     }
 
-    override fun saveNewTask(vararg user: User?,db: SQLiteDatabase?,newTask: String?)
+    override fun saveNewTask(vararg userWeb: UserWeb?,db: SQLiteDatabase?,newTask: String?)
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         db?.update(UsersTable.TABLE_NAME, contentValuesOf(UsersTable.COLUMN_NAME_NEW_TASK to newTask),
             "${UsersTable.COLUMN_NAME_ID} = ?",arrayOf(id))
     }
 
     @SuppressLint("Range")
-    override fun getNewTask(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getNewTask(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
 
         val cursor: Cursor? = db?.query(UsersTable.TABLE_NAME,
             arrayOf(UsersTable.COLUMN_NAME_NEW_TASK),
@@ -230,24 +230,24 @@ class UsersTableManager(): UserLocalProviderInterface
 
     //IRRELEVANT
 
-    override fun saveShortcutInbox(vararg user: User?,db: SQLiteDatabase?)
+    override fun saveShortcutInbox(vararg userWeb: UserWeb?,db: SQLiteDatabase?)
     {
         TODO("Not yet implemented")
     }
 
-    override fun getShortcutInbox(vararg user: User?)
+    override fun getShortcutInbox(vararg userWeb: UserWeb?)
     {
         TODO("Not yet implemented")
     }
-    override fun saveId(vararg user: User?,db: SQLiteDatabase?)
+    override fun saveId(vararg userWeb: UserWeb?,db: SQLiteDatabase?)
     {
         TODO("Not yet implemented")
     }
 
     @SuppressLint("Range")
-    override fun getId(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getId(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        var id: String? = user[0]?.id
+        var id: String? = userWeb[0]?.id
 
         val cursor: Cursor? = db?.query(UsersTable.TABLE_NAME,
             arrayOf(UsersTable.COLUMN_NAME_ID),
@@ -262,17 +262,17 @@ class UsersTableManager(): UserLocalProviderInterface
         return id
     }
 
-    override fun saveShowSidebar(vararg user: User?,db: SQLiteDatabase?,sidebar: String?)
+    override fun saveShowSidebar(vararg userWeb: UserWeb?,db: SQLiteDatabase?,sidebar: String?)
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         db?.update(UsersTable.TABLE_NAME, contentValuesOf(UsersTable.COLUMN_NAME_SIDEBAR to sidebar),
             "${UsersTable.COLUMN_NAME_ID} = ?",arrayOf(id))
     }
 
     @SuppressLint("Range")
-    override fun getShowSidebar(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getShowSidebar(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
 
         val cursor: Cursor? = db?.query(UsersTable.TABLE_NAME,
             arrayOf(UsersTable.COLUMN_NAME_SIDEBAR),
@@ -287,17 +287,17 @@ class UsersTableManager(): UserLocalProviderInterface
         return sidebar
     }
 
-    override fun saveDiskSpace(vararg user: User?,db: SQLiteDatabase?,diskSpace: String?)
+    override fun saveDiskSpace(vararg userWeb: UserWeb?,db: SQLiteDatabase?,diskSpace: String?)
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
         db?.update(UsersTable.TABLE_NAME, contentValuesOf(UsersTable.COLUMN_NAME_DISK_SPACE to diskSpace),
             "${UsersTable.COLUMN_NAME_ID} = ?",arrayOf(id))
     }
 
     @SuppressLint("Range")
-    override fun getDiskSpace(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getDiskSpace(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        val id: String? = user[0]?.id
+        val id: String? = userWeb[0]?.id
 
         val cursor: Cursor? = db?.query(UsersTable.TABLE_NAME,
             arrayOf(UsersTable.COLUMN_NAME_DISK_SPACE),

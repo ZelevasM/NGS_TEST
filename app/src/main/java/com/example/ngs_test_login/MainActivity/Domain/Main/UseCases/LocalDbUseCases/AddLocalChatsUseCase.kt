@@ -1,12 +1,12 @@
 package com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
-import com.example.ngs_test_login.MainActivity.Domain.Models.Chat
+import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.MainRepository
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Chat
 
-class AddLocalChatsUseCase(private val mainInterface: MainInterface)
+class AddLocalChatsUseCase(private val mainRepository: MainRepository)
 {
     fun execute(chats: ArrayList<Chat?>?)
     {
-        mainInterface.addLocalChats(chats)
+        mainRepository.addLocalChats(chats)
     }
 }

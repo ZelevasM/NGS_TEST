@@ -6,10 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ngs_test_login.MainActivity.Data.Main.MainInterfaceImpl
+import com.example.ngs_test_login.MainActivity.Data.Main.MainRepositoryImpl
+import com.example.ngs_test_login.MainActivity.Domain.Base.Models.MainData
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Chat
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases.*
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.*
-import com.example.ngs_test_login.MainActivity.Domain.Models.*
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.ChatSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.ListSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.ChatValidator
@@ -29,13 +31,13 @@ class MainViewModel: ViewModel(), ViewModelInterface
     val chatsLiveData: LiveData<ArrayList<Chat?>?> = chatsData
 
     private var lists: ArrayList<DataList?>? = null
-    private var chats: ArrayList<Chat?>? = null
+    private var chatWebs: ArrayList<Chat?>? = null
 
     //TODO Change
     private var currentListName: String? = null
     private var currentListID: String? = null
 
-    private val mainInterfaceImpl = MainInterfaceImpl()
+    private val mainInterfaceImpl = MainRepositoryImpl()
 
 
     //LOCAL DB METHODS
@@ -57,7 +59,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
     fun dataAtomicAssigner()
     {
         lists = getLocalListsAtomic()
-        chats = getLocalChatsAtomic()
+        chatWebs = getLocalChatsAtomic()
         //chats = mainData?.chats
 
         Log.d("MyLog","lists: $lists")
@@ -67,9 +69,9 @@ class MainViewModel: ViewModel(), ViewModelInterface
         {
             listsData.postValue(lists)
         }
-        if (ChatValidator().validateIncomingChat(chats))
+        if (ChatValidator().validateIncomingChat(chatWebs))
         {
-            chatsData.postValue(chats)
+            chatsData.postValue(chatWebs)
         }
     }
 
@@ -105,7 +107,6 @@ class MainViewModel: ViewModel(), ViewModelInterface
         val mainSocketInitUseCase: MainSocketInitUseCase = MainSocketInitUseCase(mainInterfaceImpl)
         mainSocketInitUseCase.execute(bSocket[0])
         invokeSocket()
-        //updateList("AyUxNpkglkxyBdazZCaMh2I=", "AAAAAQQQQQQQQQQQQ")
     }
 
     fun addList(name: String)
@@ -154,7 +155,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
     {
         viewModelScope.launch(Dispatchers.IO) {
             val getChatUseCase: GetChatUseCase = GetChatUseCase(mainInterfaceImpl)
-            val chatSocketCallbackImpl: ChatSocketCallbackImpl = ChatSocketCallbackImpl(chats,
+            val chatSocketCallbackImpl: ChatSocketCallbackImpl = ChatSocketCallbackImpl(chatWebs,
                 chatsData)
             getChatUseCase.execute(chatSocketCallbackImpl)
         }

@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ConvertClassToJson
 import com.example.ngs_test_login.MainActivity.Data.User.Models.*
-import com.example.ngs_test_login.MainActivity.Domain.Models.Shortcut
+import com.example.ngs_test_login.MainActivity.Data.User.Models.ShortcutWeb
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.*
 import io.socket.client.Socket
 import org.json.JSONObject
@@ -377,17 +377,18 @@ class UserSocket(private val mSocket: Socket)
         }
     }
 
-    fun changeShortcut(shortcuts: ArrayList<Shortcut?>?)
+    fun changeShortcut(shortcutWebs: ArrayList<ShortcutWeb?>?)
     {
         //val socketShortcuts: Array<Shortcut?>? = SocketShortcut(type)
         val socketShortcutJson: ArrayList<JSONObject?> = ArrayList()
-        if(shortcuts !=null)
+        if(shortcutWebs !=null)
         {
-            for (i in shortcuts.indices)
+            for (i in shortcutWebs.indices)
             {
-                socketShortcutJson.add(ConvertClassToJson(shortcuts[i]).convert())
+                socketShortcutJson.add(ConvertClassToJson(shortcutWebs[i]).convert())
             }
         }
+        Log.d("MyLog","Short Type is Json Object: ${socketShortcutJson is ArrayList<JSONObject?>?}")
         //val socketShortcutsJsonArray: Array<*>? = socketShortcutJson.toArray() as Array<*>?
 
         val event: String = "IN_Shortcuts"
@@ -397,6 +398,32 @@ class UserSocket(private val mSocket: Socket)
 
     fun onChangedShortcut(userShortcutsSocketCallbackInterface: UserShortcutsSocketCallbackInterface)
     {
-
+        var socketDataSerializer: SocketDataSerializer<SocketShortcuts>
+        var socketDataSerializerOut: SocketDataSerializer<SocketOutMessage>
+        var shortcuts: SocketShortcuts = SocketShortcuts()
+        var outMessage: SocketOutMessage = SocketOutMessage()
+        val event: String = "OUT_Shortcuts"
+        mSocket.on("OUT_Message")
+        {
+                args ->
+            socketDataSerializerOut = SocketDataSerializer(args[0] as JSONObject, outMessage.javaClass)
+            outMessage = socketDataSerializerOut.doSerialization()
+            Log.d("MyLog","OUT MESSAGE: $outMessage")
+            Log.d("MyLog","ConnexionInShortcuts: ${mSocket.connected()}")
+        }
+        mSocket.on(event)
+        {
+                args ->
+            Log.d("MyLog","GOT SHORTCUTS: ${args[0]}")
+            socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, shortcuts.javaClass)
+            shortcuts = socketDataSerializer.doSerialization()
+            val shorts = ArrayList<ShortcutWeb?>()
+            for(i in shortcuts.shortcutWebs.indices)
+            {
+                shorts.add(shortcuts.shortcutWebs[i])
+            }
+            userShortcutsSocketCallbackInterface.onChanged(shortcutWebs  = shorts)
+            Log.d("MyLog", "Serialized: $shortcuts")
+        }
     }
 }

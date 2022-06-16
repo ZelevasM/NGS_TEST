@@ -38,7 +38,6 @@ class AsyncGet
             val reqParam: String = "email=$em"
 
             Log.d("MyLog","\n\n$reqParam")
-
             val mURL = URL(BuildConfig.SEARCH_USER_KEY)
 
             with(mURL.openConnection() as HttpURLConnection) {
@@ -102,7 +101,6 @@ class AsyncGet
             val reqParam: String = "email=$email&password=$encodedPass"
 
             Log.d("MyLog","\n\n$reqParam")
-
             val mURL = URL(BuildConfig.SIGN_IN_KEY)
 
             with(mURL.openConnection() as HttpURLConnection) {

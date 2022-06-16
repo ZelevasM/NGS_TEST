@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ngs_test_login.MainActivity.Domain.Models.DataList
 import com.example.ngs_test_login.MainActivity.Presentation.Adapters.DataListAdapter
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.R
@@ -43,14 +42,12 @@ class MainListsFragment: Fragment()
     {
         nullIcon = view.findViewById(R.id.lists_imageView)
         nullText = view.findViewById(R.id.textView_lists_warn)
-        var lists: ArrayList<DataList?>?
-        var adapter: DataListAdapter
+        val adapter: DataListAdapter = DataListAdapter()
         listRecView = view.findViewById(R.id.listRecView)
         listRecView.layoutManager = LinearLayoutManager(this.context)
         listRecView.setHasFixedSize(true)
         mainViewModel.listsLiveData.observe(viewLifecycleOwner, Observer {
-            lists = it
-            adapter = DataListAdapter(lists)
+            adapter.lists = it
             listRecView.adapter = adapter
             adapter.setOnItemClickListener(object: DataListAdapter.onItemClickListener{
                 override fun onItemClicked(position: Int, id: String?, name: String?)

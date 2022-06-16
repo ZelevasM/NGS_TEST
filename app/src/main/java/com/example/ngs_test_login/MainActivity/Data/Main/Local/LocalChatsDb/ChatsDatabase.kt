@@ -1,27 +1,45 @@
 package com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalChatsDb
 
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalChatsDb.Tables.ChatsMessagesTable
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalChatsDb.Tables.ChatsTable
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalListsDb.Tables.ListsTable
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalListsDb.Tables.ListsTasksMessagesTable
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalListsDb.Tables.ListsTasksTable
-import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalListsDb.Tables.ListsUsersTable
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalChatsDb.Converters.ChatsMessagesConverters
+import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalChatsDb.Converters.ChatsUsersConverters
+import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalChatsDb.Entities.ChatsEntity
 
-object ChatsDatabase
+@Database(entities = [ChatsEntity::class], version = 1, exportSchema = false)
+@TypeConverters(ChatsUsersConverters::class, ChatsMessagesConverters::class)
+abstract class ChatsDatabase: RoomDatabase()
 {
-    //DATABASE VARS
-    const val DATABASE_VERSION: Int = 1
-    const val DATABASE_NAME: String = "CHATS_DB.db"
+    abstract fun chatsDao(): ChatsDao
 
-    fun createChatsTable(): String
-    {return ChatsTable.CREATE_TABLE}
+    companion object
+    {
+        @Volatile
+        private var INSTANCE: ChatsDatabase? = null
 
-    fun deleteChatsTable(): String
-    {return ChatsTable.DELETE_TABLE}
+        fun getDatabase(context: Context): ChatsDatabase
+        {
+            val tempInstance = INSTANCE
+            if(tempInstance != null)
+                return tempInstance
 
-    fun createChatsMessagesTable(): String
-    {return ChatsMessagesTable.CREATE_TABLE}
+            synchronized(this)
+            {
+                val instance = Room.databaseBuilder(context.applicationContext, ChatsDatabase::class.java, "user_database").build()
+                INSTANCE = instance
+                return instance
+            }
+        }
 
-    fun deleteChatsMessagesTable(): String
-    {return ChatsMessagesTable.DELETE_TABLE}
+        fun closeDatabase()
+        {
+            if(INSTANCE?.isOpen == true)
+            {
+                INSTANCE?.close()
+            }
+        }
+    }
 }

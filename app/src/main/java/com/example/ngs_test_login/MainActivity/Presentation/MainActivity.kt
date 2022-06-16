@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity()
         navController = findNavController(R.id.main_activity_nav_host_fragment)
         //lock UI elements
         baseViewModel = BaseViewModel(mainViewModel, userViewModel)
-        baseViewModel.init(this)
+        baseViewModel.init(applicationContext)
         //supportFragmentManager.beginTransaction().replace(R.id.main_container,MainFragment.newInstance()).commit()
     }
 
@@ -67,12 +67,10 @@ class MainActivity : AppCompatActivity()
                 //lock UI elements, in fragments
             }
         })
-        //mainViewModel.socketInit()
     }
     private fun lockUI()
     {}
 
     private fun unLockUI()
-    {
-    }
+    {}
 }

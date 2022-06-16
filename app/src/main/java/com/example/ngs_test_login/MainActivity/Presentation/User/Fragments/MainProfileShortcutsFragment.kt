@@ -10,12 +10,8 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.ngs_test_login.MainActivity.Domain.Models.Shortcut
-import com.example.ngs_test_login.MainActivity.Presentation.Adapters.ShortcutAdapter
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.MainActivity.Presentation.User.UserViewModel
 import com.example.ngs_test_login.R
@@ -72,22 +68,47 @@ class MainProfileShortcutsFragment: Fragment()
         switches?.add(assignedSwitch)
         switches?.add(mediumSwitch)
         switches?.add(highSwitch)
-        val shortcutsStateChecker = ShortcutsStateChecker(switches,activity!!)
-        inboxSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-            userViewModel.changeShortcut(shortcutsStateChecker.summarize())
-        }
-        todaySwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-            userViewModel.changeShortcut(shortcutsStateChecker.summarize())
-        }
-        assignedSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-            userViewModel.changeShortcut(shortcutsStateChecker.summarize())
-        }
-        mediumSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-            userViewModel.changeShortcut(shortcutsStateChecker.summarize())
-            Log.d("MyLog","switched: $isChecked")
-        }
-        highSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-            userViewModel.changeShortcut(shortcutsStateChecker.summarize())
-        }
+
+        userViewModel.shortcutsLiveData.observe(viewLifecycleOwner, Observer {
+            val shortcuts = it
+//            inboxSwitch.isChecked = false
+//            todaySwitch.isChecked = false
+//            assignedSwitch.isChecked = false
+//            mediumSwitch.isChecked = false
+//            highSwitch.isChecked = false
+            if(shortcuts !=null)
+            {
+                for (i in shortcuts.indices)
+                {
+                    when (shortcuts[i]?.type)
+                    {
+                        "inbox" ->  inboxSwitch.isChecked = true
+                        "today" -> todaySwitch.isChecked = true
+                        "assigned_to_me" -> assignedSwitch.isChecked = true
+                        "medium_priority" -> mediumSwitch.isChecked = true
+                        "high_priority" -> highSwitch.isChecked = true
+                    }
+                    val type = shortcuts[i]?.type
+                }
+                val shortcutsStateChecker = ShortcutsStateChecker(switches,requireActivity())
+                inboxSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+                    userViewModel.changeShortcut(shortcutsStateChecker.summarize())
+                }
+                todaySwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+                    userViewModel.changeShortcut(shortcutsStateChecker.summarize())
+                }
+                assignedSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+                    userViewModel.changeShortcut(shortcutsStateChecker.summarize())
+                }
+                mediumSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+                    userViewModel.changeShortcut(shortcutsStateChecker.summarize())
+                    Log.d("MyLog","switched: $isChecked")
+                }
+                highSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+                    userViewModel.changeShortcut(shortcutsStateChecker.summarize())
+                }
+            }
+        })
+
     }
 }

@@ -5,7 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.User.Local.LocalUserDb.TableManagers.*
-import com.example.ngs_test_login.MainActivity.Domain.Models.User
+import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
 import com.example.ngs_test_login.MainActivity.Domain.User.DateFormatLocalProviderInterface
 import com.example.ngs_test_login.MainActivity.Domain.User.UserLocalProviderInterface
 
@@ -33,25 +33,25 @@ class UsersDatabaseManager (private val context: Context):
         return newlyCreated
     }
 
-    fun writeToDb(user: User?)
+    fun writeToDb(userWeb: UserWeb?)
     {
         usersDatabaseHelper.onUpgrade(mDb,UsersDatabase.DATABASE_VERSION,UsersDatabase.DATABASE_VERSION)
-        usersTableManager.write(user, mDb)
-        usersFoldersTableManager.write(user, mDb)
-        usersFoldersListsTableManager.write(user, mDb)
-        usersDatesFormatTableManager.write(user, mDb)
-        usersShortcutsTableManager.write(user, mDb)
+        usersTableManager.write(userWeb, mDb)
+        usersFoldersTableManager.write(userWeb, mDb)
+        usersFoldersListsTableManager.write(userWeb, mDb)
+        usersDatesFormatTableManager.write(userWeb, mDb)
+        usersShortcutsTableManager.write(userWeb, mDb)
     }
 
     @SuppressLint("Range")
-    fun readFromDb(): User?
+    fun readFromDb(): UserWeb?
     {
-        var user: User? = usersTableManager.read(mDb)
-        user = usersFoldersTableManager.read(user, mDb)
-        user = usersFoldersListsTableManager.read(user, mDb)
-        user = usersDatesFormatTableManager.read(user, mDb)
-        user = usersShortcutsTableManager.read(user, mDb)
-        return user
+        var userWeb: UserWeb? = usersTableManager.read(mDb)
+        userWeb = usersFoldersTableManager.read(userWeb, mDb)
+        userWeb = usersFoldersListsTableManager.read(userWeb, mDb)
+        userWeb = usersDatesFormatTableManager.read(userWeb, mDb)
+        userWeb = usersShortcutsTableManager.read(userWeb, mDb)
+        return userWeb
     }
 
     fun closeDb()
@@ -61,139 +61,139 @@ class UsersDatabaseManager (private val context: Context):
     }
 
     //USER SETTINGS
-    override fun saveName(vararg user: User?,db: SQLiteDatabase?,name: String?)
+    override fun saveName(vararg userWeb: UserWeb?,db: SQLiteDatabase?,name: String?)
     {
-        usersTableManager.saveName(db=mDb, user = user, name = name)
+        usersTableManager.saveName(db=mDb, userWeb = userWeb, name = name)
     }
 
-    override fun getName(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getName(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersTableManager.getName(db = mDb, user = user)
+        return usersTableManager.getName(db = mDb, userWeb = userWeb)
     }
 
 
-    override fun saveEmail(vararg user: User?,db: SQLiteDatabase?,email: String?)
+    override fun saveEmail(vararg userWeb: UserWeb?,db: SQLiteDatabase?,email: String?)
     {
-        usersTableManager.saveEmail(db=mDb, user = user, email = email)
+        usersTableManager.saveEmail(db=mDb, userWeb = userWeb, email = email)
     }
 
-    override fun getEmail(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getEmail(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersTableManager.getEmail(db = mDb, user = user)
+        return usersTableManager.getEmail(db = mDb, userWeb = userWeb)
     }
 
     //USER GENERAL SETTINGS
 
-    override fun saveLanguage(vararg user: User?,db: SQLiteDatabase?,language: String?)
+    override fun saveLanguage(vararg userWeb: UserWeb?,db: SQLiteDatabase?,language: String?)
     {
-        usersTableManager.saveLanguage(db=mDb, user = user, language = language)
+        usersTableManager.saveLanguage(db=mDb, userWeb = userWeb, language = language)
     }
 
-    override fun getLanguage(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getLanguage(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersTableManager.getLanguage(db = mDb, user = user)
+        return usersTableManager.getLanguage(db = mDb, userWeb = userWeb)
     }
 
-    override fun saveHomepage(vararg user: User?,db: SQLiteDatabase?,homepage: String?)
+    override fun saveHomepage(vararg userWeb: UserWeb?,db: SQLiteDatabase?,homepage: String?)
     {
-        usersTableManager.saveHomepage(db=mDb, user = user, homepage = homepage)
+        usersTableManager.saveHomepage(db=mDb, userWeb = userWeb, homepage = homepage)
     }
 
-    override fun getHomepage(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getHomepage(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-       return usersTableManager.getHomepage(db = mDb, user = user)
+       return usersTableManager.getHomepage(db = mDb, userWeb = userWeb)
     }
 
-    override fun saveDateFormat(vararg user: User?,db: SQLiteDatabase?,dateFormat: String?)
+    override fun saveDateFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?,dateFormat: String?)
     {
-        usersDatesFormatTableManager.saveDateFormat(db= mDb, user = user, dateFormat = dateFormat)
+        usersDatesFormatTableManager.saveDateFormat(db= mDb, userWeb = userWeb, dateFormat = dateFormat)
     }
 
-    override fun getDateFormat(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getDateFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatesFormatTableManager.getDateFormat(db= mDb, user = user)
+        return usersDatesFormatTableManager.getDateFormat(db= mDb, userWeb = userWeb)
     }
 
-    override fun saveTimeFormat(vararg user: User?,db: SQLiteDatabase?,timeFormat: String?)
+    override fun saveTimeFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?,timeFormat: String?)
     {
-        usersDatesFormatTableManager.saveTimeFormat(db= mDb, user = user, timeFormat = timeFormat)
+        usersDatesFormatTableManager.saveTimeFormat(db= mDb, userWeb = userWeb, timeFormat = timeFormat)
     }
 
-    override fun getTimeFormat(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getTimeFormat(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatesFormatTableManager.getTimeFormat(db =mDb, user = user)
+        return usersDatesFormatTableManager.getTimeFormat(db =mDb, userWeb = userWeb)
     }
 
-    override fun saveStartOfWeek(vararg user: User?,db: SQLiteDatabase?,startOfWeek: String?)
+    override fun saveStartOfWeek(vararg userWeb: UserWeb?,db: SQLiteDatabase?,startOfWeek: String?)
     {
-        usersDatesFormatTableManager.saveStartOfWeek(db = mDb, user = user, startOfWeek = startOfWeek)
+        usersDatesFormatTableManager.saveStartOfWeek(db = mDb, userWeb = userWeb, startOfWeek = startOfWeek)
     }
 
-    override fun getStartOfWeek(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getStartOfWeek(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersDatesFormatTableManager.getStartOfWeek(db= mDb, user = user)
+        return usersDatesFormatTableManager.getStartOfWeek(db= mDb, userWeb = userWeb)
     }
 
-    override fun saveExpandSubtask(vararg user: User?,db: SQLiteDatabase?,expandSubtask: String?)
+    override fun saveExpandSubtask(vararg userWeb: UserWeb?,db: SQLiteDatabase?,expandSubtask: String?)
     {
-        usersTableManager.saveExpandSubtask(db=mDb, user = user, expandSubtask = expandSubtask)
+        usersTableManager.saveExpandSubtask(db=mDb, userWeb = userWeb, expandSubtask = expandSubtask)
     }
 
-    override fun getExpandSubtask(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getExpandSubtask(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersTableManager.getExpandSubtask(db = mDb, user = user)
+        return usersTableManager.getExpandSubtask(db = mDb, userWeb = userWeb)
     }
 
-    override fun saveNewTask(vararg user: User?,db: SQLiteDatabase?,newTask: String?)
+    override fun saveNewTask(vararg userWeb: UserWeb?,db: SQLiteDatabase?,newTask: String?)
     {
-        usersTableManager.saveNewTask(db=mDb, user = user, newTask = newTask)
+        usersTableManager.saveNewTask(db=mDb, userWeb = userWeb, newTask = newTask)
     }
 
-    override fun getNewTask(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getNewTask(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersTableManager.getNewTask(db = mDb, user = user)
+        return usersTableManager.getNewTask(db = mDb, userWeb = userWeb)
     }
 
 
     //IRRELEVANT
 
-    override fun saveShortcutInbox(vararg user: User?,db: SQLiteDatabase?)
+    override fun saveShortcutInbox(vararg userWeb: UserWeb?,db: SQLiteDatabase?)
     {
         TODO("Not yet implemented")
     }
 
-    override fun getShortcutInbox(vararg user: User?)
+    override fun getShortcutInbox(vararg userWeb: UserWeb?)
     {
-        usersTableManager.getShortcutInbox(user = user)
+        usersTableManager.getShortcutInbox(userWeb = userWeb)
     }
 
-    override fun saveId(vararg user: User?,db: SQLiteDatabase?)
+    override fun saveId(vararg userWeb: UserWeb?,db: SQLiteDatabase?)
     {
         TODO("Not yet implemented")
     }
 
-    override fun getId(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getId(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersTableManager.getId(db = mDb, user = user)
+        return usersTableManager.getId(db = mDb, userWeb = userWeb)
     }
 
-    override fun saveShowSidebar(vararg user: User?,db: SQLiteDatabase?,sidebar: String?)
+    override fun saveShowSidebar(vararg userWeb: UserWeb?,db: SQLiteDatabase?,sidebar: String?)
     {
-        usersTableManager.saveShowSidebar(db=mDb, user = user, sidebar = sidebar)
+        usersTableManager.saveShowSidebar(db=mDb, userWeb = userWeb, sidebar = sidebar)
     }
 
-    override fun getShowSidebar(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getShowSidebar(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersTableManager.getShowSidebar(db = mDb, user = user)
+        return usersTableManager.getShowSidebar(db = mDb, userWeb = userWeb)
     }
 
-    override fun saveDiskSpace(vararg user: User?,db: SQLiteDatabase?,diskSpace: String?)
+    override fun saveDiskSpace(vararg userWeb: UserWeb?,db: SQLiteDatabase?,diskSpace: String?)
     {
-        usersTableManager.saveDiskSpace(db=mDb, user = user, diskSpace= diskSpace)
+        usersTableManager.saveDiskSpace(db=mDb, userWeb = userWeb, diskSpace= diskSpace)
     }
 
-    override fun getDiskSpace(vararg user: User?,db: SQLiteDatabase?): String?
+    override fun getDiskSpace(vararg userWeb: UserWeb?,db: SQLiteDatabase?): String?
     {
-        return usersTableManager.getDiskSpace(db = mDb, user = user)
+        return usersTableManager.getDiskSpace(db = mDb, userWeb = userWeb)
     }
 }

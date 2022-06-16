@@ -1,7 +1,7 @@
 package com.example.ngs_test_login.MainActivity.Domain.Base
 
 import com.example.ngs_test_login.MainActivity.Domain.Base.SocketCallbacks.BaseSocketCallback
-import com.example.ngs_test_login.MainActivity.Domain.Models.MainData
+import com.example.ngs_test_login.MainActivity.Domain.Base.Models.MainData
 import io.socket.client.Socket
 
 

@@ -3,7 +3,6 @@ package com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.*

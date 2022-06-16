@@ -1,14 +1,13 @@
 package com.example.ngs_test_login.MainActivity.Data.Base
 
-import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.Base.Web.BaseSocket
-import com.example.ngs_test_login.MainActivity.Data.Main.Mappers.WebMainDataMapper
+import com.example.ngs_test_login.MainActivity.Data.Base.Mappers.WebMapper
 import com.example.ngs_test_login.MainActivity.Data.Base.Models.WebMainData
 import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.MainDataSerializer
-import com.example.ngs_test_login.MainActivity.Data.Main.Web.GetData
+import com.example.ngs_test_login.MainActivity.Data.Base.Web.GetData
 import com.example.ngs_test_login.MainActivity.Domain.Base.BaseInterface
 import com.example.ngs_test_login.MainActivity.Domain.Base.SocketCallbacks.BaseSocketCallback
-import com.example.ngs_test_login.MainActivity.Domain.Models.MainData
+import com.example.ngs_test_login.MainActivity.Domain.Base.Models.MainData
 import io.socket.client.Socket
 
 class BaseInterfaceImpl: BaseInterface
@@ -27,8 +26,8 @@ class BaseInterfaceImpl: BaseInterface
         val dataJson: String? = getData.getData()
         val mainDataSerializer: MainDataSerializer = MainDataSerializer(dataJson)
         val webMainData: WebMainData? = mainDataSerializer.doSerialization()
-        val webMainDataMapper: WebMainDataMapper = WebMainDataMapper()
-        val mainData: MainData? = webMainDataMapper.fromWebData(webMainData)
+        val webMainDataMapper: WebMapper = WebMapper()
+        val mainData: MainData? = webMainDataMapper.map(webMainData)
 
         return mainData
     }

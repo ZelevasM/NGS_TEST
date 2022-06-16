@@ -1,12 +1,12 @@
 package com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases
 
 import android.content.Context
-import com.example.ngs_test_login.MainActivity.Domain.Main.MainInterface
+import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.MainRepository
 
-class LocalDbInitUseCase(private val mainInterface: MainInterface)
+class LocalDbInitUseCase(private val mainRepository: MainRepository)
 {
     fun execute(context: Context)
     {
-        mainInterface.localDbInit(context)
+        mainRepository.localDbInit(context)
     }
 }

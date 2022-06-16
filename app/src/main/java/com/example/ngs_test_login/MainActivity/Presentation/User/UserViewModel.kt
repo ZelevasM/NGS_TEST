@@ -7,13 +7,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ngs_test_login.MainActivity.Data.User.UserInterfaceImpl
-import com.example.ngs_test_login.MainActivity.Domain.Models.MainData
-import com.example.ngs_test_login.MainActivity.Domain.Models.Shortcut
+import com.example.ngs_test_login.MainActivity.Domain.Base.Models.MainData
+import com.example.ngs_test_login.MainActivity.Data.User.Models.ShortcutWeb
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.LocalUserDbCloseUseCase
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.LocalUserDbInitUseCase
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.AddLocalUserUseCase
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.GetLocalUserUseCase
-import com.example.ngs_test_login.MainActivity.Domain.Models.User
+import com.example.ngs_test_login.MainActivity.Data.User.Models.UserWeb
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.SocketUseCases.*
 import com.example.ngs_test_login.MainActivity.Presentation.User.LocalDbProviders.UserLocalProvider
 import com.example.ngs_test_login.MainActivity.Presentation.User.SocketCallbacksImpl.*
@@ -25,8 +25,8 @@ import kotlinx.coroutines.launch
 
 class UserViewModel: ViewModel(), ViewModelInterface
 {
-    private val shortcutsData = MutableLiveData<ArrayList<Shortcut?>?>()
-    val shortcutsLiveData: LiveData<ArrayList<Shortcut?>?> = shortcutsData
+    private val shortcutsData = MutableLiveData<ArrayList<ShortcutWeb?>?>()
+    val shortcutsLiveData: LiveData<ArrayList<ShortcutWeb?>?> = shortcutsData
 
     //USER SETTINGS
     private val userNameData = MutableLiveData<String?>()
@@ -84,10 +84,10 @@ class UserViewModel: ViewModel(), ViewModelInterface
     fun dataAtomicAssigner()
     {
         Log.d("MyLog","Local User in User: ${getLocalUserAtomic()}")
-        val shortcuts: ArrayList<Shortcut?>? = getLocalUserAtomic()?.shortcuts as ArrayList<Shortcut?>?
-        if (ShortcutValidator().validateIncomingShortcut(shortcuts))
+        val shortcutWebs: ArrayList<ShortcutWeb?>? = getLocalUserAtomic()?.shortcutWebs as ArrayList<ShortcutWeb?>?
+        if (ShortcutValidator().validateIncomingShortcut(shortcutWebs))
         {
-            shortcutsData.postValue(shortcuts)
+            shortcutsData.postValue(shortcutWebs)
             //load user settings
             userNameData.postValue(userLocalDbProvider.getName(db=null))
             userEmailData.postValue(userLocalDbProvider.getEmail(db=null))
@@ -106,16 +106,16 @@ class UserViewModel: ViewModel(), ViewModelInterface
 
     fun addLocalUserAtomic(mainData: MainData?)
     {
-        val user: User? = mainData?.user
+        val userWeb: UserWeb? = mainData?.userWeb
         val addLocalUserUseCase: AddLocalUserUseCase = AddLocalUserUseCase(userInterfaceImpl)
-        addLocalUserUseCase.execute(user)
+        addLocalUserUseCase.execute(userWeb)
     }
 
-    fun getLocalUserAtomic(): User?
+    fun getLocalUserAtomic(): UserWeb?
     {
         val getLocalUserUseCase: GetLocalUserUseCase = GetLocalUserUseCase(userInterfaceImpl)
-        val user: User? = getLocalUserUseCase.execute()
-        return user
+        val userWeb: UserWeb? = getLocalUserUseCase.execute()
+        return userWeb
     }
 
     fun changeNotifications()
@@ -290,17 +290,17 @@ class UserViewModel: ViewModel(), ViewModelInterface
         }
     }
 
-    fun changeShortcut(shortcuts: ArrayList<Shortcut?>?)
+    fun changeShortcut(shortcutWebs: ArrayList<ShortcutWeb?>?)
     {
         viewModelScope.launch(Dispatchers.IO) {
-            ChangeShortcutUseCase(userInterfaceImpl).execute(shortcuts)
+            ChangeShortcutUseCase(userInterfaceImpl).execute(shortcutWebs)
         }
     }
 
     fun onChangedShortcut()
     {
         viewModelScope.launch(Dispatchers.IO) {
-            val userShortcutCallbackInterfaceImpl = UserShortcutsSocketCallbackImpl(shortcutsData)
+            val userShortcutCallbackInterfaceImpl = UserShortcutsSocketCallbackImpl(shortcutsData, userLocalDbProvider)
             OnChangedShortcutsUseCase(userInterfaceImpl).execute(userShortcutCallbackInterfaceImpl)
         }
     }
