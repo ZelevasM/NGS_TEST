@@ -6,6 +6,6 @@ class SaveLocalUserEmailUseCase(private val userRepository: UserRepository)
 {
     fun execute(email: String?)
     {
-        userRepository.saveEmail(null,db = null,email = email)
+        userRepository.saveLocalEmail(email = email)
     }
 }

@@ -6,6 +6,6 @@ class SaveLocalUserLanguageUseCase(private val userRepository: UserRepository)
 {
     fun execute(language: String?)
     {
-        userRepository.saveLanguage(null, db = null, language = language)
+        userRepository.saveLocalLanguage(language = language)
     }
 }

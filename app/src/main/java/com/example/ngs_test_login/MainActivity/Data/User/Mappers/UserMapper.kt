@@ -28,7 +28,7 @@ class UserMapper: DoubleMapper<User?, UserWeb?>
         }
         return UserWeb(id = value?.id, name = value?.name, email = value?.email, shortcutInbox = value?.shortcutInbox, language = value?.language,
         diskSpace = value?.diskSpace, showSidebar = value?.showSidebar, expandSubtask = value?.expandSubtask, newTask = value?.newTask,
-        homepage = HomepageMapper().mapFromTToK(value?.homepage), dateFormatWeb = DateFormatMapper().mapFromTToK(value?.dateFormatWeb),
+        homepage = HomepageMapper().mapFromTToK(value?.homepage), dateFormatWeb = DateFormatMapper().mapFromTToK(value?.dateFormat),
         shortcutWebs = shortcuts, folderWeb = folders)
     }
 
@@ -50,7 +50,7 @@ class UserMapper: DoubleMapper<User?, UserWeb?>
         }
         return User(id = value?.id, name = value?.name, email = value?.email, shortcutInbox = value?.shortcutInbox, language = value?.language,
             diskSpace = value?.diskSpace, showSidebar = value?.showSidebar, expandSubtask = value?.expandSubtask, newTask = value?.newTask,
-            homepage = HomepageMapper().mapFromKTOT(value?.homepage), dateFormatWeb = DateFormatMapper().mapFromKTOT(value?.dateFormatWeb),
+            homepage = HomepageMapper().mapFromKTOT(value?.homepage), dateFormat = DateFormatMapper().mapFromKTOT(value?.dateFormatWeb),
             shortcuts = shortcuts, folders = folders)
     }
 }

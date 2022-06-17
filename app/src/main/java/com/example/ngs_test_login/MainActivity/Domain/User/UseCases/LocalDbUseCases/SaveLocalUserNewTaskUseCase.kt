@@ -6,6 +6,6 @@ class SaveLocalUserNewTaskUseCase(private val userRepository: UserRepository)
 {
     fun execute(newTask: String?)
     {
-        userRepository.saveNewTask(null, db = null, newTask = newTask)
+        userRepository.saveLocalNewTask(newTask = newTask)
     }
 }

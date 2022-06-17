@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ngs_test_login.MainActivity.Data.User.UserRepositoryImpl
 import com.example.ngs_test_login.MainActivity.Domain.Base.Models.MainData
+import com.example.ngs_test_login.MainActivity.Domain.User.Models.Shortcut
+import com.example.ngs_test_login.MainActivity.Domain.User.Models.User
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.LocalUserDbCloseUseCase
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.LocalUserDbInitUseCase
 import com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases.AddLocalUserUseCase
@@ -22,23 +24,29 @@ import kotlinx.coroutines.launch
 
 class UserViewModel: ViewModel(), ViewModelInterface
 {
-    private val shortcutsData = MutableLiveData<ArrayList<ShortcutWeb?>?>()
-    val shortcutsLiveData: LiveData<ArrayList<ShortcutWeb?>?> = shortcutsData
+    private val userInterfaceImpl: UserRepositoryImpl = UserRepositoryImpl()
 
-    //USER SETTINGS
+    //USER INFO SETTINGS
     private val userNameData = MutableLiveData<String?>()
     val userNameLiveData: LiveData<String?> = userNameData
 
     private val userEmailData = MutableLiveData<String?>()
     val userEmailLiveData: LiveData<String?> = userEmailData
 
-    //USER GENERAL SETTINGS
+    //GENERAL SETTINGS
     private val userLanguageData = MutableLiveData<String?>()
     val userLanguageLiveData: LiveData<String?> = userLanguageData
 
     private val userHomepageData = MutableLiveData<String?>()
     val userHomepageLiveData: LiveData<String?> = userHomepageData
 
+    private val userSubtaskData = MutableLiveData<String?>()
+    val userSubtaskLiveData: LiveData<String?> = userSubtaskData
+
+    private val userNewTaskData = MutableLiveData<String?>()
+    val userNewTaskLiveData: LiveData<String?> = userNewTaskData
+
+    //DATE FORMAT SETTINGS
     private val userDateFormatData = MutableLiveData<String?>()
     val userDateFormatLiveData: LiveData<String?> = userDateFormatData
 
@@ -48,21 +56,10 @@ class UserViewModel: ViewModel(), ViewModelInterface
     private val userWeekStartData = MutableLiveData<String?>()
     val userWeekStartLiveData: LiveData<String?> = userWeekStartData
 
-    private val userSubtaskData = MutableLiveData<String?>()
-    val userSubtaskLiveData: LiveData<String?> = userSubtaskData
+    //SHORTCUTS' SETTINGS
+    private val shortcutsData = MutableLiveData<ArrayList<Shortcut?>?>()
+    val shortcutsLiveData: LiveData<ArrayList<Shortcut?>?> = shortcutsData
 
-    private val userNewTaskData = MutableLiveData<String?>()
-    val userNewTaskLiveData: LiveData<String?> = userNewTaskData
-
-    private val userInterfaceImpl: UserRepositoryImpl = UserRepositoryImpl()
-    private val userLocalDbProvider: com.example.ngs_test_login.MainActivity.Presentation.User.LocalDbProviders.User = com.example.ngs_test_login.MainActivity.Presentation.User.LocalDbProviders.User(userInterfaceImpl)
-
-    override fun socketInit(vararg bSocket: Socket)
-    {
-        val userSocketInitUseCase = UserSocketInitUseCase(userInterfaceImpl)
-        userSocketInitUseCase.execute(bSocket[0])
-        invokeSocketListeners()
-    }
 
     override fun localDbInit(context: Context)
     {
@@ -81,21 +78,22 @@ class UserViewModel: ViewModel(), ViewModelInterface
     fun dataAtomicAssigner()
     {
         Log.d("MyLog","Local User in User: ${getLocalUserAtomic()}")
-        val shortcutWebs: ArrayList<ShortcutWeb?>? = getLocalUserAtomic()?.shortcutWebs as ArrayList<ShortcutWeb?>?
-        if (ShortcutValidator().validateIncomingShortcut(shortcutWebs))
+        val user: User? = getLocalUserAtomic()
+        val shortcuts: ArrayList<Shortcut?>? = user?.shortcuts
+        if (ShortcutValidator().validateIncomingShortcut(shortcuts))
         {
-            shortcutsData.postValue(shortcutWebs)
+            shortcutsData.postValue(shortcuts)
             //load user settings
-            userNameData.postValue(userLocalDbProvider.getName())
-            userEmailData.postValue(userLocalDbProvider.getEmail())
+            userNameData.postValue(user?.name)
+            userEmailData.postValue(user?.email)
             //load general settings
-            userLanguageData.postValue(userLocalDbProvider.getLanguage())
-            userHomepageData.postValue(userLocalDbProvider.getHomepage())
-            userDateFormatData.postValue(userLocalDbProvider.getDateFormat())
-            userTimeFormatData.postValue(userLocalDbProvider.getTimeFormat())
-            userWeekStartData.postValue(userLocalDbProvider.getStartOfWeek())
-            userSubtaskData.postValue(userLocalDbProvider.getExpandSubtask())
-            userNewTaskData.postValue(userLocalDbProvider.getNewTask())
+            userLanguageData.postValue(user?.language)
+            userHomepageData.postValue(user?.homepage?.type)
+            userDateFormatData.postValue(user?.dateFormat?.date)
+            userTimeFormatData.postValue(user?.dateFormat?.time)
+            userWeekStartData.postValue(user?.dateFormat?.startOfTheWeek)
+            userSubtaskData.postValue(user?.expandSubtask)
+            userNewTaskData.postValue(user?.newTask)
             //userLocalDbProvider.getDiskSpace(db=null)
             //write data to local storage
         }
@@ -108,20 +106,25 @@ class UserViewModel: ViewModel(), ViewModelInterface
         addLocalUserUseCase.execute(user)
     }
 
-    fun getLocalUserAtomic(): UserWeb?
+    fun getLocalUserAtomic(): User?
     {
         val getLocalUserUseCase: GetLocalUserUseCase = GetLocalUserUseCase(userInterfaceImpl)
-        val userWeb: UserWeb? = getLocalUserUseCase.execute()
-        return userWeb
+        val user: User? = getLocalUserUseCase.execute()
+        return user
     }
 
-    fun changeNotifications()
+    //Socket's Methods
+
+    override fun socketInit(vararg bSocket: Socket)
     {
-        //send change to socket -> receive answer from socket -> store answer from socket locally
-        // -> show answer from socket in UI
+        val userSocketInitUseCase = UserSocketInitUseCase(userInterfaceImpl)
+        userSocketInitUseCase.execute(bSocket[0])
+        invokeSocketListeners()
     }
 
-    //USER SETTINGS
+
+    //USER INFO SETTINGS
+
     fun changeName(name: String?)
     {
         viewModelScope.launch(Dispatchers.IO) {
@@ -133,141 +136,64 @@ class UserViewModel: ViewModel(), ViewModelInterface
     fun onChangedName()
     {
         viewModelScope.launch(Dispatchers.IO) {
-            val userName = UserNameSocketCallbackInterfaceImpl(userNameData, userLocalDbProvider)
-            val onUserNameUC = OnChangedNameUseCase(userInterfaceImpl)
-            onUserNameUC.execute(userName)
+            val userName = UserNameSocketCallbackInterfaceImpl(userNameData, userInterfaceImpl)
+            OnChangedNameUseCase(userInterfaceImpl).execute(userName)
         }
     }
 
     fun changeEmail(email: String?)
     {
-        viewModelScope.launch(Dispatchers.IO) {
-            val changeEmailUseCase: ChangeEmailUseCase = ChangeEmailUseCase(userInterfaceImpl)
-            changeEmailUseCase.execute(email)
-        }
+        viewModelScope.launch(Dispatchers.IO) { ChangeEmailUseCase(userInterfaceImpl).execute(email) }
     }
 
     fun onChangedEmail()
     {
         viewModelScope.launch(Dispatchers.IO) {
-            val userEmail = UserEmailSocketCallbackInterfaceImpl(userEmailData, userLocalDbProvider)
-            val onEmailUC = OnChangedEmailUseCase(userInterfaceImpl)
-            onEmailUC.execute(userEmail)
-        }
+            val userEmail = UserEmailSocketCallbackInterfaceImpl(userEmailData, userInterfaceImpl)
+            OnChangedEmailUseCase(userInterfaceImpl).execute(userEmail) }
     }
 
     fun changePassword()
     {
-        viewModelScope.launch(Dispatchers.IO) {
-            val changePasswordUseCase: ChangePasswordUseCase = ChangePasswordUseCase(userInterfaceImpl)
-            changePasswordUseCase.execute()
-        }
+        viewModelScope.launch(Dispatchers.IO) { ChangePasswordUseCase(userInterfaceImpl).execute() }
     }
 
     fun onChangedPassword()
     {}
 
 
-    //USER GENERAL SETTINGS
+    //GENERAL SETTINGS
 
     fun changeLanguage()
     {}
 
     fun onChangedLanguage()
     {
-        viewModelScope.launch(Dispatchers.IO) {
-            val userLang = UserLanguageSocketCallbackInterfaceImpl()
-        }
+        viewModelScope.launch(Dispatchers.IO) { val userLang = UserLanguageSocketCallbackInterfaceImpl() }
     }
 
     fun changeHomepage(homepage: String?)
     {
-        viewModelScope.launch(Dispatchers.IO) {
-            val changeHomepageUseCase: ChangeHomepageUseCase = ChangeHomepageUseCase(userInterfaceImpl)
-            changeHomepageUseCase.execute(homepage)
-        }
+        viewModelScope.launch(Dispatchers.IO) { ChangeHomepageUseCase(userInterfaceImpl).execute(homepage) }
     }
 
     fun onChangedHomepage()
     {
         viewModelScope.launch(Dispatchers.IO) {
-            val userHomepageSocketCallback = UserHomepageSocketCallbackInterfaceImpl(homepageData = userHomepageData,
-            userLocalDbProvider)
-            val onChangedHomepageUseCase: OnChangedHomepageUseCase =
-                OnChangedHomepageUseCase(userInterfaceImpl)
-            onChangedHomepageUseCase.execute(userHomepageSocketCallback)
-        }
-    }
-
-    fun changeDateFormat(dateFormat: String?)
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            val changedDateFormatUseCase: ChangeDateFormatUseCase = ChangeDateFormatUseCase(userInterfaceImpl)
-            changedDateFormatUseCase.execute(dateFormat)
-        }
-    }
-
-    fun onChangedDateFormat()
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            val dateFormat = UserDateFormatSocketCallbackInterfaceImpl(userDateFormatData,
-                userLocalDbProvider)
-            val onChangedDateFormat = OnChangedDateFormatUseCase(userInterfaceImpl)
-            onChangedDateFormat.execute(dateFormat)
-        }
-    }
-
-    fun changeTimeFormat(timeFormat: String?)
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            val changeTimeFormatUseCase: ChangeTimeFormatUseCase = ChangeTimeFormatUseCase(userInterfaceImpl)
-            changeTimeFormatUseCase.execute(timeFormat)
-        }
-    }
-
-    fun onChangedTimeFormat()
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            val timeFormat = UserTimeFormatSocketCallbackInterfaceImpl(userTimeFormatData,
-            userLocalDbProvider)
-            val onTimeFormat = OnChangedTimeFormatUseCase(userInterfaceImpl)
-            onTimeFormat.execute(timeFormat)
-        }
-    }
-
-    fun changeStartOfWeek(startOfWeek: String?)
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            val changeStartOfWeekUseCase: ChangeStartOfWeekUseCase = ChangeStartOfWeekUseCase(userInterfaceImpl)
-            changeStartOfWeekUseCase.execute(startOfWeek)
-        }
-    }
-
-    fun onChangedStartOfWeek()
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            val startOfWeek = UserStartOfWeekSocketCallbackInterfaceImpl(userWeekStartData,
-            userLocalDbProvider)
-            val onStartOfWeek = OnChangedStartOfWeekUseCase(userInterfaceImpl)
-            onStartOfWeek.execute(startOfWeek)
-        }
+            val userHomepageSocketCallback = UserHomepageSocketCallbackInterfaceImpl(homepageData = userHomepageData, userInterfaceImpl)
+            OnChangedHomepageUseCase(userInterfaceImpl).execute(userHomepageSocketCallback) }
     }
 
     fun changeExpandSubtask(expandSubtask: String?)
     {
-        viewModelScope.launch(Dispatchers.IO) {
-            val changeExpandSubtaskUseCaseUseCase: ChangeExpandSubtaskUseCase = ChangeExpandSubtaskUseCase(userInterfaceImpl)
-            changeExpandSubtaskUseCaseUseCase.execute(expandSubtask)
-        }
+        viewModelScope.launch(Dispatchers.IO) { ChangeExpandSubtaskUseCase(userInterfaceImpl).execute(expandSubtask) }
     }
 
     fun onChangedExpandSubtask()
     {
         viewModelScope.launch(Dispatchers.IO) {
-            val subtask = UserSubtaskSocketCallbackInterfaceImpl(userSubtaskData, userLocalDbProvider)
-            val onSubtask = OnChangedExpandSubtaskUseCase(userInterfaceImpl)
-            onSubtask.execute(subtask)
-        }
+            val subtask = UserSubtaskSocketCallbackInterfaceImpl(userSubtaskData, userInterfaceImpl)
+            OnChangedExpandSubtaskUseCase(userInterfaceImpl).execute(subtask) }
     }
 
     fun changeNewTask(newTask: String?)
@@ -281,37 +207,64 @@ class UserViewModel: ViewModel(), ViewModelInterface
     fun onChangedNewTask()
     {
         viewModelScope.launch(Dispatchers.IO) {
-            val newTask = UserNewTaskSocketCallbackInterfaceImpl(userNewTaskData, userLocalDbProvider)
-            val onNewTask = OnChangedNewTaskUseCase(userInterfaceImpl)
-            onNewTask.execute(newTask)
+            val newTask = UserNewTaskSocketCallbackInterfaceImpl(userNewTaskData, userInterfaceImpl)
+            OnChangedNewTaskUseCase(userInterfaceImpl).execute(newTask) }
+    }
+
+    //DATE FORMAT SETTINGS
+
+    fun changeDateFormat(dateFormat: String?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { ChangeDateFormatUseCase(userInterfaceImpl).execute(dateFormat) }
+    }
+
+    fun onChangedDateFormat()
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            val dateFormat = UserDateFormatSocketCallbackInterfaceImpl(userDateFormatData, userInterfaceImpl)
+            OnChangedDateFormatUseCase(userInterfaceImpl).execute(dateFormat)
         }
     }
 
-    fun changeShortcut(shortcutWebs: ArrayList<ShortcutWeb?>?)
+    fun changeTimeFormat(timeFormat: String?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { ChangeTimeFormatUseCase(userInterfaceImpl).execute(timeFormat) }
+    }
+
+    fun onChangedTimeFormat()
     {
         viewModelScope.launch(Dispatchers.IO) {
-            ChangeShortcutUseCase(userInterfaceImpl).execute(shortcutWebs)
+            val timeFormat = UserTimeFormatSocketCallbackInterfaceImpl(userTimeFormatData, userInterfaceImpl)
+            OnChangedTimeFormatUseCase(userInterfaceImpl).execute(timeFormat)
         }
+    }
+
+    fun changeStartOfWeek(startOfWeek: String?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { ChangeStartOfWeekUseCase(userInterfaceImpl).execute(startOfWeek) }
+    }
+
+    fun onChangedStartOfWeek()
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            val startOfWeek = UserStartOfWeekSocketCallbackInterfaceImpl(userWeekStartData, userInterfaceImpl)
+            val onStartOfWeek = OnChangedStartOfWeekUseCase(userInterfaceImpl)
+            onStartOfWeek.execute(startOfWeek)
+        }
+    }
+
+    //SHORTCUTS' SETTINGS
+
+    fun changeShortcut(shortcuts: ArrayList<Shortcut?>?)
+    {
+        viewModelScope.launch(Dispatchers.IO) {ChangeShortcutUseCase(userInterfaceImpl).execute(shortcuts)}
     }
 
     fun onChangedShortcut()
     {
         viewModelScope.launch(Dispatchers.IO) {
-            val userShortcutCallbackInterfaceImpl = UserShortcutsSocketCallbackImpl(shortcutsData, userLocalDbProvider)
+            val userShortcutCallbackInterfaceImpl = UserShortcutsSocketCallbackImpl(shortcutsData, userInterfaceImpl)
             OnChangedShortcutsUseCase(userInterfaceImpl).execute(userShortcutCallbackInterfaceImpl)
-        }
-    }
-
-
-    //IRRELEVANT
-
-    fun changeDiskSpace()
-    {}
-
-    fun onChangedDiskSpace()
-    {
-        viewModelScope.launch(Dispatchers.IO) {
-            val diskSpace = UserDiskSpaceSocketCallbackInterfaceImpl()
         }
     }
 

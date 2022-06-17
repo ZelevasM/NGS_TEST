@@ -6,6 +6,6 @@ class GetLocalUserEmailUseCase(private val userRepository: UserRepository)
 {
     fun execute(): String?
     {
-        return userRepository.getEmail(db = null)
+        return userRepository.getLocalEmail()
     }
 }

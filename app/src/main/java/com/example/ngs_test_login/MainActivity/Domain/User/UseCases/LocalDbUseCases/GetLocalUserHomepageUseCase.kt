@@ -6,6 +6,6 @@ class GetLocalUserHomepageUseCase(private val userRepository: UserRepository)
 {
     fun execute(): String?
     {
-        return userRepository.getHomepage(db=null)
+        return userRepository.getLocalHomepage()
     }
 }

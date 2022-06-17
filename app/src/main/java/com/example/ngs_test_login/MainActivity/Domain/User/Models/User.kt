@@ -21,7 +21,7 @@ data class User(
 
     var token: ArrayList<Any?>? = null,
 
-    var dateFormatWeb: DateFormat? = null,
+    var dateFormat: DateFormat? = null,
 
     var homepage: Homepage? = null,
 

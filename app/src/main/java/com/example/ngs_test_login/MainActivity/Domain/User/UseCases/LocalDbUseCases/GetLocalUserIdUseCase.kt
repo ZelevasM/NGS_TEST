@@ -6,6 +6,6 @@ class GetLocalUserIdUseCase(private val userRepository: UserRepository)
 {
     fun execute(): String?
     {
-        return userRepository.getId(db = null)
+        return "userRepository.id"
     }
 }

@@ -6,6 +6,6 @@ class GetLocalUserLanguageUseCase(private val userRepository: UserRepository)
 {
     fun execute(): String?
     {
-        return userRepository.getLanguage(db=null)
+        return userRepository.getLocalLanguage()
     }
 }

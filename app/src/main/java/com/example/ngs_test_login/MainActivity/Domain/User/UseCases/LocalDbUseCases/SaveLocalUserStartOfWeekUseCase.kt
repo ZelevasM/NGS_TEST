@@ -6,6 +6,6 @@ class SaveLocalUserStartOfWeekUseCase(private val userRepository: UserRepository
 {
     fun execute(startOfWeek: String?)
     {
-        userRepository.saveStartOfWeek(db = null, startOfWeek = startOfWeek)
+        userRepository.saveLocalStartOfWeek(startOfWeek = startOfWeek)
     }
 }

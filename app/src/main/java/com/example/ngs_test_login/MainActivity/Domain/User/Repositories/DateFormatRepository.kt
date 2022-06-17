@@ -1,18 +1,37 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.Repositories
 
 import com.example.ngs_test_login.MainActivity.Domain.User.Models.User
+import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserDateFormatSocketCallbackInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserStartOfWeekSocketCallbackInterface
+import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserTimeFormatSocketCallbackInterface
 
 interface DateFormatRepository
 {
-    fun saveDateFormat(dateFormat: String?)
+    fun saveLocalDateFormat(dateFormat: String?)
 
-    fun getDateFormat(): String?
+    fun getLocalDateFormat(): String?
 
-    fun saveTimeFormat(timeFormat: String?)
+    fun saveLocalTimeFormat(timeFormat: String?)
 
-    fun getTimeFormat(): String?
+    fun getLocalTimeFormat(): String?
 
-    fun saveStartOfWeek(startOfWeek: String?)
+    fun saveLocalStartOfWeek(startOfWeek: String?)
 
-    fun getStartOfWeek(): String?
+    fun getLocalStartOfWeek(): String?
+
+    //Socket's Methods
+
+    fun changeDateFormat(dateFormat: String?)
+
+    fun onChangedDateFormat(userDateFormatSocketCallbackInterface: UserDateFormatSocketCallbackInterface)
+
+
+    fun changeTimeFormat(timeFormat: String?)
+
+    fun onChangedTimeFormat(userTimeFormatSocketCallbackInterface: UserTimeFormatSocketCallbackInterface)
+
+
+    fun changeStartOfWeek(startOfWeek: String?)
+
+    fun onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface: UserStartOfWeekSocketCallbackInterface)
 }

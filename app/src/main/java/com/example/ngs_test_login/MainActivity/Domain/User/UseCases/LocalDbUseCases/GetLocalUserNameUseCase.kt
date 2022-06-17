@@ -6,6 +6,6 @@ class GetLocalUserNameUseCase(private val userRepository: UserRepository)
 {
     fun execute(): String?
     {
-        return userRepository.getName(db = null)
+        return userRepository.getLocalName()
     }
 }

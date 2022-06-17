@@ -3,8 +3,10 @@ package com.example.ngs_test_login.MainActivity.Data.User.Web
 import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ConvertClassToJson
+import com.example.ngs_test_login.MainActivity.Data.User.Mappers.ShortcutMapper
 import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.*
 import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.ShortcutWeb
+import com.example.ngs_test_login.MainActivity.Domain.User.Models.Shortcut
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.*
 import io.socket.client.Socket
 import org.json.JSONObject
@@ -417,12 +419,12 @@ class UserSocket(private val mSocket: Socket)
             Log.d("MyLog","GOT SHORTCUTS: ${args[0]}")
             socketDataSerializer = SocketDataSerializer(args[0] as JSONObject, shortcuts.javaClass)
             shortcuts = socketDataSerializer.doSerialization()
-            val shorts = ArrayList<ShortcutWeb?>()
+            val shorts = ArrayList<Shortcut?>()
             for(i in shortcuts.shortcutWebs.indices)
             {
-                shorts.add(shortcuts.shortcutWebs[i])
+                shorts?.add(ShortcutMapper().mapFromKTOT(shortcuts.shortcutWebs[i]))
             }
-            userShortcutsSocketCallbackInterface.onChanged(shortcutWebs  = shorts)
+            userShortcutsSocketCallbackInterface.onChanged(shortcuts  = shorts)
             Log.d("MyLog", "Serialized: $shortcuts")
         }
     }

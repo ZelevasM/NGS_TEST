@@ -6,6 +6,6 @@ class SaveLocalUserNameUseCase(private val userRepository: UserRepository)
 {
     fun execute(name: String?)
     {
-        userRepository.saveName(null, db = null, name = name)
+        userRepository.saveLocalName(name = name)
     }
 }

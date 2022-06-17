@@ -6,6 +6,6 @@ class GetLocalUserExpandSubtaskUseCase(private val userRepository: UserRepositor
 {
     fun execute(): String?
     {
-        return userRepository.getExpandSubtask(db=null)
+        return userRepository.getLocalExpandSubtask()
     }
 }

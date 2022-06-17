@@ -6,6 +6,6 @@ class GetLocalUserShowSidebarUseCase(private val userRepository: UserRepository)
 {
     fun execute(): String?
     {
-       return userRepository.getShowSidebar(db=null)
+       return "userRepository.Sidebar"
     }
 }

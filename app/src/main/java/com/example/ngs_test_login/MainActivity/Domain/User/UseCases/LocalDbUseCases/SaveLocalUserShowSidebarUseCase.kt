@@ -6,6 +6,6 @@ class SaveLocalUserShowSidebarUseCase(private val userRepository: UserRepository
 {
     fun execute(sidebar: String?)
     {
-        userRepository.saveShowSidebar(null, db = null, sidebar = sidebar)
+        "userRepository.saveLocaS(null, db = null, sidebar = sidebar)"
     }
 }

@@ -1,17 +1,17 @@
 package com.example.ngs_test_login.MainActivity.Presentation.User.SocketCallbacksImpl
 
 import androidx.lifecycle.MutableLiveData
-import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.ShortcutWeb
+import com.example.ngs_test_login.MainActivity.Domain.User.Models.Shortcut
+import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserShortcutsSocketCallbackInterface
-import com.example.ngs_test_login.MainActivity.Presentation.User.LocalDbProviders.User
 
-class UserShortcutsSocketCallbackImpl (private val shortcutsData: MutableLiveData<ArrayList<ShortcutWeb?>?>,
-                                       private val localUserDbProvider: User):
+class UserShortcutsSocketCallbackImpl (private val shortcutsData: MutableLiveData<ArrayList<Shortcut?>?>,
+                                       private val userRepository: UserRepository):
     UserShortcutsSocketCallbackInterface
 {
-    override fun onChanged(shortcutWebs: ArrayList<ShortcutWeb?>?)
+    override fun onChanged(shortcuts: ArrayList<Shortcut?>?)
     {
 
-        shortcutsData.postValue(shortcutWebs)
+        shortcutsData.postValue(shortcuts)
     }
 }

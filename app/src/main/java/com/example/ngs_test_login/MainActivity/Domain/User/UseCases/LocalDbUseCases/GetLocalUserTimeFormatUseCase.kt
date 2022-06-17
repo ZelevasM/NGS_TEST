@@ -6,6 +6,6 @@ class GetLocalUserTimeFormatUseCase(private val userRepository: UserRepository)
 {
     fun execute(): String?
     {
-        return userRepository.getTimeFormat(db=null)
+        return userRepository.getLocalTimeFormat()
     }
 }

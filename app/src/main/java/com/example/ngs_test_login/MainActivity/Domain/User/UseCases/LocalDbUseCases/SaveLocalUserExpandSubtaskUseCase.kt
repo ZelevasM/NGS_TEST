@@ -6,6 +6,6 @@ class SaveLocalUserExpandSubtaskUseCase(private val userRepository: UserReposito
 {
     fun execute(expandSubtask: String?)
     {
-        userRepository.saveExpandSubtask(null, db = null, expandSubtask = expandSubtask)
+        userRepository.saveLocalExpandSubtask(expandSubtask = expandSubtask)
     }
 }

@@ -1,8 +1,9 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks
 
-import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.ShortcutWeb
+import com.example.ngs_test_login.MainActivity.Domain.User.Models.Shortcut
+
 
 interface UserShortcutsSocketCallbackInterface
 {
-    fun onChanged(shortcutWebs: ArrayList<ShortcutWeb?>?)
+    fun onChanged(shortcuts: ArrayList<Shortcut?>?)
 }

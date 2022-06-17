@@ -6,6 +6,6 @@ class SaveLocalUserDiskSpaceUseCase(private val userRepository: UserRepository)
 {
     fun execute(diskSpace: String?)
     {
-        userRepository.saveDiskSpace(null, db = null, diskSpace = diskSpace)
+        "userRepository.saveDiskSpace(diskSpace = diskSpace)"
     }
 }

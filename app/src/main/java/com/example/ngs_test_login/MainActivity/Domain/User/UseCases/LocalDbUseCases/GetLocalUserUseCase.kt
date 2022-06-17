@@ -1,13 +1,12 @@
 package com.example.ngs_test_login.MainActivity.Domain.User.UseCases.LocalDbUseCases
 
-import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.UserWeb
+import com.example.ngs_test_login.MainActivity.Domain.User.Models.User
 import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.UserRepository
 
 class GetLocalUserUseCase(private val userRepository: UserRepository)
 {
-    fun execute(): UserWeb?
+    fun execute(): User?
     {
-        val userWeb: UserWeb? = userRepository.getLocalUser()
-        return userWeb
+        return userRepository.getLocalUser()
     }
 }

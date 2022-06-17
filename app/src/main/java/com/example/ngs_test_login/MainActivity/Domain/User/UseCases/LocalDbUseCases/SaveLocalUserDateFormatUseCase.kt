@@ -6,6 +6,6 @@ class SaveLocalUserDateFormatUseCase(private val userRepository: UserRepository)
 {
     fun execute(dateFormat: String?)
     {
-        userRepository.saveDateFormat(db = null, dateFormat = dateFormat)
+        userRepository.saveLocalDateFormat(dateFormat = dateFormat)
     }
 }

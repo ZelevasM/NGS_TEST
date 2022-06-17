@@ -6,6 +6,6 @@ class SaveLocalUserHomepageUseCase(private val userRepository: UserRepository)
 {
     fun execute(homepage: String?)
     {
-        userRepository.saveHomepage(db=null, homepage = homepage)
+        userRepository.saveLocalHomepage(homepage = homepage)
     }
 }

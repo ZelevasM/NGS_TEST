@@ -6,6 +6,6 @@ class GetLocalUserNewTaskUseCase(private val userRepository: UserRepository)
 {
     fun execute(): String?
     {
-        return userRepository.getNewTask(db=null)
+        return userRepository.getLocalNewTask()
     }
 }
