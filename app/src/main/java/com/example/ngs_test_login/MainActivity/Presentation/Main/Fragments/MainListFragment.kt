@@ -8,7 +8,7 @@ import android.widget.ExpandableListView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import com.example.ngs_test_login.MainActivity.Presentation.Adapters.TasksExpandableListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.R
 import com.google.android.material.appbar.AppBarLayout
@@ -17,7 +17,7 @@ import com.google.android.material.appbar.MaterialToolbar
 class MainListFragment: Fragment()
 {
     private val mainViewModel: MainViewModel by activityViewModels()
-    private lateinit var tasksList: ExpandableListView
+    private lateinit var tasksRecView: RecyclerView
     private lateinit var actionBar: MaterialToolbar
     private lateinit var actionBarLayout: AppBarLayout
 
@@ -46,7 +46,7 @@ class MainListFragment: Fragment()
             requireActivity().findNavController(host).popBackStack(destination,true)
             requireActivity().findNavController(host).navigate(destination)
         }
-        tasksList = view.findViewById(R.id.main_list_tasks_expandableListView)
+        tasksRecView = view.findViewById(R.id.main_list_tasks_recView)
 
 
         //TESTING
@@ -62,7 +62,5 @@ class MainListFragment: Fragment()
             }
             children.put(groups[i], childrenArray)
         }
-        val tasksListAdapter: TasksExpandableListAdapter = TasksExpandableListAdapter(requireContext(), groups, children)
-        tasksList.setAdapter(tasksListAdapter)
     }
 }

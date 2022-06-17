@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,5 +7,18 @@
         android:id="@+id/mainListFragment"
         android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainListFragment"
         android:label="@string/name"
-        tools:layout="@layout/fragment_main_list"/>
+        tools:layout="@layout/fragment_main_list">
+        <action
+            android:id="@+id/action_mainListFragment_to_mainTaskFragment"
+            app:destination="@id/mainTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainTaskFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainTaskFragment"
+        android:label="MainTaskFragment"
+        tools:layout="@layout/fragment_main_task">
+        <action
+            android:id="@+id/action_mainTaskFragment_to_mainListFragment"
+            app:destination="@id/mainListFragment" />
+    </fragment>
 </navigation>

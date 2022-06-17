@@ -45,8 +45,8 @@
                 android:background="@color/semi_transparent_black"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
-        <ExpandableListView
-            android:id="@+id/main_list_tasks_expandableListView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_list_tasks_recView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:childDivider="@color/white"

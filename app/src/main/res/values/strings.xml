@@ -43,6 +43,12 @@
     <string name="users">Users</string>
     <string name="sort">Sort Out</string>
 
+    //Main Task/Comments/Attachments
+    <string name="assign_to">Assign To</string>
+    <string name="remind_me">Remind Me</string>
+    <string name="due_date">Due Date</string>
+    <string name="add_note">Add Note</string>
+
     //Profile
     <string name="settings">Settings</string>
     <string name="gen_settings">General Settings</string>

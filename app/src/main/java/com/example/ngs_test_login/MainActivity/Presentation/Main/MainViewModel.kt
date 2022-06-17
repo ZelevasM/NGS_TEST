@@ -99,8 +99,6 @@ class MainViewModel: ViewModel(), ViewModelInterface
         return getLocalChatsUseCase.execute()
     }
 
-
-    //SOCKET METHODS
     //LISTS' METHODS
     override fun socketInit(vararg bSocket: Socket)
     {
@@ -143,6 +141,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
         }
     }
 
+    //CHAT' METHODS
     fun addChat(name: String)
     {
         viewModelScope.launch(Dispatchers.IO) {
