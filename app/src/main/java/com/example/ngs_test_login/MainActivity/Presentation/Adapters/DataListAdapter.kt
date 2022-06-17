@@ -81,7 +81,6 @@ class DataListAdapter():
         val firstLetter: Char? = currentList?.name?.get(0)
         holder.iconTextView.text = firstLetter.toString()
         holder.titleTextView.text = currentList?.name
-        Log.d("MyLog","Title of List: ${currentList?.name}")
         holder.tasksTextView.text = currentList?.tasks?.size.toString()
         if(holder.tasksTextView.text == "null")
         {

@@ -36,6 +36,10 @@ class MainViewModel: ViewModel(), ViewModelInterface
     //TODO Change
     private var currentListName: String? = null
     private var currentListID: String? = null
+    private var currentTaskName: String? = null
+    private var currentTaskID: String? = null
+    private val singleListData = MutableLiveData<DataList?>()
+    val singleListLiveData: LiveData<DataList?> = singleListData
 
     private val mainInterfaceImpl = MainRepositoryImpl()
 
@@ -141,6 +145,12 @@ class MainViewModel: ViewModel(), ViewModelInterface
         }
     }
 
+    fun getLocalList(dataList: DataList)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            singleListData.postValue(GetLocalListUseCase(mainInterfaceImpl).execute(dataList)) }
+    }
+
     //CHAT' METHODS
     fun addChat(name: String)
     {
@@ -172,6 +182,12 @@ class MainViewModel: ViewModel(), ViewModelInterface
     {
         currentListID = id
         currentListName = name
+    }
+
+    fun setCurrentTask(id: String?, name: String?)
+    {
+        currentTaskID = id
+        currentTaskName = name
     }
 
     fun getCurrentListName(): String?{return currentListName}

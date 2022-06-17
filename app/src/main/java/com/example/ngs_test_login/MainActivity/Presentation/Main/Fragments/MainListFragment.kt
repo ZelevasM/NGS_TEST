@@ -1,14 +1,24 @@
 package com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
+import com.example.ngs_test_login.MainActivity.Presentation.Adapters.DataListAdapter
+import com.example.ngs_test_login.MainActivity.Presentation.Adapters.SimpleTaskAdapter
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.R
 import com.google.android.material.appbar.AppBarLayout
@@ -47,6 +57,52 @@ class MainListFragment: Fragment()
             requireActivity().findNavController(host).navigate(destination)
         }
         tasksRecView = view.findViewById(R.id.main_list_tasks_recView)
+        tasksRecView.layoutManager = LinearLayoutManager(this.context)
+        tasksRecView.setHasFixedSize(true)
+        val simpleAdapter = SimpleTaskAdapter()
+        mainViewModel.getLocalList(DataList(id = mainViewModel.getCurrentListID()!!))
+
+        mainViewModel.singleListLiveData.observe(viewLifecycleOwner, Observer {
+            if(it?.tasks != null)
+            {
+                Log.d("MyLog","LIIIIIIst: $it")
+                val tasks: ArrayList<Task?>? = it.tasks
+                simpleAdapter.tasks = tasks
+                tasksRecView.adapter = simpleAdapter
+                simpleAdapter.setOnItemClickListener(object: SimpleTaskAdapter.onItemClickListener{
+                    override fun onItemClicked(position: Int, id: String?, name: String?)
+                    {
+                        super.onItemClicked(position, id, name)
+                        Toast.makeText(activity,"$position + $id" ,Toast.LENGTH_SHORT).show()
+                        mainViewModel.setCurrentTask(id = id, name = name)
+                        findNavController().navigate(R.id.action_mainListFragment_to_mainTaskFragment)
+
+                    }
+                })
+//                val parentTasks: ArrayList<Task?>? = ArrayList()
+//                val childTasks: ArrayList<Task?>? = ArrayList()
+////                for(i in tasks!!)
+////                {
+////                    if(i?.parent == null)
+////                    {
+////                        parentTasks?.add(i)
+////                    }
+////                }
+////                for(i in tasks!!)
+////                {
+////                    if(i?.parent != null)
+////                    {
+////                        if (parentTasks != null)
+////                        {
+////                            for(j in parentTasks)
+////                            {
+////                                if(j?.id == i?.parent)
+////                            }
+////                        }
+////                    }
+////                }
+            }
+        })
 
 
         //TESTING

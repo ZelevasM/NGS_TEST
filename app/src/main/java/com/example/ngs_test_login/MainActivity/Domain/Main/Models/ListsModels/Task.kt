@@ -11,11 +11,11 @@ data class Task(
 
     var done: Boolean? = null,
 
+    var section: String? = null,
+
     var notes: String? = null,
 
     var order: Int? = null,
-
-    var users: List<TaskUser?>? = null,
 
     var parent: String? = null,
 
@@ -25,5 +25,5 @@ data class Task(
 
     var messages: ArrayList<TaskMessage?>? = null,
 
-    var section: String? = null)
+    var users: List<TaskUser?>? = null)
 {}

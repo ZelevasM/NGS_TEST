@@ -51,6 +51,8 @@ class TaskMapper: DoubleMapper<Task?, TaskWeb?>
                 users?.add(TaskUserMapper().mapFromKTOT(i))
             }
         }
-        return Task()
+        return Task(id = value?.id, name = value?.name, priority = value?.priority, done = value?.done, date = value?.date, order = value?.order,
+            auth = value?.auth, notes = value?.notes, parent = value?.parent, section = value?.section,
+            assign = TaskAssignMapper().mapFromKTOT(value?.assign),users = users, messages = messages)
     }
 }

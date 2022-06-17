@@ -1,5 +1,6 @@
 package com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Mappers
 
+import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.DataListWeb
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.ListSectionWeb
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.TaskUserWeb
