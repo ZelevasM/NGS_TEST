@@ -4,7 +4,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.ngs_test_login.BuildConfig
-import com.example.ngs_test_login.LoginActivity.Domain.Models.User
+import com.example.ngs_test_login.LoginActivity.Domain.Models.UserFromLogin
 import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -29,7 +29,7 @@ class AsyncGet
      * @param email: User
      * @return boolean
      */
-    fun searchEmail(email: User): Boolean = runBlocking{
+    fun searchEmail(email: UserFromLogin): Boolean = runBlocking{
         //// var result which changes its value to true, if the responseCode from the server was between 200 and 299
         var result: Boolean = false
 
@@ -83,7 +83,7 @@ class AsyncGet
      * @return boolean
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    fun signIn(password: User): Boolean = runBlocking{
+    fun signIn(password: UserFromLogin): Boolean = runBlocking{
         //// var result which changes its value to true, if the responseCode from the server was between 200 and 299
         var result: Boolean = false
         val job = GlobalScope.launch(Dispatchers.IO) {
@@ -142,18 +142,18 @@ class AsyncGet
      * inside of which it sends POST requestMethod to the server,
      * checks connection, and if it is ok, retrieves JSON from the server and makes var result = true,
      * which is returned by the fun at the end of its execution
-     * @param user: User
+     * @param userFromLogin: User
      * @return boolean
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    fun signUp(user: User): Boolean = runBlocking {
+    fun signUp(userFromLogin: UserFromLogin): Boolean = runBlocking {
         //// var result which changes its value to true, if the responseCode from the server was between 200 and 299
         var result: Boolean = false
         val job = GlobalScope.launch(Dispatchers.IO) {
 
-            val email: String = user.e
-            val pass: String = user.p
-            val name: String = user.n
+            val email: String = userFromLogin.e
+            val pass: String = userFromLogin.p
+            val name: String = userFromLogin.n
 
             val encodedPass = Base64.getEncoder().encodeToString(pass.toByteArray())
             val decodedPass = String(Base64.getDecoder().decode(encodedPass))

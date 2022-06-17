@@ -1,7 +1,7 @@
 package com.example.ngs_test_login.LoginActivity.Domain.Email
 
 import com.example.ngs_test_login.LoginActivity.Domain.LoginInterface
-import com.example.ngs_test_login.LoginActivity.Domain.Models.User
+import com.example.ngs_test_login.LoginActivity.Domain.Models.UserFromLogin
 
 /**
  * CheckPassUseCase is used to provide an abstract layer in the Domain,
@@ -17,7 +17,7 @@ class CheckPassUseCase(private val loginInterface: LoginInterface)
      * @return boolean
      * !NOTE: that @param password is an instance of a class User, and it contains all of its fields
      */
-    fun execute(password: User): Boolean
+    fun execute(password: UserFromLogin): Boolean
     {
         return loginInterface.emailPassCheck(password)
     }

@@ -15,6 +15,6 @@ class ListsSectionsConverters
     @TypeConverter
     fun toListsSections(listsSections: String?): ArrayList<ListSection?>?
     {
-        return Gson().fromJson(listsSections, Array<ListSection>::class.java).toList() as ArrayList<ListSection?>?
+        return ArrayList(Gson().fromJson(listsSections, Array<ListSection>::class.java).toList())
     }
 }

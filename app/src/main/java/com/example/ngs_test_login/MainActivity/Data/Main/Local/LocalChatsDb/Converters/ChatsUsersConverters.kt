@@ -15,6 +15,6 @@ class ChatsUsersConverters
     @TypeConverter
     fun toChatUsers(chatUsers: String?): ArrayList<ChatUser?>?
     {
-        return Gson().fromJson(chatUsers, Array<ChatUser>::class.java).toList() as ArrayList<ChatUser?>?
+        return ArrayList(Gson().fromJson(chatUsers, Array<ChatUser>::class.java).toList())
     }
 }

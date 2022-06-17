@@ -15,6 +15,6 @@ class ListsTasksConverters
     @TypeConverter
     fun toTasks(tasks: String?): ArrayList<Task?>?
     {
-        return Gson().fromJson(tasks, Array<Task>::class.java).toList() as ArrayList<Task?>?
+        return ArrayList(Gson().fromJson(tasks, Array<Task>::class.java).toList())
     }
 }

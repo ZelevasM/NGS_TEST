@@ -89,7 +89,7 @@ class PasswordFragment : Fragment()
         submitButton = view.findViewById(R.id.button_email_submit)
         passEditText = view.findViewById(R.id.editText_password)
         passTextView = view.findViewById(R.id.textView_sample_email)
-        passTextView.text = "For ${loginViewModel.user.e}"
+        passTextView.text = "For ${loginViewModel.userFromLogin.e}"
         toolbar = view.findViewById(R.id.toolbar_pass)
         /// toolbar holds back button, which gets the user back to the EmailFragment, when it is pressed
         toolbar.setNavigationOnClickListener{

@@ -38,7 +38,7 @@ class DataListMapper: DoubleMapper<DataList?, DataListWeb?>
                 tasks?.add(TaskMapper().mapFromTToK(i))
             }
         }
-        return DataListWeb(id = value?.id, name = value?.id, date = value?.date, author = value?.author, color = value?.color, V = value?.V,
+        return DataListWeb(id = value?.id, name = value?.name, date = value?.date, author = value?.author, color = value?.color, V = value?.V,
         orderBy = value?.orderBy, order = value?.order, users = users, sections = sections, tasks = tasks)
     }
 
@@ -70,7 +70,7 @@ class DataListMapper: DoubleMapper<DataList?, DataListWeb?>
                 tasks?.add(TaskMapper().mapFromKTOT(i))
             }
         }
-        return DataList(id = value?.id!!, name = value?.id, date = value?.date, author = value?.author, color = value?.color, V = value?.V,
+        return DataList(id = value?.id!!, name = value?.name, date = value?.date, author = value?.author, color = value?.color, V = value?.V,
             orderBy = value?.orderBy, order = value?.order, users = users, sections = sections, tasks = tasks)
     }
 }

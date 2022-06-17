@@ -22,6 +22,6 @@ interface UserRepository: UserInfoRepository, GeneralSettingsRepository, DateFor
 
     //Socket's Methods
 
-    fun socketInit(bSocket: Socket)
+    override fun socketInit(bSocket: Socket)
 
 }

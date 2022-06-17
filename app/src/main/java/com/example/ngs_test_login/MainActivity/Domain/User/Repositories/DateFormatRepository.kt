@@ -4,6 +4,7 @@ import com.example.ngs_test_login.MainActivity.Domain.User.Models.User
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserDateFormatSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserStartOfWeekSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserTimeFormatSocketCallbackInterface
+import io.socket.client.Socket
 
 interface DateFormatRepository
 {
@@ -20,6 +21,8 @@ interface DateFormatRepository
     fun getLocalStartOfWeek(): String?
 
     //Socket's Methods
+
+    fun socketInit(bSocket: Socket)
 
     fun changeDateFormat(dateFormat: String?)
 

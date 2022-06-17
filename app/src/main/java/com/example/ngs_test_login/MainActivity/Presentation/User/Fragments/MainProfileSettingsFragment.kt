@@ -63,14 +63,14 @@ class MainProfileSettingsFragment: Fragment()
         newTaskSpinner = view.findViewById(R.id.profile_new_task_menu)
 
         val itemArray: Array<String> = arrayOf("English", "Uzbek", "Russian")
-        val langBaseSpinner = SettingsBaseSpinner(languageSpinner, itemArray, context!!)
+        val langBaseSpinner = SettingsBaseSpinner(languageSpinner, itemArray, requireContext())
         val flag: String? = "lang"
         langBaseSpinner.assign(flag, userViewModel)
 
 
         //  TODO DELETE
         val itemArrayHome: Array<String> = arrayOf("Inbox", "Today")
-        val homepageBaseSpinner = SettingsBaseSpinner(homepageSpinner, itemArrayHome, context!!)
+        val homepageBaseSpinner = SettingsBaseSpinner(homepageSpinner, itemArrayHome, requireContext())
         val flagHome = "homepage"
         homepageBaseSpinner.assign(flagHome, userViewModel)
 //        userViewModel.userHomepageLiveData.observe(viewLifecycleOwner, Observer {
@@ -78,7 +78,7 @@ class MainProfileSettingsFragment: Fragment()
 //        })
 
         val itemArrayDate: Array<String> = arrayOf("DD/MM/YYYY", "MM/DD/YYYY")
-        val dateFormatBaseSpinner = SettingsBaseSpinner(dateFormatSpinner, itemArrayDate, context!!)
+        val dateFormatBaseSpinner = SettingsBaseSpinner(dateFormatSpinner, itemArrayDate, requireContext())
         val flagDate = "dateFormat"
         dateFormatBaseSpinner.assign(flagDate, userViewModel)
         userViewModel.userDateFormatLiveData.observe(viewLifecycleOwner, Observer {
@@ -89,7 +89,7 @@ class MainProfileSettingsFragment: Fragment()
         })
 
         val itemArrayTime: Array<String> = arrayOf("1:00 PM", "13:00")
-        val timeFormatBaseSpinner = SettingsBaseSpinner(timeFormatSpinner, itemArrayTime, context!!)
+        val timeFormatBaseSpinner = SettingsBaseSpinner(timeFormatSpinner, itemArrayTime, requireContext())
         val flagTime ="timeFormat"
         timeFormatBaseSpinner.assign(flagTime, userViewModel)
         userViewModel.userTimeFormatLiveData.observe(viewLifecycleOwner, Observer {
@@ -101,7 +101,7 @@ class MainProfileSettingsFragment: Fragment()
         })
 
         val itemArrayWeek: Array<String> = arrayOf("Monday", "Sunday")
-        val weekStartBaseSpinner = SettingsBaseSpinner(weekStartSpinner, itemArrayWeek, context!!)
+        val weekStartBaseSpinner = SettingsBaseSpinner(weekStartSpinner, itemArrayWeek, requireContext())
         val flagWeek ="weekStart"
         weekStartBaseSpinner.assign(flagWeek, userViewModel)
         userViewModel.userWeekStartLiveData.observe(viewLifecycleOwner, Observer {
@@ -112,7 +112,7 @@ class MainProfileSettingsFragment: Fragment()
         })
 
         val itemArrayExpandSubtask: Array<String> = arrayOf("Enabled", "Disabled")
-        val expandSubtaskBaseSpinner = SettingsBaseSpinner(expandSubtaskSpinner, itemArrayExpandSubtask, context!!)
+        val expandSubtaskBaseSpinner = SettingsBaseSpinner(expandSubtaskSpinner, itemArrayExpandSubtask, requireContext())
         val flagSubtask ="expandSubtask"
         expandSubtaskBaseSpinner.assign(flagSubtask, userViewModel)
         userViewModel.userSubtaskLiveData.observe(viewLifecycleOwner, Observer {
@@ -123,7 +123,7 @@ class MainProfileSettingsFragment: Fragment()
         })
 
         val itemArrayNewTask: Array<String> = arrayOf("Top", "Bottom")
-        val newTaskBaseSpinner = SettingsBaseSpinner(newTaskSpinner, itemArrayNewTask, context!!)
+        val newTaskBaseSpinner = SettingsBaseSpinner(newTaskSpinner, itemArrayNewTask, requireContext())
         val flagNew ="newTask"
         newTaskBaseSpinner.assign(flagNew, userViewModel)
         userViewModel.userNewTaskLiveData.observe(viewLifecycleOwner, Observer {

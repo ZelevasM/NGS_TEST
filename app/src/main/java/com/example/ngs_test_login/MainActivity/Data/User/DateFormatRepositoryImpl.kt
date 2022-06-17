@@ -1,72 +1,80 @@
 package com.example.ngs_test_login.MainActivity.Data.User
 
 import com.example.ngs_test_login.MainActivity.Data.User.Local.UserDao
+import com.example.ngs_test_login.MainActivity.Data.User.Web.UserSocket
 import com.example.ngs_test_login.MainActivity.Domain.User.Repositories.DateFormatRepository
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserDateFormatSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserStartOfWeekSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserTimeFormatSocketCallbackInterface
+import io.socket.client.Socket
 
 class DateFormatRepositoryImpl(private val userDao: UserDao): DateFormatRepository
 {
+    private lateinit var userSocket: UserSocket
     override fun saveLocalDateFormat(dateFormat: String?)
     {
-        TODO("Not yet implemented")
+        userDao.updateDateFormat(dateFormat)
     }
 
     override fun getLocalDateFormat(): String?
     {
-        TODO("Not yet implemented")
+        return userDao.getDateFormat()
     }
 
     override fun saveLocalTimeFormat(timeFormat: String?)
     {
-        TODO("Not yet implemented")
+        userDao.updateTimeFormat(timeFormat)
     }
 
     override fun getLocalTimeFormat(): String?
     {
-        TODO("Not yet implemented")
+        return userDao.getTimeFormat()
     }
 
     override fun saveLocalStartOfWeek(startOfWeek: String?)
     {
-        TODO("Not yet implemented")
+        userDao.updateStartOfWeek(startOfWeek)
     }
 
     override fun getLocalStartOfWeek(): String?
     {
-        TODO("Not yet implemented")
+        return userDao.getStartOfWeek()
+    }
+
+    override fun socketInit(bSocket: Socket)
+    {
+        userSocket = UserSocket(bSocket)
     }
 
     //Socket's Methods
 
     override fun changeDateFormat(dateFormat: String?)
     {
-        TODO("Not yet implemented")
+        userSocket.changeDateFormat(dateFormat)
     }
 
     override fun onChangedDateFormat(userDateFormatSocketCallbackInterface: UserDateFormatSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        userSocket.onChangedDateFormat(userDateFormatSocketCallbackInterface)
     }
 
     override fun changeTimeFormat(timeFormat: String?)
     {
-        TODO("Not yet implemented")
+        userSocket.changeTimeFormat(timeFormat)
     }
 
     override fun onChangedTimeFormat(userTimeFormatSocketCallbackInterface: UserTimeFormatSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        userSocket.onChangedTimeFormat(userTimeFormatSocketCallbackInterface)
     }
 
     override fun changeStartOfWeek(startOfWeek: String?)
     {
-        TODO("Not yet implemented")
+        userSocket.changeStartOfWeek(startOfWeek)
     }
 
     override fun onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface: UserStartOfWeekSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        userSocket.onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface)
     }
 }

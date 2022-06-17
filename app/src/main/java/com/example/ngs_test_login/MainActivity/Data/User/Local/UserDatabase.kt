@@ -10,7 +10,7 @@ import com.example.ngs_test_login.MainActivity.Data.User.Local.Converters.UserSh
 import com.example.ngs_test_login.MainActivity.Data.User.Local.Entities.UserEntity
 
 @Database(entities = [UserEntity::class], version = 1, exportSchema = false)
-@TypeConverters(UserFoldersConverters::class, UserShortcutsConverters::class)
+@TypeConverters(UserShortcutsConverters::class, UserFoldersConverters::class)
 abstract class UserDatabase: RoomDatabase()
 {
     abstract fun userDao(): UserDao

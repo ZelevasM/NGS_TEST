@@ -15,6 +15,6 @@ class UserFoldersConverters
     @TypeConverter
     fun toUserFolders(folders: String?): ArrayList<Folder?>?
     {
-        return Gson().fromJson(folders, Array<Folder>::class.java).toList() as ArrayList<Folder?>?
+        return ArrayList(Gson().fromJson(folders, Array<Folder>::class.java).toList())
     }
 }

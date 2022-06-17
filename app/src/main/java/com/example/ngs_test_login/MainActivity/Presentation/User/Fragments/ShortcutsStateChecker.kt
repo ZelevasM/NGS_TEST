@@ -4,46 +4,46 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Switch
 import androidx.core.content.ContextCompat
-import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.ShortcutWeb
+import com.example.ngs_test_login.MainActivity.Domain.User.Models.Shortcut
 import com.example.ngs_test_login.R
 
 class ShortcutsStateChecker(private val switches: ArrayList<Switch?>?, private val context: Context)
 {
     @SuppressLint("ResourceType")
-    fun summarize(): ArrayList<ShortcutWeb?>?
+    fun summarize(): ArrayList<Shortcut?>?
     {
-        val shortcutWebs: ArrayList<ShortcutWeb?>? = ArrayList()
+        val shortcuts: ArrayList<Shortcut?>? = ArrayList()
        if(switches?.get(0)?.isChecked == true)
        {
            val color: String = getColor(R.color.dark_blue)
-           val inboxShort = ShortcutWeb(type = "inbox", color = color, projectId = "BniBhUlKE0ZxBWq+ERWlnWI=")
-           shortcutWebs?.add(inboxShort)
+           val inboxShort = Shortcut(type = "inbox", color = color, projectId = "BniBhUlKE0ZxBWq+ERWlnWI=")
+           shortcuts?.add(inboxShort)
        }
         if(switches?.get(1)?.isChecked == true)
         {
             val color: String = getColor(R.color.dark_green)
-            val todayShort = ShortcutWeb(type = "today", color = color)
-            shortcutWebs?.add(todayShort)
+            val todayShort = Shortcut(type = "today", color = color)
+            shortcuts?.add(todayShort)
         }
         if(switches?.get(2)?.isChecked == true)
         {
             val color: String = getColor(R.color.dark_orange)
-            val assShort = ShortcutWeb(type = "assigned_to_me", color = color)
-            shortcutWebs?.add(assShort)
+            val assShort = Shortcut(type = "assigned_to_me", color = color)
+            shortcuts?.add(assShort)
         }
         if(switches?.get(3)?.isChecked == true)
         {
             val color: String = getColor(R.color.lime_yellow)
-            val mediumShort = ShortcutWeb(type = "medium_priority", color = color)
-            shortcutWebs?.add(mediumShort)
+            val mediumShort = Shortcut(type = "medium_priority", color = color)
+            shortcuts?.add(mediumShort)
         }
         if(switches?.get(4)?.isChecked == true)
         {
             val color: String = getColor(R.color.grapefruit_red)
-            val highShort = ShortcutWeb(type = "high_priority", color = color)
-            shortcutWebs?.add(highShort)
+            val highShort = Shortcut(type = "high_priority", color = color)
+            shortcuts?.add(highShort)
         }
-        return shortcutWebs
+        return shortcuts
     }
 
     fun getColor(id: Int): String

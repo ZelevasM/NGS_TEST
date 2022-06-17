@@ -1,7 +1,7 @@
 package com.example.ngs_test_login.LoginActivity.Domain.Email
 
 import com.example.ngs_test_login.LoginActivity.Domain.LoginInterface
-import com.example.ngs_test_login.LoginActivity.Domain.Models.User
+import com.example.ngs_test_login.LoginActivity.Domain.Models.UserFromLogin
 
 /**
 * CheckEmailUseCase is used to provide an abstract layer in the Domain,
@@ -17,7 +17,7 @@ class CheckEmailUseCase(private var loginInterface: LoginInterface)
      * @return boolean
      * !NOTE: that @param email is an instance of a class User, and it contains all of its fields
      */
-    fun execute(email: User): Boolean
+    fun execute(email: UserFromLogin): Boolean
     {
         return loginInterface.emailCheck(email)
     }

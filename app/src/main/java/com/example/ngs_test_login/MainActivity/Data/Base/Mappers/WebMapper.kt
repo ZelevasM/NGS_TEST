@@ -3,7 +3,7 @@ package com.example.ngs_test_login.MainActivity.Data.Base.Mappers
 import com.example.ngs_test_login.MainActivity.Data.Base.Models.WebMainData
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ChatsWeb.Mappers.ChatMapper
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Mappers.DataListMapper
-import com.example.ngs_test_login.MainActivity.Data.User.Mappers.UserMapper
+import com.example.ngs_test_login.MainActivity.Data.User.Web.Mappers.UserMapper
 import com.example.ngs_test_login.MainActivity.Domain.Mappers.Mapper
 import com.example.ngs_test_login.MainActivity.Domain.Base.Models.MainData
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Chat

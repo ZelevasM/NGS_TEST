@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.ShortcutWeb
+import com.example.ngs_test_login.MainActivity.Domain.User.Models.Shortcut
 import com.example.ngs_test_login.MainActivity.Presentation.Adapters.ShortcutAdapter
 import com.example.ngs_test_login.MainActivity.Presentation.Main.MainViewModel
 import com.example.ngs_test_login.MainActivity.Presentation.User.UserViewModel
@@ -44,15 +44,15 @@ class MainShortcutsFragment: Fragment()
         nullIcon = view.findViewById(R.id.shortcuts_imageView)
         nullText = view.findViewById(R.id.textView_shortcuts_warn)
 
-        var shortcutWebs: ArrayList<ShortcutWeb?>?
+        var shortcuts: ArrayList<Shortcut?>?
         var adaper: ShortcutAdapter
 
         shortRecView = view.findViewById(R.id.shortRecView)
         shortRecView.layoutManager = LinearLayoutManager(this.context)
         shortRecView.setHasFixedSize(true)
         shortcutUserViewModel.shortcutsLiveData.observe(viewLifecycleOwner, Observer {
-            shortcutWebs = it
-            adaper = ShortcutAdapter(shortcutWebs)
+            shortcuts = it
+            adaper = ShortcutAdapter(shortcuts)
             shortRecView.adapter= adaper
 
             nullIcon.visibility = View.GONE

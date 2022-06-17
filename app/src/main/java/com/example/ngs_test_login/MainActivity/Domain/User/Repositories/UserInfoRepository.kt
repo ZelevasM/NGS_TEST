@@ -3,6 +3,7 @@ package com.example.ngs_test_login.MainActivity.Domain.User.Repositories
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserEmailSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserNameSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserPasswordSocketCallbackInterface
+import io.socket.client.Socket
 
 interface UserInfoRepository
 {
@@ -15,6 +16,8 @@ interface UserInfoRepository
     fun getLocalEmail(): String?
 
     //Socket's Methods
+
+    fun socketInit(bSocket: Socket)
 
     fun changeName(name: String?)
 

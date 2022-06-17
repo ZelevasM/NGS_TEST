@@ -3,9 +3,8 @@ package com.example.ngs_test_login.MainActivity.Data.User.Web
 import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ConvertClassToJson
-import com.example.ngs_test_login.MainActivity.Data.User.Mappers.ShortcutMapper
+import com.example.ngs_test_login.MainActivity.Data.User.Web.Mappers.ShortcutMapper
 import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.*
-import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.ShortcutWeb
 import com.example.ngs_test_login.MainActivity.Domain.User.Models.Shortcut
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.*
 import io.socket.client.Socket
@@ -379,15 +378,15 @@ class UserSocket(private val mSocket: Socket)
         }
     }
 
-    fun changeShortcut(shortcutWebs: ArrayList<ShortcutWeb?>?)
+    fun changeShortcut(shortcuts: ArrayList<Shortcut?>?)
     {
         //val socketShortcuts: Array<Shortcut?>? = SocketShortcut(type)
         val socketShortcutJson: ArrayList<JSONObject?> = ArrayList()
-        if(shortcutWebs !=null)
+        if(shortcuts !=null)
         {
-            for (i in shortcutWebs.indices)
+            for (i in shortcuts.indices)
             {
-                socketShortcutJson.add(ConvertClassToJson(shortcutWebs[i]).convert())
+                socketShortcutJson.add(ConvertClassToJson(ShortcutMapper().mapFromTToK(shortcuts[i])).convert())
             }
         }
         Log.d("MyLog","Short Type is Json Object: ${socketShortcutJson is ArrayList<JSONObject?>?}")

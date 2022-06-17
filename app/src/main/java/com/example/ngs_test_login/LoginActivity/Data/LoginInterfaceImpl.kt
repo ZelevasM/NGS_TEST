@@ -1,12 +1,10 @@
 package com.example.ngs_test_login.LoginActivity.Data
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.FragmentTransaction
 import com.example.ngs_test_login.LoginActivity.Data.Web.AsyncGet
 import com.example.ngs_test_login.LoginActivity.Domain.LoginInterface
-import com.example.ngs_test_login.LoginActivity.Domain.Models.User
+import com.example.ngs_test_login.LoginActivity.Domain.Models.UserFromLogin
 
 /**
  * LoginInterfaceImpl implements LoginInterface,
@@ -21,7 +19,7 @@ class LoginInterfaceImpl : LoginInterface
      * @param email: User
      * @return boolean
      */
-    override fun emailCheck(email: User): Boolean
+    override fun emailCheck(email: UserFromLogin): Boolean
     {
         val checkEmail = AsyncGet()
         return checkEmail.searchEmail(email)
@@ -35,7 +33,7 @@ class LoginInterfaceImpl : LoginInterface
      * @return boolean
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun emailPassCheck(password: User): Boolean
+    override fun emailPassCheck(password: UserFromLogin): Boolean
     {
         val checkPass = AsyncGet()
         return checkPass.signIn(password)
@@ -45,14 +43,14 @@ class LoginInterfaceImpl : LoginInterface
      * overridden fun emailSignUp receives user:User,
      * then creates an instance of AsyncGet, where all 'dirty job' is done,
      * and returns returned from AsyncGet.emailSignUp(user) boolean value
-     * @param user: User
+     * @param userFromLogin: User
      * @return boolean
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun emailSignUp(user: User): Boolean
+    override fun emailSignUp(userFromLogin: UserFromLogin): Boolean
     {
         val createAcc = AsyncGet()
-        return createAcc.signUp(user)
+        return createAcc.signUp(userFromLogin)
     }
 
     override fun privacy()

@@ -2,6 +2,7 @@ package com.example.ngs_test_login.MainActivity.Presentation.Adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,6 +81,7 @@ class DataListAdapter():
         val firstLetter: Char? = currentList?.name?.get(0)
         holder.iconTextView.text = firstLetter.toString()
         holder.titleTextView.text = currentList?.name
+        Log.d("MyLog","Title of List: ${currentList?.name}")
         holder.tasksTextView.text = currentList?.tasks?.size.toString()
         if(holder.tasksTextView.text == "null")
         {

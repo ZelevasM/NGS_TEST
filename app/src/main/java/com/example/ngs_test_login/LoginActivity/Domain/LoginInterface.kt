@@ -1,6 +1,6 @@
 package com.example.ngs_test_login.LoginActivity.Domain
 
-import com.example.ngs_test_login.LoginActivity.Domain.Models.User
+import com.example.ngs_test_login.LoginActivity.Domain.Models.UserFromLogin
 
 /**
  * interface LoginInterface provides an abstract layer in the Domain,
@@ -10,11 +10,11 @@ import com.example.ngs_test_login.LoginActivity.Domain.Models.User
  */
 interface LoginInterface
 {
-    fun emailCheck(email: User): Boolean
+    fun emailCheck(email: UserFromLogin): Boolean
 
-    fun emailPassCheck(password: User): Boolean
+    fun emailPassCheck(password: UserFromLogin): Boolean
 
-    fun emailSignUp(user: User): Boolean
+    fun emailSignUp(userFromLogin: UserFromLogin): Boolean
 
     fun privacy()
 

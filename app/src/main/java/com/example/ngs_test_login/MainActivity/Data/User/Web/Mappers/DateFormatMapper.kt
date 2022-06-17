@@ -1,4 +1,4 @@
-package com.example.ngs_test_login.MainActivity.Data.User.Mappers
+package com.example.ngs_test_login.MainActivity.Data.User.Web.Mappers
 
 import com.example.ngs_test_login.MainActivity.Data.User.Web.Models.DateFormatWeb
 import com.example.ngs_test_login.MainActivity.Domain.Mappers.DoubleMapper

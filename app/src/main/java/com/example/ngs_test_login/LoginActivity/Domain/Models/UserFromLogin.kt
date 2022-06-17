@@ -7,7 +7,7 @@ package com.example.ngs_test_login.LoginActivity.Domain.Models
  * @sample user can be sent only with field filled, as well as all fields filled,
  * so it makes easier to communicate between different classes, instances, functions and etc.
  */
-class User(private val name: String, private val email: String,private val password: String)
+class UserFromLogin(private val name: String,private val email: String,private val password: String)
 {
     var n = name
     var e = email

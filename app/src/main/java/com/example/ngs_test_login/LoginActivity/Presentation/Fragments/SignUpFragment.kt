@@ -3,7 +3,6 @@ package com.example.ngs_test_login.LoginActivity.Presentation.Fragments
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -99,7 +98,7 @@ class SignUpFragment : Fragment()
         passEditText = view.findViewById(R.id.editTextTextPassword)
         passConfEditText = view.findViewById(R.id.editTextTextPassword_Confirm)
         signUpTextView = view.findViewById(R.id.textView_sample_email_signUp)
-        signUpTextView.text = "For ${loginViewModel.user.e}"
+        signUpTextView.text = "For ${loginViewModel.userFromLogin.e}"
         toolbar = view.findViewById(R.id.toolbar_sign_up)
         /// toolbar holds back button, which gets the user back to the LoginFragment, when it is pressed
         toolbar.setNavigationOnClickListener{

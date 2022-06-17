@@ -1,5 +1,6 @@
 package com.example.ngs_test_login.MainActivity.Data.User.Local.Entities
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.ngs_test_login.MainActivity.Domain.User.Models.Folder
@@ -28,10 +29,10 @@ data class UserEntity(
 
     var newTask: Boolean? = null,
 
-    var token: ArrayList<Any?>? = null,
+    @Embedded
+    var dateFormat: DateFormat? = null,
 
-    var dateFormatWeb: DateFormat? = null,
-
+    @Embedded
     var homepage: Homepage? = null,
 
     var shortcuts: ArrayList<Shortcut?>? = null,

@@ -15,6 +15,6 @@ class ListsUsersConverters
     @TypeConverter
     fun toListUsers(listUsers: String?): ArrayList<TaskUser?>?
     {
-        return Gson().fromJson(listUsers, Array<TaskUser>::class.java).toList() as ArrayList<TaskUser?>?
+        return ArrayList(Gson().fromJson(listUsers,Array<TaskUser>::class.java).toList())
     }
 }

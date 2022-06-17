@@ -3,6 +3,7 @@ package com.example.ngs_test_login.MainActivity.Domain.User.Repositories
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserHomepageSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserNewTaskSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.User.SocketCallbacks.UserSubtaskSocketCallbackInterface
+import io.socket.client.Socket
 
 interface GeneralSettingsRepository
 {
@@ -26,6 +27,8 @@ interface GeneralSettingsRepository
     fun getLocalNewTask(): String?
 
     //Socket's Methods
+
+    fun socketInit(bSocket: Socket)
 
     fun changeHomepage(homepage: String?)
 

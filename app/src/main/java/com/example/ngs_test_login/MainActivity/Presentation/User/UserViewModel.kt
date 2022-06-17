@@ -92,8 +92,9 @@ class UserViewModel: ViewModel(), ViewModelInterface
             userDateFormatData.postValue(user?.dateFormat?.date)
             userTimeFormatData.postValue(user?.dateFormat?.time)
             userWeekStartData.postValue(user?.dateFormat?.startOfTheWeek)
-            userSubtaskData.postValue(user?.expandSubtask)
-            userNewTaskData.postValue(user?.newTask)
+            //TODO Convert to normal type
+            userSubtaskData.postValue(user?.expandSubtask.toString())
+            userNewTaskData.postValue(user?.newTask.toString())
             //userLocalDbProvider.getDiskSpace(db=null)
             //write data to local storage
         }

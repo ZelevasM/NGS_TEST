@@ -41,120 +41,120 @@ class UserRepositoryImpl: UserRepository
 
     override fun addLocalUser(user: User?)
     {
-        TODO("Not yet implemented")
+        userInfoRepositoryImpl.addUser(user)
     }
 
     override fun getLocalUser(): User?
     {
-        TODO("Not yet implemented")
+        return userInfoRepositoryImpl.getUser()
     }
 
     //-User Info Repository
 
     override fun saveLocalName(name: String?)
     {
-        TODO("Not yet implemented")
+        userInfoRepositoryImpl.saveLocalName(name)
     }
 
     override fun getLocalName(): String?
     {
-        TODO("Not yet implemented")
+        return userInfoRepositoryImpl.getLocalName()
     }
 
     override fun saveLocalEmail(email: String?)
     {
-        TODO("Not yet implemented")
+        userInfoRepositoryImpl.saveLocalEmail(email)
     }
 
     override fun getLocalEmail(): String?
     {
-        TODO("Not yet implemented")
+        return userInfoRepositoryImpl.getLocalEmail()
     }
 
     //-General Settings Repository
 
     override fun saveLocalLanguage(language: String?)
     {
-        TODO("Not yet implemented")
+        generalSettingsRepositoryImpl.saveLocalLanguage(language)
     }
 
     override fun getLocalLanguage(): String?
     {
-        TODO("Not yet implemented")
+        return generalSettingsRepositoryImpl.getLocalLanguage()
     }
 
     override fun saveLocalHomepage(homepage: String?)
     {
-        TODO("Not yet implemented")
+        generalSettingsRepositoryImpl.saveLocalHomepage(homepage)
     }
 
     override fun getLocalHomepage(): String?
     {
-        TODO("Not yet implemented")
+        return generalSettingsRepositoryImpl.getLocalHomepage()
     }
 
     override fun saveLocalExpandSubtask(expandSubtask: String?)
     {
-        TODO("Not yet implemented")
+        generalSettingsRepositoryImpl.saveLocalExpandSubtask(expandSubtask)
     }
 
     override fun getLocalExpandSubtask(): String?
     {
-        TODO("Not yet implemented")
+        return generalSettingsRepositoryImpl.getLocalExpandSubtask()
     }
 
     override fun saveLocalNewTask(newTask: String?)
     {
-        TODO("Not yet implemented")
+        generalSettingsRepositoryImpl.saveLocalNewTask(newTask)
     }
 
     override fun getLocalNewTask(): String?
     {
-        TODO("Not yet implemented")
+        return generalSettingsRepositoryImpl.getLocalNewTask()
     }
 
     //-Date Format Repository
 
     override fun saveLocalDateFormat(dateFormat: String?)
     {
-        TODO("Not yet implemented")
+        dateFormatRepositoryImpl.saveLocalDateFormat(dateFormat)
     }
 
     override fun getLocalDateFormat(): String?
     {
-        TODO("Not yet implemented")
+        return dateFormatRepositoryImpl.getLocalDateFormat()
     }
 
     override fun saveLocalTimeFormat(timeFormat: String?)
     {
-        TODO("Not yet implemented")
+        dateFormatRepositoryImpl.saveLocalTimeFormat(timeFormat)
     }
 
     override fun getLocalTimeFormat(): String?
     {
-        TODO("Not yet implemented")
+        return dateFormatRepositoryImpl.getLocalTimeFormat()
     }
 
     override fun saveLocalStartOfWeek(startOfWeek: String?)
     {
-        TODO("Not yet implemented")
+        dateFormatRepositoryImpl.saveLocalStartOfWeek(startOfWeek)
     }
 
     override fun getLocalStartOfWeek(): String?
     {
-        TODO("Not yet implemented")
+        return dateFormatRepositoryImpl.getLocalStartOfWeek()
     }
 
     //-Shortcuts' Repository
 
     override fun updateLocalShortcut()
     {
-        TODO("Not yet implemented")
+        shortcutsRepositoryImpl.updateLocalShortcut()
     }
 
     override fun getLocalShortcut()
     {
-        TODO("Not yet implemented")
+        shortcutsRepositoryImpl.getLocalShortcut()
     }
 
     //Socket's Methods
@@ -162,115 +162,117 @@ class UserRepositoryImpl: UserRepository
     override fun socketInit(bSocket: Socket)
     {
         mSocket = bSocket
-        userSocket = UserSocket(mSocket)
+        userInfoRepositoryImpl.socketInit(bSocket)
+        generalSettingsRepositoryImpl.socketInit(bSocket)
+        dateFormatRepositoryImpl.socketInit(bSocket)
+        shortcutsRepositoryImpl.socketInit(bSocket)
     }
 
     //-User Info Repository Socket's Methods
 
     override fun changeName(name: String?)
     {
-        TODO("Not yet implemented")
+        userInfoRepositoryImpl.changeName(name)
     }
 
     override fun onChangedName(userNameSocketCallbackInterface: UserNameSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        return userInfoRepositoryImpl.onChangedName(userNameSocketCallbackInterface)
     }
 
     override fun changeEmail(email: String?)
     {
-        TODO("Not yet implemented")
+        userInfoRepositoryImpl.changeEmail(email)
     }
 
     override fun onChangedEmail(userEmailSocketCallbackInterface: UserEmailSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        return userInfoRepositoryImpl.onChangedEmail(userEmailSocketCallbackInterface)
     }
 
     override fun changePassword()
     {
-        TODO("Not yet implemented")
+        userInfoRepositoryImpl.changePassword()
     }
 
     override fun onChangedPassword(userPassSocketCallbackInterface: UserPasswordSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        userInfoRepositoryImpl.onChangedPassword(userPassSocketCallbackInterface)
     }
 
     //-User General Repository Socket's Methods
 
-
     override fun changeHomepage(homepage: String?)
     {
-        TODO("Not yet implemented")
+        generalSettingsRepositoryImpl.changeHomepage(homepage)
     }
 
     override fun onChangedHomepage(userHomeSocketCallbackInterface: UserHomepageSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        generalSettingsRepositoryImpl.onChangedHomepage(userHomeSocketCallbackInterface)
     }
 
     override fun changeExpandSubtask(expandSubtask: String?)
     {
-        TODO("Not yet implemented")
+        generalSettingsRepositoryImpl.changeExpandSubtask(expandSubtask)
     }
 
     override fun onChangedExpandSubtask(userSubtaskSocketCallbackInterface: UserSubtaskSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        generalSettingsRepositoryImpl.onChangedExpandSubtask(userSubtaskSocketCallbackInterface)
     }
 
     override fun changeNewTask(newTask: String?)
     {
-        TODO("Not yet implemented")
+        generalSettingsRepositoryImpl.changeNewTask(newTask)
     }
 
     override fun onChangedNewTask(userNewTaskSocketCallbackInterface: UserNewTaskSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        generalSettingsRepositoryImpl.onChangedNewTask(userNewTaskSocketCallbackInterface)
     }
 
     //-Date Format Repository Socket's Methods
 
     override fun changeDateFormat(dateFormat: String?)
     {
-        TODO("Not yet implemented")
+        dateFormatRepositoryImpl.changeDateFormat(dateFormat)
     }
 
     override fun onChangedDateFormat(userDateFormatSocketCallbackInterface: UserDateFormatSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        dateFormatRepositoryImpl.onChangedDateFormat(userDateFormatSocketCallbackInterface)
     }
 
     override fun changeTimeFormat(timeFormat: String?)
     {
-        TODO("Not yet implemented")
+        dateFormatRepositoryImpl.changeTimeFormat(timeFormat)
     }
 
     override fun onChangedTimeFormat(userTimeFormatSocketCallbackInterface: UserTimeFormatSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        dateFormatRepositoryImpl.onChangedTimeFormat(userTimeFormatSocketCallbackInterface)
     }
 
     override fun changeStartOfWeek(startOfWeek: String?)
     {
-        TODO("Not yet implemented")
+        dateFormatRepositoryImpl.changeStartOfWeek(startOfWeek)
     }
 
     override fun onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface: UserStartOfWeekSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        dateFormatRepositoryImpl.onChangedStartOfWeek(userStartOfWeekSocketCallbackInterface)
     }
 
     //-Shortcuts' Repository Socket's Methods
 
     override fun changeShortcut(shortcuts: ArrayList<Shortcut?>?)
     {
-        TODO("Not yet implemented")
+        shortcutsRepositoryImpl.changeShortcut(shortcuts)
     }
 
     override fun onChangedShortcut(userShortcutsSocketCallbackInterface: UserShortcutsSocketCallbackInterface)
     {
-        TODO("Not yet implemented")
+        shortcutsRepositoryImpl?.onChangedShortcut(userShortcutsSocketCallbackInterface)
     }
 }
