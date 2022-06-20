@@ -15,6 +15,7 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCas
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.TasksSocketUseCases.*
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.ChatSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.ListSocketCallbackImpl
+import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.TaskSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.ChatValidator
 import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.ListValidator
 import com.example.ngs_test_login.MainActivity.Presentation.ViewModelInterface
@@ -35,6 +36,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
     private var chatWebs: ArrayList<Chat?>? = null
 
     //TODO Change
+    private var currentList: DataList? = null
     private var currentListName: String? = null
     private var currentListID: String? = null
     private var currentTaskName: String? = null
@@ -148,8 +150,11 @@ class MainViewModel: ViewModel(), ViewModelInterface
 
     fun getLocalList(dataList: DataList)
     {
-        viewModelScope.launch(Dispatchers.IO) {
-            singleListData.postValue(GetLocalListUseCase(mainInterfaceImpl).execute(dataList)) }
+        viewModelScope.launch(Dispatchers.IO)
+        {
+            currentList = GetLocalListUseCase(mainInterfaceImpl).execute(dataList)
+            singleListData.postValue(currentList)
+        }
     }
 
     //TASK'S METHODS
@@ -185,7 +190,11 @@ class MainViewModel: ViewModel(), ViewModelInterface
 
     fun getTask()
     {
-        viewModelScope.launch(Dispatchers.IO) { GetTaskUseCase(mainInterfaceImpl).execute() }
+        viewModelScope.launch(Dispatchers.IO)
+        {
+            val taskSocketCallbackImpl = TaskSocketCallbackImpl(currentList, singleListData, mainInterfaceImpl)
+            GetTaskUseCase(mainInterfaceImpl).execute(taskSocketCallbackImpl)
+        }
     }
 
     //CHAT' METHODS

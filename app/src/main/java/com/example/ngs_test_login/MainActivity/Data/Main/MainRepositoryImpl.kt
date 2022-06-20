@@ -11,6 +11,7 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ListS
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Chat
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
+import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.TaskSocketCallbackInterface
 import io.socket.client.Socket
 
 class MainRepositoryImpl: MainRepository
@@ -208,9 +209,9 @@ class MainRepositoryImpl: MainRepository
         tasksRepositoryImpl?.deleteTask(id, projectId)
     }
 
-    override fun getTask()
+    override fun getTask(taskSocketCallbackInterface: TaskSocketCallbackInterface)
     {
-        tasksRepositoryImpl?.getTask()
+        tasksRepositoryImpl?.getTask(taskSocketCallbackInterface)
     }
 
     //Socket's Methods For Chats

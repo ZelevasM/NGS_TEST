@@ -31,6 +31,4 @@ interface ListsDao
     //Insert + Done + Note + Order + Rename + Delete: All through 'Update Query'
     @Query("UPDATE lists_table SET tasks =:tasks WHERE id =:listId")
     fun updateTask(tasks: ArrayList<Task?>?, listId: String?)
-
-    fun getTask()
 }

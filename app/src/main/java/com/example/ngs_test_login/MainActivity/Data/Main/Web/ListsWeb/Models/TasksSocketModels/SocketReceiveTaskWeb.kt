@@ -1,5 +1,7 @@
 package com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.TasksSocketModels
 
+import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.TaskAssignWeb
+import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.TaskUserWeb
 import com.google.gson.annotations.SerializedName
 
 data class SocketReceiveTaskWeb(
@@ -11,7 +13,7 @@ data class SocketReceiveTaskWeb(
     @SerializedName("notes") val notes: String? = null,
     @SerializedName("date") val date: String? = null,
     @SerializedName("auth_id") val auth_id: String? = null,
-    @SerializedName("assign") val assign: String? = null,
-    @SerializedName("order") val order: String? = null,
-    @SerializedName("users") val users: String? = null)
+    @SerializedName("assign") val assign: TaskAssignWeb? = null,
+    @SerializedName("order") val order: Int? = null,
+    @SerializedName("users") val users: ArrayList<TaskUserWeb?>? = null)
 {}

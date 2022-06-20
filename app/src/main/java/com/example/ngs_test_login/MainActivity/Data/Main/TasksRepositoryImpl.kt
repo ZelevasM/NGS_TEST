@@ -4,6 +4,7 @@ import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalListsDb.List
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Socket.TaskSocket
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
 import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.TasksRepository
+import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.TaskSocketCallbackInterface
 import io.socket.client.Socket
 
 class TasksRepositoryImpl(private val listsDao: ListsDao): TasksRepository
@@ -29,7 +30,7 @@ class TasksRepositoryImpl(private val listsDao: ListsDao): TasksRepository
         {
             for(i in tasks.indices)
             {
-                if (tasks[i]?.id == task?.id) tasks[i] = task
+                if (tasks[i]?.id == task?.id) tasks[i]?.done = task?.done
             }
         }
         listsDao.updateTask(tasks, listId)
@@ -42,7 +43,7 @@ class TasksRepositoryImpl(private val listsDao: ListsDao): TasksRepository
         {
             for(i in tasks.indices)
             {
-                if (tasks[i]?.id == task?.id) tasks[i] = task
+                if (tasks[i]?.id == task?.id) tasks[i]?.notes = task?.notes
             }
         }
         listsDao.updateTask(tasks, listId)
@@ -55,7 +56,7 @@ class TasksRepositoryImpl(private val listsDao: ListsDao): TasksRepository
         {
             for(i in tasks.indices)
             {
-                if (tasks[i]?.id == task?.id) tasks[i] = task
+                if (tasks[i]?.id == task?.id) tasks[i]?.name = task?.name
             }
         }
         listsDao.updateTask(tasks, listId)
@@ -118,8 +119,8 @@ class TasksRepositoryImpl(private val listsDao: ListsDao): TasksRepository
         taskSocket.deleteTask(id, projectId)
     }
 
-    override fun getTask()
+    override fun getTask(taskSocketCallbackInterface: TaskSocketCallbackInterface)
     {
-        taskSocket.getTask()
+        taskSocket.getTask(taskSocketCallbackInterface)
     }
 }

@@ -1,19 +1,21 @@
 package com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl
 
 import androidx.lifecycle.MutableLiveData
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
 import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.MainRepository
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.TaskSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases.TasksLocalDbUseCases.*
-import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.TasksSocketUseCases.OrderTaskUseCase
 
-class TaskSocketCallbackImpl(private val tasks: ArrayList<Task?>?,
-                            private val tasksData: MutableLiveData<ArrayList<Task?>?>,
-                            private val mainRepository: MainRepository): TaskSocketCallbackInterface
+class TaskSocketCallbackImpl(private val currentList: DataList?,
+                             private val singleListData: MutableLiveData<DataList?>,
+                             private val mainRepository: MainRepository): TaskSocketCallbackInterface
 {
     override fun onAdded(task: Task?,listId: String)
     {
         AddLocalTaskUseCase(mainRepository).execute(task, listId)
+        currentList?.tasks?.add(task)
+        singleListData.postValue(currentList)
     }
 
     override fun onDone(task: Task?,listId: String)

@@ -1,6 +1,7 @@
 package com.example.ngs_test_login.MainActivity.Domain.Main.Repositories
 
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
+import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.TaskSocketCallbackInterface
 import io.socket.client.Socket
 
 interface TasksRepository
@@ -37,5 +38,5 @@ interface TasksRepository
 
     fun deleteTask(id: String, projectId: String)
 
-    fun getTask()
+    fun getTask(taskSocketCallbackInterface: TaskSocketCallbackInterface)
 }

@@ -6,11 +6,16 @@ import androidx.annotation.RequiresApi
 import com.example.ngs_test_login.MainActivity.Data.Base.Serializers.SocketDataSerializer
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ConvertClassToJson
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.IdGenerator
+import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Mappers.DataListMapper
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.SocketSendList
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.TaskWeb
+import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.TasksSocketModels.SocketReceiveTaskSecondWeb
+import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.TasksSocketModels.SocketReceiveTaskWeb
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.TasksSocketModels.SocketSendTaskSecondWeb
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Models.TasksSocketModels.SocketSendTaskWeb
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ListSocketCallbackInterface
+import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.TaskSocketCallbackInterface
 import io.socket.client.Socket
 import org.json.JSONObject
 
@@ -68,10 +73,12 @@ class TaskSocket(private val mSocket: Socket)
         mSocket.emit(event, socketTask)
     }
 
-    fun getTask()
+    fun getTask(taskSocketCallbackInterface: TaskSocketCallbackInterface)
     {
-        var serializerSocket: SocketDataSerializer<TaskWeb>
-        val taskWeb: TaskWeb = TaskWeb()
+        var serializerSocket: SocketDataSerializer<SocketReceiveTaskWeb>
+        var serializerSocketSecond: SocketDataSerializer<SocketReceiveTaskSecondWeb>
+        val socketReceiveTaskWeb = SocketReceiveTaskWeb()
+        val socketReceiveTaskSecondWeb = SocketReceiveTaskSecondWeb()
         mSocket.on("OUT_Message")
         {
             Log.d("MyLog","OUT MESSAGE")
@@ -81,38 +88,43 @@ class TaskSocket(private val mSocket: Socket)
         mSocket.on("OUT_TaskAdd")
         {
                 args->
-            Log.d("MyLog","GOT TASK: ${args[0]}")
+            Log.d("MyLog","GOT TASK in Added: ${args[0]}")
+            //taskSocketCallbackInterface.onAdded()
+            serializerSocket = SocketDataSerializer(args[0] as JSONObject, socketReceiveTaskWeb.javaClass)
+            Log.d("MyLog","Serialized Task: ${serializerSocket.doSerialization()}")
+            //val list: DataList? = DataListMapper().mapFromKTOT(serializerSocket.doSerialization())
+            //listSocketCallbackInterface.onDeleted(list)
 
         }
 
         mSocket.on("OUT_TaskDone")
         {
                 args->
-            Log.d("MyLog","GOT TASK: ${args[0]}")
+            Log.d("MyLog","GOT TASK in Done: ${args[0]}")
         }
 
         mSocket.on("OUT_TaskNote")
         {
                 args->
-            Log.d("MyLog","GOT TASK: ${args[0]}")
+            Log.d("MyLog","GOT TASK in Note: ${args[0]}")
         }
 
         mSocket.on("OUT_TaskOrder")
         {
                 args->
-            Log.d("MyLog","GOT TASK: ${args[0]}")
+            Log.d("MyLog","GOT TASK in Order: ${args[0]}")
         }
 
         mSocket.on("OUT_TaskRename")
         {
                 args->
-            Log.d("MyLog","GOT TASK: ${args[0]}")
+            Log.d("MyLog","GOT TASK in Rename:${args[0]}")
         }
 
         mSocket.on("OUT_TaskDelete")
         {
                 args->
-            Log.d("MyLog","GOT TASK: ${args[0]}")
+            Log.d("MyLog","GOT TASK in Delete: ${args[0]}")
         }
     }
 }
