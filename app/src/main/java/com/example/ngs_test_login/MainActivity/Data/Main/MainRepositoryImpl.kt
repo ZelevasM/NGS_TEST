@@ -10,6 +10,7 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ChatS
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ListSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Chat
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
 import io.socket.client.Socket
 
 class MainRepositoryImpl: MainRepository
@@ -19,6 +20,7 @@ class MainRepositoryImpl: MainRepository
 
     //Local DB
     private var listsRepositoryImpl: ListsRepositoryImpl? = null
+    private var tasksRepositoryImpl: TasksRepositoryImpl? = null
     private var chatRepositoryImpl: ChatRepositoryImpl? = null
     private var listsDao: ListsDao? = null
     private var chatsDao: ChatsDao? = null
@@ -29,6 +31,7 @@ class MainRepositoryImpl: MainRepository
     {
         listsDao = ListsDatabase.getDatabase(context).listsDao()
         listsRepositoryImpl = ListsRepositoryImpl(listsDao!!)
+        tasksRepositoryImpl = TasksRepositoryImpl(listsDao!!)
 
         chatsDao = ChatsDatabase.getDatabase(context).chatsDao()
         chatRepositoryImpl = ChatRepositoryImpl(chatsDao!!)
@@ -72,6 +75,43 @@ class MainRepositoryImpl: MainRepository
         return listsRepositoryImpl?.getLocalList(dataList)
     }
 
+    //Local Database's Methods For Tasks
+
+    override fun searchTasks()
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun addLocalTask(task: Task?,listId: String)
+    {
+        tasksRepositoryImpl?.addLocalTask(task, listId)
+    }
+
+    override fun doneLocalTask(task: Task?,listId: String)
+    {
+        tasksRepositoryImpl?.doneLocalTask(task, listId)
+    }
+
+    override fun noteLocalTask(task: Task?,listId: String)
+    {
+        tasksRepositoryImpl?.noteLocalTask(task, listId)
+    }
+
+    override fun renameLocalTask(task: Task?,listId: String)
+    {
+        tasksRepositoryImpl?.renameLocalTask(task, listId)
+    }
+
+    override fun deleteLocalTask(task: Task?,listId: String)
+    {
+        tasksRepositoryImpl?.deleteLocalTask(task, listId)
+    }
+
+    override fun getLocalTask(taskId: String?,listId: String): Task?
+    {
+        return tasksRepositoryImpl?.getLocalTask(taskId, listId)
+    }
+
     //Local Database's Methods For Chats
 
     override fun addLocalChats(chats: ArrayList<Chat?>?)
@@ -110,6 +150,7 @@ class MainRepositoryImpl: MainRepository
     {
         mSocket = bSocket
         listsRepositoryImpl?.socketInit(mSocket)
+        tasksRepositoryImpl?.socketInit(mSocket)
         chatRepositoryImpl?.socketInit(mSocket)
     }
 
@@ -133,6 +174,43 @@ class MainRepositoryImpl: MainRepository
     override fun getList(listSocketCallbackInterface: ListSocketCallbackInterface)
     {
         listsRepositoryImpl?.getList(listSocketCallbackInterface)
+    }
+
+    //Socket's Methods For Tasks
+
+    override fun addTask(name: String, projectId: String, parentTaskId: String?)
+    {
+        tasksRepositoryImpl?.addTask(name, projectId, parentTaskId)
+    }
+
+    override fun doneTask(id: String,projectId: String,done: Boolean)
+    {
+        tasksRepositoryImpl?.doneTask(id, projectId, done)
+    }
+
+    override fun noteTask(id: String, projectId: String, notes: String?)
+    {
+        tasksRepositoryImpl?.noteTask(id, projectId, notes)
+    }
+
+    override fun orderTask()
+    {
+        tasksRepositoryImpl?.orderTask()
+    }
+
+    override fun renameTask(id: String, newName: String?,  projectId: String)
+    {
+       tasksRepositoryImpl?.renameTask(id, newName, projectId)
+    }
+
+    override fun deleteTask(id: String,projectId: String)
+    {
+        tasksRepositoryImpl?.deleteTask(id, projectId)
+    }
+
+    override fun getTask()
+    {
+        tasksRepositoryImpl?.getTask()
     }
 
     //Socket's Methods For Chats

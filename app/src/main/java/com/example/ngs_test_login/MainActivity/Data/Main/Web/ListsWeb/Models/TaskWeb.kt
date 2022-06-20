@@ -40,5 +40,5 @@ data class TaskWeb(
     var users: List<TaskUserWeb?>? = null,
 
     @field:SerializedName("messages")
-    var messages: ArrayList<TaskMessageWeb?>? = null,)
+    var messages: ArrayList<TaskMessageWeb?>? = null)
 {}

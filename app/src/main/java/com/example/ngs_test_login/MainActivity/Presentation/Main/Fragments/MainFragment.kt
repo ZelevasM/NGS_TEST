@@ -60,7 +60,19 @@ class MainFragment: Fragment()
             {
                 findNavController().navigate(R.id.action_mainFragment3_to_mainProfileFragment)
             }
+            if(it.itemId == R.id.action_search)
+            {
+                findNavController().navigate(R.id.action_mainFragment3_to_mainSearchFragment)
+            }
+            if(it.itemId == R.id.action_folder)
+            {
+                //SHOW POP-UP
+            }
             true
+        }
+
+        actionBar.setNavigationOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment3_to_mainNotificationsFragment)
         }
 
         navView.setupWithNavController(navController)
@@ -74,5 +86,4 @@ class MainFragment: Fragment()
             findNavController().navigate(R.id.action_mainFragment3_to_mainAddFragment)
         }
     }
-
 }

@@ -12,6 +12,7 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Cha
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases.*
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.*
+import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.TasksSocketUseCases.*
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.ChatSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.ListSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.ChatValidator
@@ -151,6 +152,42 @@ class MainViewModel: ViewModel(), ViewModelInterface
             singleListData.postValue(GetLocalListUseCase(mainInterfaceImpl).execute(dataList)) }
     }
 
+    //TASK'S METHODS
+    fun addTask(name: String, projectId: String, parentTaskId: String?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { AddTaskUseCase(mainInterfaceImpl).execute(name, projectId, parentTaskId) }
+    }
+
+    fun doneTask(id: String, projectId: String, done: Boolean)
+    {
+        viewModelScope.launch(Dispatchers.IO) { DoneTaskUseCase(mainInterfaceImpl).execute(id, projectId, done) }
+    }
+
+    fun noteTask(id: String, projectId: String, notes: String?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { NotesTaskUseCase(mainInterfaceImpl).execute(id, projectId, notes) }
+    }
+
+    fun orderTask()
+    {
+
+    }
+
+    fun renameTask(id: String, newName: String?,  projectId: String)
+    {
+        viewModelScope.launch(Dispatchers.IO) { RenameTaskUseCase(mainInterfaceImpl).execute(id, newName, projectId) }
+    }
+
+    fun deleteTask(id: String, projectId: String)
+    {
+        viewModelScope.launch(Dispatchers.IO) { DeleteTaskUseCase(mainInterfaceImpl).execute(id, projectId) }
+    }
+
+    fun getTask()
+    {
+        viewModelScope.launch(Dispatchers.IO) { GetTaskUseCase(mainInterfaceImpl).execute() }
+    }
+
     //CHAT' METHODS
     fun addChat(name: String)
     {
@@ -173,6 +210,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
     fun invokeSocket()
     {
         getList()
+        getTask()
         getChat()
     }
 

@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity()
                 Toast.makeText(this,"CONNECTED", Toast.LENGTH_SHORT).show()
                 //unlock UI elements
                 baseViewModel.getDataFromRest()
+                //mainViewModel.deleteTask("BQiQeHE2TWFoBejIxzKooWI=", "MTY1NDc2MTYyNDUxMV82MjYwZjg0ZTVkYjVlNTA1ZmFjY2VjYjI=")
             }
             else
             {

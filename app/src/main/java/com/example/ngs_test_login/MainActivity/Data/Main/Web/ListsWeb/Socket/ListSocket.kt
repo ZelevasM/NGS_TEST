@@ -47,7 +47,7 @@ class ListSocket(private val mSocket: Socket)
     fun getList(listSocketCallbackInterface: ListSocketCallbackInterface)
     {
         var serializerSocket: SocketDataSerializer<DataListWeb>
-        val list: DataListWeb = DataListWeb()
+        val listWeb: DataListWeb = DataListWeb()
         mSocket.on("OUT_Message")
         {
             Log.d("MyLog","OUT MESSAGE")
@@ -58,7 +58,7 @@ class ListSocket(private val mSocket: Socket)
         {
             args->
                 Log.d("MyLog","GOT LIST: ${args[0]}")
-                serializerSocket = SocketDataSerializer(args[0] as JSONObject, list.javaClass)
+                serializerSocket = SocketDataSerializer(args[0] as JSONObject, listWeb.javaClass)
                 val list: DataList? = DataListMapper().mapFromKTOT(serializerSocket.doSerialization())
                 listSocketCallbackInterface.onAdded(list)
         }
@@ -67,7 +67,7 @@ class ListSocket(private val mSocket: Socket)
         {
                 args->
             Log.d("MyLog","GOT LIST UPDATE: ${args[0]}")
-            serializerSocket = SocketDataSerializer(args[0] as JSONObject, list.javaClass)
+            serializerSocket = SocketDataSerializer(args[0] as JSONObject, listWeb.javaClass)
             val list: DataList? = DataListMapper().mapFromKTOT(serializerSocket.doSerialization())
             listSocketCallbackInterface.onUpdated(list)
         }
@@ -76,7 +76,7 @@ class ListSocket(private val mSocket: Socket)
         {
                 args->
             Log.d("MyLog","GOT LIST DELETE: ${args[0]}")
-            serializerSocket = SocketDataSerializer(args[0] as JSONObject, list.javaClass)
+            serializerSocket = SocketDataSerializer(args[0] as JSONObject, listWeb.javaClass)
             val list: DataList? = DataListMapper().mapFromKTOT(serializerSocket.doSerialization())
             listSocketCallbackInterface.onDeleted(list)
         }

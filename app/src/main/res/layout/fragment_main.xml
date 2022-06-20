@@ -18,46 +18,13 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:navigationIcon="@drawable/ic_notifications"
+            app:navigationIconTint="@color/light_pink"
             app:titleTextColor="@color/black"
-            app:menu="@menu/action_bar_main_menu"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary">
+            app:menu="@menu/action_bar_main_menu">
         </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/topAppBarLayout"
-        android:id="@+id/editText_main_search_layout_holder"
-        android:background="@color/light_grey">
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editText_main_search_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.NGS_Test_Login.TextInput"
-            app:shapeAppearanceOverlay="@style/Widget.NGS_Test_Login.TextInput"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="8dp"
-            android:hint="@string/search_notif"
-            app:boxStrokeColor="@color/light_pink"
-            app:boxStrokeWidth="1dp"
-            app:startIconDrawable="@drawable/ic_search"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/light_pink"
-            app:hintTextColor="@color/light_pink">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_email"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:ems="10"
-                android:inputType="text"
-                android:paddingVertical="1dp" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </RelativeLayout>
-
 
     <Button
         android:id="@+id/button_add"
@@ -76,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/main_navigation_bar"
-        android:layout_below="@id/editText_main_search_layout_holder"
+        android:layout_below="@id/topAppBarLayout"
         app:navGraph="@navigation/main_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

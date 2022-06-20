@@ -18,6 +18,12 @@
         <action
             android:id="@+id/action_mainFragment3_to_mainListHostFragment"
             app:destination="@id/mainListHostFragment" />
+        <action
+            android:id="@+id/action_mainFragment3_to_mainNotificationsFragment"
+            app:destination="@id/mainNotificationsFragment" />
+        <action
+            android:id="@+id/action_mainFragment3_to_mainSearchFragment"
+            app:destination="@id/mainSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainAddFragment"
@@ -59,4 +65,14 @@
         android:name="com.example.ngs_test_login.MainActivity.Presentation.User.Fragments.MainProfileShortcutsFragment"
         android:label="MainProfileShortcutsFragment"
         tools:layout="@layout/fragment_profile_shortcuts"/>
+    <fragment
+        android:id="@+id/mainNotificationsFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainNotificationsFragment"
+        android:label="MainNotificationsFragment"
+        tools:layout="@layout/fragment_main_notifications"/>
+    <fragment
+        android:id="@+id/mainSearchFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainSearchFragment"
+        android:label="MainSearchFragment"
+        tools:layout="@layout/fragment_main_search"/>
 </navigation>
