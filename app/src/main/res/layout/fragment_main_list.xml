@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:titleTextColor="@color/black"
-            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:navigationIcon="@drawable/ic_action_back_button"
             app:navigationIconTint="@color/black"
             app:menu="@menu/action_bar_list_menu"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
@@ -46,6 +46,17 @@
                 android:background="@color/semi_transparent_black"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/main_list_add_task_button"
+            style="@android:style/Widget.Material.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/add_task"
+            android:background="@color/semi_transparent_black"
+            android:visibility="gone"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_list_tasks_recView"
             android:layout_width="match_parent"

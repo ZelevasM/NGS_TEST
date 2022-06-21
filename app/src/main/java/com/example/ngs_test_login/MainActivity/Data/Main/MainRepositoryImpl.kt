@@ -83,32 +83,32 @@ class MainRepositoryImpl: MainRepository
         TODO("Not yet implemented")
     }
 
-    override fun addLocalTask(task: Task?,listId: String)
+    override fun addLocalTask(task: Task?,listId: String?)
     {
         tasksRepositoryImpl?.addLocalTask(task, listId)
     }
 
-    override fun doneLocalTask(task: Task?,listId: String)
+    override fun doneLocalTask(task: Task?,listId: String?)
     {
         tasksRepositoryImpl?.doneLocalTask(task, listId)
     }
 
-    override fun noteLocalTask(task: Task?,listId: String)
+    override fun noteLocalTask(task: Task?,listId: String?)
     {
         tasksRepositoryImpl?.noteLocalTask(task, listId)
     }
 
-    override fun renameLocalTask(task: Task?,listId: String)
+    override fun renameLocalTask(task: Task?,listId: String?)
     {
         tasksRepositoryImpl?.renameLocalTask(task, listId)
     }
 
-    override fun deleteLocalTask(task: Task?,listId: String)
+    override fun deleteLocalTask(task: Task?,listId: String?)
     {
         tasksRepositoryImpl?.deleteLocalTask(task, listId)
     }
 
-    override fun getLocalTask(taskId: String?,listId: String): Task?
+    override fun getLocalTask(taskId: String?,listId: String?): Task?
     {
         return tasksRepositoryImpl?.getLocalTask(taskId, listId)
     }

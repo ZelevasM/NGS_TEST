@@ -43,6 +43,8 @@
     //Main List
     <string name="users">Users</string>
     <string name="sort">Sort Out</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 
     //Main Task/Comments/Attachments
     <string name="assign_to">Assign To</string>

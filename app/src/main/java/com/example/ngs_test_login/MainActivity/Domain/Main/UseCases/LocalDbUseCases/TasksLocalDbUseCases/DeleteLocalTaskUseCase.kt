@@ -5,7 +5,7 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.MainRepo
 
 class DeleteLocalTaskUseCase(private val mainRepository: MainRepository)
 {
-    fun execute(task: Task?,listId: String)
+    fun execute(task: Task?,listId: String?)
     {
         mainRepository.deleteLocalTask(task, listId)
     }

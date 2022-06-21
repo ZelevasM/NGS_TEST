@@ -8,19 +8,19 @@ interface TasksRepository
 {
     fun searchTasks()
 
-    fun addLocalTask(task: Task?, listId: String)
+    fun addLocalTask(task: Task?, listId: String?)
 
-    fun doneLocalTask(task: Task?, listId: String)
+    fun doneLocalTask(task: Task?, listId: String?)
 
-    fun noteLocalTask(task: Task?, listId: String)
+    fun noteLocalTask(task: Task?, listId: String?)
 
     //fun orderLocalTask(task: Task?, listId: String)
 
-    fun renameLocalTask(task: Task?, listId: String)
+    fun renameLocalTask(task: Task?, listId: String?)
 
-    fun deleteLocalTask(task: Task?, listId: String)
+    fun deleteLocalTask(task: Task?, listId: String?)
 
-    fun getLocalTask(taskId: String?, listId: String): Task?
+    fun getLocalTask(taskId: String?, listId: String?): Task?
 
     //Socket's Methods
 

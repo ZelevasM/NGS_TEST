@@ -1,5 +1,6 @@
 package com.example.ngs_test_login.MainActivity.Data.Main
 
+import android.util.Log
 import com.example.ngs_test_login.MainActivity.Data.Main.Local.LocalListsDb.ListsDao
 import com.example.ngs_test_login.MainActivity.Data.Main.Web.ListsWeb.Socket.TaskSocket
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
@@ -16,14 +17,14 @@ class TasksRepositoryImpl(private val listsDao: ListsDao): TasksRepository
         TODO("Not yet implemented")
     }
 
-    override fun addLocalTask(task: Task?,listId: String)
+    override fun addLocalTask(task: Task?,listId: String?)
     {
         val tasks = listsDao.getList(listId)?.tasks
         tasks?.add(task)
         listsDao.updateTask(tasks, listId)
     }
 
-    override fun doneLocalTask(task: Task?,listId: String)
+    override fun doneLocalTask(task: Task?,listId: String?)
     {
         val tasks = listsDao.getList(listId)?.tasks
         if (tasks != null)
@@ -36,7 +37,7 @@ class TasksRepositoryImpl(private val listsDao: ListsDao): TasksRepository
         listsDao.updateTask(tasks, listId)
     }
 
-    override fun noteLocalTask(task: Task?,listId: String)
+    override fun noteLocalTask(task: Task?,listId: String?)
     {
         val tasks = listsDao.getList(listId)?.tasks
         if (tasks != null)
@@ -49,7 +50,7 @@ class TasksRepositoryImpl(private val listsDao: ListsDao): TasksRepository
         listsDao.updateTask(tasks, listId)
     }
 
-    override fun renameLocalTask(task: Task?,listId: String)
+    override fun renameLocalTask(task: Task?,listId: String?)
     {
         val tasks = listsDao.getList(listId)?.tasks
         if (tasks != null)
@@ -62,12 +63,26 @@ class TasksRepositoryImpl(private val listsDao: ListsDao): TasksRepository
         listsDao.updateTask(tasks, listId)
     }
 
-    override fun deleteLocalTask(task: Task?,listId: String)
+    override fun deleteLocalTask(task: Task?,listId: String?)
     {
-
+        val tasks = listsDao.getList(listId)?.tasks
+        if(tasks != null)
+        {
+            Log.d("MyLog","tasks size: ${tasks.size}")
+            for(i in 0 until tasks.size)
+            {
+                Log.d("MyLog","position: ${i}")
+                if(tasks[i]?.id == task?.id)
+                {
+                    tasks.removeAt(i)
+                    break
+                }
+            }
+        }
+        listsDao.updateTask(tasks, listId)
     }
 
-    override fun getLocalTask(taskId: String?,listId: String): Task?
+    override fun getLocalTask(taskId: String?,listId: String?): Task?
     {
         val tasks: ArrayList<Task?>? = listsDao.getList(listId)?.tasks
         var resultTask: Task? = null

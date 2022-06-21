@@ -21,9 +21,14 @@ class SimpleTaskAdapter(): RecyclerView.Adapter<SimpleTaskAdapter.SimpleTaskView
             notifyDataSetChanged()
         }
     private lateinit var clickListener: onItemClickListener
+    private lateinit var longClickListener: onItemLongClickListener
     interface onItemClickListener
     {
         fun onItemClicked(position: Int,id: String?, name: String?){}
+    }
+    interface onItemLongClickListener
+    {
+        fun onItemLongClicked(position: Int, id: String?, name: String?){}
     }
 
     fun setOnItemClickListener(listener: onItemClickListener)
@@ -31,15 +36,25 @@ class SimpleTaskAdapter(): RecyclerView.Adapter<SimpleTaskAdapter.SimpleTaskView
         clickListener = listener
     }
 
-    class SimpleTaskViewHolder(itemView: View, listener: onItemClickListener): RecyclerView.ViewHolder(itemView)
+    fun setOnItemLongClickListener(longListener: onItemLongClickListener)
+    {
+        longClickListener = longListener
+    }
+
+    class SimpleTaskViewHolder(itemView: View, listener: onItemClickListener, longListener: onItemLongClickListener): RecyclerView.ViewHolder(itemView)
     {
         private val mListener = listener
+        private val mLongListener = longListener
 
         fun bind(task: Task?)
         {
             itemView.findViewById<TextView>(R.id.task_simple_item_textView).text = task?.name
             itemView.findViewById<RelativeLayout>(R.id.task_simple_item_container).setOnClickListener {
                 mListener.onItemClicked(adapterPosition, id = task?.id, name = task?.name)
+            }
+            itemView.findViewById<RelativeLayout>(R.id.task_simple_item_container).setOnLongClickListener{
+                mLongListener.onItemLongClicked(adapterPosition, id = task?.id, name = task?.name)
+                true
             }
         }
     }
@@ -48,7 +63,7 @@ class SimpleTaskAdapter(): RecyclerView.Adapter<SimpleTaskAdapter.SimpleTaskView
     {
         val itemView: View = LayoutInflater.from(parent.context).
         inflate(R.layout.task_simple_item, parent, false)
-        return SimpleTaskAdapter.SimpleTaskViewHolder(itemView, clickListener)
+        return SimpleTaskAdapter.SimpleTaskViewHolder(itemView, clickListener, longClickListener)
     }
 
     override fun onBindViewHolder(holder: SimpleTaskViewHolder,position: Int)
