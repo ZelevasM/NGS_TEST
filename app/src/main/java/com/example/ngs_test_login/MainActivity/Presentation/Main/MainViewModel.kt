@@ -12,9 +12,11 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Cha
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases.*
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.*
+import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.TasksChatsSocketUseCases.*
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.TasksSocketUseCases.*
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.ChatSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.ListSocketCallbackImpl
+import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.TaskChatSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl.TaskSocketCallbackImpl
 import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.ChatValidator
 import com.example.ngs_test_login.MainActivity.Presentation.Main.Validators.ListValidator
@@ -197,6 +199,40 @@ class MainViewModel: ViewModel(), ViewModelInterface
         }
     }
 
+    //TASKS' CHATS' METHODS
+
+    fun addTaskMessage(userId: String?, taskId: String?, listId: String?, message: String?, replyChatId: String?, fileId: String?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { AddTaskMessageUseCase(mainInterfaceImpl).execute(userId, taskId, listId, message, replyChatId, fileId) }
+    }
+
+    fun renameTaskMessage(id: String?, taskId: String?, listId: String?, message: String?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { RenameTaskMessageUseCase(mainInterfaceImpl).execute(id, taskId, listId, message) }
+    }
+
+    fun deleteTaskMessage(id: String?, taskId: String?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { DeleteTaskMessageUseCase(mainInterfaceImpl).execute(id, taskId) }
+    }
+
+    fun readTaskMessage(id: String?, taskId: String?, userId: String?, allRead: Boolean?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { ReadTaskMessageUseCase(mainInterfaceImpl).execute(id, taskId, userId, allRead) }
+    }
+
+    fun startTypingTaskMessage()
+    {}
+
+    fun endTypingTaskMessage()
+    {}
+
+    fun getTaskMessage()
+    {
+        val taskChatSocketCallbackImpl = TaskChatSocketCallbackImpl(mainInterfaceImpl)
+        GetTaskMessageUseCase(mainInterfaceImpl).execute(taskChatSocketCallbackImpl)
+    }
+
     //CHAT' METHODS
     fun addChat(name: String)
     {
@@ -220,6 +256,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
     {
         getList()
         getTask()
+        getTaskMessage()
         getChat()
     }
 

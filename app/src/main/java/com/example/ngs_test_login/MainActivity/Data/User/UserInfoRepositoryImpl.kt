@@ -24,7 +24,6 @@ class UserInfoRepositoryImpl(private val userDao: UserDao): UserInfoRepository
     {
         if(userDao.getUser()?.size != 0)
         {
-            Log.d("MyLog","User: ${userDao.getUser()?.get(0)}")
             return UserEntityMapper().mapFromKTOT(userDao.getUser()?.get(0))
         }
         return null

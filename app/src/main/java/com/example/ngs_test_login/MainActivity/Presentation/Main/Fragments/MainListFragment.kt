@@ -106,6 +106,7 @@ class MainListFragment: Fragment()
                         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
                         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
                     }
+
                     alertDialog.show()
                 }
             }
@@ -126,7 +127,7 @@ class MainListFragment: Fragment()
         mainViewModel.getLocalList(DataList(id = mainViewModel.getCurrentListID()!!))
 
         mainViewModel.singleListLiveData.observe(viewLifecycleOwner, Observer {
-            if(it?.tasks != null)
+            if(it?.tasks != null && it?.id == mainViewModel.getCurrentListID())
             {
                 Log.d("MyLog","LIIIIIIst: $it")
                 val tasks: ArrayList<Task?>? = it.tasks

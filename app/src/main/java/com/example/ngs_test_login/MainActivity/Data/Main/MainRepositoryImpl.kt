@@ -11,17 +11,33 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.ListS
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Chat
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.TaskMessage
+import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.TaskChatCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.TaskSocketCallbackInterface
 import io.socket.client.Socket
 
 class MainRepositoryImpl: MainRepository
 {
+    /*
+        Structure of the Class:
+        1. Local Db Methods
+            1. Lists
+            2. Tasks
+            3. Tasks' Chats
+            4. Chats
+        2. Socket Methods
+            1. Lists
+            2. Tasks
+            3. Tasks' Chats
+            4. Chats
+     */
     //lateinit then + init fun
     private lateinit var mSocket: Socket
 
     //Local DB
     private var listsRepositoryImpl: ListsRepositoryImpl? = null
     private var tasksRepositoryImpl: TasksRepositoryImpl? = null
+    private var tasksChatsRepositoryImpl: TasksChatsRepositoryImpl? = null
     private var chatRepositoryImpl: ChatRepositoryImpl? = null
     private var listsDao: ListsDao? = null
     private var chatsDao: ChatsDao? = null
@@ -33,6 +49,7 @@ class MainRepositoryImpl: MainRepository
         listsDao = ListsDatabase.getDatabase(context).listsDao()
         listsRepositoryImpl = ListsRepositoryImpl(listsDao!!)
         tasksRepositoryImpl = TasksRepositoryImpl(listsDao!!)
+        tasksChatsRepositoryImpl = TasksChatsRepositoryImpl(listsDao!!)
 
         chatsDao = ChatsDatabase.getDatabase(context).chatsDao()
         chatRepositoryImpl = ChatRepositoryImpl(chatsDao!!)
@@ -113,6 +130,33 @@ class MainRepositoryImpl: MainRepository
         return tasksRepositoryImpl?.getLocalTask(taskId, listId)
     }
 
+    //Local Database's Methods For Tasks' Chats
+
+    override fun addLocalTaskMessage()
+    {
+        tasksChatsRepositoryImpl?.addLocalTaskMessage()
+    }
+
+    override fun renameLocalTaskMessage()
+    {
+        tasksChatsRepositoryImpl?.renameLocalTaskMessage()
+    }
+
+    override fun deleteLocalTaskMessage()
+    {
+        tasksChatsRepositoryImpl?.deleteLocalTaskMessage()
+    }
+
+    override fun readLocalTaskMessage()
+    {
+        tasksChatsRepositoryImpl?.readLocalTaskMessage()
+    }
+
+    override fun getLocalTaskMessage()
+    {
+        tasksChatsRepositoryImpl?.getLocalTaskMessage()
+    }
+
     //Local Database's Methods For Chats
 
     override fun addLocalChats(chats: ArrayList<Chat?>?)
@@ -152,6 +196,7 @@ class MainRepositoryImpl: MainRepository
         mSocket = bSocket
         listsRepositoryImpl?.socketInit(mSocket)
         tasksRepositoryImpl?.socketInit(mSocket)
+        tasksChatsRepositoryImpl?.socketInit(mSocket)
         chatRepositoryImpl?.socketInit(mSocket)
     }
 
@@ -212,6 +257,43 @@ class MainRepositoryImpl: MainRepository
     override fun getTask(taskSocketCallbackInterface: TaskSocketCallbackInterface)
     {
         tasksRepositoryImpl?.getTask(taskSocketCallbackInterface)
+    }
+
+    //Socket's Methods for Tasks' Chats
+
+    override fun addTaskMessage(userId: String?,taskId: String?,listId: String?,message: String?,replyChatId: String?,fileId: String?)
+    {
+        tasksChatsRepositoryImpl?.addTaskMessage(userId, taskId, listId, message, replyChatId, fileId)
+    }
+
+    override fun renameTaskMessage(id: String?,taskId: String?,listId: String?,message: String?)
+    {
+        tasksChatsRepositoryImpl?.renameTaskMessage(id, taskId, listId, message)
+    }
+
+    override fun deleteTaskMessage(id: String?,taskId: String?)
+    {
+        tasksChatsRepositoryImpl?.deleteTaskMessage(id, taskId)
+    }
+
+    override fun readTaskMessage(id: String?,taskId: String?,userId: String?,allRead: Boolean?)
+    {
+        tasksChatsRepositoryImpl?.readTaskMessage(id, taskId, userId, allRead)
+    }
+
+    override fun startTypingTaskMessage()
+    {
+        tasksChatsRepositoryImpl?.startTypingTaskMessage()
+    }
+
+    override fun endTypingTaskMessage()
+    {
+        tasksChatsRepositoryImpl?.endTypingTaskMessage()
+    }
+
+    override fun getTaskMessage(taskChatCallbackInterface: TaskChatCallbackInterface)
+    {
+        tasksChatsRepositoryImpl?.getTaskMessage(taskChatCallbackInterface)
     }
 
     //Socket's Methods For Chats

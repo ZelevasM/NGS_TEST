@@ -85,7 +85,7 @@ class TaskSocket(private val mSocket: Socket)
         mSocket.on("OUT_Message")
         {
             Log.d("MyLog","OUT MESSAGE")
-            Log.d("MyLog","ConnexionInList: ${mSocket.connected()}")
+            Log.d("MyLog","ConnexionInTask: ${mSocket.connected()}")
         }
 
         mSocket.on("OUT_TaskAdd")
@@ -141,7 +141,6 @@ class TaskSocket(private val mSocket: Socket)
             serializerSocketSecond = SocketDataSerializer(args[0] as JSONObject, socketReceiveTaskSecondWeb.javaClass)
             val task: Task? = SocketReceiveTaskSecondMapper().mapFromKTOT(serializerSocketSecond.doSerialization())
             val listId = serializerSocketSecond.doSerialization().projectId
-            Log.d("MyLog","Mein Delete: ${task}")
             taskSocketCallbackInterface.onDeleted(task, listId)
         }
     }

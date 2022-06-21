@@ -29,6 +29,7 @@ class MainTaskCommentsFragment: Fragment()
     //TODO GAVNO CODE
     private fun Init(view: View)
     {
-
+        mainViewModel.addTaskMessage("62a1a832c7c8e80568614d36", "AzaSE4A2TWFoBejIxzKooWI=",
+            "MTY1NDc2MTYyNDUxMV82MjYwZjg0ZTVkYjVlNTA1ZmFjY2VjYjI=", "NEW INFO", null, null)
     }
 }
