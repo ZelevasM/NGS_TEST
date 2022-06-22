@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation.findNavController
@@ -24,6 +25,8 @@ class MainTaskFragment: Fragment()
     private lateinit var appBarLayout: AppBarLayout
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
+
+    private lateinit var addNoteHolder: RelativeLayout
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -62,5 +65,10 @@ class MainTaskFragment: Fragment()
                 1 -> {tab.text = "Attachments"}
             }
         }.attach()
+
+        addNoteHolder = view.findViewById(R.id.main_task_addNote_holder)
+        addNoteHolder.setOnClickListener {
+            findNavController().navigate(R.id.action_mainTaskFragment_to_mainTaskAddNoteFragment)
+        }
     }
 }

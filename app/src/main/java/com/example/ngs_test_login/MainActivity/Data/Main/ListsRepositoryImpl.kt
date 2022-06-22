@@ -36,24 +36,24 @@ class ListsRepositoryImpl(private val listsDao: ListsDao): ListsRepository
         return lists
     }
 
-    override fun addLocalList(dataList: DataList)
+    override fun addLocalList(dataList: DataList?)
     {
         listsDao.insertList(listEntityMapper.mapFromTToK(dataList))
     }
 
-    override fun updateLocalList(dataList: DataList)
+    override fun updateLocalList(dataList: DataList?)
     {
         listsDao.updateList(listEntityMapper.mapFromTToK(dataList))
     }
 
-    override fun deleteLocalList(dataList: DataList)
+    override fun deleteLocalList(dataList: DataList?)
     {
         listsDao.deleteList(listEntityMapper.mapFromTToK(dataList))
     }
 
-    override fun getLocalList(dataList: DataList): DataList?
+    override fun getLocalList(dataList: DataList?): DataList?
     {
-        val listId: String? = dataList.id
+        val listId: String? = dataList?.id
         return listEntityMapper.mapFromKTOT(listsDao.getList(listId))
     }
 

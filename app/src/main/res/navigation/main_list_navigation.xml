@@ -20,5 +20,17 @@
         <action
             android:id="@+id/action_mainTaskFragment_to_mainListFragment"
             app:destination="@id/mainListFragment" />
+        <action
+            android:id="@+id/action_mainTaskFragment_to_mainTaskAddNoteFragment"
+            app:destination="@id/mainTaskAddNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainTaskAddNoteFragment"
+        android:name="com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments.MainTaskAddNoteFragment"
+        android:label="MainTaskAddNoteFragment"
+        tools:layout="@layout/fragment_main_task_note">
+        <action
+            android:id="@+id/action_mainTaskAddNoteFragment_to_mainTaskFragment"
+            app:destination="@id/mainTaskFragment" />
     </fragment>
 </navigation>

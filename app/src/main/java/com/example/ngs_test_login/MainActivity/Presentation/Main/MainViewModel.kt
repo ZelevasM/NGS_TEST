@@ -151,7 +151,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
         viewModelScope.launch(Dispatchers.IO) {
             val getListUseCase: GetListUseCase = GetListUseCase(mainInterfaceImpl)
             val listSocketCallbackImpl: ListSocketCallbackImpl = ListSocketCallbackImpl(lists,
-                listsData)
+                listsData, mainInterfaceImpl)
             getListUseCase.execute(listSocketCallbackImpl)
         }
     }

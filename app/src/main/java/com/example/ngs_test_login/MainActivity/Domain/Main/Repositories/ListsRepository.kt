@@ -10,13 +10,13 @@ interface ListsRepository
 
     fun getLocalLists(): ArrayList<DataList?>?
 
-    fun addLocalList(dataList: DataList)
+    fun addLocalList(dataList: DataList?)
 
-    fun updateLocalList(dataList: DataList)
+    fun updateLocalList(dataList: DataList?)
 
-    fun deleteLocalList(dataList: DataList)
+    fun deleteLocalList(dataList: DataList?)
 
-    fun getLocalList(dataList: DataList): DataList?
+    fun getLocalList(dataList: DataList?): DataList?
 
     //Socket's Methods
 

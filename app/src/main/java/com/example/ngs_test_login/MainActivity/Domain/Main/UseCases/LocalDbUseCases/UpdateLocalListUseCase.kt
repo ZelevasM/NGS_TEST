@@ -5,7 +5,7 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.MainRepo
 
 class UpdateLocalListUseCase(private val mainRepository: MainRepository)
 {
-    fun execute(dataList: DataList)
+    fun execute(dataList: DataList?)
     {
         mainRepository.updateLocalList(dataList)
     }

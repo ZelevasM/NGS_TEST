@@ -5,7 +5,7 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Da
 
 class GetLocalListUseCase(private val mainRepository: MainRepository)
 {
-    fun execute(dataList: DataList): DataList?
+    fun execute(dataList: DataList?): DataList?
     {
         return mainRepository.getLocalList(dataList)
     }

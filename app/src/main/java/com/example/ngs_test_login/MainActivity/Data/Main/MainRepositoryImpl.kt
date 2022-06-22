@@ -73,22 +73,22 @@ class MainRepositoryImpl: MainRepository
         return listsRepositoryImpl?.getLocalLists()
     }
 
-    override fun addLocalList(dataList: DataList)
+    override fun addLocalList(dataList: DataList?)
     {
         listsRepositoryImpl?.addLocalList(dataList)
     }
 
-    override fun updateLocalList(dataList: DataList)
+    override fun updateLocalList(dataList: DataList?)
     {
         listsRepositoryImpl?.updateLocalList(dataList)
     }
 
-    override fun deleteLocalList(dataList: DataList)
+    override fun deleteLocalList(dataList: DataList?)
     {
         listsRepositoryImpl?.deleteLocalList(dataList)
     }
 
-    override fun getLocalList(dataList: DataList): DataList?
+    override fun getLocalList(dataList: DataList?): DataList?
     {
         return listsRepositoryImpl?.getLocalList(dataList)
     }
