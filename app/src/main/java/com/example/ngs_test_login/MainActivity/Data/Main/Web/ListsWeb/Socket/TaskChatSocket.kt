@@ -46,9 +46,9 @@ class TaskChatSocket(private val mSocket: Socket)
         mSocket.emit(event, socketTaskMessageSecond)
     }
 
-    fun deleteTaskMessage(id: String?,taskId: String?)
+    fun deleteTaskMessage(id: String?,taskId: String?, listId: String?)
     {
-        val socketTaskMessageSecondWeb = SocketTaskMessageSecondWeb(id = id, taskId = taskId)
+        val socketTaskMessageSecondWeb = SocketTaskMessageSecondWeb(id = id, taskId = taskId, projectId = listId)
 
         val socketTaskMessageSecond: JSONObject = ConvertClassToJson(socketTaskMessageSecondWeb).convert()
         val event: String = "IN_CommitDelete"

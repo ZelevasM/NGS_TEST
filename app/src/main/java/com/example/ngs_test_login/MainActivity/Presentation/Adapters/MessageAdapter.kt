@@ -39,7 +39,9 @@ class MessageAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>()
         fun bind(taskMessage: TaskMessage?)
         {
             itemView.findViewById<TextView>(R.id.message_simple_item_text).text = taskMessage?.message
-            mListener.onItemClicked(adapterPosition, id = taskMessage?.id, userId = taskMessage?.userId, message = taskMessage?.message)
+            itemView.findViewById<RelativeLayout>(R.id.message_simple_item_container).setOnClickListener {
+                mListener.onItemClicked(adapterPosition, id = taskMessage?.id, userId = taskMessage?.userId, message = taskMessage?.message)
+            }
         }
     }
 
@@ -50,7 +52,7 @@ class MessageAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>()
         {
             itemView.findViewById<TextView>(R.id.message_simple_item_second_text).text = taskMessage?.message
             itemView.findViewById<TextView>(R.id.message_simple_item_second_userName_text).text = taskMessage?.userId
-            itemView.findViewById<RelativeLayout>(R.id.message_simple_item_container).setOnClickListener {
+            itemView.findViewById<RelativeLayout>(R.id.message_simple_item_second_container).setOnClickListener {
                 mListener.onItemClicked(adapterPosition, id = taskMessage?.id, userId = taskMessage?.userId, message = taskMessage?.message)
             }
         }

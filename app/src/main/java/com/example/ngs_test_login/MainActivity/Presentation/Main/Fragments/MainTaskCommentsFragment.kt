@@ -1,5 +1,8 @@
 package com.example.ngs_test_login.MainActivity.Presentation.Main.Fragments
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -74,48 +77,62 @@ class MainTaskCommentsFragment: Fragment()
                     {
                         super.onItemClicked(position,id,userId, message)
                         Log.d("MyLog","Pressed")
-//                        val popupMenu = PopupMenu(activity, messageRecView.findViewHolderForAdapterPosition(position)?.
-//                        itemView?.findViewById(R.id.message_simple_item_container))
-//
-//                        if(userId == this@MainTaskCommentsFragment.userId)
-//                            popupMenu.menuInflater.inflate(R.menu.message_popup_menu, popupMenu.menu)
-//                        else
-//                            popupMenu.menuInflater.inflate(R.menu.message_popup_menu, popupMenu.menu)
-//
-//                        popupMenu.setOnMenuItemClickListener(object: PopupMenu.OnMenuItemClickListener{
-//                            override fun onMenuItemClick(item: MenuItem?): Boolean
-//                            {
-//                                when(item?.itemId)
-//                                {
-//                                    R.id.message_copy -> {
-//
-//                                    }
-//
-//                                    R.id.message_edit -> {
-//                                        messageInput.setText(message)
-//                                        sendMessageButton.setOnClickListener{
-//                                            val message = messageInput.text.toString()
-//                                            if(verifyMessage(message))
-//                                            {
-//                                                val currentTaskId = mainViewModel.getCurrentTaskID()
-//                                                val currentListId = mainViewModel.getCurrentListID()
-//                                                mainViewModel.renameTaskMessage(id, taskId = currentTaskId, listId = currentListId, message = message)
-//                                                messageInput.text.clear()
-//                                                invokeDefaultSendButton()
-//                                            }
-//                                            else
-//                                            {
-//                                                Toast.makeText(requireContext(), "Invalid Input", Toast.LENGTH_SHORT).show()
-//                                            }
-//                                        }
-//                                    }
-//
-//                                    R.id.message_delete -> {}
-//                                }
-//                                return true
-//                            }
-//                        })
-                        //popupMenu.show()
+                        val popupMenu: PopupMenu
+
+                        if(userId == this@MainTaskCommentsFragment.userId)
+                        {
+                            popupMenu = PopupMenu(activity,
+                                messageRecView.findViewHolderForAdapterPosition(position)?.itemView?.findViewById(
+                                    R.id.message_simple_item_container))
+                            popupMenu.menuInflater.inflate(R.menu.message_popup_menu,popupMenu.menu)
+                        }
+                        else
+                        {
+                            popupMenu = PopupMenu(activity, messageRecView.findViewHolderForAdapterPosition(position)?.
+                            itemView?.findViewById(R.id.message_simple_item_second_container))
+                            popupMenu.menuInflater.inflate(R.menu.message_popup_menu_alien, popupMenu.menu)
+                        }
+
+                        popupMenu.setOnMenuItemClickListener(object: PopupMenu.OnMenuItemClickListener{
+                            override fun onMenuItemClick(item: MenuItem?): Boolean
+                            {
+                                when(item?.itemId)
+                                {
+                                    R.id.message_copy -> {
+                                        val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                                        val clipData = ClipData.newPlainText("ngsLabel", message)
+                                        clipboard.setPrimaryClip(clipData)
+                                    }
+
+                                    R.id.message_edit -> {
+                                        messageInput.setText(message)
+                                        sendMessageButton.setImageResource(0)
+                                        sendMessageButton.setImageResource(R.drawable.ic_edit)
+                                        sendMessageButton.setOnClickListener{
+                                            val message = messageInput.text.toString()
+                                            if(verifyMessage(message))
+                                            {
+                                                val currentTaskId = mainViewModel.getCurrentTaskID()
+                                                val currentListId = mainViewModel.getCurrentListID()
+                                                mainViewModel.renameTaskMessage(id, taskId = currentTaskId, listId = currentListId, message = message)
+                                                messageInput.text.clear()
+                                                invokeDefaultSendButton()
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(requireContext(), "Invalid Input", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
+                                    }
+
+                                    R.id.message_delete -> {
+                                        mainViewModel.deleteTaskMessage(id = id, taskId = mainViewModel.getCurrentTaskID(), mainViewModel.getCurrentListID())
+                                    }
+                                }
+                                return true
+                            }
+                        })
+                        popupMenu.show()
                     }
                 })
             }
@@ -141,6 +158,8 @@ class MainTaskCommentsFragment: Fragment()
 
     fun invokeDefaultSendButton()
     {
+        sendMessageButton.setImageResource(0)
+        sendMessageButton.setImageResource(R.drawable.ic_send)
         sendMessageButton.setOnClickListener{
             val message = messageInput.text.toString()
             if(verifyMessage(message))

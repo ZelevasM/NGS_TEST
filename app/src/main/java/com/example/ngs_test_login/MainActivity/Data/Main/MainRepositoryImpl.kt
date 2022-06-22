@@ -271,9 +271,9 @@ class MainRepositoryImpl: MainRepository
         tasksChatsRepositoryImpl?.renameTaskMessage(id, taskId, listId, message)
     }
 
-    override fun deleteTaskMessage(id: String?,taskId: String?)
+    override fun deleteTaskMessage(id: String?,taskId: String?,listId: String?)
     {
-        tasksChatsRepositoryImpl?.deleteTaskMessage(id, taskId)
+        tasksChatsRepositoryImpl?.deleteTaskMessage(id, taskId, listId)
     }
 
     override fun readTaskMessage(id: String?,taskId: String?,userId: String?,allRead: Boolean?)

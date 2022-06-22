@@ -4,8 +4,8 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.MainRepo
 
 class DeleteTaskMessageUseCase(private val mainRepository: MainRepository)
 {
-    fun execute(id: String?, taskId: String?)
+    fun execute(id: String?, taskId: String?, listId: String?)
     {
-        mainRepository.deleteTaskMessage(id, taskId)
+        mainRepository.deleteTaskMessage(id, taskId, listId)
     }
 }

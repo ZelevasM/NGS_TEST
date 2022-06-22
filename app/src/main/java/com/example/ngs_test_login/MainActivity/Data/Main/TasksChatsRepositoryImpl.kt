@@ -156,9 +156,9 @@ class TasksChatsRepositoryImpl(private val listsDao: ListsDao): TasksChatsReposi
         taskChatSocket.renameTaskMessage(id, taskId, listId, message)
     }
 
-    override fun deleteTaskMessage(id: String?,taskId: String?)
+    override fun deleteTaskMessage(id: String?,taskId: String?,listId: String?)
     {
-        taskChatSocket.deleteTaskMessage(id, taskId)
+        taskChatSocket.deleteTaskMessage(id, taskId, listId)
     }
 
     override fun readTaskMessage(id: String?,taskId: String?,userId: String?,allRead: Boolean?)

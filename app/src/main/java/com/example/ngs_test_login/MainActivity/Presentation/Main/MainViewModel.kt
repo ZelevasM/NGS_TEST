@@ -225,9 +225,9 @@ class MainViewModel: ViewModel(), ViewModelInterface
         viewModelScope.launch(Dispatchers.IO) { RenameTaskMessageUseCase(mainInterfaceImpl).execute(id, taskId, listId, message) }
     }
 
-    fun deleteTaskMessage(id: String?, taskId: String?)
+    fun deleteTaskMessage(id: String?, taskId: String?, listId: String?)
     {
-        viewModelScope.launch(Dispatchers.IO) { DeleteTaskMessageUseCase(mainInterfaceImpl).execute(id, taskId) }
+        viewModelScope.launch(Dispatchers.IO) { DeleteTaskMessageUseCase(mainInterfaceImpl).execute(id, taskId, listId) }
     }
 
     fun readTaskMessage(id: String?, taskId: String?, userId: String?, allRead: Boolean?)

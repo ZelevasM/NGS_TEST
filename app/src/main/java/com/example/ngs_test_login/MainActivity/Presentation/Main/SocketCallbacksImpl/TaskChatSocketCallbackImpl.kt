@@ -23,16 +23,19 @@ class TaskChatSocketCallbackImpl(private val mainRepository: MainRepository,
     override fun onMessageDeleted(taskMessage: TaskMessage?,taskId: String?,listId: String?)
     {
         DeleteLocalTaskMessageUseCase(mainRepository).execute(taskMessage, taskId, listId)
+        singleTaskData.postValue(GetLocalTaskUseCase(mainRepository).execute(taskId,listId!!))
     }
 
     override fun onMessageRead(taskMessage: TaskMessage?,taskId: String?,listId: String?)
     {
         ReadLocalTaskMessageUseCase(mainRepository).execute(taskMessage, taskId, listId)
+        singleTaskData.postValue(GetLocalTaskUseCase(mainRepository).execute(taskId,listId!!))
     }
 
     override fun onMessageRenamed(taskMessage: TaskMessage?,taskId: String?,listId: String?)
     {
         RenameLocalTaskMessageUseCase(mainRepository).execute(taskMessage, taskId, listId)
+        singleTaskData.postValue(GetLocalTaskUseCase(mainRepository).execute(taskId,listId!!))
     }
 
     override fun onMessageStartedTyping(taskMessage: TaskMessage?,taskId: String?,listId: String?)

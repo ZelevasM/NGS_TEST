@@ -24,7 +24,7 @@ interface TasksChatsRepository
 
     fun renameTaskMessage(id: String?, taskId: String?, listId: String?, message: String?)
 
-    fun deleteTaskMessage(id: String?, taskId: String?)
+    fun deleteTaskMessage(id: String?, taskId: String?, listId: String?)
 
     fun readTaskMessage(id: String?, taskId: String?, userId: String?, allRead: Boolean?)
 
