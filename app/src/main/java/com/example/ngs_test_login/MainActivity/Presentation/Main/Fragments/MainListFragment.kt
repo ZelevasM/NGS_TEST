@@ -137,6 +137,7 @@ class MainListFragment: Fragment()
                     override fun onItemClicked(position: Int, id: String?, name: String?)
                     {
                         super.onItemClicked(position, id, name)
+                        Log.d("MyLog","Pressed in List")
                         Toast.makeText(activity,"$position + $id" ,Toast.LENGTH_SHORT).show()
                         mainViewModel.setCurrentTask(id = id, name = name)
                         findNavController().navigate(R.id.action_mainListFragment_to_mainTaskFragment)
@@ -244,5 +245,11 @@ class MainListFragment: Fragment()
             requireActivity().findNavController(host).navigate(destination)
         }
         toolbar.inflateMenu(R.menu.action_bar_list_menu)
+    }
+
+    override fun onDestroy()
+    {
+        mainViewModel.setCurrentList(null, null)
+        super.onDestroy()
     }
 }

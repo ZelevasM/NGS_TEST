@@ -5,11 +5,11 @@ data class TaskMessage(
 
     val userId: String? = null,
 
-    val read: Boolean? = null,
+    var read: Boolean? = null,
 
     val date: String? = null,
 
-    val message: String? = null,
+    var message: String? = null,
 
     val removeFile: Boolean? = null,
 

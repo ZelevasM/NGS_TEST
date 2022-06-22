@@ -4,7 +4,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/light_pink">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_task_comments_message_recView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_task_comments_bottom_bar_holder"/>
     <RelativeLayout
+        android:id="@+id/main_task_comments_bottom_bar_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -13,12 +20,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="8dp">
-        <ImageView
+            android:layout_margin="4dp">
+        <ImageButton
             android:id="@+id/main_task_comments_attach"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="4dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             android:src="@drawable/ic_attach"
+            android:background="@null"
             android:layout_gravity="center_vertical"
             app:tint="@color/light_blue"/>
         <EditText
@@ -26,11 +37,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
-        <ImageView
+        <ImageButton
             android:id="@+id/main_task_comments_send"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             android:src="@drawable/ic_send"
+            android:background="@null"
             android:layout_gravity="center_vertical"
             app:tint="@color/light_blue" />
         </LinearLayout>

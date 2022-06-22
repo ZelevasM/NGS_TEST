@@ -19,6 +19,7 @@
         <entry key="..\:/Studio Projects/app/src/main/res/drawable-anydpi/ic_action_back_button.xml" value="0.2225" />
         <entry key="..\:/Studio Projects/app/src/main/res/drawable/ic_arrow_down.xml" value="0.306" />
         <entry key="..\:/Studio Projects/app/src/main/res/drawable/ic_arrow_right.xml" value="0.306" />
+        <entry key="..\:/Studio Projects/app/src/main/res/drawable/message_shape.xml" value="0.3165" />
         <entry key="..\:/Studio Projects/app/src/main/res/drawable/tab_indicator.xml" value="0.306" />
         <entry key="..\:/Studio Projects/app/src/main/res/drawable/tab_indicator_layout.xml" value="0.306" />
         <entry key="..\:/Studio Projects/app/src/main/res/layout/fragment_email_ent.xml" value="1.194767441860465" />
@@ -32,6 +33,8 @@
         <entry key="..\:/Studio Projects/app/src/main/res/layout/fragment_profile_shortcuts.xml" value="0.36666666666666664" />
         <entry key="..\:/Studio Projects/app/src/main/res/layout/lists_subtask_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Studio Projects/app/src/main/res/layout/lists_task_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Studio Projects/app/src/main/res/layout/message_simple_item.xml" value="0.33" />
+        <entry key="..\:/Studio Projects/app/src/main/res/layout/message_simple_item_second.xml" value="0.33" />
         <entry key="..\:/Studio Projects/app/src/main/res/layout/task_child_item.xml" value="0.3009833262077811" />
         <entry key="..\:/Studio Projects/app/src/main/res/layout/task_parent_item.xml" value="0.3009833262077811" />
         <entry key="..\:/Studio Projects/app/src/main/res/layout/task_simple_item.xml" value="0.2" />
@@ -40,6 +43,7 @@
         <entry key="..\:/Studio Projects/app/src/main/res/menu/action_bar_list_menu.xml" value="0.3009833262077811" />
         <entry key="..\:/Studio Projects/app/src/main/res/menu/action_bar_main_menu.xml" value="0.3009833262077811" />
         <entry key="..\:/Studio Projects/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3009833262077811" />
+        <entry key="..\:/Studio Projects/app/src/main/res/menu/message_popup_menu.xml" value="0.3009833262077811" />
         <entry key="..\:/Studio Projects/app/src/main/res/menu/top_navigation_menu.xml" value="0.3009833262077811" />
       </map>
     </option>

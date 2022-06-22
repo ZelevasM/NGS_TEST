@@ -124,12 +124,12 @@ class TaskChatSocket(private val mSocket: Socket)
         {
                 args->
             Log.d("MyLog","GOT TASK MESSAGE in Read Message: ${args[0]}")
-            serializerSocket = SocketDataSerializer(args[0] as JSONObject, socketTaskMessageWeb.javaClass)
-            val taskMessage: TaskMessage? = SocketTaskMessageMapper().mapFromKTOT(serializerSocket.doSerialization())
-            val listId = serializerSocket.doSerialization().projectId
-            val taskId = serializerSocket.doSerialization().taskId
-            val read = serializerSocket.doSerialization().allRead
-            Log.d("MyLog","MESSAGE: ${taskMessage} \n TASK ID: $taskId, \n LIST ID: $listId \n READ: $read")
+            serializerSocketSecond = SocketDataSerializer(args[0] as JSONObject, socketTaskMessageSecondWeb.javaClass)
+            var taskMessage: TaskMessage? = SocketTaskMessageSecondMapper().mapFromKTOT(serializerSocketSecond.doSerialization())
+            taskMessage?.read = true
+            val listId = serializerSocketSecond.doSerialization().projectId
+            val taskId = serializerSocketSecond.doSerialization().taskId
+            taskChatCallbackInterface.onMessageRead(taskMessage, taskId, listId)
         }
 
         mSocket.on("OUT_CommitStartTyping")

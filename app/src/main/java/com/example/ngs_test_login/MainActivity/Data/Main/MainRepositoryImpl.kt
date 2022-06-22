@@ -132,29 +132,29 @@ class MainRepositoryImpl: MainRepository
 
     //Local Database's Methods For Tasks' Chats
 
-    override fun addLocalTaskMessage()
+    override fun addLocalTaskMessage(taskMessage: TaskMessage?,taskId: String?,listId: String?)
     {
-        tasksChatsRepositoryImpl?.addLocalTaskMessage()
+        tasksChatsRepositoryImpl?.addLocalTaskMessage(taskMessage, taskId, listId)
     }
 
-    override fun renameLocalTaskMessage()
+    override fun renameLocalTaskMessage(taskMessage: TaskMessage?,taskId: String?,listId: String?)
     {
-        tasksChatsRepositoryImpl?.renameLocalTaskMessage()
+        tasksChatsRepositoryImpl?.renameLocalTaskMessage(taskMessage, taskId, listId)
     }
 
-    override fun deleteLocalTaskMessage()
+    override fun deleteLocalTaskMessage(taskMessage: TaskMessage?,taskId: String?,listId: String?)
     {
-        tasksChatsRepositoryImpl?.deleteLocalTaskMessage()
+        tasksChatsRepositoryImpl?.deleteLocalTaskMessage(taskMessage, taskId, listId)
     }
 
-    override fun readLocalTaskMessage()
+    override fun readLocalTaskMessage(taskMessage: TaskMessage?,taskId: String?,listId: String?)
     {
-        tasksChatsRepositoryImpl?.readLocalTaskMessage()
+        tasksChatsRepositoryImpl?.readLocalTaskMessage(taskMessage, taskId, listId)
     }
 
-    override fun getLocalTaskMessage()
+    override fun getLocalTaskMessage(taskMessage: TaskMessage?,taskId: String?,listId: String?): TaskMessage?
     {
-        tasksChatsRepositoryImpl?.getLocalTaskMessage()
+        return tasksChatsRepositoryImpl?.getLocalTaskMessage(taskMessage, taskId, listId)
     }
 
     //Local Database's Methods For Chats

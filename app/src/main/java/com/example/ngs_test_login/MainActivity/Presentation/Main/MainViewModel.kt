@@ -10,7 +10,9 @@ import com.example.ngs_test_login.MainActivity.Data.Main.MainRepositoryImpl
 import com.example.ngs_test_login.MainActivity.Domain.Base.Models.MainData
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ChatsModel.Chat
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases.*
+import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases.TasksLocalDbUseCases.GetLocalTaskUseCase
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.*
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.TasksChatsSocketUseCases.*
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.SocketUseCases.TasksSocketUseCases.*
@@ -39,12 +41,16 @@ class MainViewModel: ViewModel(), ViewModelInterface
 
     //TODO Change
     private var currentList: DataList? = null
+    private var currentTask: Task? = null
     private var currentListName: String? = null
     private var currentListID: String? = null
     private var currentTaskName: String? = null
     private var currentTaskID: String? = null
     private val singleListData = MutableLiveData<DataList?>()
     val singleListLiveData: LiveData<DataList?> = singleListData
+
+    private val singleTaskData = MutableLiveData<Task?>()
+    val singleTaskLiveData: LiveData<Task?> = singleTaskData
 
     private val mainInterfaceImpl = MainRepositoryImpl()
 
@@ -199,6 +205,14 @@ class MainViewModel: ViewModel(), ViewModelInterface
         }
     }
 
+    fun getLocalTask()
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            currentTask = GetLocalTaskUseCase(mainInterfaceImpl).execute(taskId = currentTaskID, listId = currentListID!!)
+            singleTaskData.postValue(currentTask)
+        }
+    }
+
     //TASKS' CHATS' METHODS
 
     fun addTaskMessage(userId: String?, taskId: String?, listId: String?, message: String?, replyChatId: String?, fileId: String?)
@@ -229,7 +243,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
 
     fun getTaskMessage()
     {
-        val taskChatSocketCallbackImpl = TaskChatSocketCallbackImpl(mainInterfaceImpl)
+        val taskChatSocketCallbackImpl = TaskChatSocketCallbackImpl(mainInterfaceImpl, singleTaskData)
         GetTaskMessageUseCase(mainInterfaceImpl).execute(taskChatSocketCallbackImpl)
     }
 
@@ -273,6 +287,8 @@ class MainViewModel: ViewModel(), ViewModelInterface
         currentTaskID = id
         currentTaskName = name
     }
+
+    fun getCurrentTaskID(): String? {return currentTaskID}
 
     fun getCurrentListName(): String?{return currentListName}
     fun getCurrentListID(): String?{return currentListID}

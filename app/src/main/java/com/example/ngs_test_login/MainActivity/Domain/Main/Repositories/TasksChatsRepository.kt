@@ -6,15 +6,15 @@ import io.socket.client.Socket
 
 interface TasksChatsRepository
 {
-    fun addLocalTaskMessage()
+    fun addLocalTaskMessage(taskMessage: TaskMessage?, taskId: String?, listId: String?)
 
-    fun renameLocalTaskMessage()
+    fun renameLocalTaskMessage(taskMessage: TaskMessage?, taskId: String?, listId: String?)
 
-    fun deleteLocalTaskMessage()
+    fun deleteLocalTaskMessage(taskMessage: TaskMessage?, taskId: String?, listId: String?)
 
-    fun readLocalTaskMessage()
+    fun readLocalTaskMessage(taskMessage: TaskMessage?, taskId: String?, listId: String?)
 
-    fun getLocalTaskMessage()
+    fun getLocalTaskMessage(taskMessage: TaskMessage?, taskId: String?, listId: String?): TaskMessage?
 
     //Socket's Methods
 

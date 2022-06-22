@@ -51,6 +51,9 @@
     <string name="remind_me">Remind Me</string>
     <string name="due_date">Due Date</string>
     <string name="add_note">Add Note</string>
+    <string name="message_copy">Copy</string>
+    <string name="message_edit">Edit</string>
+    <string name="message_delete">Delete</string>
 
     //Profile
     <string name="settings">Settings</string>

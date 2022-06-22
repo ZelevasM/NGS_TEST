@@ -1,11 +1,12 @@
 package com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases.TasksLocalDbUseCases
 
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
 import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.MainRepository
 
 class GetLocalTaskUseCase(private val mainRepository: MainRepository)
 {
-    fun execute(taskId: String?, listId: String)
+    fun execute(taskId: String?, listId: String): Task?
     {
-        mainRepository.getLocalTask(taskId, listId)
+        return mainRepository.getLocalTask(taskId, listId)
     }
 }
