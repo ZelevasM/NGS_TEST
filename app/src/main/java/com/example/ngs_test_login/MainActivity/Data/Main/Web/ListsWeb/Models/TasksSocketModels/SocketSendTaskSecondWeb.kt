@@ -10,5 +10,9 @@ data class SocketSendTaskSecondWeb(
     @SerializedName("done") val done: Boolean? = null,
     @SerializedName("notes") val notes: String? = null,
     @SerializedName("out") val out: Boolean? = null,
+    @SerializedName("assign") val assign: String? = null,
+    @SerializedName("remind") val remind: String? = null,
+    @SerializedName("date") val date: String? = null,
+    @SerializedName("user_id") val userId: String? = null,
     @SerializedName("new_order") val newOrder: String? = null)
 {}

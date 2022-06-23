@@ -114,6 +114,21 @@ class TasksRepositoryImpl(private val listsDao: ListsDao): TasksRepository
         taskSocket.doneTask(id, projectId, done)
     }
 
+    override fun assignTask(id: String,projectId: String,userId: String?)
+    {
+        taskSocket.assignTask(id, projectId, userId)
+    }
+
+    override fun remindTask(id: String,projectId: String,remind: String?)
+    {
+        taskSocket.remindTask(id, projectId, remind)
+    }
+
+    override fun dateTask(id: String,projectId: String,date: String?)
+    {
+        taskSocket.dateTask(id, projectId, date)
+    }
+
     override fun noteTask(id: String,projectId: String,notes: String?)
     {
         taskSocket.noteTask(id, projectId, notes)

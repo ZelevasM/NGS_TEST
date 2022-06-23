@@ -30,6 +30,12 @@ interface TasksRepository
 
     fun doneTask(id: String, projectId: String, done: Boolean)
 
+    fun assignTask(id: String, projectId: String, userId: String?)
+
+    fun remindTask(id: String, projectId: String, remind: String?)
+
+    fun dateTask(id: String, projectId: String, date: String?)
+
     fun noteTask(id: String, projectId: String, notes: String?)
 
     fun orderTask()

@@ -176,6 +176,21 @@ class MainViewModel: ViewModel(), ViewModelInterface
         viewModelScope.launch(Dispatchers.IO) { DoneTaskUseCase(mainInterfaceImpl).execute(id, projectId, done) }
     }
 
+    fun assignTask(id: String,projectId: String,userId: String?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { AssignTaskUseCase(mainInterfaceImpl).execute(id, projectId, userId) }
+    }
+
+    fun remindTask(id: String,projectId: String,remind: String?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { RemindTaskUseCase(mainInterfaceImpl).execute(id, projectId, remind) }
+    }
+
+    fun dateTask(id: String,projectId: String,date: String?)
+    {
+        viewModelScope.launch(Dispatchers.IO) { DateTaskUseCase(mainInterfaceImpl).execute(id, projectId, date) }
+    }
+
     fun noteTask(id: String, projectId: String, notes: String?)
     {
         viewModelScope.launch(Dispatchers.IO) { NotesTaskUseCase(mainInterfaceImpl).execute(id, projectId, notes) }
@@ -200,7 +215,7 @@ class MainViewModel: ViewModel(), ViewModelInterface
     {
         viewModelScope.launch(Dispatchers.IO)
         {
-            val taskSocketCallbackImpl = TaskSocketCallbackImpl(currentList, singleListData, mainInterfaceImpl)
+            val taskSocketCallbackImpl = TaskSocketCallbackImpl(singleTaskData, singleListData, mainInterfaceImpl)
             GetTaskUseCase(mainInterfaceImpl).execute(taskSocketCallbackImpl)
         }
     }

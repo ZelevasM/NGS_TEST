@@ -11,9 +11,11 @@ data class SocketReceiveTaskSecondWeb(
     @SerializedName("parent") val parent: String? = null,
     @SerializedName("done") val done: Boolean? = null,
     @SerializedName("notes") val notes: String? = null,
-    @SerializedName("date") val date: String? = null,
     @SerializedName("auth_id") val authId: String? = null,
     @SerializedName("assign") val assign: TaskAssignWeb? = null,
+    @SerializedName("remind") val remind: String? = null,
+    @SerializedName("date") val date: String? = null,
     @SerializedName("order") val order: Int? = null,
+    @SerializedName("user_id") val userId: String? = null,
     @SerializedName("users") val users: ArrayList<TaskUserWeb?>? = null)
 {}

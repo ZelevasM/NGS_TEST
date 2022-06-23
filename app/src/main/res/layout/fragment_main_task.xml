@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <RelativeLayout
+                android:id="@+id/main_task_assignTo_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -44,6 +45,7 @@
                         app:tint="@color/white" />
                 </RelativeLayout>
                 <TextView
+                    android:id="@+id/main_task_assignTo_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -59,6 +61,7 @@
                 android:background="@color/grey"/>
 
             <RelativeLayout
+                android:id="@+id/main_task_remindMe_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -75,6 +78,7 @@
                         app:tint="@color/white"/>
                 </RelativeLayout>
                 <TextView
+                    android:id="@+id/main_task_remindMe_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -95,6 +99,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <RelativeLayout
+                android:id="@+id/main_task_dueDate_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -111,6 +116,7 @@
                         app:tint="@color/white"/>
                 </RelativeLayout>
                 <TextView
+                    android:id="@+id/main_task_dueDate_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

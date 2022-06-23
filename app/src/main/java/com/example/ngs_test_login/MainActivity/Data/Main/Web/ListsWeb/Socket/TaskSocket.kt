@@ -43,6 +43,30 @@ class TaskSocket(private val mSocket: Socket)
         mSocket.emit(event, socketTask)
     }
 
+    fun assignTask(id: String,projectId: String,userId: String?)
+    {
+        val socketSendTaskSecondWeb = SocketSendTaskSecondWeb(task_id = id, projectId = projectId, userId = userId)
+        val socketTask: JSONObject = ConvertClassToJson(socketSendTaskSecondWeb).convert()
+        val event: String = "IN_AssignUser"
+        mSocket.emit(event, socketTask)
+    }
+
+    fun remindTask(id: String,projectId: String,remind: String?)
+    {
+        val socketSendTaskSecondWeb = SocketSendTaskSecondWeb(task_id = id, projectId = projectId, remind = remind)
+        val socketTask: JSONObject = ConvertClassToJson(socketSendTaskSecondWeb).convert()
+        val event: String = "IN_AssignRemind"
+        mSocket.emit(event, socketTask)
+    }
+
+    fun dateTask(id: String,projectId: String,date: String?)
+    {
+        val socketSendTaskSecondWeb = SocketSendTaskSecondWeb(task_id = id, projectId = projectId, date = date)
+        val socketTask: JSONObject = ConvertClassToJson(socketSendTaskSecondWeb).convert()
+        val event: String = "IN_AssignDate"
+        mSocket.emit(event, socketTask)
+    }
+
     fun noteTask(id: String, projectId: String, notes: String?)
     {
         val socketSendTaskSecondWeb = SocketSendTaskSecondWeb(task_id = id, projectId = projectId, notes = notes)
@@ -106,6 +130,36 @@ class TaskSocket(private val mSocket: Socket)
             val task: Task? = SocketReceiveTaskSecondMapper().mapFromKTOT(serializerSocketSecond.doSerialization())
             val listId = serializerSocketSecond.doSerialization().projectId
             taskSocketCallbackInterface.onDone(task, listId)
+        }
+
+        mSocket.on("OUT_AssignUser")
+        {
+                args->
+            Log.d("MyLog","GOT TASK in Assign User: ${args[0]}")
+            serializerSocketSecond = SocketDataSerializer(args[0] as JSONObject, socketReceiveTaskSecondWeb.javaClass)
+            val task: Task? = SocketReceiveTaskSecondMapper().mapFromKTOT(serializerSocketSecond.doSerialization())
+            val listId = serializerSocketSecond.doSerialization().projectId
+            val userId = serializerSocketSecond.doSerialization().userId
+        }
+
+        mSocket.on("OUT_AssignRemind")
+        {
+                args->
+            Log.d("MyLog","GOT TASK in Assign Remind: ${args[0]}")
+            serializerSocketSecond = SocketDataSerializer(args[0] as JSONObject, socketReceiveTaskSecondWeb.javaClass)
+            val task: Task? = SocketReceiveTaskSecondMapper().mapFromKTOT(serializerSocketSecond.doSerialization())
+            val listId = serializerSocketSecond.doSerialization().projectId
+            val remind = serializerSocketSecond.doSerialization().remind
+        }
+
+        mSocket.on("OUT_AssignDate")
+        {
+                args->
+            Log.d("MyLog","GOT TASK in Assign Date: ${args[0]}")
+            serializerSocketSecond = SocketDataSerializer(args[0] as JSONObject, socketReceiveTaskSecondWeb.javaClass)
+            val task: Task? = SocketReceiveTaskSecondMapper().mapFromKTOT(serializerSocketSecond.doSerialization())
+            val listId = serializerSocketSecond.doSerialization().projectId
+            val date = serializerSocketSecond.doSerialization().date
         }
 
         mSocket.on("OUT_TaskNote")

@@ -1,5 +1,6 @@
 package com.example.ngs_test_login.MainActivity.Presentation.Main.SocketCallbacksImpl
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
@@ -8,7 +9,7 @@ import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.TaskS
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases.GetLocalListUseCase
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases.TasksLocalDbUseCases.*
 
-class TaskSocketCallbackImpl(private val currentList: DataList?,
+class TaskSocketCallbackImpl(private val singleTaskData: MutableLiveData<Task?>,
                              private val singleListData: MutableLiveData<DataList?>,
                              private val mainRepository: MainRepository): TaskSocketCallbackInterface
 {
@@ -27,11 +28,26 @@ class TaskSocketCallbackImpl(private val currentList: DataList?,
         singleListData.postValue(GetLocalListUseCase(mainRepository).execute(tempList))
     }
 
+    override fun onAssigned(task: Task?,listId: String?,userId: String?)
+    {
+
+    }
+
+    override fun onReminded(task: Task?,listId: String?,remind: String?)
+    {
+
+    }
+
+    override fun onDate(task: Task?,listId: String?,date: String?)
+    {
+
+    }
+
     override fun onNote(task: Task?,listId: String?)
     {
         NoteLocalTaskUseCase(mainRepository).execute(task, listId)
         val tempList = DataList(id = listId!!)
-        singleListData.postValue(GetLocalListUseCase(mainRepository).execute(tempList))
+        singleTaskData.postValue(GetLocalTaskUseCase(mainRepository).execute(taskId = task?.id, listId = listId))
     }
 
     override fun onOrdered(task: Task?,listId: String?)

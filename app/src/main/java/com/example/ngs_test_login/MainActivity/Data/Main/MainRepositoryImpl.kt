@@ -234,6 +234,21 @@ class MainRepositoryImpl: MainRepository
         tasksRepositoryImpl?.doneTask(id, projectId, done)
     }
 
+    override fun assignTask(id: String,projectId: String,userId: String?)
+    {
+        tasksRepositoryImpl?.assignTask(id, projectId, userId)
+    }
+
+    override fun remindTask(id: String,projectId: String,remind: String?)
+    {
+        tasksRepositoryImpl?.remindTask(id, projectId, remind)
+    }
+
+    override fun dateTask(id: String,projectId: String,date: String?)
+    {
+        tasksRepositoryImpl?.dateTask(id, projectId, date)
+    }
+
     override fun noteTask(id: String, projectId: String, notes: String?)
     {
         tasksRepositoryImpl?.noteTask(id, projectId, notes)
