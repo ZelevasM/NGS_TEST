@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.DataList
 import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.Task
+import com.example.ngs_test_login.MainActivity.Domain.Main.Models.ListsModels.TaskAssign
 import com.example.ngs_test_login.MainActivity.Domain.Main.Repositories.MainRepository
 import com.example.ngs_test_login.MainActivity.Domain.Main.SocketCallbacks.TaskSocketCallbackInterface
 import com.example.ngs_test_login.MainActivity.Domain.Main.UseCases.LocalDbUseCases.GetLocalListUseCase
@@ -30,7 +31,9 @@ class TaskSocketCallbackImpl(private val singleTaskData: MutableLiveData<Task?>,
 
     override fun onAssigned(task: Task?,listId: String?,userId: String?)
     {
-
+        val task = GetLocalTaskUseCase(mainRepository).execute(taskId = task?.id, listId!!)
+        task?.assign = TaskAssign(userId = userId)
+        singleTaskData.postValue(task)
     }
 
     override fun onReminded(task: Task?,listId: String?,remind: String?)
@@ -46,8 +49,7 @@ class TaskSocketCallbackImpl(private val singleTaskData: MutableLiveData<Task?>,
     override fun onNote(task: Task?,listId: String?)
     {
         NoteLocalTaskUseCase(mainRepository).execute(task, listId)
-        val tempList = DataList(id = listId!!)
-        singleTaskData.postValue(GetLocalTaskUseCase(mainRepository).execute(taskId = task?.id, listId = listId))
+        singleTaskData.postValue(GetLocalTaskUseCase(mainRepository).execute(taskId = task?.id, listId = listId!!))
     }
 
     override fun onOrdered(task: Task?,listId: String?)

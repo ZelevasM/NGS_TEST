@@ -58,7 +58,15 @@
         <item name="colorAccent">@color/light_blue</item>
         <item name="android:buttonBarNegativeButtonStyle">
             @style/NGS_Date_Picker_Dialog.ButtonStyle</item>
-        <item name="android:buttonBarNeutralButtonStyle">
+        <item name="android:buttonBarPositiveButtonStyle">
+            @style/NGS_Date_Picker_Dialog.ButtonStyle</item>
+    </style>
+
+    <style name="NGS_Time_Picker_Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/light_blue</item>
+        <item name="android:buttonBarNegativeButtonStyle">
+            @style/NGS_Date_Picker_Dialog.ButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">
             @style/NGS_Date_Picker_Dialog.ButtonStyle</item>
     </style>
 

@@ -13,7 +13,8 @@ class IdGenerator(private val id: String)
 //    private val TIME_DATE_PATTERN: String = "EE MMM dd yyyy hh:mm:ss z"
 //    Result is : Thu Apr 28 2022 11:17:18 GMT+05:00
 //    private val locale: Locale = Locale.getDefault()
-//    private val dateFormat: SimpleDateFormat = SimpleDateFormat(TIME_DATE_PATTERN, locale)
+
+//    private val dateFormat: SimpleDateFormat = SimpleDateFormat(TIME_DATE_PATTERN, local e)
 //    val date: Date = Date()
 
     @RequiresApi(Build.VERSION_CODES.O)

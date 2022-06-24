@@ -31,6 +31,8 @@
         <item name="android:navigationBarColor">@color/light_grey</item>
 
         <item name="actionBarStyle">@style/Widget.NGS_Test_Login.ActionBar</item>
+        <item name="android:datePickerDialogTheme">@style/NGS_Date_Picker_Dialog</item>
+        <item name="android:timePickerDialogTheme">@style/NGS_Time_Picker_Dialog</item>
 
         <item name="textInputOutlinedStyle">@style/Widget.NGS_Test_Login.TextInput</item>
     </style>
